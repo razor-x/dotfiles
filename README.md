@@ -8,6 +8,12 @@ My user land configuration managed with [chezmoi].
 
 [chezmoi]: https://www.chezmoi.io/
 
+## Bootstrap
+
+```
+$ chezmoi init --apply ~/config/dotfiles-next razor-x
+```
+
 ## License
 
 These configuration files are licensed under the MIT license.
