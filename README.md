@@ -11,7 +11,7 @@ My user land configuration managed with [chezmoi].
 ## Bootstrap
 
 ```
-$ chezmoi init --apply ~/config/dotfiles-next razor-x
+$ chezmoi init --apply ~/config/dotfiles razor-x
 ```
 
 ## License
