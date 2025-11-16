@@ -8,38 +8,33 @@ My user land configuration managed with [chezmoi].
 
 [chezmoi]: https://www.chezmoi.io/
 
-## Bootstrap
-
-### One command
+## Bootstrap new machine
 
 ```
 $ chezmoi init --apply --source ~/config/dotfiles razor-x
 ```
 
-### Add your public key to GitHub
+### Add public key to GitHub
 
-GitHub will not allow cloning a public repo over SSH unless
-the SSH key is attached to an account.
-Since this is a new machine, the SSH public key needs to be added to your
-GitHub account, and then the repo origin URL may be updated to use SSH.
+Since this is a new machine, it is assumed to have a new SSH public-private key pair.
+The public key needs to be added to the owner's GitHub account,
+which will allow chezmoi to populate it into `~/.ssh/authorized_keys`.
 
 #### Option A: Login locally
 
 > [!IMPORTANT]
 > This requires a GUI with a default web browser and the GitHub CLI.
 
-Login to GitHub with the CLI.
+Login to GitHub which will open a web browser and then prompt you to add the new SSH key to your account.
 
 ```
 $ gh auth login
 ```
 
-This will open a web browser and prompt you to add the new SSH key to your account.
-
 #### Option B: Use a trusted device
 
 > [!IMPORTANT]
-> Since chezmoi has installed the `~/.ssh/authorized_keys` file,
+> Since chezmoi has already installed the `~/.ssh/authorized_keys` file,
 > you can use an authorized device that is already logged into GitHub
 > to upload the public key.
 
@@ -53,8 +48,8 @@ $ rm id_ed25519.pub
 
 ### Update the remote to SSH
 
-Now that the new public key is added to GitHub,
-update the origin to use SSH
+GitHub will not allow cloning a public repo over SSH unless the SSH key is attached to an account.
+Now that the new public key is added to GitHub, update the origin to use SSH
 
 ```
 $ cd ~/config/dotfiles
