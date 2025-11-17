@@ -1,3 +1,14 @@
+# Load environment.d variables only if not in session started by systemd.
+if [ -d ~/.config/environment.d ] \
+     && [ "$XDG_SESSION_TYPE" != "wayland" -a "$XDG_SESSION_TYPE" != "x11" ]; then
+  set -a
+  for conf in ~/.config/environment.d/*.conf; do
+    [ -f "$conf" ] && source "$conf"
+    unset conf
+  done
+  set +a
+fi
+
 # From https://wiki.archlinux.org/title/Fish
 if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" \
    && -z ${BASH_EXECUTION_STRING} \
