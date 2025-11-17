@@ -42,7 +42,7 @@ From the trusted device, copy over the public key from this device
 
 ```
 $ scp new-host:.ssh/id_ed25519.pub
-$ gh gh ssh-key add id_ed25519.pub
+$ gh ssh-key add id_ed25519.pub
 $ rm id_ed25519.pub
 ```
 
