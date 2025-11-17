@@ -2,9 +2,9 @@
 if [ -d ~/.config/environment.d ] \
      && [ "$XDG_SESSION_TYPE" != "wayland" -a "$XDG_SESSION_TYPE" != "x11" ]; then
   set -a
-  for conf in ~/.config/environment.d/*.conf; do
-    [ -f "$conf" ] && source "$conf"
-    unset conf
+  for environment_conf in ~/.config/environment.d/*.conf; do
+    [ -f "$environment_conf " ] && source "$environment_conf"
+    unset environment_conf
   done
   set +a
 fi
