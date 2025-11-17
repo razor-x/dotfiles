@@ -68,7 +68,9 @@ $ scp private.key new-machine:
 On the new machine, import the key
 
 ```
-cd ~/ && gpg --import private.key && rm private.key
+cd ~/ \
+  && gpg --import private.key \
+  && rm private.key
 ```
 
 Then trust the key
