@@ -10,8 +10,8 @@ My user land configuration managed with [chezmoi].
 
 ## Bootstrap new machine
 
-```console
-$ chezmoi init --apply --source ~/config/dotfiles razor-x
+```sh
+chezmoi init --apply --source ~/config/dotfiles razor-x
 ```
 
 ### Add public key to GitHub
@@ -51,10 +51,10 @@ $ rm id_ed25519.pub
 GitHub will not allow cloning a public repo over SSH unless the SSH key is attached to an account.
 Now that the new public key is added to GitHub, update the origin to use SSH
 
-```
-$ cd ~/config/dotfiles
-$ git remote set-url origin git@github.com:razor-x/dotfiles.git
-$ git fetch
+```sh
+cd ~/config/dotfiles \
+ && git remote set-url origin git@github.com:razor-x/dotfiles.git \
+ && git fetch
 ```
 
 ## License
