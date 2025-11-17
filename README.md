@@ -68,7 +68,7 @@ $ scp private.key new-machine:
 On the new machine, import the key
 
 ```
-cd ~/ && gpg --import private.key
+cd ~/ && gpg --import private.key && rm private.key
 ```
 
 Then trust the key
@@ -77,6 +77,7 @@ Then trust the key
 $ gpg --edit-key <email>
 gpg> trust
 Your decision? 5 (Ultimate trust)
+gpg> quit
 ```
 
 ## License
