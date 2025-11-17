@@ -27,8 +27,8 @@ which will allow chezmoi to populate it into `~/.ssh/authorized_keys`.
 
 Login to GitHub which will open a web browser and then prompt you to add the new SSH key to your account.
 
-```
-$ gh auth login
+```sh
+gh auth login
 ```
 
 #### Option B: Use a trusted device
@@ -38,7 +38,7 @@ $ gh auth login
 > you can use an authorized device that is already logged into GitHub
 > to upload the public key.
 
-From the trusted device, copy over the public key from this device
+From the trusted device, copy over the public key to the new machine
 
 ```
 $ scp new-host:.ssh/id_ed25519.pub
@@ -55,6 +55,28 @@ Now that the new public key is added to GitHub, update the origin to use SSH
 cd ~/config/dotfiles \
  && git remote set-url origin git@github.com:razor-x/dotfiles.git \
  && git fetch
+```
+
+### Import GPG key
+
+Copy the ASCII armored private key over to the new machine
+
+```
+$ scp private.key new-machine:
+```
+
+On the new machine, import the key
+
+```
+cd ~/ && gpg --import private.key
+```
+
+Then trust the key
+
+```
+$ gpg --edit-key <email>
+gpg> trust
+Your decision? 5 (Ultimate trust)
 ```
 
 ## License
