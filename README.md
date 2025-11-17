@@ -10,7 +10,7 @@ My user land configuration managed with [chezmoi].
 
 ## Bootstrap new machine
 
-```
+```console
 $ chezmoi init --apply --source ~/config/dotfiles razor-x
 ```
 
