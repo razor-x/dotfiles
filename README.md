@@ -82,6 +82,15 @@ Your decision? 5 (Ultimate trust)
 gpg> quit
 ```
 
+### Add an SSH passphrase
+
+After a new system is setup it may still have an SSH key without a passphrase.
+Add a passphrase with
+
+```
+ssh-keygen -p -f ~/.ssh/id_ed25519
+```
+
 ## License
 
 These configuration files are licensed under the MIT license.
