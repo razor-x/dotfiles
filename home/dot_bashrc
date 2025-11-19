@@ -1,5 +1,5 @@
 # Load environment.d variables if not already loaded.
-if [[ -z $USER_ENV_VARS_SET ]] && [[ -d $HOME/.config/environment.d ]]; then
+if [[ -z $USER_ENV_VARS_SET ]] && [[ -d "$HOME/.config/environment.d"" ]]; then
   set -a
   for user_environment_conf in $HOME/.config/environment.d/*.conf; do
     [[ -f "$user_environment_conf" ]] && source "$user_environment_conf"
