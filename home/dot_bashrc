@@ -1,11 +1,10 @@
-# Load environment.d variables only if not in session started by systemd.
-if [ -d ~/.config/environment.d ] \
-     && [ "$XDG_SESSION_TYPE" != "wayland" -a "$XDG_SESSION_TYPE" != "x11" ]; then
+# Load environment.d variables if not already loaded.
+if [[ -v $USER_ENV_VARS_SET ]] && [[ -d $HOME/.config/environment.d ]]; then
   set -a
-  for environment_conf in ~/.config/environment.d/*.conf; do
-    [ -f "$environment_conf" ] && source "$environment_conf"
-    unset environment_conf
+  for user_environment_conf in $HOME/.config/environment.d/*.conf; do
+    [[ -f "$user_environment_conf" ]] && source "$user_environment_conf"
   done
+  unset user_environment_conf
   set +a
 fi
 
