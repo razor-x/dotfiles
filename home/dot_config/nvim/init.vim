@@ -52,6 +52,10 @@ let g:tex_flavor='latex'
 " Set WildMenu preferences.
 set wildmode=longest:full,full
 
+" Map space to leader.
+let mapleader = "\<Space>"
+let maplocalleader = "\\"
+
 " Add aliases for consistent behavior of ctrl-space.
 nmap <NUL> <C-Space>
 imap <NUL> <C-Space>
