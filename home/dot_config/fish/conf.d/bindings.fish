@@ -3,8 +3,8 @@ bind -M default vv edit_command_buffer
 
 bind \ce end-of-line accept-autosuggestion
 bind \ca beginning-of-line-or-history-pager
-bind \cf forward-bigword
-bind \cr backward-bigword
+bind \cf forward-word
+bind \cr backward-word
 
 function beginning-of-line-or-history-pager
   if test -z (commandline)
