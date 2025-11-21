@@ -8,7 +8,7 @@ if set -q SSH_CLIENT; or set -q SSH_TTY
 end
 
 if status is-interactive
-  if not is_ssh_session
+  if not $is_ssh_session
     load_private_keys
   end
 end
