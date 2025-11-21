@@ -1,12 +1,7 @@
 function load_private_keys
-  read -P "Load SSH and GPG keys? [Y/n] " -n 1 response
+  confirm_action "Load SSH and GPG keys?"
 
-  set response (string lower (string trim $response))
-  if test -z "$response"
-    set response "y"
-  end
-
-  if test "$response" != "y"
+  if not confirm_action
     return
   end
 
