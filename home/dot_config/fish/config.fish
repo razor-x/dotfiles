@@ -11,4 +11,8 @@ if status is-interactive
   if not $is_ssh_session
     load_private_keys
   end
+
+  if $is_ssh_session
+    set fish_tmux_autostart true
+  end
 end
