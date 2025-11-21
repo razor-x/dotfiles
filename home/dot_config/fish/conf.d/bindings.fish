@@ -13,3 +13,5 @@ function beginning-of-line-or-history-pager
     commandline -f beginning-of-line
   end
 end
+
+abbr vv $VISUAL
