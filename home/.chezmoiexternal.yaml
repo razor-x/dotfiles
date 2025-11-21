@@ -7,7 +7,8 @@
   checksum:
     sha256: 2411fc416c4475d297f61078d0a03afb3a1f5322fff26a13fdb4f20d7e975570
   exclude:
-    - docs/
-    - tests/
-    - lib/
-    - .*
+    - '*/docs/**'
+    - '*/tests/**'
+    - '*/lib/**'
+    - '*/.*'
+    - '*/HOW_TO_PLUGIN.md'
