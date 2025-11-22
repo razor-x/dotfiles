@@ -17,8 +17,4 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.cmd('source ' .. vim.fn.stdpath('config') .. '/legacy.vim')
 
-require("lazy").setup({
-  spec = {
-    { import = "plugins" },
-  },
-})
+require("lazy").setup()
