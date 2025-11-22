@@ -24,4 +24,4 @@
   ]
 
   [".config/tmux/plugins/tmux-sensible".checksum]
-    sha256 = "26e4ed87091b382f25953afca01b0ddf00b2de5694058cd9db890a83"
+    sha256 = "426dcf398d3073bb526db88921ff5734e5566a045b23c8194cb3646646f61c16"
