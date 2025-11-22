@@ -9,16 +9,6 @@ if [[ -z $USER_ENV_VARS_SET ]] && [[ -d "$HOME/.config/environment.d" ]]; then
   done
 fi
 
-# Set Bash history variables.
-if [[ -n "$XDG_CONFIG_HOME" ]]; then
-  export HISTFILE=${HISTFILE:-$XDG_CACHE_HOME/bash/history}
-  cache_dir=$(dirname "$HISTFILE")
-  mkdir -p cache_dir
-fi
-export HISTDUP=erase
-export HISTSIZE=10000
-export SAVEHIST=$HISTSIZE
-
 # Start fish on interactive login.
 # https://wiki.archlinux.org/title/Fish
 if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" \
@@ -28,3 +18,13 @@ if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" \
   shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=''
   exec fish $LOGIN_OPTION
 fi
+
+# Set Bash history variables.
+if [[ -n "$XDG_CONFIG_HOME" ]]; then
+  export HISTFILE=${HISTFILE:-$XDG_CACHE_HOME/bash/history}
+  cache_dir=$(dirname "$HISTFILE")
+  mkdir -p cache_dir
+fi
+export HISTDUP=erase
+export HISTSIZE=10000
+export SAVEHIST=$HISTSIZE
