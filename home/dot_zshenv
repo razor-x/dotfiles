@@ -10,5 +10,5 @@ if [[ -z "$USER_ENV_VARS_SET" ]] && [[ -d "$HOME/.config/environment.d" ]]; then
 fi
 
 if [[ -n "$XDG_CONFIG_HOME" ]]; then
-  export ZDOTDIR=${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}
+  export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 fi
