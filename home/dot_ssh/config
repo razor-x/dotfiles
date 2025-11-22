@@ -1,4 +1,6 @@
 AddKeysToAgent yes
 
 Host *
+  ServerAliveInterval 60
+  TCPKeepAlive yes
   SendEnv TMUX
