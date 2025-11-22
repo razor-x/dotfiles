@@ -23,7 +23,7 @@ fi
 if [[ -n "$XDG_CONFIG_HOME" ]]; then
   export HISTFILE=${HISTFILE:-$XDG_CACHE_HOME/bash/history}
   cache_dir=$(dirname "$HISTFILE")
-  mkdir -p cache_dir
+  mkdir -p $cache_dir
 fi
 export HISTDUP=erase
 export HISTSIZE=10000
