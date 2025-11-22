@@ -1,14 +1,3 @@
-# Load environment.d variables if not already loaded.
-if [[ -z "$USER_ENV_VARS_SET" ]] && [[ -d "$HOME/.config/environment.d" ]]; then
-  for f in $HOME/.config/environment.d/*.conf; do
-    set -a
-    if [[ -f "$f" ]]; then
-      source "$f"
-    fi
-    set +a
-  done
-fi
-
 if [[ -n "$XDG_CONFIG_HOME" ]]; then
   export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 fi
