@@ -1,6 +1,6 @@
-.git
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-.next
 *.svg
+.git
+.next
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
