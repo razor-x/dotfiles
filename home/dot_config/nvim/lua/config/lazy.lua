@@ -17,7 +17,10 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.cmd('source ' .. vim.fn.stdpath('config') .. '/legacy.vim')
 
+local dotfiles = require("dotfiles")
+
 require("lazy").setup({
+  lockfile =  dotfiles.source_dir .. '/lazy-lock.json',
   spec = {
     { 'nvim-mini/mini.nvim', version = '*' },
   }
