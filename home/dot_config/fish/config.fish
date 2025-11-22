@@ -2,11 +2,9 @@
 set fish_greeting
 
 if status is-interactive
-  # Use default fish prompt in Linux  virtual console.
+  # Use simple fish prompt in Linux  virtual console.
   if test "$TERM" = "linux"
-    functions --erase fish_prompt
-    functions --erase fish_right_prompt
-    functions --erase fish_mode_prompt
+    fish_config prompt choose default
   end
 
   if not set -q SSH_CONNECTION; and test "$TERM" != "linux"
