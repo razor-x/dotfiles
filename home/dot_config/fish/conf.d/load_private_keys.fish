@@ -1,7 +1,5 @@
 function load_private_keys
-  confirm_action 'Load SSH and GPG keys?' 'y'
-
-  if not confirm_action
+  if not confirm_action 'Load SSH and GPG keys?' 'y'
     return
   end
 
