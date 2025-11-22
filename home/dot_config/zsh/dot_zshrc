@@ -1,5 +1,7 @@
 # Set Zsh history variables.
-export HISTFILE=${HISTFILE:-$XDG_CACHE_HOME/zsh/history}
+if [[ -n "$XDG_CONFIG_HOME" ]]; then
+  export HISTFILE=${HISTFILE:-$XDG_CACHE_HOME/zsh/history}
+fi
 export HISTDUP=erase
 export HISTSIZE=10000
 export SAVEHIST=$HISTSIZE

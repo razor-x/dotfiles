@@ -2,7 +2,9 @@ if [[ -f $HOME/.bashrc ]]; then
   . $HOME/.bashrc
 fi
 
-export HISTFILE=${HISTFILE:-$XDG_CACHE_HOME/bash/history}
+if [[ -n "$XDG_CONFIG_HOME" ]]; then
+  export HISTFILE=${HISTFILE:-$XDG_CACHE_HOME/bash/history}
+fi
 export HISTDUP=erase
 export HISTSIZE=10000
 export SAVEHIST=$HISTSIZE
