@@ -20,7 +20,7 @@ vim.cmd('source ' .. vim.fn.stdpath('config') .. '/legacy.vim')
 local dotfiles = require("config.dotfiles")
 
 require("lazy").setup({
-  lockfile =  dotfiles.source_dir .. '/lazy-lock.json',
+  lockfile =  dotfiles.source_dir .. '/.lazy-lock.json',
   spec = {
     { 'nvim-mini/mini.nvim', version = '*' },
   }
