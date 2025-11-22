@@ -1,1 +1,1 @@
-vim.cmd('source ./legacy.vim')
+vim.cmd('source ' .. vim.fn.stdpath('config') .. '/legacy.vim')
