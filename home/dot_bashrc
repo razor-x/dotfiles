@@ -2,7 +2,9 @@
 if [[ -z $USER_ENV_VARS_SET ]] && [[ -d "$HOME/.config/environment.d" ]]; then
   for f in $HOME/.config/environment.d/*.conf; do
     set -a
-    [[ -f "$f" ]] && source "$f"
+    if [[ -f "$f" ]]; then
+      source "$f"
+    fi
     set +a
   done
 fi
@@ -11,8 +13,7 @@ fi
 if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" \
    && -z ${BASH_EXECUTION_STRING} \
    && ${SHLVL} == 1 \
-   && -x $(command -v fish) ]]
-then
+   && -x $(command -v fish) ]]; then
   shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=''
   exec fish $LOGIN_OPTION
 fi
