@@ -14,4 +14,4 @@ function beginning-of-line-or-history-pager
   end
 end
 
-abbr vv $VISUAL
+abbr e $VISUAL
