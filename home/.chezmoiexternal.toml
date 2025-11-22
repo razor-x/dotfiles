@@ -13,3 +13,15 @@
 
   [".config/tmux/plugins/tpm".checksum]
     sha256 = "2411fc416c4475d297f61078d0a03afb3a1f5322fff26a13fdb4f20d7e975570"
+
+[".config/tmux/plugins/tmux-sensible"]
+  type = "archive"
+  url = "https://github.com/tmux-plugins/tmux-sensible/archive/refs/tags/v3.0.0.tar.gz"
+  exact = true
+  stripComponents = 1
+  exclude = [
+    "*.gitattribute"
+  ]
+
+  [".config/tmux/plugins/tpm".checksum]
+    sha256 = "26e4ed87091b382f25953afca01b0ddf00b2de5694058cd9db890a83"
