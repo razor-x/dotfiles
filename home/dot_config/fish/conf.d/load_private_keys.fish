@@ -1,5 +1,5 @@
 function load_private_keys
-  confirm_action "Load SSH and GPG keys?"
+  confirm_action 'Load SSH and GPG keys?' 'y'
 
   if not confirm_action
     return
@@ -11,7 +11,7 @@ function load_private_keys
   end
 
   # Load GPG key into the ssh-agent.
-  if not gpg-connect-agent 'keyinfo --list' /bye 2>/dev/null | grep -q "1 P"
-    echo "" | gpg --clearsign --armor &>/dev/null
+  if not gpg-connect-agent 'keyinfo --list' /bye 2>/dev/null | grep -q '1 P'
+    echo '' | gpg --clearsign --armor &>/dev/null
   end
 end
