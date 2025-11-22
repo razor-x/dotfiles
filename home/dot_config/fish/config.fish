@@ -1,7 +1,7 @@
 # Clear Fish greeting.
 set fish_greeting
 
-# Detect SSH session
+# Detect SSH session.
 set -l is_ssh_session false
 if set -q SSH_CLIENT; or set -q SSH_TTY
   set is_ssh_session true
