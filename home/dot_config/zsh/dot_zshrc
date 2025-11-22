@@ -3,6 +3,7 @@ if [[ -n "$XDG_CONFIG_HOME" ]]; then
   export HISTFILE="$XDG_CACHE_HOME/zsh/history"
   cache_dir=$(dirname "$HISTFILE")
   mkdir -p $cache_dir
+  touch "$HISTFILE"
 fi
 export HISTDUP=erase
 export HISTSIZE=10000
