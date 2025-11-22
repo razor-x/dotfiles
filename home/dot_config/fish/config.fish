@@ -9,7 +9,7 @@ if status is-interactive
     functions --erase fish_mode_prompt
   end
 
-  if not set -q SSH_CONNECTION
+  if not set -q SSH_CONNECTION; and test "$TERM" != "linux"
     load_private_keys
   end
 
