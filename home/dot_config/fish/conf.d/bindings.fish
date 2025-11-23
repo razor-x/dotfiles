@@ -16,3 +16,7 @@ end
 
 abbr e $VISUAL
 abbr d nnn
+
+abbr pycli bpython
+abbr rbcli pry
+abbr jscli node
