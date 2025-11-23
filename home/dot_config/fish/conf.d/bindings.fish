@@ -15,3 +15,4 @@ function beginning-of-line-or-history-pager
 end
 
 abbr e $VISUAL
+abbr d nnn
