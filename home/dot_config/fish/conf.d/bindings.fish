@@ -1,10 +1,10 @@
 fish_hybrid_key_bindings
-bind -M default vv edit_command_buffer
+bind --mode default vv edit_command_buffer
 
-bind \ce end-of-line accept-autosuggestion
-bind \ca beginning-of-line-or-history-pager
-bind \cf forward-word
-bind \cr backward-word
+bind \ce --mode default end-of-line accept-autosuggestion
+bind \ca --mode default beginning-of-line-or-history-pager
+bind \cf --mode default forward-word
+bind \cr --mode default backward-word
 
 function beginning-of-line-or-history-pager
   if test -z (commandline)
