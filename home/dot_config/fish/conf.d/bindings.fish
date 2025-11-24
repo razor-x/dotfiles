@@ -18,6 +18,7 @@ abbr e $VISUAL
 abbr d nnn
 abbr l ls -lh
 
+abbr cljcli lein repl
 abbr pycli bpython
 abbr rbcli pry
 abbr jscli node
