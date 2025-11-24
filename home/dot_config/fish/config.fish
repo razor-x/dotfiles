@@ -9,7 +9,7 @@ if status is-interactive
 
   # Limit when prompted to load keys.
   if not set -q SSH_CONNECTION; and test "$TERM" != "linux"
-    load_private_keys
+    set fish_autoload_private_keys true
   end
 
   # Autostart tmux when connecting though SSH and client is not using tmux.

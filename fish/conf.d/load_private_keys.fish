@@ -1,4 +1,8 @@
-function load_private_keys
+function load_private_keys --on-variable fish_autoload_private_keys
+  if test "$fish_autoload_private_keys" != true
+    return
+  end
+
   if not confirm_action 'Load SSH and GPG keys?' 'y'
     return
   end
