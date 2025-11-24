@@ -16,6 +16,7 @@ end
 
 abbr e $VISUAL
 abbr d nnn
+abbr l ls -lh
 
 abbr pycli bpython
 abbr rbcli pry
