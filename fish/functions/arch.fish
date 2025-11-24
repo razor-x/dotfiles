@@ -1,4 +1,4 @@
-function arch_package_optional_deps () {
+function arch_package_optional_deps
     pacman -Qi | awk '
       /^Name/ {pkg = $3}
       /^Optional Deps/ {in_opt = 1; found = 0; next}
@@ -10,4 +10,4 @@ function arch_package_optional_deps () {
         }
       }
     '
-}
+end
