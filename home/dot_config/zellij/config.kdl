@@ -17,6 +17,7 @@ keybinds clear-defaults=true {
         bind "c" { NewTab; SwitchToMode "locked"; }
         bind "n" { GoToNextTab; SwitchToMode "locked"; }
         bind "p" { GoToPreviousTab; SwitchToMode "locked"; }
+        bind "d" { Detach; }
     }
     shared_except "locked" {
         bind "Ctrl h" { MoveFocusOrTab "Left"; }
