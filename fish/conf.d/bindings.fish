@@ -1,6 +1,8 @@
 fish_hybrid_key_bindings
 bind --mode default vv edit_command_buffer
 
+bind ctrl-p --mode insert up-or-search
+bind ctrl-n --mode insert down-or-search
 bind ctrl-e --mode insert end-of-line accept-autosuggestion
 bind ctrl-a --mode insert beginning-of-line-or-history-pager
 bind ctrl-f --mode insert forward-word
