@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -u
+
 # yazi package hash: {{ include (joinPath .chezmoi.sourceDir "dot_config" "yazi" "package.toml") | sha256sum }}
 
 ya pkg install
