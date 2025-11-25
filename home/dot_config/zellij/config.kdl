@@ -13,6 +13,11 @@ keybinds clear-defaults=true {
     locked {
         bind "Ctrl s" { SwitchToMode "normal"; }
     }
+    normal {
+        bind "c" { NewTab; SwitchToMode "locked"; }
+        bind "n" { MoveTab "right"; SwitchToMode "locked"; }
+        bind "p" { MoveTab "left"; SwitchToMode "locked"; }
+    }
     shared_except "locked" {
         bind "Ctrl h" { MoveFocusOrTab "Left"; }
         bind "Ctrl l" { MoveFocusOrTab "Right"; }
