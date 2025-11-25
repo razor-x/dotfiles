@@ -9,7 +9,7 @@ keybinds clear-defaults=true {
     locked {
         bind "Ctrl s" { SwitchToMode "normal"; }
     }
-    normal {
+    shared_except "locked" {
         bind "Ctrl h" { MoveFocusOrTab "Left"; }
         bind "Ctrl l" { MoveFocusOrTab "Right"; }
         bind "Ctrl j" { MoveFocus "Down"; }
