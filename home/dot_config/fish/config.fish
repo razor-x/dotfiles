@@ -12,8 +12,10 @@ if status is-interactive
     set fish_autoload_private_keys true
   end
 
-  # Autostart tmux when connecting though SSH and client is not using tmux.
-  if set -q SSH_CONNECTION; and not set -q TMUX
-    set fish_tmux_autostart true
+  # Autostart Zellij when connecting though SSH and not multiplexing.
+  if set -q SSH_CONNECTION; and not set -q TMUX; and not set -q ZELLIJ;
+    zellij attach -c ssh
+    # Exit shell when Zellij exits.
+    kill $fish_pid
   end
 end
