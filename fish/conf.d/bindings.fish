@@ -17,6 +17,7 @@ end
 abbr e $VISUAL
 abbr d yazi
 abbr l ls -lh
+abbr a rg
 
 abbr cljcli lein repl
 abbr pycli bpython
