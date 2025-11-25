@@ -1,6 +1,6 @@
 ---
-.config/zellij/plugins/zellij-autolock.wasm:
+.config/zellij/plugins/zellij-nvim-nav-plugin.wasm:
   type: file
-  url: https://github.com/fresh2dev/zellij-autolock/releases/download/0.2.2/zellij-autolock.wasm
+  url: https://github.com/sharph/zellij-nvim-nav-plugin/releases/download/v1.0.0/zellij-nvim-nav-plugin.wasm
   checksum:
-    sha256: "69c95607bfd97e075d6762a44fdbc703a82a3c4909dbbbe43952f020487b8ea4"
+    sha256: "5b61c9b86af4b7a074f0d31fcf93be6e6e6598d7a47a5c95de3f64befdacc103"
