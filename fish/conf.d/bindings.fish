@@ -20,7 +20,7 @@ abbr a rg
 abbr d yazi
 abbr e $VISUAL
 abbr l ls -lh
-abbr x ouch
+abbr x ouch d
 abbr z zellij
 
 abbr cljcli lein repl
