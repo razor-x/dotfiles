@@ -3,6 +3,16 @@ on_force_close "quit"
 default_shell "fish"
 theme "onedark"
 
+plugins {
+    autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm" {
+        triggers "nvim"
+    }
+}
+
+load_plugins {
+    autolock
+}
+
 // The Unlock-First (non-colliding) preset.
 // Default leader rebound to Ctrl s.
 keybinds clear-defaults=true {
