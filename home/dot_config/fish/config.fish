@@ -15,7 +15,5 @@ if status is-interactive
   # Autostart Zellij when connecting though SSH and not multiplexing.
   if set -q SSH_CONNECTION; and not set -q TMUX; and not set -q ZELLIJ;
     zellij attach -c ssh
-    # Exit shell when Zellij exits.
-    kill $fish_pid
   end
 end
