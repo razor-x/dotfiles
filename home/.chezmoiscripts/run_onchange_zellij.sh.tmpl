@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# zellij version: {{ output "zellij" "--version" }}
+
+set -e
+set -u
+
+completions_path="$HOME/.config/fish/completions"
+mkdir -p "$completions_path"
+zellij setup --generate-completion fish > "$completions_path"
+
