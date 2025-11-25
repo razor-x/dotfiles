@@ -1,3 +1,4 @@
+on_force_close "quit"
 default_shell "fish"
 theme "onedark"
 
