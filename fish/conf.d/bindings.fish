@@ -14,10 +14,12 @@ function beginning-of-line-or-history-pager
   end
 end
 
-abbr e $VISUAL
-abbr d yazi
-abbr l ls -lh
 abbr a rg
+abbr d yazi
+abbr e $VISUAL
+abbr l ls -lh
+abbr x ouch
+abbr z zellij
 
 abbr cljcli lein repl
 abbr pycli bpython
