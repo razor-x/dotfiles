@@ -18,7 +18,6 @@ end
 
 # Ag
 abbr a rg
-# Ag anything
 abbr aa batgrep
 
 # zoom
@@ -42,6 +41,9 @@ abbr vv prettybat -p
 
 # MultipleX
 abbr mx zellij
+
+# monitor
+abbr mon zenith
 
 # Colorize help text using bat.
 abbr -a --position anywhere -- --help '--help | bat -plhelp'
