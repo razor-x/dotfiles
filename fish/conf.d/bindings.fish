@@ -22,6 +22,7 @@ abbr e $VISUAL
 abbr l ls -lh
 abbr x ouch d
 abbr z zellij
+abbr m batman
 abbr rmrf rf -rf
 
 abbr cljcli lein repl
