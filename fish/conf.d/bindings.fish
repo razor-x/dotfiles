@@ -16,13 +16,30 @@ function beginning-of-line-or-history-pager
   end
 end
 
+# Ag
 abbr a rg
+
+# zoom
+abbr z zoxide
+
+# dir
 abbr d yazi
+
+# edit
 abbr e $VISUAL
+
+# list
 abbr l ls -lh
+
+# eXtract
 abbr x ouch d
-abbr z zellij
-abbr m batman
+
+# view
+abbr v bat -p
+
+# MultipleX
+abbr mx zellij
+
 abbr rmrf rf -rf
 
 abbr cljcli lein repl
