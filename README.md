@@ -79,6 +79,7 @@ Then trust the key
 $ gpg --edit-key <email>
 gpg> trust
 Your decision? 5 (Ultimate trust)
+Do you really want to set this key to ultimate trust? (y/N) y
 gpg> quit
 ```
 
