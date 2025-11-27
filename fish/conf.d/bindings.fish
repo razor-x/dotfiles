@@ -18,7 +18,8 @@ end
 
 # Ag
 abbr a rg
-abbr av batgrep
+# Ag anything
+abbr aa batgrep
 
 # zoom
 abbr z zoxide
@@ -30,16 +31,20 @@ abbr d yazi
 abbr e $VISUAL
 
 # list
-abbr l ls -lh
+abbr l eza
 
 # eXtract
 abbr x ouch d
 
 # view
 abbr v bat -p
+abbr vv prettybat -p
 
 # MultipleX
 abbr mx zellij
+
+# Colorize help text using bat.
+abbr -a --position anywhere -- --help '--help | bat -plhelp'
 
 abbr rmrf rf -rf
 

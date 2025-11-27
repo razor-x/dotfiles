@@ -2,6 +2,10 @@
 set fish_greeting
 
 if status is-interactive
+  # Enable batpipe less preprocessor.
+  eval (batpipe)
+  batman --export-env | source
+
   # Use simple fish prompt in Linux virtual console.
   if test "$TERM" = "linux"
     fish_config prompt choose default
