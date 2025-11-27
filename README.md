@@ -62,7 +62,9 @@ cd ~/config/dotfiles \
 Copy the ASCII armored private key over to the new machine
 
 ```
+$ gpg --export-secret-keys --armor <email> > private.key 
 $ scp private.key new-machine:
+$ rm private.key
 ```
 
 On the new machine, import the key
