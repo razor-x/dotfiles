@@ -18,6 +18,7 @@ end
 
 # Ag
 abbr a rg
+abbr av batgrep
 
 # zoom
 abbr z zoxide
