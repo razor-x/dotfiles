@@ -50,7 +50,7 @@ abbr dif delta
 # Colorize help text using bat.
 abbr -a --position anywhere -- --help '--help | bat -plhelp'
 
-abbr rmf rf -rf
+abbr rmf rm -rf
 
 abbr cljcli lein repl
 abbr pycli bpython
