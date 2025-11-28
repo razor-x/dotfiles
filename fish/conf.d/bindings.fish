@@ -52,9 +52,11 @@ abbr -a --position anywhere -- --help '--help | bat -plhelp'
 
 abbr rmf rm -rf
 
-abbr cljcli lein repl
-abbr pycli bpython
-abbr rbcli pry
-abbr jscli node
+abbr cljrepl lein repl
+abbr pyrepl bpython
+abbr rbrepl pry
+
+abbr jsrepl node
+abbr fmtjs prettier -w
 
 abbr archrc cd "$ACONFMGR_CONFIG/.."
