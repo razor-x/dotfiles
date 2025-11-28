@@ -9,7 +9,7 @@
     {{- $hash = printf "%s%s" $hash (include . | sha256sum) -}}
   {{- end -}}
 {{- end -}}
-# fish plugin sha: {{ sha256sum $hash }}
+# fish plugin hash: {{ sha256sum $hash }}
 
 fisher update
 
