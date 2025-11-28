@@ -45,3 +45,12 @@ abbr jsrepl node
 abbr fmtjs prettier -w --single-quote --jsx-single-quote --no-semi
 
 abbr archrc cd "$ACONFMGR_CONFIG/.."
+
+# Use batpipe as the less preprocessor.
+eval (batpipe)
+
+# User batman as the MANPAGER.
+batman --export-env | source
+
+# Use zoxide.
+zoxide init --cmd j fish | source
