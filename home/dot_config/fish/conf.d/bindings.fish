@@ -35,7 +35,12 @@ abbr aa batgrep
 abbr e $VISUAL
 
 # list
-abbr l eza
+functions --erase ll
+functions --erase la
+functions --erase ls
+abbr l eza -l
+abbr la eza -la
+abbr ls eza
 
 # eXtract
 abbr x ouch d
