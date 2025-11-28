@@ -1,11 +1,12 @@
 fish_hybrid_key_bindings
 bind --mode default vv edit_command_buffer
 
-# Unbind all alt bindings.
-bind \
-  | grep 'alt-' \
-  | string replace -r '^bind\s+(.*?)(alt-\S+)\s.*' 'bind --erase $1$2' \
-  | source
+function fish_erase_alt_key_bindings
+  bind \
+    | grep 'alt-' \
+    | string replace -r '^bind\s+(.*?)(alt-\S+)\s.*' 'bind --erase $1$2' \
+    | source
+end
 
 bind ctrl-p --mode insert up-or-search
 bind ctrl-n --mode insert down-or-search
