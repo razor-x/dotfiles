@@ -11,5 +11,5 @@ desc = "Edit file in visual editor"
 # https://github.com/ndtoan96/ouch.yazi#compression
 [[mgr.prepend_keymap]]
 on = ["C"]
-run = "plugin ouch"
+run = "plugin ouch 7z"
 desc = "Compress with ouch"
