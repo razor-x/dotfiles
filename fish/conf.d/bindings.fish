@@ -57,6 +57,6 @@ abbr pyrepl bpython
 abbr rbrepl pry
 
 abbr jsrepl node
-abbr fmtjs prettier -w
+abbr fmtjs prettier -w --single-quote --jsx-single-quote --no-semi
 
 abbr archrc cd "$ACONFMGR_CONFIG/.."
