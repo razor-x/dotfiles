@@ -45,6 +45,7 @@ abbr mx zellij
 abbr mon zenith
 
 abbr dl xh -d
+abbr dif delta
 
 # Colorize help text using bat.
 abbr -a --position anywhere -- --help '--help | bat -plhelp'
