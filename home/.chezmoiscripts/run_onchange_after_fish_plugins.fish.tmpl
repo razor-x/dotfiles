@@ -3,8 +3,8 @@
 # fisher_plugins hash: {{ include (joinPath .chezmoi.sourceDir "dot_config" "fish" "fish_plugins.tmpl") | sha256sum }}
 
 {{- $hash := "" -}}
-{{- range (list "functions" "conf.d" "completions") -}}
-  {{- $dir := printf "%s/../fish/%s" $.chezmoi.sourceDir . -}}
+{{- range (list "completions" "conf.d" "functions" "themes") -}}
+  {{- $dir := printf "%s/dot_config/fish/%s" $.chezmoi.sourceDir . -}}
   {{- range (glob (printf "%s/*.fish" $dir)) -}}
     {{- $hash = printf "%s%s" $hash (include . | sha256sum) -}}
   {{- end -}}
