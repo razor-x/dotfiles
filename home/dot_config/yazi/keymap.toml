@@ -1,0 +1,9 @@
+[[mgr.prepend_keymap]]
+on   = [ "e" ]
+run  = "shell '$VISUAL \"$@\"' --block --confirm"
+desc = "Edit file in visual editor"
+
+[[mgr.prepend_keymap]]
+on   = [ "E" ]
+run  = "shell '$GUI_EDITOR \"$@\"'"
+desc = "Edit file in visual editor"
