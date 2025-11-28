@@ -2,6 +2,9 @@ default_mode "locked"
 default_shell "fish"
 theme "onedark"
 
+// TODO: Enable startup tips again later.
+show_startup_tips false
+
 load_plugins {
     nvim-nav
 }
