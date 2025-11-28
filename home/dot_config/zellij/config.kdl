@@ -199,7 +199,7 @@ keybinds clear-defaults=true {
         bind "t" { SwitchToMode "tab"; }
     }
     shared_among "normal" "resize" "tab" "scroll" "prompt" "tmux" {
-        bind "p" { SwitchToMode "pane"; }
+        bind "a" { SwitchToMode "pane"; }
     }
     shared_except "locked" "resize" "pane" "tab" "entersearch" "renametab" "renamepane" {
         bind "r" { SwitchToMode "resize"; }
