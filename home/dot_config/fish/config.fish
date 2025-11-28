@@ -2,9 +2,12 @@
 set fish_greeting
 
 if status is-interactive
-  # Enable batpipe less preprocessor.
+  # Use batpipe as the less preprocessor.
   eval (batpipe)
   batman --export-env | source
+
+  # Use zoxide.
+  zoxide init fish | source
 
   # Use simple fish prompt in Linux virtual console.
   if test "$TERM" = "linux"

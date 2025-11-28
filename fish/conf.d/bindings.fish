@@ -20,9 +20,6 @@ end
 abbr a rg
 abbr aa batgrep
 
-# zoom
-abbr z zoxide
-
 # dir
 abbr d yazi
 
