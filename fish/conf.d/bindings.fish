@@ -52,4 +52,4 @@ abbr pycli bpython
 abbr rbcli pry
 abbr jscli node
 
-abbr archrc cd "../$ACONFMGR_CONFIG"
+abbr archrc cd "$ACONFMGR_CONFIG/.."
