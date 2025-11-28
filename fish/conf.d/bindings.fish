@@ -23,7 +23,7 @@ abbr a rg
 abbr aa batgrep
 
 # dir
-abbr d yazi
+# abbr d d
 
 # edit
 abbr e $VISUAL
