@@ -42,6 +42,8 @@ abbr mx zellij
 # monitor
 abbr mon zenith
 
+abbr dl xh -d
+
 # Colorize help text using bat.
 abbr -a --position anywhere -- --help '--help | bat -plhelp'
 
