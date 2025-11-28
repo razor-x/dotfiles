@@ -49,7 +49,7 @@ abbr dl xh -d
 # Colorize help text using bat.
 abbr -a --position anywhere -- --help '--help | bat -plhelp'
 
-abbr rmrf rf -rf
+abbr rmf rf -rf
 
 abbr cljcli lein repl
 abbr pycli bpython
