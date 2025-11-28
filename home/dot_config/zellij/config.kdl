@@ -17,6 +17,7 @@ keybinds clear-defaults=true {
         bind "Ctrl s" { SwitchToMode "normal"; }
     }
     normal {
+        bind "o" { NewPane; SwitchToMode "locked"; }
         bind "c" { NewTab; SwitchToMode "locked"; }
         bind "n" { GoToNextTab; SwitchToMode "locked"; }
         bind "p" { GoToPreviousTab; SwitchToMode "locked"; }
