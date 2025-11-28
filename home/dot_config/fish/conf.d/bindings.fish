@@ -1,21 +1,23 @@
 fish_hybrid_key_bindings
-bind --mode default vv edit_command_buffer
 
-function fish_erase_alt_key_bindings
+# Fish automatically executes this function.
+function fish_user_key_bindings
   bind \
     | grep 'alt-' \
     | string replace -r '^bind\s+(.*?)(alt-\S+)\s.*' 'bind --erase $1$2' \
     | source
-end
 
-bind ctrl-p --mode insert up-or-search
-bind ctrl-n --mode insert down-or-search
-bind ctrl-e --mode insert end-of-line accept-autosuggestion
-bind ctrl-a --mode insert beginning-of-line-or-history-pager
-bind ctrl-f --mode insert forward-word
-bind ctrl-r --mode insert backward-word
-bind ctrl-o --mode insert forward-char
-bind ctrl-b --mode insert backward-char
+    bind --mode default vv edit_command_buffer
+
+    bind ctrl-p --mode insert up-or-search
+    bind ctrl-n --mode insert down-or-search
+    bind ctrl-e --mode insert end-of-line accept-autosuggestion
+    bind ctrl-a --mode insert beginning-of-line-or-history-pager
+    bind ctrl-f --mode insert forward-word
+    bind ctrl-r --mode insert backward-word
+    bind ctrl-o --mode insert forward-char
+    bind ctrl-b --mode insert backward-char
+end
 
 function beginning-of-line-or-history-pager
   if test -z (commandline)

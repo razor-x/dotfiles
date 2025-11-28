@@ -11,9 +11,6 @@ if status is-interactive
   # Use zoxide.
   zoxide init fish | source
 
-  # Erase bindings after all plugins are loaded.
-  fish_erase_alt_key_bindings
-
   # Use simple fish prompt in Linux virtual console.
   if test "$TERM" = "linux"
     fish_config prompt choose default
