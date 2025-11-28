@@ -10,6 +10,9 @@ My user land configuration managed with [chezmoi].
 
 ## Bootstrap new machine
 
+> [!TIP]
+> After Bootstrapping, restart the machine.
+
 ```sh
 chezmoi init --apply --source ~/config/dotfiles razor-x
 ```
@@ -22,7 +25,7 @@ which will allow chezmoi to populate it into `~/.ssh/authorized_keys`.
 
 #### Option A: Login locally
 
-> [!IMPORTANT]
+> [!TIP]
 > This requires a GUI with a default web browser and the GitHub CLI.
 
 Login to GitHub which will open a web browser and then prompt you to add the new SSH key to your account.
@@ -33,7 +36,7 @@ gh auth login
 
 #### Option B: Use a trusted device
 
-> [!IMPORTANT]
+> [!TIP]
 > Since chezmoi has already installed the `~/.ssh/authorized_keys` file,
 > you can use an authorized device that is already logged into GitHub
 > to upload the public key.
@@ -62,7 +65,7 @@ cd ~/config/dotfiles \
 Copy the ASCII armored private key over to the new machine
 
 ```
-$ gpg --export-secret-keys --armor <email> > private.key 
+$ gpg --export-secret-keys --armor <email> > private.key
 $ scp private.key new-machine:
 $ rm private.key
 ```
