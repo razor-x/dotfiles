@@ -7,6 +7,8 @@ bind ctrl-e --mode insert end-of-line accept-autosuggestion
 bind ctrl-a --mode insert beginning-of-line-or-history-pager
 bind ctrl-f --mode insert forward-word
 bind ctrl-r --mode insert backward-word
+bind ctrl-o --mode insert forward-char
+bind ctrl-b --mode insert backward-char
 
 function beginning-of-line-or-history-pager
   if test -z (commandline)
