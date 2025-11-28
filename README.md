@@ -17,6 +17,12 @@ My user land configuration managed with [chezmoi].
 chezmoi init --apply --source ~/config/dotfiles razor-x
 ```
 
+## RTFM
+
+```
+man dotfiles
+```
+
 ### Add public key to GitHub
 
 Since this is a new machine, it is assumed to have a new SSH public-private key pair.
