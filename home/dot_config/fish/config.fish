@@ -4,6 +4,8 @@ set fish_greeting
 if status is-interactive
   # Use batpipe as the less preprocessor.
   eval (batpipe)
+
+  # User batman as the MANPAGER.
   batman --export-env | source
 
   # Use zoxide.
