@@ -9,6 +9,7 @@ load_plugins {
 // The Unlock-First (non-colliding) preset.
 // Default leader rebound to Ctrl s.
 keybinds clear-defaults=true {
+    // begin customized
     locked {
         bind "Ctrl s" { SwitchToMode "normal"; }
     }
@@ -18,6 +19,7 @@ keybinds clear-defaults=true {
         bind "p" { GoToPreviousTab; SwitchToMode "locked"; }
         bind "d" { Detach; }
     }
+    // end customized
     shared_except "locked" {
         bind "Ctrl h" { MoveFocusOrTab "Left"; }
         bind "Ctrl l" { MoveFocusOrTab "Right"; }
@@ -199,7 +201,9 @@ keybinds clear-defaults=true {
         bind "t" { SwitchToMode "tab"; }
     }
     shared_among "normal" "resize" "tab" "scroll" "prompt" "tmux" {
-        bind "a" { SwitchToMode "pane"; }
+        // begin customized
+        bind "a" { SwitchToMode "pane"; } // customized
+        // end customized
     }
     shared_except "locked" "resize" "pane" "tab" "entersearch" "renametab" "renamepane" {
         bind "r" { SwitchToMode "resize"; }
