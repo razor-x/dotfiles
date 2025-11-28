@@ -1,7 +1,15 @@
 #!/usr/bin/env fish
 
 # fisher_plugins hash: {{ include (joinPath .chezmoi.sourceDir "dot_config" "fish" "fish_plugins.tmpl") | sha256sum }}
-# fish plugin sha: {{ output "git" "-C" .chezmoi.sourceDir "rev-list" "-1" "HEAD" "--" "../fish" }}
+
+{{- $hash := "" -}}
+{{- range (list "functions" "conf.d" "completions") -}}
+  {{- $dir := printf "%s/../fish/%s" $.chezmoi.sourceDir . -}}
+  {{- range (glob (printf "%s/*.fish" $dir)) -}}
+    {{- $hash = printf "%s%s" $hash (include . | sha256sum) -}}
+  {{- end -}}
+{{- end -}}
+# fish plugin sha: {{ sha256sum $hash }}
 
 fisher update
 
