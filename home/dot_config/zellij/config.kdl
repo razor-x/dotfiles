@@ -6,7 +6,7 @@ theme "onedark"
 show_startup_tips false
 
 load_plugins {
-    nvim-nav
+    vim-zellij-navigator
 }
 
 // The Unlock-First (non-colliding) preset.
