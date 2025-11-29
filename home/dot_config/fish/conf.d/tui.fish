@@ -12,9 +12,11 @@ abbr e $VISUAL
 functions --erase ll
 functions --erase la
 functions --erase ls
-abbr l eza -l
-abbr la eza -la
-abbr ls eza
+alias l eza -l
+alias ll eza -1
+alias la eza -la
+alias ls eza
+alias lsp eza -l | $PAGER
 
 # eXtract
 abbr x ouch d
