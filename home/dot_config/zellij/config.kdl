@@ -23,13 +23,58 @@ keybinds clear-defaults=true {
         bind "p" { GoToPreviousTab; SwitchToMode "locked"; }
         bind "d" { Detach; }
     }
-    // end customized
-    shared_except "locked" {
-        bind "Ctrl h" { MoveFocusOrTab "Left"; }
-        bind "Ctrl l" { MoveFocusOrTab "Right"; }
-        bind "Ctrl j" { MoveFocus "Down"; }
-        bind "Ctrl k" { MoveFocus "Up"; }
+    shared {
+        bind "Ctrl h" {
+            MessagePlugin "vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "left";
+            };
+        }
+        bind "Ctrl j" {
+            MessagePlugin "vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "down";
+            };
+        }
+        bind "Ctrl k" {
+            MessagePlugin "vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "up";
+            };
+        }
+        bind "Ctrl l" {
+            MessagePlugin "vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "right";
+            };
+        }
+        bind "Alt h" {
+            MessagePlugin "vim-zellij-navigator.wasm" {
+                name "resize";
+                payload "left";
+            };
+        }
+        bind "Alt j" {
+            MessagePlugin "vim-zellij-navigator.wasm" {
+                name "resize";
+                payload "down";
+            };
+        }
+        bind "Alt k" {
+            MessagePlugin "vim-zellij-navigator.wasm" {
+                name "resize";
+                payload "up";
+            };
+        }
+        bind "Alt l" {
+            MessagePlugin "vim-zellij-navigator.wasm" {
+                name "resize";
+                payload "right";
+            };
+        }
+      }
     }
+    // end customized
     pane {
         bind "left" { MoveFocus "left"; }
         bind "down" { MoveFocus "down"; }
