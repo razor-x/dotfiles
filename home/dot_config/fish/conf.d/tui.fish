@@ -56,4 +56,4 @@ batman --export-env | source
 zoxide init --cmd j fish | source
 
 abbr dotfiles cd "(chezmoi source-path)"
-alias wdotfiles "fd . (chezmoi source-path) -t file | entr chezmoi apply"
+alias dotwatch "fd . (chezmoi source-path) -t file | entr chezmoi apply"
