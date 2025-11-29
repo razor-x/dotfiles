@@ -73,7 +73,6 @@ keybinds clear-defaults=true {
                 payload "right";
             };
         }
-      }
     }
     // end customized
     pane {
