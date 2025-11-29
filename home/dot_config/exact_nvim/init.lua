@@ -12,7 +12,7 @@ vim.keymap.set("n", "<leader>f", function()
   pick.builtin.files() -- Defaults to 'rg' which respects .gitignore and global ignore
 end, { desc = "Pick all files in cwd" })
 
-local smart_splits = smart_splits
+local smart_splits = require("smart-splits")
 
 vim.keymap.set("n", "<A-h>", smart_splits.resize_left)
 vim.keymap.set("n", "<A-j>", smart_splits.resize_down)
