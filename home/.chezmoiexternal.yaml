@@ -4,3 +4,9 @@
   url: https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm
   checksum:
     sha256: "77e5a2f62f7c1a698caf2574493d5d75587e0fd877cfba34c48caf731c24c58d"
+
+.config/gitui/theme.ron:
+  type: file
+  url: https://raw.githubusercontent.com/catppuccin/gitui/refs/heads/main/themes/catppuccin-frappe.ron
+  checksum:
+    sha256: "b54b5dd79033fd5234897f9d53f567ff97970039bcf9c5ffb1a94d903aa01d82"
