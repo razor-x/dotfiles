@@ -1,4 +1,6 @@
-function confirm_action -a message default_action
+function confirm_action -a message default_action \
+    --description "Prompt user for confirmation"
+
     if test "$default_action" = y
         set prompt '[Y/n]'
         set default_result 0

@@ -1,5 +1,5 @@
-function load_private_keys
-    # Load all SSH keys into the ssh-agent.
+function load_private_keys \
+    --description "Load SSH keys into the ssh-agent and GPG keys into the GPG agent."
     if not ssh-add -l &>/dev/null
         ssh-add
     end

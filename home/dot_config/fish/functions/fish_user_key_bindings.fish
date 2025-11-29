@@ -1,7 +1,8 @@
 fish_hybrid_key_bindings
 
-# Fish automatically executes this function.
-function fish_user_key_bindings
+function fish_user_key_bindings \
+    --description "Fish automatically executes this function after setting all preset bindings."
+
     # Erase all Alt bindings.
     bind \
         | grep alt- \
@@ -28,7 +29,9 @@ function fish_user_key_bindings
     bind ctrl-q --mode insert __fish_paginate
 end
 
-function beginning-of-line-or-history-pager
+function beginning-of-line-or-history-pager \
+    --description "Move the cursor to the beginning of the line; if already there, open the history pager."
+
     if test -z (commandline)
         commandline -f history-pager
     else
