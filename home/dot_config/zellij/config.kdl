@@ -208,6 +208,8 @@ keybinds clear-defaults=true {
         // -- begin customization --
         bind "Alt ." { GoToPreviousTab; } // Looks like shift-less "Alt <"
         bind "Alt ," { GoToNextTab; } // Looks like shift-less "Alt >"
+        bind "Alt Shift tab" { CloseTab; }
+        bind "Alt tab" { NewTab; }
         bind "Ctrl h" {
             MessagePlugin "vim-zellij-navigator" {
                 name "move_focus";
