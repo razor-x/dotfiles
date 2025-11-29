@@ -251,7 +251,7 @@ keybinds clear-defaults=true {
         bind "enter" { SwitchToMode "locked"; }
     }
     // -- begin customization --
-    shared_except "locked" "scroll" {
+    shared_except "locked" "scroll" "entersearch" "renametab" "renamepane" {
         bind "space" { SwitchToMode "scroll"; }
     }
     // -- end customization --
@@ -276,11 +276,6 @@ keybinds clear-defaults=true {
         bind "/" { SwitchToMode "entersearch"; SearchInput 0; }
         // -- end customization --
     }
-    // -- begin customization --
-    shared_among "normal" "resize" "tab" "entersearch" "prompt" "tmux" {
-        bind "space" { SwitchToMode "scroll"; }
-    }
-    // -- end customization --
     shared_except "locked" "resize" "pane" "tab" "entersearch" "renametab" "renamepane" {
         bind "r" { SwitchToMode "resize"; }
     }
