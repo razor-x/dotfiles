@@ -33,6 +33,13 @@ keybinds clear-defaults=true {
         bind "n" { GoToNextTab; SwitchToMode "locked"; }
         bind "p" { GoToPreviousTab; SwitchToMode "locked"; }
         bind "e" { EditScrollback; SwitchToMode "locked"; }
+        bind "g" {
+            Run "gitui" {
+                close_on_exit true
+                floating true
+            };
+            SwitchToMode "locked";
+        }
         bind "d" { Detach; }
     }
     // -- end customization --
@@ -136,7 +143,9 @@ keybinds clear-defaults=true {
         bind "space" { SwitchToMode "locked"; }
         bind "w" {
             DumpScreen "/tmp/zellij_scrollback.dump.txt";
-            Run "fish" "-c" "zellij_scrollback";
+            Run "fish" "-c" "zellij_scrollback" {
+                close_on_exit true
+            };
             SwitchToMode "locked";
         }
         // -- end customization --
