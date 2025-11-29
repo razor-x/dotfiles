@@ -16,7 +16,7 @@ alias l eza -l
 alias ll eza -1
 alias la eza -la
 alias ls eza
-alias lsp eza -l | $PAGER
+alias lsp eza -l | bat
 
 # eXtract
 abbr x ouch d
