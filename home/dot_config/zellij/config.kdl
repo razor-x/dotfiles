@@ -171,17 +171,40 @@ keybinds clear-defaults=true {
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
         bind "Alt f" { ToggleFloatingPanes; }
-        bind "Alt h" { MoveFocusOrTab "left"; }
+        // begin customized
+        bind "Alt h" {
+            MessagePlugin "vim-zellij-navigator" {
+                name "resize";
+                payload "left";
+            };
+        }
+        // end customized
         bind "Alt i" { MoveTab "left"; }
-        bind "Alt j" { MoveFocus "down"; }
-        bind "Alt k" { MoveFocus "up"; }
-        bind "Alt l" { MoveFocusOrTab "right"; }
+        // begin customized
+        bind "Alt j" {
+            MessagePlugin "vim-zellij-navigator" {
+                name "resize";
+                payload "down";
+            };
+        }
+        bind "Alt k" {
+            MessagePlugin "vim-zellij-navigator" {
+                name "resize";
+                payload "up";
+            };
+        }
+        bind "Alt l" {
+            MessagePlugin "vim-zellij-navigator" {
+                name "resize";
+                payload "right";
+            };
+        }
+        // end customized
         bind "Alt n" { NewPane; }
         bind "Alt o" { MoveTab "right"; }
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
         // begin customized
-        // https://github.com/mrjones2014/smart-splits.nvim#zellij
         bind "Ctrl h" {
             MessagePlugin "vim-zellij-navigator" {
                 name "move_focus";
@@ -203,30 +226,6 @@ keybinds clear-defaults=true {
         bind "Ctrl l" {
             MessagePlugin "vim-zellij-navigator" {
                 name "move_focus";
-                payload "right";
-            };
-        }
-        bind "Alt h" {
-            MessagePlugin "vim-zellij-navigator" {
-                name "resize";
-                payload "left";
-            };
-        }
-        bind "Alt j" {
-            MessagePlugin "vim-zellij-navigator" {
-                name "resize";
-                payload "down";
-            };
-        }
-        bind "Alt k" {
-            MessagePlugin "vim-zellij-navigator" {
-                name "resize";
-                payload "up";
-            };
-        }
-        bind "Alt l" {
-            MessagePlugin "vim-zellij-navigator" {
-                name "resize";
                 payload "right";
             };
         }
