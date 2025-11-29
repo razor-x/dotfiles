@@ -71,4 +71,9 @@ alias now='date +"%Y-%m-%dT%H:%M:%S.%3N%:z"'
 alias nowutc='date --utc +"%Y-%m-%dT%H:%M:%S.%3N%:z"'
 alias nowz='date --utc +"%Y-%m-%dT%H:%M:%S.%3NZ"'
 alias today='date --iso-8601=date'
-alias zellij_save_dump "mv /tmp/zellij.dump.txt $HOME/zellij.(now).dump.txt"
+
+function zellij_scrollback
+    set zellij_scrollback "$HOME/scrollback.$(now).txt"
+    mv /tmp/zellij_scrollback.dump.txt $zellij_scrollback
+    bat -p $zellij_scrollback
+end
