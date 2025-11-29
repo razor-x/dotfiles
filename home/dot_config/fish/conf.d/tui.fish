@@ -16,7 +16,9 @@ alias l 'eza -l'
 alias ll 'eza -1'
 alias la 'eza -la'
 alias ls 'eza'
-alias 'lsp eza -l | bat'
+function lsp
+    eza -la $argv | bat
+end
 
 # eXtract
 abbr x ouch d
