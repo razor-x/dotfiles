@@ -24,6 +24,7 @@ keybinds clear-defaults=true {
     normal {
         bind "o" { NewPane; SwitchToMode "locked"; }
         bind "c" { NewTab; SwitchToMode "locked"; }
+        bind "w" { CloseFocus; SwitchToMode "locked" }
         bind "n" { GoToNextTab; SwitchToMode "locked"; }
         bind "p" { GoToPreviousTab; SwitchToMode "locked"; }
         bind "d" { Detach; }
@@ -210,6 +211,7 @@ keybinds clear-defaults=true {
         bind "Alt ," { GoToNextTab; } // Looks like shift-less "Alt >"
         bind "Alt Shift tab" { CloseTab; }
         bind "Alt tab" { NewTab; }
+        bind "Alt w" { CloseFocus; }
         bind "Ctrl h" {
             MessagePlugin "vim-zellij-navigator" {
                 name "move_focus";
