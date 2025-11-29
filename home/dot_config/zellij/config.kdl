@@ -22,9 +22,13 @@ keybinds clear-defaults=true {
         bind "Ctrl s" { SwitchToMode "normal"; }
     }
     normal {
-        bind "o" { NewPane; SwitchToMode "locked"; }
-        bind "c" { NewTab; SwitchToMode "locked"; }
+        bind "h" { NextSwapLayout; SwitchToMode "locked"; }
+        bind "j" { NewPane "Down"; SwitchToMode "locked"; }
+        bind "k" { ToggleFloatingPanes; SwitchToMode "locked"; }
+        bind "l" { NewPane "Right"; SwitchToMode "locked"; }
         bind "w" { CloseFocus; SwitchToMode "locked"; }
+        bind "tab" { NewTab; SwitchToMode "locked"; }
+        bind "Shift tab" { CloseTab; SwitchToMode "locked"; }
         bind "n" { GoToNextTab; SwitchToMode "locked"; }
         bind "p" { GoToPreviousTab; SwitchToMode "locked"; }
         bind "e" { EditScrollback; SwitchToMode "locked"; }
