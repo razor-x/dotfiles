@@ -17,7 +17,9 @@ alias ll 'eza -1'
 alias la 'eza -la'
 alias ls 'eza'
 function lsp
-    eza -la --color=always $argv | eval $PAGER
+    set -l cmd (__fish_anypager)
+    or return 1
+    eza -la --color=always $argv | $cmd
 end
 
 # eXtract
