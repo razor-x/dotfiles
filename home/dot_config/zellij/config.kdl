@@ -252,14 +252,14 @@ keybinds clear-defaults=true {
         bind "m" { SwitchToMode "move"; }
     }
     shared_except "locked" "entersearch" "search" "renametab" "renamepane" "session" {
-        bind "s" { SwitchToMode "session"; }
+        bind "a" { SwitchToMode "session"; }
     }
     shared_except "locked" "tab" "entersearch" "renametab" "renamepane" {
         bind "t" { SwitchToMode "tab"; }
     }
     shared_among "normal" "resize" "tab" "scroll" "prompt" "tmux" {
         // -- begin customization --
-        bind "a" { SwitchToMode "pane"; }
+        bind "s" { SwitchToMode "pane"; }
         // -- end customization --
     }
     shared_except "locked" "resize" "pane" "tab" "entersearch" "renametab" "renamepane" {
