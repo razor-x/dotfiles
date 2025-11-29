@@ -17,7 +17,7 @@ alias ll 'eza -1'
 alias la 'eza -la'
 alias ls 'eza'
 function lsp
-    eza -la $argv | bat
+    eza -la --color=always $argv | eval $PAGER
 end
 
 # eXtract
