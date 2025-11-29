@@ -15,8 +15,9 @@ function fish_user_key_bindings
     bind ctrl-a --mode insert beginning-of-line-or-history-pager
     bind ctrl-f --mode insert forward-word
     bind ctrl-r --mode insert backward-word
+    bind ctrl-b --mode insert backward-delete-char
     bind ctrl-o --mode insert forward-char
-    bind ctrl-b --mode insert backward-char
+    bind ctrl-u --mode insert backward-char
 end
 
 function beginning-of-line-or-history-pager
