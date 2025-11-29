@@ -1,6 +1,7 @@
 default_mode "locked"
 default_shell "fish"
 theme "onedark"
+pane_frames false
 
 // TODO: Enable startup tips again later.
 show_startup_tips false
