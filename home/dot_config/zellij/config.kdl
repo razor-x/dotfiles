@@ -27,57 +27,6 @@ keybinds clear-defaults=true {
         bind "p" { GoToPreviousTab; SwitchToMode "locked"; }
         bind "d" { Detach; }
     }
-    // https://github.com/mrjones2014/smart-splits.nvim#zellij
-    shared {
-        bind "Ctrl h" {
-            MessagePlugin "vim-zellij-navigator" {
-                name "move_focus";
-                payload "left";
-            };
-        }
-        bind "Ctrl j" {
-            MessagePlugin "vim-zellij-navigator" {
-                name "move_focus";
-                payload "down";
-            };
-        }
-        bind "Ctrl k" {
-            MessagePlugin "vim-zellij-navigator" {
-                name "move_focus";
-                payload "up";
-            };
-        }
-        bind "Ctrl l" {
-            MessagePlugin "vim-zellij-navigator" {
-                name "move_focus";
-                payload "right";
-            };
-        }
-        bind "Alt h" {
-            MessagePlugin "vim-zellij-navigator" {
-                name "resize";
-                payload "left";
-            };
-        }
-        bind "Alt j" {
-            MessagePlugin "vim-zellij-navigator" {
-                name "resize";
-                payload "down";
-            };
-        }
-        bind "Alt k" {
-            MessagePlugin "vim-zellij-navigator" {
-                name "resize";
-                payload "up";
-            };
-        }
-        bind "Alt l" {
-            MessagePlugin "vim-zellij-navigator" {
-                name "resize";
-                payload "right";
-            };
-        }
-    }
     // end customized
     pane {
         bind "left" { MoveFocus "left"; }
@@ -231,6 +180,57 @@ keybinds clear-defaults=true {
         bind "Alt o" { MoveTab "right"; }
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
+        // begin customized
+        // https://github.com/mrjones2014/smart-splits.nvim#zellij
+        bind "Ctrl h" {
+            MessagePlugin "vim-zellij-navigator" {
+                name "move_focus";
+                payload "left";
+            };
+        }
+        bind "Ctrl j" {
+            MessagePlugin "vim-zellij-navigator" {
+                name "move_focus";
+                payload "down";
+            };
+        }
+        bind "Ctrl k" {
+            MessagePlugin "vim-zellij-navigator" {
+                name "move_focus";
+                payload "up";
+            };
+        }
+        bind "Ctrl l" {
+            MessagePlugin "vim-zellij-navigator" {
+                name "move_focus";
+                payload "right";
+            };
+        }
+        bind "Alt h" {
+            MessagePlugin "vim-zellij-navigator" {
+                name "resize";
+                payload "left";
+            };
+        }
+        bind "Alt j" {
+            MessagePlugin "vim-zellij-navigator" {
+                name "resize";
+                payload "down";
+            };
+        }
+        bind "Alt k" {
+            MessagePlugin "vim-zellij-navigator" {
+                name "resize";
+                payload "up";
+            };
+        }
+        bind "Alt l" {
+            MessagePlugin "vim-zellij-navigator" {
+                name "resize";
+                payload "right";
+            };
+        }
+        // end customized
     }
     shared_except "locked" "renametab" "renamepane" {
         bind "Ctrl q" { Quit; }
