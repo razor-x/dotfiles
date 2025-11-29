@@ -205,6 +205,8 @@ keybinds clear-defaults=true {
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
         // begin customized
+        bind "Alt ." { GoToPreviousTab; } // Looks like shift-less "Alt <"
+        bind "Alt ," { GoToNextTab; } // Looks like shift-less "Alt >"
         bind "Ctrl h" {
             MessagePlugin "vim-zellij-navigator" {
                 name "move_focus";
@@ -229,8 +231,6 @@ keybinds clear-defaults=true {
                 payload "right";
             };
         }
-        bind "Ctrl ." { GoToPreviousTab; } // Looks like shift-less "Ctrl <"
-        bind "Ctrl ," { GoToNextTab; } // Looks like shift-less "Ctrl >"
         // end customized
     }
     shared_except "locked" "renametab" "renamepane" {
