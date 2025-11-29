@@ -244,6 +244,11 @@ keybinds clear-defaults=true {
     shared_except "locked" "entersearch" {
         bind "enter" { SwitchToMode "locked"; }
     }
+    // -- begin customization --
+    shared_except "locked" "scroll" {
+        bind "space { SwitchToMode "scroll"; }
+    }
+    // -- end customization --
     shared_except "locked" "entersearch" "renametab" "renamepane" "prompt" "tmux" {
         bind "Ctrl s" { SwitchToMode "locked"; }
     }
@@ -262,8 +267,14 @@ keybinds clear-defaults=true {
     shared_among "normal" "resize" "tab" "scroll" "prompt" "tmux" {
         // -- begin customization --
         bind "s" { SwitchToMode "pane"; }
+        bind "/" { SwitchToMode "entersearch"; SearchInput 0; }
         // -- end customization --
     }
+    // -- begin customization --
+    shared_among "normal" "resize" "tab" "entersearch" "prompt" "tmux" {
+        bind "space" { SwitchToMode "scroll"; }
+    }
+    // -- end customization --
     shared_except "locked" "resize" "pane" "tab" "entersearch" "renametab" "renamepane" {
         bind "r" { SwitchToMode "resize"; }
     }
@@ -302,6 +313,6 @@ keybinds clear-defaults=true {
         bind "esc" { UndoRenamePane; SwitchToMode "pane"; }
     }
     shared_among "prompt" "tmux" {
-        bind "s" { SwitchToMode "scroll"; }
+        bind "space" { SwitchToMode "scroll"; }
     }
 }
