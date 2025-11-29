@@ -229,6 +229,8 @@ keybinds clear-defaults=true {
                 payload "right";
             };
         }
+        bind "Ctrl ." { GoToPreviousTab; } // Looks like shift-less "Ctrl <"
+        bind "Ctrl ," { GoToNextTab; } // Looks like shift-less "Ctrl >"
         // end customized
     }
     shared_except "locked" "renametab" "renamepane" {
