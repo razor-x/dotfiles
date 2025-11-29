@@ -76,4 +76,5 @@ function zellij_scrollback
     set zellij_scrollback "$HOME/scrollback.$(now).txt"
     mv /tmp/zellij_scrollback.dump.txt $zellij_scrollback
     bat -p $zellij_scrollback
+    echo $zellij_scrollback
 end

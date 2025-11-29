@@ -124,7 +124,11 @@ keybinds clear-defaults=true {
         bind "Alt k" { MoveFocus "up"; SwitchToMode "locked"; }
         bind "Alt l" { MoveFocusOrTab "right"; SwitchToMode "locked"; }
         // -- begin customization --
-        bind "d" { DumpScreen "/tmp/zellij.dump.txt"; SwitchToMode "locked"; }
+        bind "w" {
+            DumpScreen "/tmp/zellij_scrollback.dump.txt";
+            Run "fish" "-c" "zellij_scrollback";
+            SwitchToMode "locked";
+        }
         // -- end customization --
     }
     search {
