@@ -12,11 +12,11 @@ abbr e $VISUAL
 functions --erase ll
 functions --erase la
 functions --erase ls
-alias l eza -l
-alias ll eza -1
-alias la eza -la
-alias ls eza
-alias lsp eza -l | bat
+alias l 'eza -l'
+alias ll 'eza -1'
+alias la 'eza -la'
+alias ls 'eza'
+alias 'lsp eza -l | bat'
 
 # eXtract
 abbr x ouch d
