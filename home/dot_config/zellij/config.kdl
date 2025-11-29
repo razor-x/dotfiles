@@ -211,6 +211,7 @@ keybinds clear-defaults=true {
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
         // -- begin customization --
+        bind "Alt q" { Detach; }
         bind "Alt e" { EditScrollback; SwitchToMode "locked"; }
         bind "Alt ." { GoToPreviousTab; } // Looks like shift-less "Alt <"
         bind "Alt ," { GoToNextTab; } // Looks like shift-less "Alt >"
