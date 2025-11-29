@@ -2,9 +2,16 @@ fish_hybrid_key_bindings
 
 # Fish automatically executes this function.
 function fish_user_key_bindings
+  # Erase all Alt bindings.
   bind \
     | grep 'alt-' \
     | string replace -r '^bind\s+(.*?)(alt-\S+)\s.*' 'bind --erase $1$2' \
+    | source
+
+  # Erase conflicting navigation bindings.
+  bind \
+    | grep 'ctrl-[hjkl] ' \
+    | string replace -r '^bind\s+(.*?)(ctrl-\S+)\s.*' 'bind --erase $1$2' \
     | source
 
     bind --mode default vv edit_command_buffer
