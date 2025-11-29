@@ -246,7 +246,7 @@ keybinds clear-defaults=true {
     }
     // -- begin customization --
     shared_except "locked" "scroll" {
-        bind "space { SwitchToMode "scroll"; }
+        bind "space" { SwitchToMode "scroll"; }
     }
     // -- end customization --
     shared_except "locked" "entersearch" "renametab" "renamepane" "prompt" "tmux" {
