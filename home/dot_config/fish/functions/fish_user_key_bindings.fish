@@ -27,6 +27,14 @@ function fish_user_key_bindings \
     bind ctrl-o --mode insert forward-char
     bind ctrl-u --mode insert backward-char
     bind ctrl-q --mode insert fish_paginate
+
+    fzf_configure_bindings \
+        --directory='ctrl-;' \
+        --git_log="ctrl-'" \
+        --git_status='ctrl-g' \
+        --history='' \
+        --processes='ctrl-\\' \
+        --variables='ctrl-/'
 end
 
 function beginning-of-line-or-history-pager \
