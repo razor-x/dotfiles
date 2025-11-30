@@ -26,7 +26,7 @@ function fish_user_key_bindings \
     bind ctrl-b --mode insert backward-delete-char
     bind ctrl-o --mode insert forward-char
     bind ctrl-u --mode insert backward-char
-    bind ctrl-q --mode insert __fish_paginate
+    bind ctrl-q --mode insert fish_paginate
 end
 
 function beginning-of-line-or-history-pager \
