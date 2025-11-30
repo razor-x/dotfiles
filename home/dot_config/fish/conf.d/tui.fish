@@ -17,7 +17,7 @@ alias ll 'eza -1'
 alias la 'eza -la'
 alias ls 'eza'
 function lsp --description 'List all files with pagination'
-    set -l cmd (__fish_anypager)
+    set -l cmd $PAGER
     or return 1
     eza -la --color=always $argv | $cmd
 end

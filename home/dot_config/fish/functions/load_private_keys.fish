@@ -1,5 +1,5 @@
 function autoload_private_keys --on-variable fish_autoload_private_keys \
-    --description 'Prompt user to load SSH and GPG keys into agents.'
+    --description 'Prompt user to load SSH and GPG keys into agents'
 
     if test "$fish_autoload_private_keys" != true
         return

@@ -1,5 +1,5 @@
 function zellij_scrollback \
-    --description 'Save the Zellij scrollback and view it.'
+    --description 'Save the Zellij scrollback and view it'
 
     set zellij_dump '/tmp/zellij_scrollback.dump.txt'
 

@@ -1,5 +1,5 @@
 function arch_package_optional_deps \
-    --description 'Show all missing optional dependencies.'
+    --description 'Show all missing optional dependencies'
 
     pacman -Qi | awk '
       /^Name/ {pkg = $3}
