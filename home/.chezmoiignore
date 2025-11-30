@@ -2,3 +2,11 @@
 **/conf.d/*.fish
 **/functions/*.fish
 **/themes/*.fish
+
+{{- if not (has .chezmoi.hostname (list "minto" "anny")) }}
+.config/nvim/**
+.config/zsh/**
+.zprofile
+.zshenv
+.config/environment.d/xsecurelock.conf
+{{- end }}
