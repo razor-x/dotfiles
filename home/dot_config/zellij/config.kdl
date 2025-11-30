@@ -30,7 +30,7 @@ keybinds clear-defaults=true {
         bind "j" { NewPane "Down"; SwitchToMode "locked"; }
         bind "k" { ToggleFloatingPanes; SwitchToMode "locked"; }
         bind "l" { NewPane "Right"; SwitchToMode "locked"; }
-        bind "w" { CloseFocus; SwitchToMode "locked"; }
+        bind "x" { CloseFocus; SwitchToMode "locked"; }
         bind "tab" { NewTab; SwitchToMode "locked"; }
         bind "Shift tab" { CloseTab; SwitchToMode "locked"; }
         bind "n" { GoToNextTab; SwitchToMode "locked"; }
