@@ -1,5 +1,5 @@
 function load_private_keys \
-    --description "Load SSH keys into the ssh-agent and GPG keys into the GPG agent."
+    --description 'Load SSH keys into the ssh-agent and GPG keys into the GPG agent'
     if not ssh-add -l &>/dev/null
         ssh-add
     end
