@@ -10,6 +10,6 @@ function zellij_scrollback \
 
     set zellij_scrollback "$HOME/scrollback.$(now).txt"
     mv $zellij_dump $zellij_scrollback
-    bat -p $zellij_scrollback
+    bat --pager="less --raw-control-chars" $zellij_scrollback
     echo $zellij_scrollback
 end
