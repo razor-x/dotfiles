@@ -7,7 +7,7 @@ pane_frames false
 show_startup_tips false
 
 // Treat git commit as nvim so Ctrl keybinds are passed to nvim.
-post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | grep -q 'git commit' && echo nvim || echo \"$RESURRECT_COMMAND\""
+post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | grep -qE '(git commit|fzf)' && echo nvim || echo \"$RESURRECT_COMMAND\""
 
 plugins {
     vim-zellij-navigator location="file:~/.config/zellij/plugins/vim-zellij-navigator.wasm"
