@@ -1,0 +1,10 @@
+[user]
+  name = {{ .fullName | quote }}
+  email = {{ .emailAddress | quote }}
+  signingkey = {{ .gpgKeyId | quote }}
+[init]
+  defaultBranch = main
+[commit]
+  gpgsign = true
+[pull]
+  rebase = true
