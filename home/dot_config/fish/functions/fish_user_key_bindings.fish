@@ -28,13 +28,18 @@ function fish_user_key_bindings \
     bind ctrl-u --mode insert backward-char
     bind ctrl-q --mode insert fish_paginate
 
+    bind ctrl-/ --mode normal __fish_whatis_current_token
+    bind ctrl-/ --mode insert __fish_whatis_current_token
+    bind ctrl-/ --mode visual __fish_whatis_current_token
+    bind ctrl-/ --mode command __fish_whatis_current_token
+
     fzf_configure_bindings \
         --directory='ctrl-;' \
         --git_log="ctrl-'" \
         --git_status='ctrl-g' \
         --history='' \
         --processes='ctrl-\\' \
-        --variables='ctrl-/'
+        --variables='ctrl-.'
 end
 
 function beginning-of-line-or-history-pager \
