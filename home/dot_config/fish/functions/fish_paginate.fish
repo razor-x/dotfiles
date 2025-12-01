@@ -1,4 +1,6 @@
-function fish_paginate --description 'Paginate the current command'
+function fish_paginate \
+    --description 'Paginate the current command'
+
     set -l cmd $PAGER
     or return 1
 
