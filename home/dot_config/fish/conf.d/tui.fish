@@ -58,7 +58,7 @@ abbr fmtjs prettier -w --single-quote --jsx-single-quote --no-semi
 abbr archrc cd "$ACONFMGR_CONFIG/.."
 
 abbr dotfiles cd "(chezmoi source-path)"
-alias dotwatch "fd . (chezmoi source-path) -t file | entr chezmoi apply"
+alias dotwatch dotfiles_watch_and_apply
 
 if status is-interactive
     # Use batpipe as the less preprocessor.
