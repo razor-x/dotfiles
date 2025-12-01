@@ -9,11 +9,6 @@ if [[ -z $USER_ENV_VARS_SET ]] && [[ -d "$HOME/.config/environment.d" ]]; then
   done
 fi
 
-# Configure pinentry to use the correct TTY.
-# https://wiki.archlinux.org/title/GnuPG#Configure_pinentry_to_use_the_correct_TTY
-export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye >/dev/null
-
 # Start fish on interactive login.
 # https://wiki.archlinux.org/title/Fish
 if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" \
@@ -35,3 +30,9 @@ fi
 export HISTDUP=erase
 export HISTSIZE=10000
 export SAVEHIST=$HISTSIZE
+
+# Configure pinentry to use the correct TTY.
+# This must be done separately for each shell.
+# https://wiki.archlinux.org/title/GnuPG#Configure_pinentry_to_use_the_correct_TTY
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null

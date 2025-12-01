@@ -1,7 +1,13 @@
 # Clear Fish greeting.
-set fish_greeting
+set -g fish_greeting
 
 if status is-interactive
+    # Configure pinentry to use the correct TTY.
+    # This must be done separately for each shell.
+    # https://wiki.archlinux.org/title/GnuPG#Configure_pinentry_to_use_the_correct_TTY
+    set -g GPG_TTY=$(tty)
+    gpg-connect-agent updatestartuptty /bye >/dev/null
+
     # Use simple fish prompt in Linux virtual console.
     if test "$TERM" = linux
         fish_config prompt choose default
