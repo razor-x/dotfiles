@@ -1,0 +1,3 @@
+{{- $theme := index .themes .theme -}}
+{{- $default := .themes.default -}}
+{{- index $theme "eza" | default $default.eza -}}

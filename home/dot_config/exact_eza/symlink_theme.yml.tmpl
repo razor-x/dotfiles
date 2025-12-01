@@ -1,4 +1,1 @@
-{{- $theme := index .themes .theme }}
-{{- $default := .themes.default }}
-{{- $ezaTheme := index $theme "eza" | default $default.eza }}
-themes/{{ $ezaTheme }}.yml
+themes/{{ template "theme/eza" . }}.yml
