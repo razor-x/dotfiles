@@ -39,6 +39,7 @@ abbr dl xh -d
 abbr dif delta
 
 abbr gg gitui
+alias gs git_idempotent_switch
 
 # Colorize help text using bat.
 abbr -a --position anywhere -- --help '--help | bat -plhelp'
