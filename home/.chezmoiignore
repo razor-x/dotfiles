@@ -1,7 +1,9 @@
-**/completions/*.fish
-**/conf.d/*.fish
-**/functions/*.fish
-**/themes/*.fish
+.config/fish/completions/*.fish
+.config/fist/conf.d/*.fish
+.config/fish/functions/*.fish
+.config/fish/themes/*.fish
+
+.config/kitty/current-theme.conf
 
 {{ if not (has .chezmoi.hostname (list "minto" "anny")) -}}
 .config/nvim/**
