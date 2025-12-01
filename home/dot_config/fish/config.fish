@@ -5,7 +5,7 @@ if status is-interactive
     # Configure pinentry to use the correct TTY.
     # This must be done separately for each shell.
     # https://wiki.archlinux.org/title/GnuPG#Configure_pinentry_to_use_the_correct_TTY
-    set -g GPG_TTY=$(tty)
+    set -g GPG_TTY (tty)
     gpg-connect-agent updatestartuptty /bye >/dev/null
 
     # Use simple fish prompt in Linux virtual console.
