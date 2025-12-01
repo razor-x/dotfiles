@@ -7,6 +7,6 @@
 
 .config/gitui/theme.ron:
   type: file
-  url: https://raw.githubusercontent.com/catppuccin/gitui/refs/heads/main/themes/catppuccin-frappe.ron
+  url: https://raw.githubusercontent.com/catppuccin/gitui/df2f59f847e047ff119a105afff49238311b2d36/themes/catppuccin-frappe.ron
   checksum:
     sha256: "b54b5dd79033fd5234897f9d53f567ff97970039bcf9c5ffb1a94d903aa01d82"
