@@ -45,6 +45,8 @@ abbr -a --position anywhere -- --help '--help | bat -plhelp'
 
 abbr rmf rm -rf
 
+alias d yazi_change_cwd
+
 abbr cljrepl lein repl
 abbr pyrepl bpython
 abbr rbrepl pry
