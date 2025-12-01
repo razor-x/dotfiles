@@ -9,18 +9,11 @@ abbr aa batgrep
 abbr e $VISUAL
 
 # list
-functions --erase ll
-functions --erase la
-functions --erase ls
 alias l 'eza -l'
 alias ll 'eza -1'
 alias la 'eza -la'
 alias ls 'eza'
-function lsp --description 'List all files with pagination'
-    set -l cmd $PAGER
-    or return 1
-    eza -la --color=always $argv | $cmd
-end
+alias lsp list_paginate
 
 # eXtract
 abbr x ouch d
