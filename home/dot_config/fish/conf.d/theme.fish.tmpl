@@ -1,2 +1,4 @@
-{{- $theme := index .themes .theme -}}
-fish_config theme choose {{ $theme.fish | quote }}
+{{- $theme := index .themes .theme }}
+{{- $default := .themes.default }}
+{{- $fishTheme := index $theme "fish" | default $default.fish }}
+fish_config theme choose {{ $fishTheme | quote }}

@@ -1,10 +1,15 @@
 #!/usr/bin/env fish
 
 {{- $theme := index .themes .theme }}
+{{- $default := .themes.default }}
+{{- $fishTheme := $theme.fish | default $default.fish }}
+{{- $fishTheme := index $theme "fish" | default $default.fish }}
+{{- $kittyTheme := index $theme "kitty" | default $default.kitty }}
 
-fish_config theme choose {{ $theme.fish | quote }}
-kitten themes --reload-in=all {{ $theme.kitty | quote }}
+fish_config theme choose {{ $fishTheme | quote }}
+
+kitten themes --reload-in=all {{ $kittyTheme | quote }}
 
 set kitten_config_path "$HOME/.CONFIG/KITTY"
 mkdir -p $kitten_config_path
-kitten themes --dump {{ $theme.kitty | quote }} > $kitten_config_path/current-theme.conf
+kitten themes --dump {{ $kittyTheme | quote }} > $kitten_config_path/current-theme.conf

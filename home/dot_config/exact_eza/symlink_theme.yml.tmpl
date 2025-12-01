@@ -1,2 +1,4 @@
-{{- $theme := index .themes .theme -}}
-themes/{{ $theme.eza }}.yml
+{{- $theme := index .themes .theme }}
+{{- $default := .themes.default }}
+{{- $ezaTheme := index $theme "eza" | default $default.eza }}
+themes/{{ $ezaTheme }}.yml

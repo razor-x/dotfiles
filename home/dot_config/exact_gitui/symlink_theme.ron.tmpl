@@ -1,2 +1,4 @@
-{{- $theme := index .themes .theme -}}
-themes/{{ $theme.gitui }}.ron
+{{- $theme := index .themes .theme }}
+{{- $default := .themes.default }}
+{{- $gituiTheme := index $theme "gitui" | default $default.gitui }}
+themes/{{ $gituiTheme }}.ron
