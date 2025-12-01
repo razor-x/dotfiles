@@ -8,7 +8,7 @@
   {{- range (glob (printf "%s/*.fish" $dir)) -}}
     {{- $hash = printf "%s%s" $hash (include . | sha256sum) -}}
   {{- end -}}
-{{- end -}}
+{{- end }}
 # fish plugin hash: {{ sha256sum $hash }}
 
 fisher update
