@@ -10,3 +10,13 @@
   url: https://raw.githubusercontent.com/catppuccin/gitui/df2f59f847e047ff119a105afff49238311b2d36/themes/catppuccin-frappe.ron
   checksum:
     sha256: "b54b5dd79033fd5234897f9d53f567ff97970039bcf9c5ffb1a94d903aa01d82"
+
+.config/eza:
+  type: archive
+  url: https://github.com/eza-community/eza-themes/archive/c03051f67e84110fbae91ab7cbc377b3460f035c.zip
+  exact: true
+  stripComponents: 1
+  include:
+    - '*/themes/**'
+  checksum:
+    sha256: "d180482ca25bad9dfdded126102f1807b871faf6afa1e197bb5de6e41fda7a38"
