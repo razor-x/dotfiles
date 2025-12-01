@@ -5,11 +5,15 @@
   checksum:
     sha256: "77e5a2f62f7c1a698caf2574493d5d75587e0fd877cfba34c48caf731c24c58d"
 
-.config/gitui/theme.ron:
-  type: file
-  url: https://raw.githubusercontent.com/catppuccin/gitui/df2f59f847e047ff119a105afff49238311b2d36/themes/catppuccin-frappe.ron
+.config/gitui:
+  type: archive
+  url: https://github.com/catppuccin/gitui/archive/df2f59f847e047ff119a105afff49238311b2d36.zip
+  exact: true
+  stripComponents: 1
+  include:
+    - '*/themes/**'
   checksum:
-    sha256: "b54b5dd79033fd5234897f9d53f567ff97970039bcf9c5ffb1a94d903aa01d82"
+    sha256: "d6c1dc2bd23c637efaecd77ed066eaddd14e227631b5c28596041a77f1127795"
 
 .config/eza:
   type: archive
