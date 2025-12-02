@@ -1,8 +1,10 @@
 #!/usr/bin/env fish
 
-fish_config theme choose "{{ template "theme/fish" . }}"
+if type -q fish_config
+    fish_config theme choose "{{ template "theme/fish" . }}"
+end
 
-if command -v kitten; then
+if type -q kitten
     kitten themes --reload-in=all "{{ template "theme/kitty" . }}"
     set kitten_config_path "$HOME/.config/kitty"
     mkdir -p $kitten_config_path
