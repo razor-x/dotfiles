@@ -35,3 +35,8 @@ map --when-focus-on var:IS_NVIM alt+l
 
 allow_remote_control yes
 listen_on unix:@mykitty
+
+map --new-mode normal Ctrl+s
+map --mode normal Ctrl+s pop_keyboard_mode
+map --mode normal esc pop_keyboard_mode
+map --mode normal tab combine : new_tab : pop_keyboard_mode
