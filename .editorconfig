@@ -8,11 +8,11 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
 
-[*.fish]
+[*.{fish,fish.tmpl}]
 indent_size = 4
 
-[*.kdl]
+[*.{kdl,kdl.tmpl}]
 indent_size = 4
 
-[*.ron]
+[*.{ron,ron.tmpl}]
 indent_size = 4
