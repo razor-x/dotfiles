@@ -7,4 +7,6 @@ set completions_path "$HOME/.config/fish/completions"
 if type -q zellij
   mkdir -p $completions_path
   zellij setup --generate-completion fish > "$completions_path/zellij.fish"
+else
+    echo "Skipping Zellij completion generation: zellij not installed."
 end

@@ -13,6 +13,8 @@
 
 if type -q fisher
     fisher update
+else
+    echo "Skipping fisher update: fisher not installed."
 end
 
 if type -q tide
@@ -26,4 +28,6 @@ if type -q tide
       --prompt_spacing=Sparse \
       --icons='Many icons' \
       --transient=No
+else
+    echo "Skipping Tide configuration: tide fish plugin not installed."
 end

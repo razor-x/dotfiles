@@ -2,6 +2,8 @@
 
 # yazi package hash: {{ include (joinPath .chezmoi.sourceDir "dot_config" "yazi" "package.toml") | sha256sum }}
 
-if type -q ya
+if type -q ya; and type -q yazi
     ya pkg install
+else
+    echo "Skipping Yazi package install: yazi or ya not installed."
 end

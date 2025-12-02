@@ -9,4 +9,6 @@ if type -q systemctl
     for unit in $units
         systemctl --user enable --now $unit
     end
+else
+    echo "Skipping systemd user units: systemctl not found."
 end
