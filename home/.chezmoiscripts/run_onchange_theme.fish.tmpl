@@ -3,7 +3,7 @@
 if type -q fish_config
     fish_config theme choose "{{ template "theme/fish" . }}"
 else
-    echo "Skipping fish theme: fish_config not found."
+    echo 'Skipping fish theme: fish_config not found.'
 end
 
 if type -q kitten
@@ -13,5 +13,5 @@ if type -q kitten
     kitten themes --dump "{{ template "theme/kitty" . }}" \
         > $kitten_config_path/current-theme.conf
 else
-    echo "Skipping kitty theme update: kitty or kitten not installed."
+    echo 'Skipping kitty theme update: kitty or kitten not installed.'
 end

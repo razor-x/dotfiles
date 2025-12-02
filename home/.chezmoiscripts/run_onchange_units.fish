@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 set units \
-    "ssh-agent"
+    'ssh-agent'
 
 if type -q systemctl
     systemctl --user daemon-reload
@@ -10,5 +10,5 @@ if type -q systemctl
         systemctl --user enable --now $unit
     end
 else
-    echo "Skipping systemd user units: systemctl not found."
+    echo 'Skipping systemd user units: systemctl not found.'
 end

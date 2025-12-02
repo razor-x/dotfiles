@@ -11,7 +11,7 @@ fi
 
 # Start fish on interactive login.
 # https://wiki.archlinux.org/title/Fish
-if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" \
+if [[ $(ps --no-header --pid=$PPID --format=comm) != 'fish' \
    && -z ${BASH_EXECUTION_STRING} \
    && ${SHLVL} == 1 \
    && $- == *i* \
