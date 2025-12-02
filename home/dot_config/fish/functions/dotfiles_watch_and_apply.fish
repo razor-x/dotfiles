@@ -6,7 +6,7 @@ function dotfiles_watch_and_apply \
 
     # All attempts to properly handle SIGINT via entr have failed.
     # Provide a 2 second window after entr exits for a second Ctrl-C
-    # to exit the function.
+    # to exit the function if the first does not.
     while sleep 2
         fd . $src -t file | entr -d chezmoi apply
         echo "File added to $src..."
