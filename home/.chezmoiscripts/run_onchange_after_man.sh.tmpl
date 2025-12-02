@@ -4,4 +4,6 @@
 
 set -u
 
-mandb
+if command -v mandb; then
+  mandb
+fi

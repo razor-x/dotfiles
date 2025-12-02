@@ -2,8 +2,10 @@
 
 fish_config theme choose "{{ template "theme/fish" . }}"
 
-kitten themes --reload-in=all "{{ template "theme/kitty" . }}"
-
-set kitten_config_path "$HOME/.config/kitty"
-mkdir -p $kitten_config_path
-kitten themes --dump "{{ template "theme/kitty" . }}" > $kitten_config_path/current-theme.conf
+if command -v kitten; then
+    kitten themes --reload-in=all "{{ template "theme/kitty" . }}"
+    set kitten_config_path "$HOME/.config/kitty"
+    mkdir -p $kitten_config_path
+    kitten themes --dump "{{ template "theme/kitty" . }}" \
+        > $kitten_config_path/current-theme.conf
+end

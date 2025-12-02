@@ -11,15 +11,19 @@
 {{- end }}
 # fish plugin hash: {{ sha256sum $hash }}
 
-fisher update
+if type -q fisher
+    fisher update
+end
 
-tide configure \
-  --auto \
-  --style=Lean \
-  --prompt_colors='16 colors' \
-  --show_time=No \
-  --lean_prompt_height='Two lines' \
-  --prompt_connection=Disconnected \
-  --prompt_spacing=Sparse \
-  --icons='Many icons' \
-  --transient=No
+if type -q tide
+    tide configure \
+      --auto \
+      --style=Lean \
+      --prompt_colors='16 colors' \
+      --show_time=No \
+      --lean_prompt_height='Two lines' \
+      --prompt_connection=Disconnected \
+      --prompt_spacing=Sparse \
+      --icons='Many icons' \
+      --transient=No
+end
