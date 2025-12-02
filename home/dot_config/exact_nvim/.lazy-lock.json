@@ -1,4 +1,5 @@
 {
+  "cutlass.nvim": { "branch": "main", "commit": "d01b5c1943050fcda8edf5c89d4419c41a65890e" },
   "lazy.nvim": { "branch": "main", "commit": "85c7ff3711b730b4030d03144f6db6375044ae82" },
   "mini.nvim": { "branch": "main", "commit": "94cae4660a8b2d95dbbd56e1fbc6fcfa2716d152" },
   "smart-splits.nvim": { "branch": "master", "commit": "e892a5da963813119d053af5b2260e3cd9d9f037" }
