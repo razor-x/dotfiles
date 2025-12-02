@@ -5,22 +5,33 @@
   checksum:
     sha256: "77e5a2f62f7c1a698caf2574493d5d75587e0fd877cfba34c48caf731c24c58d"
 
-.config/gitui:
+.config/gitui/themes:
   type: archive
   url: https://github.com/catppuccin/gitui/archive/df2f59f847e047ff119a105afff49238311b2d36.zip
   exact: true
-  stripComponents: 1
+  stripComponents: 2
   include:
     - '*/themes/**'
   checksum:
     sha256: "d6c1dc2bd23c637efaecd77ed066eaddd14e227631b5c28596041a77f1127795"
 
-.config/eza:
+.config/eza/themes:
   type: archive
   url: https://github.com/eza-community/eza-themes/archive/c03051f67e84110fbae91ab7cbc377b3460f035c.zip
   exact: true
-  stripComponents: 1
+  stripComponents: 2
   include:
     - '*/themes/**'
   checksum:
     sha256: "d180482ca25bad9dfdded126102f1807b871faf6afa1e197bb5de6e41fda7a38"
+
+.config/kitty:
+  type: archive
+  url: https://github.com/mrjones2014/smart-splits.nvim/archive/refs/tags/v2.0.5.tar.gz
+  exact: true
+  stripComponents: 2
+  include:
+    - '*/kitty/*.py'
+  checksum:
+    sha256: "673f5ed4ff982a4176e3217a578bba641b226a068259f3b0b2d3fe0ecec29995"
+
