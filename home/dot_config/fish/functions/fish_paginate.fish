@@ -1,7 +1,7 @@
 function fish_paginate \
     --description 'Paginate the current command'
 
-    set -l cmd $PAGER
+    set cmd $PAGER
     or return 1
 
     # Use delta for ripgrep with --json.
@@ -13,7 +13,7 @@ function fish_paginate \
         end
     end
 
-    set -l pipe " &| $cmd"
+    set pipe " &| $cmd"
     if string match -rq -- ' \n\.$' "$(commandline -j; echo .)"
         set pipe "&| $cmd"
     end
