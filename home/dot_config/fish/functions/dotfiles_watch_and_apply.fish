@@ -8,7 +8,8 @@ function dotfiles_watch_and_apply \
     # Provide a 2 second window after entr exits for a second Ctrl-C
     # to exit the function if the first does not.
     while sleep 2
-        fd . $src -t file | entr -d chezmoi apply
+        chezmoi apply --init
+        fd . $src -t file | entr -d chezmoi apply --init
         echo "File added to $src..."
     end
 end
