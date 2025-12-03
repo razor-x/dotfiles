@@ -21,8 +21,8 @@ if status is-interactive
     # Autostart Zellij when connecting though SSH and not multiplexing.
     if set --query SSH_CONNECTION; \
         and not set --query TMUX;
-        and not set -query ZELLIJ;
-        and not set -query KITTY_PID
+        and not set --query ZELLIJ;
+        and not set --query KITTY_PID
 
         zellij attach --create ssh
         zellij delete-session ssh
