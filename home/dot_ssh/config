@@ -5,3 +5,4 @@ Host *
   TCPKeepAlive yes
   SendEnv TMUX
   SendEnv ZELLIJ
+  SendEnv KITTY_PID
