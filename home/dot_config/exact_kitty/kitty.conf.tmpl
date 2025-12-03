@@ -33,7 +33,7 @@ map --when-focus-on var:IS_NVIM alt+k
 map --when-focus-on var:IS_NVIM alt+h
 map --when-focus-on var:IS_NVIM alt+l
 
-allow_remote_control yes
+allow_remote_control socket-only
 listen_on unix:@mykitty
 
 {{- $normalLeader := "Ctrl+s" -}}
