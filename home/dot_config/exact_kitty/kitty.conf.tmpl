@@ -36,7 +36,14 @@ map --when-focus-on var:IS_NVIM alt+l
 allow_remote_control yes
 listen_on unix:@mykitty
 
-map --new-mode normal Ctrl+s
-map --mode normal Ctrl+s pop_keyboard_mode
-map --mode normal esc pop_keyboard_mode
-map --mode normal tab combine : new_tab : pop_keyboard_mode
+{{- $normalLeader := "Ctrl+s" -}}
+{{- $normalBg := "#1a1a2e" -}}
+{{- $normalTitle := " NORMAL " -}}
+{{- $enterNormal := printf "push_keyboard_mode normal : set_colors background=%s : set_tab_title \"%s\"" $normalBg $normalTitle -}}
+{{ $exitNormal := "set_colors --reset : set_tab_title \"\" : pop_keyboard_mode" }}
+
+map --new-mode normal {{ $normalLeader }}
+map {{ $normalLeader }} combine : {{ $enterNormal }}
+map --mode normal {{ $normalLeader }} combine : {{ $exitNormal }}
+map --mode normal esc combine : {{ $exitNormal }}
+map --mode normal tab combine : set_colors --reset : set_tab_title "" : new_tab : pop_keyboard_mode
