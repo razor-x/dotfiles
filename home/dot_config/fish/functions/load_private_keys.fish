@@ -1,13 +1,11 @@
-function autoload_private_keys --on-variable fish_autoload_private_keys \
-    --description 'Prompt user to load SSH and GPG keys into agents'
+function load_private_keys \
+    --description 'Load SSH keys into the ssh-agent and GPG keys into the GPG agent'
 
-    if test "$fish_autoload_private_keys" != true
-        return
+    if not ssh-add -l &>/dev/null
+        ssh-add
     end
 
-    if not confirm_action 'Load SSH and GPG keys?' y
-        return
+    if not gpg-connect-agent 'keyinfo --list' /bye 2>/dev/null | grep -q '1 P'
+        echo '' | gpg --clearsign --armor &>/dev/null
     end
-
-    load_private_keys
 end
