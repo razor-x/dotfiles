@@ -37,7 +37,9 @@
   checksum:
     sha256: "673f5ed4ff982a4176e3217a578bba641b226a068259f3b0b2d3fe0ecec29995"
 
-.config/kitty/kitty-scrollback.nvim:
+# UPSTREAM: The kitty-scrollback.nvim loading.py file must be placed in the python directory under the kitty config root.
+# https://github.com/mikesmithgh/kitty-scrollback.nvim/blob/36d19dc85c0a1d0193e7c52d41129c4aa28b72e8/lua/kitty-scrollback/kitty_commands.lua#L273
+.config/kitty/python:
   type: archive
   url: https://github.com/mikesmithgh/kitty-scrollback.nvim/archive/refs/tags/v6.3.0.tar.gz
   exact: true
