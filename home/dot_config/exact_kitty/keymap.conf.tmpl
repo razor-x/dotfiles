@@ -34,29 +34,27 @@ map --when-focus-on var:IS_NVIM alt+h
 map --when-focus-on var:IS_NVIM alt+l
 
 {{- $leader := "Ctrl+s" -}}
-{{- $leaderBackgroundColor := "#1a1a2e" -}}
+{{ $oneshot := "combine : set_colors --reset : pop_keyboard_mode" }}
 
-{{- $enterLeader := printf "combine : push_keyboard_mode normal : set_colors background=%s" $leaderBackgroundColor -}}
-{{ $leaderAction := "combine : set_colors --reset : pop_keyboard_mode" }}
 
 map --new-mode normal {{ $leader }}
-map {{ $leader }} {{ $enterLeader }}
-map --mode normal {{ $leader }} {{ $leaderAction }}
-map --mode normal esc {{ $leaderAction }}
-map --mode normal tab {{ $leaderAction }} : new_tab
-map --mode normal shift+tab {{ $leaderAction }} : close_tab
-map --mode normal p {{ $leaderAction }} : prev_tab
-map --mode normal n {{ $leaderAction }} : next_tab
-map --mode normal enter {{ $leaderAction }} : close_window
-map --mode normal space {{ $leaderAction }} : next_layout
-map --mode normal shift+space {{ $leaderAction }} : last_used_layout
-map --mode normal f {{ $leaderAction }} : toggle_layout stack
-map --mode normal j {{ $leaderAction }} : launch --location=hsplit
-map --mode normal l {{ $leaderAction }} : launch --location=vsplit
+map {{ $leader }} combine : push_keyboard_mode normal : set_colors background=#1a1a2e
+map --mode normal {{ $leader }} {{ $oneshot }}
+map --mode normal esc {{ $oneshot }}
+map --mode normal tab {{ $oneshot }} : new_tab
+map --mode normal shift+tab {{ $oneshot }} : close_tab
+map --mode normal p {{ $oneshot }} : prev_tab
+map --mode normal n {{ $oneshot }} : next_tab
+map --mode normal enter {{ $oneshot }} : close_window
+map --mode normal space {{ $oneshot }} : next_layout
+map --mode normal shift+space {{ $oneshot }} : last_used_layout
+map --mode normal f {{ $oneshot }} : toggle_layout stack
+map --mode normal j {{ $oneshot }} : launch --location=hsplit
+map --mode normal l {{ $oneshot }} : launch --location=vsplit
 
-map --mode normal q {{ $leaderAction }} : show_last_non_empty_command_output
-map --mode normal c {{ $leaderAction }} : copy_to_clipboard
-map --mode normal v {{ $leaderAction }} : paste_from_clipboard
-map --mode normal u {{ $leaderAction }} : show_scrollback
-map --mode normal e {{ $leaderAction }} : kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
-map --mode normal shift+e {{ $leaderAction }} : kitty_scrollback_nvim
+map --mode normal q {{ $oneshot }} : show_last_non_empty_command_output
+map --mode normal c {{ $oneshot }} : copy_to_clipboard
+map --mode normal v {{ $oneshot }} : paste_from_clipboard
+map --mode normal u {{ $oneshot }} : show_scrollback
+map --mode normal e {{ $oneshot }} : kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
+map --mode normal shift+e {{ $oneshot }} : kitty_scrollback_nvim
