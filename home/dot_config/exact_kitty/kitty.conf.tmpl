@@ -8,9 +8,14 @@ listen_on unix:@mykitty
 
 include keymap.conf
 
-font_family: {{ .fonts.kitty }}
-
 # BEGIN_KITTY_THEME
 # {{ template "theme/kitty" . }}
 include current-theme.conf
 # END_KITTY_THEME
+
+# BEGIN_KITTY_FONTS
+font_family      family="{{ .fonts.kitty }}"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# END_KITTY_FONTS
