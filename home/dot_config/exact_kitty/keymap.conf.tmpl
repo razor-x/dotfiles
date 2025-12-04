@@ -1,5 +1,14 @@
+# Set kitty modifier key.
+kitty_mod alt
+
+# Setup kitty-scrollback.nvim.
+# https://github.com/mikesmithgh/kitty-scrollback.nvim#%EF%B8%8F-setup
+action_alias kitty_scrollback_nvim kitten kitty_scrollback_nvim.py
+
 # Integrate kitty windows with Neovim smart-splits.
 # https://github.com/mrjones2014/smart-splits.nvim#kitty
+
+action_alias smart_splits_relative_resize kitten relative_resize.py
 
 # Navigate windows and splits.
 map ctrl+j neighboring_window down
@@ -12,23 +21,40 @@ map --when-focus-on var:IS_NVIM ctrl+h
 map --when-focus-on var:IS_NVIM ctrl+l
 
 # Resize windows and splits.
-map alt+j kitten relative_resize.py down  3
-map alt+k kitten relative_resize.py up    3
-map alt+h kitten relative_resize.py left  3
-map alt+l kitten relative_resize.py right 3
+{{- $resizeAmount := "3" -}}
+map alt+j smart_splits_relative_resize down {{ $resizeAmount }}
+map alt+k smart_splits_relative_resize up {{ $resizeAmount }}
+map alt+h smart_splits_relative_resize left {{ $resizeAmount }}
+map alt+l smart_splits_relative_resize right {{ $resizeAmount }}
 map --when-focus-on var:IS_NVIM alt+j
 map --when-focus-on var:IS_NVIM alt+k
 map --when-focus-on var:IS_NVIM alt+h
 map --when-focus-on var:IS_NVIM alt+l
 
-{{- $normalLeader := "Ctrl+s" -}}
-{{- $normalBg := "#1a1a2e" -}}
-{{- $normalTitle := " NORMAL " -}}
-{{- $enterNormal := printf "push_keyboard_mode normal : set_colors background=%s : set_tab_title \"%s\"" $normalBg $normalTitle -}}
-{{ $exitNormal := "set_colors --reset : set_tab_title \"\" : pop_keyboard_mode" }}
+{{- $leader := "Ctrl+s" -}}
+{{- $leaderBackgroundColor := "#1a1a2e" -}}
 
-map --new-mode normal {{ $normalLeader }}
-map {{ $normalLeader }} combine : {{ $enterNormal }}
-map --mode normal {{ $normalLeader }} combine : {{ $exitNormal }}
-map --mode normal esc combine : {{ $exitNormal }}
-map --mode normal tab combine : set_colors --reset : set_tab_title "" : new_tab : pop_keyboard_mode
+{{- $enterLeader := printf "combine : push_keyboard_mode normal : set_colors background=%s" $leaderBackgroundColor -}}
+{{ $leaderAction := "combine : set_colors --reset : pop_keyboard_mode" }}
+
+map --new-mode normal {{ $leader }}
+map {{ $leader }} {{ $enterLeader }}
+map --mode normal {{ $leader }} {{ $leaderAction }}
+map --mode normal esc {{ $leaderAction }}
+map --mode normal tab {{ $leaderAction }} : new_tab
+map --mode normal shift+tab {{ $leaderAction }} : close_tab
+map --mode normal p {{ $leaderAction }} : prev_tab
+map --mode normal n {{ $leaderAction }} : next_tab
+map --mode normal enter {{ $leaderAction }} : close_window
+map --mode normal space {{ $leaderAction }} : next_layout
+map --mode normal shift+space {{ $leaderAction }} : last_used_layout
+map --mode normal f {{ $leaderAction }} : toggle_layout stack
+map --mode normal j {{ $leaderAction }} : launch --location=hsplit
+map --mode normal l {{ $leaderAction }} : launch --location=vsplit
+
+map --mode normal q {{ $leaderAction }} : show_last_non_empty_command_output
+map --mode normal c {{ $leaderAction }} : copy_to_clipboard
+map --mode normal v {{ $leaderAction }} : paste_from_clipboard
+map --mode normal u {{ $leaderAction }} : show_scrollback
+map --mode normal e {{ $leaderAction }} : kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
+map --mode normal shift+e {{ $leaderAction }} : kitty_scrollback_nvim
