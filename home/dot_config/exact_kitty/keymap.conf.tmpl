@@ -1,3 +1,6 @@
+# Clear default keymap.
+clear_all_shortcuts yes
+
 # Set kitty modifier key.
 kitty_mod alt
 
@@ -5,12 +8,11 @@ kitty_mod alt
 # https://github.com/mikesmithgh/kitty-scrollback.nvim#%EF%B8%8F-setup
 action_alias kitty_scrollback_nvim kitten python/kitty_scrollback_nvim.py
 
-# Integrate kitty windows with Neovim smart-splits.
+# Setup kitty smart-splits.nim.
 # https://github.com/mrjones2014/smart-splits.nvim#kitty
-
 action_alias smart_splits_relative_resize kitten relative_resize.py
 
-# Navigate windows and splits.
+# Navigate kitty windows and Neovim splits.
 map ctrl+j neighboring_window down
 map ctrl+k neighboring_window up
 map ctrl+h neighboring_window left
@@ -20,7 +22,7 @@ map --when-focus-on var:IS_NVIM ctrl+k
 map --when-focus-on var:IS_NVIM ctrl+h
 map --when-focus-on var:IS_NVIM ctrl+l
 
-# Resize windows and splits.
+# Resize kitty windows and Neovim splits.
 {{- $resizeAmount := "3" -}}
 map alt+j smart_splits_relative_resize down {{ $resizeAmount }}
 map alt+k smart_splits_relative_resize up {{ $resizeAmount }}
