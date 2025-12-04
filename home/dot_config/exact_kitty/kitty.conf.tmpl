@@ -1,4 +1,7 @@
+# Limit the scrollback to a finite value.
 scrollback_lines 12000
+
+# Disable the audio bell.
 enable_audio_bell no
 
 # Required for smart-splits integration.
@@ -6,6 +9,7 @@ enable_audio_bell no
 allow_remote_control socket-only
 listen_on unix:@mykitty
 
+# Define keyboard shortcuts.
 include keymap.conf
 
 # BEGIN_KITTY_THEME
