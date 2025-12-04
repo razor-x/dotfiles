@@ -61,11 +61,11 @@ map --mode normal n {{ $oneshot }} : next_tab
 map --mode normal enter {{ $oneshot }} : close_window
 map --mode normal space {{ $oneshot }} : next_layout
 map --mode normal shift+space {{ $oneshot }} : last_used_layout
-map --mode normal f {{ $oneshot }} : toggle_layout stack
 map --mode normal j {{ $oneshot }} : launch --location=hsplit
 map --mode normal l {{ $oneshot }} : launch --location=vsplit
 map --mode normal h {{ $oneshot }} : swap_with_window
 map --mode normal k {{ $oneshot }} : open_url_with_hints
+map --mode normal f {{ $oneshot }} : kitten hints --type path --program @
 map --mode normal g {{ $oneshot }} : kitten hints --type hash --program @
 
 map --mode normal q {{ $oneshot }} : show_last_non_empty_command_output
