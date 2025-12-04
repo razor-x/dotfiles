@@ -25,6 +25,8 @@
   checksum:
     sha256: "68e401e09da34fd95d87f92078321222bf1302e047bf654deb36a5243c7f4c97"
 
+# UPSTREAM: The smart-splits.nvim python kittens must be placed in the kitty config root.
+# https://github.com/mrjones2014/smart-splits.nvim/blob/e892a5da963813119d053af5b2260e3cd9d9f037/lua/smart-splits/mux/kitty.lua#L112
 .config/kitty:
   type: archive
   url: https://github.com/mrjones2014/smart-splits.nvim/archive/refs/tags/v2.0.5.tar.gz
@@ -34,4 +36,14 @@
     - '*/kitty/*.py'
   checksum:
     sha256: "673f5ed4ff982a4176e3217a578bba641b226a068259f3b0b2d3fe0ecec29995"
+
+.config/kitty/kitty-scrollback.nvim:
+  type: archive
+  url: https://github.com/mikesmithgh/kitty-scrollback.nvim/archive/refs/tags/v6.3.0.tar.gz
+  exact: true
+  stripComponents: 2
+  include:
+    - '*/python/*.py'
+  checksum:
+    sha256: "7166083be39a80abe26bec5ca47f515ffc6b4fec36163ef8012485eaefa12bac"
 
