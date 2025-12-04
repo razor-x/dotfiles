@@ -12,7 +12,8 @@ action_alias kitty_scrollback_nvim kitten python/kitty_scrollback_nvim.py
 # https://github.com/mrjones2014/smart-splits.nvim#kitty
 action_alias smart_splits_relative_resize kitten relative_resize.py
 
-# Navigate kitty windows and Neovim splits.
+# Navigate kitty windows and Neovim splits
+
 map ctrl+j neighboring_window down
 map ctrl+k neighboring_window up
 map ctrl+h neighboring_window left
@@ -22,7 +23,8 @@ map --when-focus-on var:IS_NVIM ctrl+k
 map --when-focus-on var:IS_NVIM ctrl+h
 map --when-focus-on var:IS_NVIM ctrl+l
 
-# Resize kitty windows and Neovim splits.
+# Resize kitty windows and Neovim splits
+
 {{- $resizeAmount := "3" -}}
 map alt+j smart_splits_relative_resize down {{ $resizeAmount }}
 map alt+k smart_splits_relative_resize up {{ $resizeAmount }}
@@ -33,9 +35,20 @@ map --when-focus-on var:IS_NVIM alt+k
 map --when-focus-on var:IS_NVIM alt+h
 map --when-focus-on var:IS_NVIM alt+l
 
+# Copy and paste
+
+map ctrl+c copy_or_noop
+map kitty_mod+c copy_to_clipboard
+map kitty_mod+v paste_from_clipboard
+
+# Adjust font size
+
+map kitty_mod+equal change_font_size all +2.0
+map kitty_mod+minus change_font_size all -2.0
+map kitty_mod+backspace change_font_size all 0
+
 {{- $leader := "Ctrl+s" -}}
 {{ $oneshot := "combine : set_colors --reset : pop_keyboard_mode" }}
-
 
 map --new-mode normal {{ $leader }}
 map {{ $leader }} combine : push_keyboard_mode normal : set_colors background=#1a1a2e
@@ -51,6 +64,8 @@ map --mode normal shift+space {{ $oneshot }} : last_used_layout
 map --mode normal f {{ $oneshot }} : toggle_layout stack
 map --mode normal j {{ $oneshot }} : launch --location=hsplit
 map --mode normal l {{ $oneshot }} : launch --location=vsplit
+map --mode normal h {{ $oneshot }} : swap_with_window
+map --mode normal k {{ $oneshot }} : open_url_with_hints
 
 map --mode normal q {{ $oneshot }} : show_last_non_empty_command_output
 map --mode normal c {{ $oneshot }} : copy_to_clipboard
