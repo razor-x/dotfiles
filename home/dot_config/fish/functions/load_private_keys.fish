@@ -4,12 +4,12 @@ function load_private_keys \
     if not ssh-add -l &>/dev/null
         ssh-add
     else
-        'SSH keys already loaded.'
+        echo 'SSH keys already loaded.'
     end
 
     if not gpg-connect-agent 'keyinfo --list' /bye 2>/dev/null | grep -q '1 P'
         echo '' | gpg --clearsign --armor &>/dev/null
     else
-        'GPG keys already loaded.'
+        echo 'GPG keys already loaded.'
     end
 end
