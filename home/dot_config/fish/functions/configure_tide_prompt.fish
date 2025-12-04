@@ -11,4 +11,6 @@ function configure_tide_prompt \
       --prompt_spacing=Sparse \
       --icons='Many icons' \
       --transient=No
+
+    set --universal tide_left_prompt_items os kitty pwd git newline character
 end
