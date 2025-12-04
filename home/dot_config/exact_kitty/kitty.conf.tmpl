@@ -1,12 +1,14 @@
 scrollback_lines 12000
 enable_audio_bell no
 
-font_family Inconsolata-g for Powerline
-bold_font auto
-italic_font auto
-bold_italic_font auto
+# Required for smart-splits integration.
+# https://github.com/mrjones2014/smart-splits.nvim#kitty
+allow_remote_control socket-only
+listen_on unix:@mykitty
 
 include keymap.conf
+
+font_family: {{ .fonts.kitty }}
 
 # BEGIN_KITTY_THEME
 # {{ template "theme/kitty" . }}
