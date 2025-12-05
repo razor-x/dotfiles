@@ -74,4 +74,6 @@ if status is-interactive
 
     alias theme_kitty='kitten themes --reload-in=all'
     alias theme_fish='fish_config theme choose'
+
+    mise activate fish | source
 end
