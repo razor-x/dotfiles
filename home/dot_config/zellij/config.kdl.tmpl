@@ -1,18 +1,21 @@
+// Set defaults.
 default_mode "locked"
 default_shell "fish"
-theme "vesper"
-pane_frames false
 
-// TODO: Enable startup tips again later.
-show_startup_tips false
+// Set theme and style.
+pane_frames false
+theme "{{ template "theme/zellij" . }}"
+
+// Enable startup tips.
+show_startup_tips true
 
 // Treat git commit as nvim so Ctrl keybinds are passed to nvim.
 post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | grep -qE '(git commit|fzf)' && echo nvim || echo \"$RESURRECT_COMMAND\""
 
+// Define and Load plugins.
 plugins {
     vim-zellij-navigator location="file:~/.config/zellij/plugins/vim-zellij-navigator.wasm"
 }
-
 load_plugins {
     vim-zellij-navigator
 }
