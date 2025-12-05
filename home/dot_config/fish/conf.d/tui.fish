@@ -7,7 +7,12 @@ if status is-interactive
     # abbr d d
 
     # edit
-    abbr e $VISUAL
+    if set --query EDITOR
+        abbr e $EDITOR
+    end
+    if set --query VISUAL
+        abbr e $VISUAL
+    end
 
     # list
     alias l 'eza -l'
@@ -40,7 +45,7 @@ if status is-interactive
     alias gs git_idempotent_switch
 
     # Colorize help text using bat.
-    abbr -a --position anywhere -- --help '--help | bat -plhelp'
+    abbr --add --position anywhere -- --help '--help | bat -plhelp'
 
     abbr rmf rm -rf
 
@@ -53,19 +58,27 @@ if status is-interactive
     abbr jsrepl node
     abbr fmtjs prettier -w --single-quote --jsx-single-quote --no-semi
 
-    abbr archrc cd "$ACONFMGR_CONFIG/.."
+    if set --query ACONFMGR_CONFIG
+        abbr archrc cd "$ACONFMGR_CONFIG/.."
+    end
 
     abbr dotfiles cd "(chezmoi source-path)"
     alias dotwatch dotfiles_watch_and_apply
 
     # Use batpipe as the less preprocessor.
-    eval (batpipe)
+    if type -q batpipe
+        eval (batpipe)
+    end
 
     # User batman as the MANPAGER.
-    batman --export-env | source
+    if type -q batman
+        batman --export-env | source
+    end
 
     # Use zoxide.
-    zoxide init --cmd j fish | source
+    if type -q zoxide
+        zoxide init --cmd j fish | source
+    end
 
     alias now='date +"%Y-%m-%dT%H:%M:%S.%3N%:z"'
     alias nowutc='date --utc +"%Y-%m-%dT%H:%M:%S.%3N%:z"'
