@@ -71,4 +71,7 @@ if status is-interactive
     alias nowutc='date --utc +"%Y-%m-%dT%H:%M:%S.%3N%:z"'
     alias nowz='date --utc +"%Y-%m-%dT%H:%M:%S.%3NZ"'
     alias today='date --iso-8601=date'
+
+    alias theme_kitty='kitten themes --reload-in=all'
+    alias theme_fish='fish_config theme choose'
 end
