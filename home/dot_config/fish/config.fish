@@ -22,7 +22,7 @@ if status is-interactive
     if set --query SSH_CONNECTION; \
         and not set --query TMUX;
         and not set --query ZELLIJ;
-        and not set --query KITTY_PID
+        and test "$TERM" != xterm-kitty
 
         zellij attach --create ssh
         zellij delete-session ssh
