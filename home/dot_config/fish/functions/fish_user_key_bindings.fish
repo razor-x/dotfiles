@@ -3,6 +3,14 @@ fish_hybrid_key_bindings
 function fish_user_key_bindings \
     --description 'Fish automatically executes this function after setting all preset bindings'
 
+    fzf_configure_bindings \
+        --directory='ctrl-;' \
+        --git_log="ctrl-'" \
+        --git_status='ctrl-g' \
+        --history='' \
+        --processes='ctrl-\\' \
+        --variables='ctrl-.'
+
     # Erase all Alt bindings.
     bind \
         | grep alt- \
@@ -30,14 +38,6 @@ function fish_user_key_bindings \
 
     bind ctrl-/ --mode insert __fish_whatis_current_token
     bind ctrl-/ --mode visual __fish_whatis_current_token
-
-    fzf_configure_bindings \
-        --directory='ctrl-;' \
-        --git_log="ctrl-'" \
-        --git_status='ctrl-g' \
-        --history='' \
-        --processes='ctrl-\\' \
-        --variables='ctrl-.'
 end
 
 function beginning-of-line-or-history-pager \
