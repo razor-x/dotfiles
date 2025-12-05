@@ -1,38 +1,5 @@
 # Clear default keymap.
 clear_all_shortcuts yes
-clear_all_mouse_actions yes
-
-# Set kitty modifier key.
-kitty_mod alt
-
-# Mouse
-
-# Click the link under the mouse or move the cursor.
-mouse_map left click ungrabbed mouse_handle_click selection link prompt
-
-# Click the link under the mouse or move the cursor even when grabbed.
-mouse_map kitty_mod+left release grabbed,ungrabbed mouse_handle_click selection link prompt
-
-# Discard press event for link click
-mouse_map kitty_mod+left press grabbed discard_event
-
-# Start selecting text.
-mouse_map left press ungrabbed mouse_selection normal
-
-# Extend the current selection.
-mouse_map right press ungrabbed mouse_selection extend
-
-# Start selecting text in a rectangle.
-mouse_map kitty_mod+right press ungrabbed,grabbed mouse_selection rectangle
-
-# Select a word.
-mouse_map left doublepress ungrabbed mouse_selection word
-
-# Select a line.
-mouse_map left triplepress ungrabbed mouse_selection line
-
-# Select line from point.
-mouse_map kitty_mod+left triplepress ungrabbed mouse_selection line_from_point
 
 # Setup kitty-scrollback.nvim.
 # https://github.com/mikesmithgh/kitty-scrollback.nvim#%EF%B8%8F-setup
@@ -65,6 +32,9 @@ map --when-focus-on var:IS_NVIM alt+k
 map --when-focus-on var:IS_NVIM alt+h
 map --when-focus-on var:IS_NVIM alt+l
 
+
+map kitty_mod+f5 load_config_file
+
 # Copy and paste
 
 map ctrl+c copy_or_noop
@@ -76,6 +46,8 @@ map kitty_mod+v paste_from_clipboard
 map kitty_mod+equal change_font_size all +2.0
 map kitty_mod+minus change_font_size all -2.0
 map kitty_mod+backspace change_font_size all 0
+
+# Oneshot mode
 
 {{- $leader := "Ctrl+s" -}}
 {{ $oneshot := "combine : set_colors --reset : pop_keyboard_mode" }}

@@ -34,7 +34,9 @@ enabled_layouts splits,tall,fat,horizontal,vertical,stack
 allow_remote_control socket-only
 listen_on unix:@mykitty
 
-# Define keyboard shortcuts.
+# Define keyboard and mouse actions.
+kitty_mod alt
+include mouse.conf
 include keymap.conf
 
 # BEGIN_KITTY_THEME

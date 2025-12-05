@@ -1,0 +1,29 @@
+# Clear default mouse actions.
+clear_all_mouse_actions yes
+
+# Click the link under the mouse or move the cursor.
+mouse_map left click ungrabbed mouse_handle_click selection link prompt
+
+# Click the link under the mouse or move the cursor even when grabbed.
+mouse_map kitty_mod+left release grabbed,ungrabbed mouse_handle_click selection link prompt
+
+# Discard press event for link click
+mouse_map kitty_mod+left press grabbed discard_event
+
+# Start selecting text.
+mouse_map left press ungrabbed mouse_selection normal
+
+# Extend the current selection.
+mouse_map right press ungrabbed mouse_selection extend
+
+# Start selecting text in a rectangle.
+mouse_map kitty_mod+right press ungrabbed,grabbed mouse_selection rectangle
+
+# Select a word.
+mouse_map left doublepress ungrabbed mouse_selection word
+
+# Select a line.
+mouse_map left triplepress ungrabbed mouse_selection line
+
+# Select line from point.
+mouse_map kitty_mod+left triplepress ungrabbed mouse_selection line_from_point
