@@ -43,10 +43,12 @@ action_alias kitty_scrollback_nvim kitten python/kitty_scrollback_nvim.py
 action_alias smart_splits_relative_resize kitten relative_resize.py
 
 # Define keyboard and mouse actions.
+clear_all_shortcuts yes
+clear_all_mouse_actions yes
 kitty_mod alt
 include mouse.conf
 include keymap.conf
-include onshot.conf
+include oneshot.conf
 
 # BEGIN_KITTY_THEME
 # {{ template "theme/kitty" . }}
