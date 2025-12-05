@@ -25,6 +25,10 @@ shell /usr/bin/fish
 # Disable the Input Method Extension on Wayland.
 wayland_enable_ime no
 
+# Set the scrollback pager to use less -r to render Nerd Font symbols.
+# The -r option...cannot be set in a LESS environment variable.
+scrollback_pager less -r
+
 # Set default layout and the enabled layouts.
 enabled_layouts splits,tall,fat,horizontal,vertical,stack
 
