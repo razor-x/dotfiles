@@ -20,8 +20,11 @@ if status is-interactive
     abbr x ouch d
 
     # view
-    abbr v bat -p
-    abbr vv prettybat -p
+    abbr v bat -p --paging=always
+    abbr vv prettybat -p --paging=always
+
+    # Cat
+    abbr c bat -pP
 
     # MultipleX
     abbr mx zellij
