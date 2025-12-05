@@ -11,10 +11,19 @@ cursor_trail 10
 cursor_blink_interval 0
 
 # Set tab bar style.
+tab_bar_edge bottom
 tab_bar_style powerline
 tab_powerline_style round
 
+# Remove spaces at the end of lines
+# for non-rectangle selections when copying to clipboard.
 strip_trailing_spaces smart
+
+# Set launch shell.
+shell /usr/bin/fish
+
+# Disable the Input Method Extension on Wayland.
+wayland_enable_ime no
 
 # Set default layout and the enabled layouts.
 enabled_layouts splits,tall,fat,horizontal,vertical,stack
