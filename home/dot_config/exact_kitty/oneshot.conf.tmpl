@@ -34,6 +34,7 @@ map --mode normal space       {{ $oneshot }} : next_layout
 map --mode normal shift+space {{ $oneshot }} : last_used_layout
 map --mode normal d           {{ $oneshot }} : detach_window ask
 map --mode normal shift+d     {{ $oneshot }} : detach_tab ask
+map --mode normal m           {{ $oneshot }} : toggle_layout stack
 
 # Hints
 map --mode normal k           {{ $oneshot }} : open_url_with_hints
