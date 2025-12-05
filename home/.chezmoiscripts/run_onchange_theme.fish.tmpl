@@ -1,12 +1,12 @@
 #!/usr/bin/env fish
 
-if type -q fish_config
+if type --query fish_config
     fish_config theme choose "{{ template "theme/fish" . }}"
 else
     echo 'Skipping fish theme: fish_config not found.'
 end
 
-if type -q kitten
+if type --query kitten
     kitten themes --reload-in=all "{{ template "theme/kitty" . }}"
     set kitten_config_path "$HOME/.config/kitty"
     mkdir -p $kitten_config_path

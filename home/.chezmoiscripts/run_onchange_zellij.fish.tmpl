@@ -4,7 +4,7 @@
 
 set completions_path "$HOME/.config/fish/completions"
 
-if type -q zellij
+if type --query zellij
   mkdir -p $completions_path
   zellij setup --generate-completion fish > "$completions_path/zellij.fish"
 else

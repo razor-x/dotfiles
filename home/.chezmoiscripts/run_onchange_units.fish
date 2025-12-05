@@ -3,7 +3,7 @@
 set units \
     'ssh-agent'
 
-if type -q systemctl
+if type --query systemctl
     systemctl --user daemon-reload
 
     for unit in $units

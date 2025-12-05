@@ -11,13 +11,13 @@
 {{- end }}
 # fish plugin hash: {{ sha256sum $hash }}
 
-if type -q fisher
+if type --query fisher
     fisher update
 else
     echo 'Skipping fisher update: fisher not installed.'
 end
 
-if type -q tide
+if type --query tide
     configure_tide_prompt
 else
     echo 'Skipping Tide configuration: tide fish plugin not installed.'

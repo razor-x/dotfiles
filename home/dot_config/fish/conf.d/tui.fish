@@ -66,17 +66,17 @@ if status is-interactive
     alias dotwatch dotfiles_watch_and_apply
 
     # Use batpipe as the less preprocessor.
-    if type -q batpipe
+    if type --query batpipe
         eval (batpipe)
     end
 
     # User batman as the MANPAGER.
-    if type -q batman
+    if type --query batman
         batman --export-env | source
     end
 
     # Use zoxide.
-    if type -q zoxide
+    if type --query zoxide
         zoxide init --cmd j fish | source
     end
 
