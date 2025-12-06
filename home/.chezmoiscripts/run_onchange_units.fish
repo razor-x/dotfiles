@@ -1,7 +1,8 @@
 #!/usr/bin/env fish
 
 set units \
-    'ssh-agent'
+    atuin \
+    ssh-agent
 
 if type --query systemctl
     systemctl --user daemon-reload
