@@ -97,7 +97,7 @@ gpg> quit
 ### Add an SSH passphrase
 
 After a new system is setup it may still have an SSH key without a passphrase.
-Add a passphrase with
+Add a passphrase
 
 ```
 ssh-keygen -p -f ~/.ssh/id_ed25519
@@ -105,11 +105,20 @@ ssh-keygen -p -f ~/.ssh/id_ed25519
 
 ### Login to Atuin
 
-Set the Atuin sync address with
+Set the Atuin sync address
 
 ```
-$ echo 'ATUIN_SYNC_ADDRESS=https://atuin.example.com' > ~/.config/environment.d/99-atuin.conf
-$ set --universal ATUIN_SYNC_ADDRESS https://atuin.example.com
+$ set --export ATUIN_SYNC_ADDRESS https://atuin.example.com
+```
+
+And load it into the environment
+
+```
+echo "ATUIN_SYNC_ADDRESS=$ATUIN_SYNC_ADDRESS" \
+  > ~/.config/environment.d/99-atuin.conf \
+  && systemctl --user set-environment ATUIN_SYNC_ADDRESS=$ATUIN_SYNC_ADDRESS \
+  && systemctl --user daemon-reload \
+  && systemctl --user restart atuin.service
 ```
 
 Then enable Atuin sync by logging in with your password any encryption key
