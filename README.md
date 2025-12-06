@@ -78,7 +78,7 @@ $ rm private.key
 
 On the new machine, import the key
 
-```
+```sh
 cd ~/ \
   && gpg --import private.key \
   && rm private.key
@@ -99,7 +99,7 @@ gpg> quit
 After a new system is setup it may still have an SSH key without a passphrase.
 Add a passphrase
 
-```
+```sh
 ssh-keygen -p -f ~/.ssh/id_ed25519
 ```
 
@@ -114,7 +114,7 @@ $ set --export ATUIN_SYNC_ADDRESS https://atuin.example.com
 Then load it into the environment
 and enable Atuin sync by logging in with your password and encryption key
 
-```
+```sh
 echo "ATUIN_SYNC_ADDRESS=$ATUIN_SYNC_ADDRESS" \
   > ~/.config/environment.d/99-atuin.conf \
   && systemctl --user set-environment ATUIN_SYNC_ADDRESS=$ATUIN_SYNC_ADDRESS \
