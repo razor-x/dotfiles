@@ -8,6 +8,14 @@
 # Ignore environment files managed externally.
 .config/environment.d/99-*.conf
 
+# Ignore generated kitty config backup file.
+.config/kitty/kitty.conf.bak
+
+# Ignore generated kitty theme files.
+{{- range (list "current-theme" "dark-theme.auto" "light-theme.auto" "no-preference-theme.auto") -}}
+.config/kitty/{{ . }}.conf
+{{ end -}}
+
 {{ if not (has .chezmoi.hostname (list "minto" "anny")) -}}
 .config/nvim/**
 .config/zsh/**

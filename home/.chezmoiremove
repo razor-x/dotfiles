@@ -1,6 +1,7 @@
 .bash_history
 .bash_logout
 .cargo
+.config/kitty/kitty.conf.bak
 .npm
 .terminfo
 .yarn
