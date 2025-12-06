@@ -88,5 +88,11 @@ if status is-interactive
     alias theme_kitty='kitten themes --reload-in=all'
     alias theme_fish='fish_config theme choose'
 
-    mise activate fish | source
+    if type --query mise
+        mise activate fish | source
+    end
+
+    if type --query atuin
+        atuin init fish | source
+    end
 end
