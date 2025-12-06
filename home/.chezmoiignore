@@ -16,6 +16,10 @@
 .config/kitty/{{ . }}.conf
 {{ end -}}
 
+# UPSTREAM: Ignore nushell history file until the location respects XDG.
+# https://github.com/nushell/nushell/issues/10100
+.config/nushell/history.txt
+
 {{ if not (has .chezmoi.hostname (list "minto" "anny")) -}}
 .config/nvim/**
 .config/zsh/**

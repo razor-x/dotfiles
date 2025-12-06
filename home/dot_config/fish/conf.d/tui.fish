@@ -92,6 +92,7 @@ if status is-interactive
         mise activate fish | source
     end
 
+    # Install Atuin shell plugin.
     if type --query atuin
         atuin init fish --disable-up-arrow --disable-ctrl-r | source
     end
