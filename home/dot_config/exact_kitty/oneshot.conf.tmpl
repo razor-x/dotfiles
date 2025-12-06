@@ -32,8 +32,8 @@ map --mode normal w           {{ $oneshot }} : close_os_window
 map --mode normal h           {{ $oneshot }} : swap_with_window
 map --mode normal space       {{ $oneshot }} : next_layout
 map --mode normal shift+space {{ $oneshot }} : last_used_layout
-map --mode normal d           {{ $oneshot }} : detach_window ask
-map --mode normal shift+d     {{ $oneshot }} : detach_tab ask
+map --mode normal d           {{ $oneshot }} : detach_window new-tab
+map --mode normal shift+d     {{ $oneshot }} : detach_tab
 map --mode normal m           {{ $oneshot }} : toggle_layout stack
 
 # Hints
