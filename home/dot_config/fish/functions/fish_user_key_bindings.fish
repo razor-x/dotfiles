@@ -36,6 +36,8 @@ function fish_user_key_bindings \
     bind ctrl-o --mode insert forward-char
     bind ctrl-u --mode insert backward-char
     bind ctrl-q --mode insert fish_paginate
+    # TODO: Consider ctrl-shift-r backward-bigword, etc.
+    # TODO: Consider ctrl-shift-u backward-path-component, etc.
 
     bind ctrl-/ --mode insert __fish_whatis_current_token
     bind ctrl-/ --mode visual __fish_whatis_current_token
