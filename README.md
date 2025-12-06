@@ -112,7 +112,7 @@ $ set --export ATUIN_SYNC_ADDRESS https://atuin.example.com
 ```
 
 Then load it into the environment
-and enable Atuin sync by logging in with your password any encryption key
+and enable Atuin sync by logging in with your password and encryption key
 
 ```
 echo "ATUIN_SYNC_ADDRESS=$ATUIN_SYNC_ADDRESS" \
