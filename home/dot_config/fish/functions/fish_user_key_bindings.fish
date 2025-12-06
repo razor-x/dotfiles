@@ -1,7 +1,9 @@
-fish_hybrid_key_bindings
-
 function fish_user_key_bindings \
     --description 'Fish automatically executes this function after setting all preset bindings'
+
+    fish_hybrid_key_bindings
+
+    bind --mode insert 'ctrl-tab' _atuin_search
 
     fzf_configure_bindings \
         --directory='ctrl-;' \

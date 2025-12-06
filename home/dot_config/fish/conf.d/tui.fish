@@ -93,6 +93,6 @@ if status is-interactive
     end
 
     if type --query atuin
-        atuin init fish | source
+        atuin init fish --disable-up-arrow --disable-ctrl-r | source
     end
 end
