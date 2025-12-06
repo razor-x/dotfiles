@@ -115,7 +115,7 @@ $ set --universal ATUIN_SYNC_ADDRESS https://atuin.example.com
 Then enable Atuin sync by logging in with your password any encryption key
 
 ```
-atuin login -u
+atuin login --username $USER
 ```
 
 ## License
