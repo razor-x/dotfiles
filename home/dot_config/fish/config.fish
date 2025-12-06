@@ -19,7 +19,7 @@ if status is-interactive
     end
 
     # Autostart Zellij when connecting though SSH and not multiplexing.
-    if set --query SSH_CONNECTION; \
+    if set --query SSH_CONNECTION;
         and not set --query TMUX;
         and not set --query ZELLIJ;
         and test "$TERM" != xterm-kitty
