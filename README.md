@@ -103,6 +103,14 @@ Add a passphrase with
 ssh-keygen -p -f ~/.ssh/id_ed25519
 ```
 
+### Login to Atuin
+
+Enable Atuin sync by logging in with your password any encryption key
+
+```
+atuin login -u
+```
+
 ## License
 
 These configuration files are licensed under the MIT license.
