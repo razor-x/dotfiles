@@ -71,7 +71,7 @@ cd ~/config/dotfiles \
 Copy the ASCII armored private key over to the new machine
 
 ```
-$ gpg --export-secret-keys --armor <email> > private.key
+$ gpg --export-secret-keys --armor <email_address> > private.key
 $ scp private.key new-machine:
 $ rm private.key
 ```
@@ -105,7 +105,14 @@ ssh-keygen -p -f ~/.ssh/id_ed25519
 
 ### Login to Atuin
 
-Enable Atuin sync by logging in with your password any encryption key
+Set the Atuin sync address with
+
+```
+$ echo 'ATUIN_SYNC_ADDRESS=https://atuin.example.com' > ~/.config/environment.d/99-atuin.conf
+$ set --universal ATUIN_SYNC_ADDRESS https://atuin.example.com
+```
+
+Then enable Atuin sync by logging in with your password any encryption key
 
 ```
 atuin login -u

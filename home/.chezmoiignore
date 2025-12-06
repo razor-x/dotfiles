@@ -5,7 +5,8 @@
 .config/fish/{{ . }}/*.fish
 {{ end -}}
 
-.config/kitty/current-theme.conf
+# Ignore environment files managed externally.
+.config/environment.d/99-*.conf
 
 {{ if not (has .chezmoi.hostname (list "minto" "anny")) -}}
 .config/nvim/**
