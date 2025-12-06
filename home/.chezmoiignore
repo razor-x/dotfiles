@@ -9,7 +9,7 @@
 .config/environment.d/99-*.conf
 
 # Ignore generated kitty config backup file.
-.config/kitty/kitty.conf.bak
+.config/kitty/*.bak
 
 # Ignore generated kitty theme files.
 {{- range (list "current-theme" "dark-theme.auto" "light-theme.auto" "no-preference-theme.auto") -}}
