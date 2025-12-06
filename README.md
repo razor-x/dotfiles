@@ -111,20 +111,16 @@ Set the Atuin sync address
 $ set --export ATUIN_SYNC_ADDRESS https://atuin.example.com
 ```
 
-And load it into the environment
+Then load it into the environment
+and enable Atuin sync by logging in with your password any encryption key
 
 ```
 echo "ATUIN_SYNC_ADDRESS=$ATUIN_SYNC_ADDRESS" \
   > ~/.config/environment.d/99-atuin.conf \
   && systemctl --user set-environment ATUIN_SYNC_ADDRESS=$ATUIN_SYNC_ADDRESS \
   && systemctl --user daemon-reload \
-  && systemctl --user restart atuin.service
-```
-
-Then enable Atuin sync by logging in with your password any encryption key
-
-```
-atuin login --username $USER
+  && systemctl --user restart atuin.service \
+  && atuin login --username $USER
 ```
 
 ## License
