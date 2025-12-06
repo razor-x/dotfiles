@@ -32,6 +32,7 @@ function fish_user_key_bindings \
     bind ctrl-f --mode insert forward-word
     bind ctrl-r --mode insert backward-word
     bind ctrl-b --mode insert backward-delete-char
+    bind ctrl-y --mode insert backward-delete-char
     bind ctrl-o --mode insert forward-char
     bind ctrl-u --mode insert backward-char
     bind ctrl-q --mode insert fish_paginate
