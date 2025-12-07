@@ -1,5 +1,5 @@
 # Load environment.d variables if stale.
-if [[ $USER_ENV_VARS_HASH != '{{ template "user_env_hash" . }}' ]] \
+if [[ $USER_ENV_HASH != '{{ template "user_env_hash" . }}' ]] \
   && [[ -d "$HOME/.config/environment.d" ]]; then
   for f in $HOME/.config/environment.d/*.conf; do
     set -a

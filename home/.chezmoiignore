@@ -1,12 +1,9 @@
-# The Fisher plugin manager installs these as a local fish plugin.
+# The Fisher plugin manager installs theses paths as a local fish plugin.
 # Only .config/fish/{config.fish,fish_plugins} is managed by chezmoi.
 # The dot_config/fish directory must not be managed as exact_fish.
 {{ range (list "completions" "conf.d" "functions" "themes") -}}
 .config/fish/{{ . }}/*.fish
 {{ end -}}
-
-# Ignore environment files managed externally.
-.config/environment.d/99-*.conf
 
 # Ignore generated kitty config backup file.
 .config/kitty/kitty.conf.bak

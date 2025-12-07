@@ -1,0 +1,4 @@
+# Compute a hash of all environment variables defined in ~/.config/environment.d.
+# The hash excludes this file.
+# This is used to trigger or skip reloading of environment variables.
+USER_ENV_HASH="{{ template "user_env_hash" . }}"

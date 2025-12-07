@@ -115,11 +115,7 @@ Then load it into the environment
 and enable Atuin sync by logging in with your password and encryption key
 
 ```sh
-echo "ATUIN_SYNC_ADDRESS=$ATUIN_SYNC_ADDRESS" \
-  > ~/.config/environment.d/99-atuin.conf \
-  && systemctl --user set-environment ATUIN_SYNC_ADDRESS=$ATUIN_SYNC_ADDRESS \
-  && systemctl --user daemon-reload \
-  && systemctl --user restart atuin.service \
+chezmoi apply \
   && atuin login --username $USER
 ```
 
