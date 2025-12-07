@@ -1,5 +1,5 @@
-set --universal tide_kitty_color 'FFD1DC'
-set --universal tide_kitty_bg_color 'normal'
+set --global tide_kitty_color 'FFD1DC'
+set --global tide_kitty_bg_color 'normal'
 
 function _tide_item_kitty \
     --description "Tide prompt item that shows if running inside kitty terminal"
