@@ -17,6 +17,9 @@
 # https://github.com/nushell/nushell/issues/10100
 .config/nushell/history.txt
 
+# Ignore Yazi installed plugins.
+.config/yazi/plugins
+
 {{ if not (has .chezmoi.hostname (list "minto" "anny")) -}}
 .config/nvim/**
 .config/zsh/**
