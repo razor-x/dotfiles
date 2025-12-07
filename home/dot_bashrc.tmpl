@@ -1,5 +1,6 @@
-# Load environment.d variables if not already loaded.
-if [[ -z $USER_ENV_VARS_SET ]] && [[ -d "$HOME/.config/environment.d" ]]; then
+# Load environment.d variables if stale.
+if [[ $USER_ENV_VARS_HASH != '{{ template "user_env_hash" . }}' ]] \
+  && [[ -d "$HOME/.config/environment.d" ]]; then
   for f in $HOME/.config/environment.d/*.conf; do
     set -a
     if [[ -f "$f" ]]; then

@@ -1,0 +1,8 @@
+{{- $hash := "" -}}
+{{- $dir := printf "%s/dot_config/exact_environment.d" $.chezmoi.sourceDir -}}
+{{- range (glob (printf "%s/*.conf" $dir)) -}}
+  {{- if ne (base .) "00-env.conf" -}}
+    {{- $hash = printf "%s%s" $hash (include . | sha256sum) -}}
+  {{- end -}}
+{{- end -}}
+{{- $hash -}}
