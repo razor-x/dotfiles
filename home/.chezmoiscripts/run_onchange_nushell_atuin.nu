@@ -8,5 +8,6 @@ if (which atuin | is-not-empty) {
 
   atuin init nu | save $"($atuin_path)/init.nu"
 } else {
-  echo 'Skipping Nushell atuin init: atuin not found.'
+  print 'Cannot install atuin Nushell shell integration: atuin not found.'
+  exit 1
 }

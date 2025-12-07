@@ -14,11 +14,13 @@
 if type --query fisher
     fisher update
 else
-    echo 'Skipping fisher update: fisher not installed.'
+    echo 'Cannot update fish plugins: fisher is not installed.'
+    return 1
 end
 
 if type --query tide
     configure_tide_prompt
 else
-    echo 'Skipping Tide configuration: tide fish plugin not installed.'
+    echo 'Cannot configure Tide: the tide fish plugin is not installed.'
+    return 1
 end

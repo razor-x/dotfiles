@@ -8,5 +8,6 @@ if type --query zellij
   mkdir -p $completions_path
   zellij setup --generate-completion fish > "$completions_path/zellij.fish"
 else
-    echo 'Skipping Zellij completion generation: zellij not installed.'
+    echo 'Cannot install Zellij fish shell completion: zellij not installed.'
+    return 1
 end

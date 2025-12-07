@@ -11,5 +11,6 @@ if type --query systemctl
         systemctl --user enable --now $unit
     end
 else
-    echo 'Skipping systemd user units: systemctl not found.'
+    echo 'Cannot setup systemd user units: systemctl not found.'
+    return 1
 end

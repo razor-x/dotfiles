@@ -5,5 +5,6 @@
 if type --query ya; and type --query yazi
     ya pkg install
 else
-    echo 'Skipping Yazi package install: yazi or ya not installed.'
+    echo 'Cannot install Yazi packages: yazi or ya not installed.'
+    return 1
 end
