@@ -2,6 +2,10 @@ update_check = false
 sync_frequency = "5m"
 enter_accept = false
 
+{{ if env "ATUIN_SYNC_ADDRESS" -}}
+sync_address = {{ env "ATUIN_SYNC_ADDRESS" | quote }}
+{{ end -}}
+
 [sync]
 records = true
 
