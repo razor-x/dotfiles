@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-# yazi package hash: {{ include (joinPath .chezmoi.sourceDir "dot_config" "yazi" "package.toml") | sha256sum }}
+# hash: {{ include (joinPath .chezmoi.sourceDir "dot_config" "yazi" "package.toml") | sha256sum }}
 
 if type --query ya; and type --query yazi
     ya pkg install
