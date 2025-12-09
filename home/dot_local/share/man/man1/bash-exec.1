@@ -1,0 +1,117 @@
+.TH BASH-EXEC 1 "December 2025" "bash-exec 1.0" "User Commands"
+.SH NAME
+bash-exec \- environment-aware application launcher
+.SH SYNOPSIS
+.B bash-exec
+.I command
+.RI [ arguments... ]
+.SH DESCRIPTION
+.B bash-exec
+loads environment variables from
+.I ~/.config/environment.d/
+before executing a command. This allows applications to load updated
+environment variables without completely restarting the user session.
+.PP
+When applications are launched via window manager keybinds or launchers, they
+inherit the window manager's environment, which was established when the
+session started. The window manager itself typically inherits its environment
+from the display manager or systemd user session. Modifying
+.I ~/.config/environment.d/
+files does not affect already-running processes.
+.B bash-exec
+solves this by sourcing environment configuration immediately before launching
+each application.
+.PP
+The wrapper uses
+.BR exec (3)
+to replace itself with the target application, ensuring no additional process
+remains in the tree and avoiding any performance overhead.
+.SS Performance and Caching
+.B bash-exec
+only reloads environment variables when their content has changed. This is
+determined by comparing an embedded hash value (generated and maintained by
+.BR chezmoi )
+against the
+.B USER_ENV_HASH
+environment variable. If the hash matches, variable loading is skipped, making
+subsequent invocations extremely fast with negligible overhead.
+.PP
+This means
+.B bash-exec
+only has a meaningful effect when environment variables have been modified in
+.I ~/.config/environment.d/
+and the user session has not been restarted since the modification. After
+restarting the user session, it will already have the updated environment,
+making the wrapper redundant until the next modification.
+.SS When to Use
+.B bash-exec
+is particularly useful when working on dotfile configurations, testing new
+environment variables, or updating secrets such as API tokens. Without this
+wrapper, testing environment changes would require completely restarting the
+user session after each modification.
+.PP
+This wrapper is most useful for applications that do not inherit from the
+user's login shell, including GUI applications (e.g.,
+.BR neovide ),
+and terminal emulators configured to bypass the login shell. For example,
+.B kitty
+can be configured to launch
+.B fish
+directly with shell integration, which skips the bash login shell entirely.
+Applications launched via window manager keybinds rather than from an
+interactive shell also benefit from this wrapper.
+.SS When Not to Use
+Applications launched from an interactive bash session, or from interactive
+shells that were themselves started from bash (such as
+.B fish
+started from an interactive bash prompt), already have the correct environment
+and do not need this wrapper.
+.SS Limitations
+.B bash-exec
+cannot help with systemd user services or dbus-activated applications, as
+these inherit their environment from systemd's user manager rather than from
+the window manager. Managing environment variables for systemd user services
+is outside the scope of this tool.
+.SH EXAMPLES
+.PP
+Sway keybind for terminal:
+.RS 4
+.nf
+bindsym $mod+Return exec bash-exec kitty
+.fi
+.RE
+.PP
+Sway keybind for GUI editor:
+.RS 4
+.nf
+bindsym $mod+e exec bash-exec neovide
+.fi
+.RE
+.PP
+Application launcher:
+.RS 4
+.nf
+bindsym $mod+d exec bash-exec wofi --show=drun
+.fi
+.RE
+.PP
+Command line usage:
+.RS 4
+.nf
+bash-exec firefox
+.fi
+.RE
+.SH FILES
+.TP
+.I ~/.config/environment.d/*.conf
+Environment variable definitions in
+.B key=value
+format. Files in this directory are sourced when
+.B USER_ENV_HASH
+does not match the embedded hash value.
+.SH SEE ALSO
+.BR bash (1),
+.BR exec (3),
+.BR environ (7),
+.BR environment.d(5),
+.BR chezmoi (1)

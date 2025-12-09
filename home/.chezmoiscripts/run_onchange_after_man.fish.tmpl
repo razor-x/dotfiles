@@ -1,6 +1,16 @@
 #!/usr/bin/env fish
 
-# hash: {{ include (joinPath .chezmoi.sourceDir "dot_local" "share" "man" "man7" "dotfiles.7") | sha256sum }}
+
+{{ $hash := "" }}
+{{- range untilStep 1 9 1 -}}
+  {{- $section := . -}}
+  {{- $dir := printf "%s/dot_local/share/man/man%s" $.chezmoi.sourceDir $section -}}
+  {{- range (glob (printf "%s/*.%s" $dir $section)) -}}
+    {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
+  {{- end -}}
+{{- end -}}
+
+# hash: {{ sha256sum $hash }}
 
 if type --query mandb
     mandb --user-db
