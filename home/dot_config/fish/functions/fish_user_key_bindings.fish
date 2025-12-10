@@ -64,6 +64,12 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-/ __fish_whatis_current_token
     bind --mode visual ctrl-/ __fish_whatis_current_token
     bind --mode insert ctrl-d delete-or-exit
+
+    # Restore binds for ctrl-m (enter) and ctrl-i (tab) in vconsole.
+    if test "$TERM" = "linux"
+        bind --mode insert ctrl-m execute
+        bind --mode insert ctrl-i complete
+    end
 end
 
 function beginning-of-line-or-history-pager \
