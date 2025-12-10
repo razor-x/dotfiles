@@ -70,7 +70,11 @@ function fish_user_key_bindings \
         bind --mode insert ctrl-m execute
         bind --mode insert ctrl-i complete
     end
+
+    # TODO: Bind ctrl-y
 end
+
+# TODO move all functions here to functions files
 
 function beginning-of-line-or-history-pager \
     --description 'Move the cursor to the beginning of the line; if empty, open the history pager'
