@@ -58,7 +58,8 @@ function fish_user_key_bindings \
     bind ctrl-enter fish_clipboard_paste
     bind --mode insert ctrl-c clear-commandline repaint-mode
     bind --mode insert ctrl-v fish_clipboard_paste
-    ## TODO bind , (<) to insert a (fish_clipboard_paste) and . (>) to pipe to fish_clipboard_copy
+    bind --mode insert ctrl-comma 'commandline -i "(fish_clipboard_paste)"'
+    bind --mode insert ctrl-. fish_clipboard_pipe
 
     # Misc.
     bind --mode insert ctrl-/ __fish_whatis_current_token
