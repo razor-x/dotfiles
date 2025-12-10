@@ -50,7 +50,7 @@ function fish_user_key_bindings \
     # Manipulate prompt.
     bind --mode insert ctrl-t transpose-chars
     bind --mode insert ctrl-q fish_paginate
-    # bind --mode insert ctrl-g fish_filter
+    bind --mode insert ctrl-g fish_filter
     bind --mode insert ctrl-z undo
     bind --mode insert ctrl-shift-z redo
 
