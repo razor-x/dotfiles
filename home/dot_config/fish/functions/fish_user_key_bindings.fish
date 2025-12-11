@@ -83,6 +83,9 @@ function fish_user_key_bindings \
     # Exit.
     bind --mode insert ctrl-d exit
 
+    # Vi default (normal) mode bindings.
+    bind --mode default U redo
+
     # Restore bindings for ctrl-m (enter) and ctrl-i (tab) in vconsole.
     if test "$TERM" = "linux"
         bind --mode insert ctrl-m execute
