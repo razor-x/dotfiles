@@ -1,6 +1,7 @@
 function fish_user_key_bindings \
     --description 'Fish automatically executes this function after setting all preset bindings'
 
+    # Use hybrid Emacs-Vi bindings.
     fish_hybrid_key_bindings
 
     # Erase all Ctrl and Alt insert mode bindings.
@@ -13,8 +14,13 @@ function fish_user_key_bindings \
         | string replace -r '^bind\s+(.*?)((ctrl|alt)-\S+)\s.*' 'bind --erase $1$2' \
         | source
 
-    bind --mode insert 'ctrl-tab' _atuin_search
+    # Erase arrow key bindings.
+    bind --erase left
+    bind --erase shift-left
+    bind --erase right
+    bind --erase shift-right
 
+    # Configure fzf bindings.
     fzf_configure_bindings \
         --directory='ctrl-i' \
         --git_log="ctrl-'" \
@@ -23,12 +29,14 @@ function fish_user_key_bindings \
         --processes='ctrl-\\' \
         --variables='ctrl-x'
 
+    # Edit command buffer in editor.
     bind --mode default vv edit_command_buffer
     bind --mode insert ctrl-m edit_command_buffer
 
     # Navigate history.
     bind --mode insert ctrl-p up-or-search
     bind --mode insert ctrl-n down-or-search
+    bind --mode insert 'ctrl-tab' _atuin_search
 
     # Navigate prompt.
     bind --mode insert ctrl-o forward-char
@@ -66,7 +74,7 @@ function fish_user_key_bindings \
     bind --mode visual ctrl-/ __fish_whatis_current_token
     bind --mode insert ctrl-d delete-or-exit
 
-    # Restore binds for ctrl-m (enter) and ctrl-i (tab) in vconsole.
+    # Restore bindings for ctrl-m (enter) and ctrl-i (tab) in vconsole.
     if test "$TERM" = "linux"
         bind --mode insert ctrl-m execute
         bind --mode insert ctrl-i complete
