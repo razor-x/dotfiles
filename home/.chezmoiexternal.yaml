@@ -5,6 +5,16 @@
   checksum:
     sha256: "77e5a2f62f7c1a698caf2574493d5d75587e0fd877cfba34c48caf731c24c58d"
 
+.config/atuin/themes:
+  type: archive
+  url: https://github.com/catppuccin/atuin/archive/abfab12de743aa73cf20ac3fa61e450c4d96380c.tar.gz
+  exact: true
+  stripComponents: 2
+  include:
+    - '*/themes/**'
+  checksum:
+    sha256: "566e6c20f62be92ee9817f395c50e33fc230724e014a00ee60858e881d8d4dd0"
+
 .config/gitui/themes:
   type: archive
   url: https://github.com/catppuccin/gitui/archive/df2f59f847e047ff119a105afff49238311b2d36.tar.gz
