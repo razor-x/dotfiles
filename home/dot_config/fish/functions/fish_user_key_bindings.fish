@@ -1,12 +1,15 @@
 function fish_user_key_bindings \
     --description 'Fish automatically executes this function after setting all preset bindings'
 
+    # Remove escape delay since alt bindings are not used.
+    set --global fish_escape_delay_ms 100
+
     # Use hybrid Emacs-Vi bindings.
     fish_hybrid_key_bindings
 
     # Erase all Ctrl and Alt insert mode bindings.
     bind \
-        | grep --extended-regexp --no-ignore-case 'bind --preset -M insert (ctrl|alt)' \
+        | grep --extended-regexp --no-ignore-case 'bind --preset (-M \w+ )?(ctrl|alt)' \
         # Keep ctrl-space which inserts a literal space without expanding abbreviations.
         | grep --invert-match 'ctrl-space' \
         # Keep escape (ctrl-[) which toggles normal and insert mode.
