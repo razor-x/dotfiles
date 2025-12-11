@@ -9,20 +9,18 @@ function fish_user_key_bindings \
 
     # Erase all Ctrl and Alt insert mode bindings.
     bind \
-        | grep --extended-regexp --no-ignore-case 'bind --preset (-M \w+ )?(ctrl|alt)' \
+        | grep --extended-regexp --no-ignore-case 'bind --preset (-M \w+ )?(ctrl|alt|shift)' \
         # Keep ctrl-space which inserts a literal space without expanding abbreviations.
         | grep --invert-match 'ctrl-space' \
         # Keep escape (ctrl-[) which toggles normal and insert mode.
         | grep --invert-match 'ctrl-\[' \
-        | string replace -r '^bind\s+(.*?)((ctrl|alt)-\S+)\s.*' 'bind --erase $1$2' \
+        | string replace -r '^bind\s+(.*?)((ctrl|alt|shift)-\S+)\s.*' 'bind --erase $1$2' \
         | source
 
     # Erase arrow key bindings.
     for mode in default insert visual
-        bind --erase --mode $mode left
-        bind --erase --mode $mode shift-left
-        bind --erase --mode $mode right
-        bind --erase --mode $mode shift-right
+        bind --erase --preset --mode $mode left
+        bind --erase --preset --mode $mode right
     end
 
     # Configure fzf bindings.
