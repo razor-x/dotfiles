@@ -58,6 +58,8 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-delete kill-line
 
     # Manipulate prompt.
+    bind --mode insert ctrl-z undo
+    bind --mode insert ctrl-shift-z redo
     bind --mode insert ctrl-t transpose-chars
     bind --mode insert ctrl-q fish_paginate
     bind --mode insert ctrl-g fish_filter
@@ -73,16 +75,12 @@ function fish_user_key_bindings \
     bind --mode insert shift-backspace scrollback-push
     bind --mode insert shift-delete clear-screen
 
-    # Show info.
-    bind ctrl-/ --mode insert __fish_whatis_current_token
-    bind ctrl-y --mode insert __fish_man_page
+    # Get info.
+    bind --mode insert ctrl-/ __fish_whatis_current_token
+    bind --mode insert ctrl-y __fish_man_page
 
-    # Common functions.
-    for mode in default insert visual
-        bind --mode $mode ctrl-d exit
-        bind --mode insert ctrl-z undo
-        bind --mode insert ctrl-shift-z redo
-    end
+    # Exit.
+    bind --mode insert ctrl-d exit
 
     # Restore bindings for ctrl-m (enter) and ctrl-i (tab) in vconsole.
     if test "$TERM" = "linux"
