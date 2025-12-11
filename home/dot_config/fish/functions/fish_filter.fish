@@ -9,7 +9,7 @@ function fish_filter \
 
     set pipe " | $cmd"
     if string match -rq -- ' \n\.$' "$(commandline -j; echo .)"
-        set pipe "| $cmd"
+        set pipe "| $cmd "
     end
     fish_commandline_append $pipe
     commandline -f end-of-line
