@@ -15,10 +15,12 @@ function fish_user_key_bindings \
         | source
 
     # Erase arrow key bindings.
-    bind --erase left
-    bind --erase shift-left
-    bind --erase right
-    bind --erase shift-right
+    for mode in default insert visual
+        bind --erase --mode $mode left
+        bind --erase --mode $mode shift-left
+        bind --erase --mode $mode right
+        bind --erase --mode $mode shift-right
+    end
 
     # Configure fzf bindings.
     fzf_configure_bindings \
@@ -59,8 +61,6 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-t transpose-chars
     bind --mode insert ctrl-q fish_paginate
     bind --mode insert ctrl-g fish_filter
-    bind --mode insert ctrl-z undo
-    bind --mode insert ctrl-shift-z redo
 
     # Access clipboard.
     bind ctrl-enter fish_clipboard_paste
@@ -69,16 +69,24 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-comma 'commandline -i "(fish_clipboard_paste)"'
     bind --mode insert ctrl-. fish_clipboard_pipe
 
-    # Misc.
-    bind --mode insert ctrl-/ __fish_whatis_current_token
-    bind --mode visual ctrl-/ __fish_whatis_current_token
-    bind --mode insert ctrl-d delete-or-exit
+    # Clear scrollback.
+    bind --mode insert shift-backspace scrollback-push
+    bind --mode insert shift-delete clear-screen
+
+    # Show info.
+    bind ctrl-/ --mode insert __fish_whatis_current_token
+    bind ctrl-y --mode insert __fish_man_page
+
+    # Common functions.
+    for mode in default insert visual
+        bind --mode $mode ctrl-d exit
+        bind --mode insert ctrl-z undo
+        bind --mode insert ctrl-shift-z redo
+    end
 
     # Restore bindings for ctrl-m (enter) and ctrl-i (tab) in vconsole.
     if test "$TERM" = "linux"
         bind --mode insert ctrl-m execute
         bind --mode insert ctrl-i complete
     end
-
-    # TODO: Bind ctrl-y
 end
