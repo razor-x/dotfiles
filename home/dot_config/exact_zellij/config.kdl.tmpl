@@ -4,7 +4,7 @@ default_shell "fish"
 
 // Set theme and style.
 pane_frames false
-theme "{{ template "theme/zellij" . }}"
+theme "{{ template "theme" (merge (dict "app" "zellij") .) }}"
 
 // Enable startup tips.
 show_startup_tips true

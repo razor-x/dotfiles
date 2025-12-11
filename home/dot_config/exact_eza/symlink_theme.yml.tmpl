@@ -1,1 +1,1 @@
-themes/{{ template "theme/eza" . }}.yml
+themes/{{ template "theme" (merge (dict "app" "eza") .) }}.yml

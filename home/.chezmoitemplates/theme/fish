@@ -1,3 +1,0 @@
-{{- $theme := index .themes .theme -}}
-{{- $default := .themes.default -}}
-{{- index $theme "fish" | default $default.fish -}}

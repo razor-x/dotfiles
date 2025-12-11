@@ -24,7 +24,7 @@ include keymap.conf
 include oneshot.conf
 
 # BEGIN_KITTY_THEME
-# {{ template "theme/kitty" . }}
+# {{ template "theme" (merge (dict "app" "kitty") .) }}
 include current-theme.conf
 # END_KITTY_THEME
 
