@@ -1,13 +1,22 @@
+# Disable updates since Atuin is an Arch Linux package.
 update_check = false
-sync_frequency = "5m"
+
+# Faster default sync frequency.
+sync_frequency = "10s"
+
+# Stop Atuin from immediately executing the command.
 enter_accept = false
 
 {{ if env "ATUIN_SYNC_ADDRESS" -}}
+# Use private Atuin server.
 sync_address = {{ env "ATUIN_SYNC_ADDRESS" | quote }}
 {{ end -}}
 
 [sync]
+# Enable sync v2.
 records = true
 
 [daemon]
+# Enable the background daemon.
+# The daemon is installed as the atuin.service user unit.
 enabled = true
