@@ -9,7 +9,7 @@
   type: archive
   url: https://github.com/catppuccin/atuin/archive/abfab12de743aa73cf20ac3fa61e450c4d96380c.tar.gz
   exact: true
-  stripComponents: 2
+  stripComponents: 3
   include:
     - '*/themes/**'
   checksum:

@@ -7,6 +7,10 @@ sync_frequency = "10s"
 # Stop Atuin from immediately executing the command.
 enter_accept = false
 
+[theme]
+# Set theme.
+name = "catppuccin-mocha-mauve"
+
 {{ if env "ATUIN_SYNC_ADDRESS" -}}
 # Use private Atuin server.
 sync_address = {{ env "ATUIN_SYNC_ADDRESS" | quote }}
