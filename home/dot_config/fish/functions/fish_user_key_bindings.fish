@@ -47,14 +47,11 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-o forward-char
     bind --mode insert ctrl-u backward-char
     bind --mode insert ctrl-f forward-word
-    # TODO: ctrl-r backward-word-or-atuin
-    # Bind ctrl-shift-space to what ctrl-space is (no abbr expand)
-    bind --mode insert ctrl-r backward-word
+    bind --mode insert ctrl-r backward-word-or-atuin
     bind --mode insert ctrl-shift-f forward-token
     bind --mode insert ctrl-shift-r backward-token
     bind --mode insert ctrl-a beginning-of-line-or-history-pager
     bind --mode insert ctrl-e end-of-line accept-autosuggestion
-    bind --mode insert ctrl-shift-space _atuin_search
 
     # Delete from prompt.
     bind --mode insert ctrl-b backward-delete-char
@@ -103,4 +100,10 @@ function fish_user_key_bindings \
         bind --mode $mode tab complete
         bind --mode $mode shift-tab complete-and-search
     end
+
+    # TODO: See if ctrl-space will work on Sway as expected.
+    # https://github.com/razor-x/dotfiles/issues/2
+    bind --preset --mode insert ctrl-space \
+        | string replace -r 'ctrl-space' 'ctrl-shift-space' \
+        | source
 end
