@@ -47,6 +47,8 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-o forward-char
     bind --mode insert ctrl-u backward-char
     bind --mode insert ctrl-f forward-word
+    # TODO: ctrl-r backward-word-or-atuin
+    # Bind ctrl-shift-space to what ctrl-space is (no abbr expand)
     bind --mode insert ctrl-r backward-word
     bind --mode insert ctrl-shift-f forward-token
     bind --mode insert ctrl-shift-r backward-token
