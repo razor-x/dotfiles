@@ -53,6 +53,16 @@
   checksum:
     sha256: "7166083be39a80abe26bec5ca47f515ffc6b4fec36163ef8012485eaefa12bac"
 
+.config/yazi/themes:
+  type: archive
+  url: https://github.com/catppuccin/yazi/archive/043ffae14e7f7fcc136636d5f2c617b5bc2f5e31.tar.gz
+  exact: true
+  stripComponents: 3
+  include:
+    - '*/themes/**'
+  checksum:
+    sha256: "92cbda4573e80784ab693fdf3b6c16636f2c1bb551f78935404eba8e8c911b40"
+
 .config/zellij/plugins/vim-zellij-navigator.wasm:
   type: file
   url: https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm
