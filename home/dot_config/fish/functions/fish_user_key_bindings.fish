@@ -39,7 +39,6 @@ function fish_user_key_bindings \
     # Navigate history.
     bind --mode insert ctrl-p up-or-search
     bind --mode insert ctrl-n down-or-search
-    bind --mode insert 'ctrl-tab' _atuin_search
 
     # Navigate prompt.
     bind --mode insert ctrl-o forward-char
@@ -49,6 +48,7 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-shift-f forward-token
     bind --mode insert ctrl-shift-r backward-token
     bind --mode insert ctrl-a beginning-of-line-or-history-pager
+    bind --mode insert ctrl-shift-a _atuin_search
     bind --mode insert ctrl-e end-of-line accept-autosuggestion
 
     # Delete from prompt.
