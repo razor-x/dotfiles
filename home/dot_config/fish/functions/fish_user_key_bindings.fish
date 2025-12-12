@@ -32,6 +32,9 @@ function fish_user_key_bindings \
         --processes='ctrl-\\' \
         --variables='ctrl-x'
 
+    # Set fifc fifc_binding.
+    set --global fifc_keybinding 'ctrl-tab'
+
     # Edit command buffer in editor.
     bind --mode default vv edit_command_buffer
     bind --mode insert ctrl-m edit_command_buffer
@@ -48,8 +51,8 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-shift-f forward-token
     bind --mode insert ctrl-shift-r backward-token
     bind --mode insert ctrl-a beginning-of-line-or-history-pager
-    bind --mode insert ctrl-shift-a _atuin_search
     bind --mode insert ctrl-e end-of-line accept-autosuggestion
+    bind --mode insert ctrl-shift-space _atuin_search
 
     # Delete from prompt.
     bind --mode insert ctrl-b backward-delete-char
@@ -91,4 +94,10 @@ function fish_user_key_bindings \
         bind --mode insert ctrl-m execute
         bind --mode insert ctrl-i complete
     end
+
+    # UPSTREAM: Setting fifc_keybinding does not preserve tab default behavior.
+    # https://github.com/gazorby/fifc/issues/57
+    bind tab complete
+    bind --mode insert tab complete
+    bind --mode visual tab complete
 end

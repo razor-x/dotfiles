@@ -96,4 +96,7 @@ if status is-interactive
     if type --query atuin
         atuin init fish --disable-up-arrow --disable-ctrl-r | source
     end
+
+    # Set fifc editor.
+    set --export fifc_editor $VISUAL
 end
