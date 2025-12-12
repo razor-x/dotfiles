@@ -41,7 +41,6 @@ if status is-interactive
     abbr dif delta
 
     abbr gg gitui
-    abbr gcln! git clean -fdx
     alias gs git_idempotent_switch
 
     # Colorize help text using bat.
