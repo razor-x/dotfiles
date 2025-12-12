@@ -97,7 +97,8 @@ function fish_user_key_bindings \
 
     # UPSTREAM: Setting fifc_keybinding does not preserve tab default behavior.
     # https://github.com/gazorby/fifc/issues/57
-    bind tab complete
-    bind --mode insert tab complete
-    bind --mode visual tab complete
+    for mode in default insert visual
+        bind --mode $mode tab complete
+        bind --mode $mode shift-tab complete-and-search
+    end
 end
