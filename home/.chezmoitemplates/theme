@@ -7,6 +7,8 @@
   {{ template "catppuccin" . }}
 {{- else if eq .app "atuin" -}}
   themes/{{ $name }}.toml
+{{- else if eq .app "bat" -}}
+  {{ $name }}
 {{- else if eq .app "fish" -}}
   {{ $name }}
 {{- else if eq .app "eza" -}}
