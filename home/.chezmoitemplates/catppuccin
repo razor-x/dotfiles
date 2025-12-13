@@ -1,7 +1,9 @@
 {{- $theme := "default" -}}
 
 {{- $catppuccin := index .catppuccin $theme -}}
-{{- $flavor := $catppuccin.flavor -}}
+{{- $flavor := $catppuccin.darkFlavor -}}
+{{- $darkFlavor := $catppuccin.darkFlavor -}}
+{{- $lightFlavor := $catppuccin.lightFlavor -}}
 {{- $accent := $catppuccin.accent -}}
 
 {{- $root := joinPath .chezmoi.homeDir ".local" "share" "theme" "catppuccin" .app -}}
@@ -17,7 +19,13 @@
 {{- else if eq .app "kitty" -}}
   Catppuccin-{{ $flavor | title }}
 {{- else if eq .app "yazi" -}}
-  catppuccin-{{ $flavor }}
+  {{- if eq .mode "light" -}}
+    catppuccin-{{ $lightFlavor }}
+  {{- else if eq .mode "dark" -}}
+    catppuccin-{{ $darkFlavor }}
+  {{- else -}}
+    catppuccin-{{ $flavor }}
+  {{- end -}}
 {{- else if eq .app "zellij" -}}
   catppuccin-{{ $flavor }}
 {{- else -}}

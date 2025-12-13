@@ -4,7 +4,7 @@
 {{- $name := index $theme .app | default (index $default .app) -}}
 
 {{- if eq $name "catppuccin" -}}
-  {{ template "catppuccin" (merge (dict "app" .app) .) }}
+  {{ template "catppuccin" . }}
 {{- else if eq .app "atuin" -}}
   themes/{{ $name }}.toml
 {{- else if eq .app "fish" -}}
@@ -16,7 +16,13 @@
 {{- else if eq .app "kitty" -}}
   {{ $name }}
 {{- else if eq .app "yazi" -}}
-  {{ $name }}
+  {{- if eq .mode "light" -}}
+    {{ $name.light }}
+  {{- else if eq .mode "dark" -}}
+    {{ $name.dark }}
+  {{- else -}}
+    {{ $name.default }}
+  {{- end -}}
 {{- else if eq .app "zellij" -}}
   {{ $name }}
 {{- else -}}

@@ -1,2 +1,3 @@
 [flavor]
-dark = "{{ template "theme" (merge (dict "app" "yazi") .) }}"
+dark = "{{ template "theme" (merge (dict "app" "yazi" "mode" "dark") .) }}"
+light = "{{ template "theme" (merge (dict "app" "yazi" "mode" "light") .) }}"
