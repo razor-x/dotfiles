@@ -17,6 +17,10 @@
 # https://github.com/nushell/nushell/issues/10100
 .config/nushell/history.txt
 
+# Do not install Yazi _package.toml.
+# https://www.chezmoi.io/user-guide/manage-different-types-of-file/#handle-configuration-files-which-are-externally-modified
+.config/yazi/_package.toml
+
 # Ignore Yazi installed plugins and flavors.
 {{ range (list "plugins" "flavors") -}}
 .config/yazi/{{ . }}
