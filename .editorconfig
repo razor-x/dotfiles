@@ -16,3 +16,7 @@ indent_size = 4
 
 [*.{ron,ron.tmpl}]
 indent_size = 4
+
+[home/dot_config/exact_git/config*]
+indent_style = tab
+indent_size = 4

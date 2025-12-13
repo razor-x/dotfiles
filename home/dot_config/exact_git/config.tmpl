@@ -1,10 +1,16 @@
 [user]
-  name = {{ .fullName | quote }}
-  email = {{ .emailAddress | quote }}
-  signingkey = {{ .gpgKeyId | quote }}
+	name = {{ .fullName | quote }}
+	email = {{ .emailAddress | quote }}
+	signingkey = {{ .gpgKeyId | quote }}
 [init]
-  defaultBranch = main
+	defaultBranch = main
 [commit]
-  gpgsign = true
+	gpgsign = true
 [pull]
-  rebase = true
+	rebase = true
+[core]
+	pager = delta --paging=always
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
