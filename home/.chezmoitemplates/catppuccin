@@ -7,15 +7,15 @@
 {{- $root := joinPath .chezmoi.homeDir ".local" "share" "theme" "catppuccin" .app -}}
 
 {{- if eq .app "atuin" -}}
-  {{ joinPath $root "themes" (list "catppuccin" $flavor $accent | join "-") -}}.toml
+  {{ joinPath $root "themes" $flavor (list "catppuccin" $flavor $accent | join "-") -}}.toml
 {{- else if eq .app "eza" -}}
-  {{ joinPath $root "themes" (list "catppuccin" $flavor $accent | join "-") -}}.yml
+  {{ joinPath $root "themes" $flavor (list "catppuccin" $flavor $accent | join "-") -}}.yml
 {{- else if eq .app "gitui" -}}
-  {{ joinPath $root "themes" (list "catppuccin" $flavor | join "-") -}}
+  {{ joinPath $root "themes" (list "catppuccin" $flavor | join "-") -}}.ron
 {{- else if eq .app "yazi" -}}
   catppuccin-{{ $flavor }}
 {{- else if eq .app "zellij" -}}
-  {{ $flavor }}
+  catppuccin-{{ $flavor }}
 {{- else -}}
   {{- fail (printf "No catppuccin theme installed for %s." .app) -}}
 {{- end -}}
