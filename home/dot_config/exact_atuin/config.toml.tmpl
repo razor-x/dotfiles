@@ -9,7 +9,7 @@ enter_accept = false
 
 [theme]
 # Set theme.
-name = "catppuccin-mocha-mauve"
+name = "{{ template "theme" (merge (dict "app" "atuin") .) }}"
 
 {{ if env "ATUIN_SYNC_ADDRESS" -}}
 # Use private Atuin server.

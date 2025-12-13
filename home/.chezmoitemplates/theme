@@ -6,7 +6,7 @@
 {{- if eq $name "catppuccin" -}}
   {{ template "catppuccin" . }}
 {{- else if eq .app "atuin" -}}
-  themes/{{ $name }}.toml
+  themes/{{ $name }}
 {{- else if eq .app "bat" -}}
   {{ $name }}
 {{- else if eq .app "fish" -}}

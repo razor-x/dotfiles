@@ -9,7 +9,7 @@
 {{- $root := joinPath .chezmoi.homeDir ".local" "share" "theme" "catppuccin" .app -}}
 
 {{- if eq .app "atuin" -}}
-  {{ joinPath $root "themes" $flavor (list "catppuccin" $flavor $accent | join "-") -}}.toml
+  {{ joinPath $root "themes" $flavor (list "catppuccin" $flavor $accent | join "-") -}}
 {{- else if eq .app "bat" -}}
   Catppuccin {{ $flavor | title }}
 {{- else if eq .app "eza" -}}
