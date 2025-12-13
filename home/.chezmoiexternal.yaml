@@ -1,33 +1,17 @@
 ---
-.config/atuin/themes:
-  type: archive
-  url: https://github.com/catppuccin/atuin/archive/abfab12de743aa73cf20ac3fa61e450c4d96380c.tar.gz
-  exact: true
-  stripComponents: 3
-  include:
-    - '*/themes/**'
-  checksum:
-    sha256: "566e6c20f62be92ee9817f395c50e33fc230724e014a00ee60858e881d8d4dd0"
+# --------------
+# Zellij Plugins
+# --------------
 
-.config/eza/themes:
-  type: archive
-  url: https://github.com/eza-community/eza-themes/archive/c03051f67e84110fbae91ab7cbc377b3460f035c.tar.gz
-  exact: true
-  stripComponents: 2
-  include:
-    - '*/themes/**'
+.config/zellij/plugins/vim-zellij-navigator.wasm:
+  type: file
+  url: https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm
   checksum:
-    sha256: "68e401e09da34fd95d87f92078321222bf1302e047bf654deb36a5243c7f4c97"
+    sha256: "77e5a2f62f7c1a698caf2574493d5d75587e0fd877cfba34c48caf731c24c58d"
 
-.config/gitui/themes:
-  type: archive
-  url: https://github.com/catppuccin/gitui/archive/df2f59f847e047ff119a105afff49238311b2d36.tar.gz
-  exact: true
-  stripComponents: 2
-  include:
-    - '*/themes/**'
-  checksum:
-    sha256: "0e928438f3a967a5bc47aebcdf9899de1ce59ad4190cf291691364784361744d"
+# -------------
+# Kitty Plugins
+# -------------
 
 # UPSTREAM: The smart-splits.nvim python kittens must be placed in the kitty config root.
 # https://github.com/mrjones2014/smart-splits.nvim/blob/e892a5da963813119d053af5b2260e3cd9d9f037/lua/smart-splits/mux/kitty.lua#L112
@@ -53,18 +37,36 @@
   checksum:
     sha256: "7166083be39a80abe26bec5ca47f515ffc6b4fec36163ef8012485eaefa12bac"
 
-.config/yazi/themes:
+# ----------------
+# Catppuccin Theme
+# ----------------
+
+.local/share/theme/catppuccin/atuin:
   type: archive
-  url: https://github.com/catppuccin/yazi/archive/043ffae14e7f7fcc136636d5f2c617b5bc2f5e31.tar.gz
+  url: https://github.com/catppuccin/atuin/archive/abfab12de743aa73cf20ac3fa61e450c4d96380c.tar.gz
   exact: true
-  stripComponents: 3
+  stripComponents: 1
   include:
     - '*/themes/**'
   checksum:
-    sha256: "92cbda4573e80784ab693fdf3b6c16636f2c1bb551f78935404eba8e8c911b40"
+    sha256: "566e6c20f62be92ee9817f395c50e33fc230724e014a00ee60858e881d8d4dd0"
 
-.config/zellij/plugins/vim-zellij-navigator.wasm:
-  type: file
-  url: https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm
+.local/share/theme/catppuccin/eza:
+  type: archive
+  url: https://github.com/catppuccin/eza/archive/70f805f6cc27fa5b91750b75afb4296a0ec7fec9.tar.gz
+  exact: true
+  stripComponents: 1
+  include:
+    - '*/themes/**'
   checksum:
-    sha256: "77e5a2f62f7c1a698caf2574493d5d75587e0fd877cfba34c48caf731c24c58d"
+    sha256: "c8fe4bc862071a7aca025e56f95eb9e9f8e861f1d8934325e23ab11f8618aace"
+
+.local/share/theme/catppuccin/gitui:
+  type: archive
+  url: https://github.com/catppuccin/gitui/archive/df2f59f847e047ff119a105afff49238311b2d36.tar.gz
+  exact: true
+  stripComponents: 1
+  include:
+    - '*/themes/**'
+  checksum:
+    sha256: "0e928438f3a967a5bc47aebcdf9899de1ce59ad4190cf291691364784361744d"

@@ -7,17 +7,25 @@ data:
   gpgKeyId: 757C899CECF66FE0
   fonts:
     kitty: FiraCode Nerd Font
-  theme: dark
-  themes:
-    # When a theme omits a key, the value from the default theme will be used as a fallback.
+  catppuccin:
     default:
-      atuin: catppuccin-frappe-mauve
+      flavor: frappe
+      accent: peach
+  theme: catppuccin
+  themes:
+    # When a theme omits a key,
+    # the value from the default theme will be used as a fallback.
+    default:
+      atuin: catppuccin
       eza: catppuccin
       fish: ayu Mirage
-      gitui: catppuccin-frappe
+      gitui: catppuccin
       kitty: Ayu
-      yazi: catppuccin-frappe-mauve
+      yazi: catppuccin
       zellij: vesper
-    dark:
-      fish: Catppuccin Frappe
-      kitty: Catppuccin-Frappe
+    catppuccin:
+      atuin: catppuccin
+      eza: catppuccin
+      gitui: catppuccin
+      yazi: catppuccin
+      zellij: catppuccin

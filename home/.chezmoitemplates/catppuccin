@@ -1,0 +1,21 @@
+{{- $theme := "default" -}}
+
+{{- $catppuccin := index .catppuccin $theme -}}
+{{- $flavor := $catppuccin.flavor -}}
+{{- $accent := $catppuccin.accent -}}
+
+{{- $root := joinPath .chezmoi.homeDir ".local" "share" "theme" "catppuccin" .app -}}
+
+{{- if eq .app "atuin" -}}
+  {{ joinPath $root "themes" (list "catppuccin" $flavor $accent | join "-") -}}.toml
+{{- else if eq .app "eza" -}}
+  {{ joinPath $root "themes" (list "catppuccin" $flavor $accent | join "-") -}}.yml
+{{- else if eq .app "gitui" -}}
+  {{ joinPath $root "themes" (list "catppuccin" $flavor | join "-") -}}
+{{- else if eq .app "yazi" -}}
+  catppuccin-{{ $flavor }}
+{{- else if eq .app "zellij" -}}
+  {{ $flavor }}
+{{- else -}}
+  {{- fail (printf "No catppuccin theme installed for %s." .app) -}}
+{{- end -}}

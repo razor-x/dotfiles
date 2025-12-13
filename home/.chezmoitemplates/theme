@@ -1,3 +1,24 @@
 {{- $theme := index .themes .theme -}}
 {{- $default := .themes.default -}}
-{{- index $theme .app | default (index $default .app) -}}
+
+{{- $name := index $theme .app | default (index $default .app) -}}
+
+{{- if eq $name "catppuccin" -}}
+  {{ template "catppuccin" (merge (dict "app" .app) .) }}
+{{- else if eq .app "atuin" -}}
+  themes/{{ $name }}.toml
+{{- else if eq .app "fish" -}}
+  {{ $name }}
+{{- else if eq .app "eza" -}}
+  themes/${{ $name }}.yml
+{{- else if eq .app "gitui" -}}
+  themes/${{ $name }}.ron
+{{- else if eq .app "kitty" -}}
+  {{ $name }}
+{{- else if eq .app "yazi" -}}
+  {{ $name }}
+{{- else if eq .app "zellij" -}}
+  {{ $name }}
+{{- else -}}
+  {{- fail (printf "No catppuccin theme installed for %s." .app) -}}
+{{- end -}}

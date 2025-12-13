@@ -3,5 +3,22 @@ use = "ndtoan96/ouch"
 rev = "41d68cd"
 hash = "c7790dd555aee4adf4d125e200ea8611"
 
-[flavor]
-deps = []
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-latte"
+rev = "ffe6e3a"
+hash = "b7f67b15a9f94f408d94b9630465c37a"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-frappe"
+rev = "ffe6e3a"
+hash = "90a866c034553e2d3bfdf536940733df"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-macchiato"
+rev = "ffe6e3a"
+hash = "9b9a8e91898a73c1211788a4ed30336"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "ffe6e3a"
+hash = "8d7799e4598ff079fa5ee5c770d9bc08"
