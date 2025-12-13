@@ -12,6 +12,8 @@
   {{ joinPath $root "themes" $flavor (list "catppuccin" $flavor $accent | join "-") -}}.yml
 {{- else if eq .app "gitui" -}}
   {{ joinPath $root "themes" (list "catppuccin" $flavor | join "-") -}}.ron
+{{- else if eq .app "kitty" -}}
+  catppuccin-{{ $flavor }}
 {{- else if eq .app "yazi" -}}
   catppuccin-{{ $flavor }}
 {{- else if eq .app "zellij" -}}
