@@ -13,11 +13,11 @@
 {{- else if eq .app "bat" -}}
   Catppuccin {{ $flavor | title }}
 {{- else if eq .app "eza" -}}
-  {{ joinPath $root "themes" $flavor (list "catppuccin" $flavor $accent | join "-") -}}.yml
+  {{ joinPath $root "themes" $flavor (list "catppuccin" $flavor $accent | join "-") -}}
 {{- else if eq .app "fish" -}}
   Catppuccin {{ $flavor | title }}
 {{- else if eq .app "gitui" -}}
-  {{ joinPath $root "themes" (list "catppuccin" $flavor | join "-") -}}.ron
+  {{ joinPath $root "themes" (list "catppuccin" $flavor | join "-") -}}
 {{- else if eq .app "kitty" -}}
   Catppuccin-{{ $flavor | title }}
 {{- else if eq .app "yazi" -}}

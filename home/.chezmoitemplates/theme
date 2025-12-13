@@ -12,9 +12,9 @@
 {{- else if eq .app "fish" -}}
   {{ $name }}
 {{- else if eq .app "eza" -}}
-  themes/${{ $name }}.yml
+  themes/${{ $name }}
 {{- else if eq .app "gitui" -}}
-  themes/${{ $name }}.ron
+  themes/${{ $name }}
 {{- else if eq .app "kitty" -}}
   {{ $name }}
 {{- else if eq .app "yazi" -}}
