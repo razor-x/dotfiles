@@ -10,6 +10,8 @@
   {{ joinPath $root "themes" $flavor (list "catppuccin" $flavor $accent | join "-") -}}.toml
 {{- else if eq .app "eza" -}}
   {{ joinPath $root "themes" $flavor (list "catppuccin" $flavor $accent | join "-") -}}.yml
+{{- else if eq .app "fish" -}}
+  Catppuccin {{ $flavor | title }}
 {{- else if eq .app "gitui" -}}
   {{ joinPath $root "themes" (list "catppuccin" $flavor | join "-") -}}.ron
 {{- else if eq .app "kitty" -}}
