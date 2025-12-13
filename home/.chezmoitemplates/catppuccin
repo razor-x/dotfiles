@@ -15,7 +15,7 @@
 {{- else if eq .app "gitui" -}}
   {{ joinPath $root "themes" (list "catppuccin" $flavor | join "-") -}}.ron
 {{- else if eq .app "kitty" -}}
-  catppuccin-{{ $flavor }}
+  Catppuccin-{{ $flavor | title }}
 {{- else if eq .app "yazi" -}}
   catppuccin-{{ $flavor }}
 {{- else if eq .app "zellij" -}}
