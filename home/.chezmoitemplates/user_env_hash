@@ -1,5 +1,5 @@
 {{- $hash := "" -}}
-{{- $dir := printf "%s/.config/environment.d" $.chezmoi.homeDir -}}
+{{- $dir := joinPath .chezmoi.homeDir ".config" "environment.d" -}}
 {{- range (glob (printf "%s/*.conf" $dir)) -}}
   {{- if ne (base .) "00-lock.conf" -}}
     {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
