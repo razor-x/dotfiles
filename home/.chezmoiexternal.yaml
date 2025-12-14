@@ -1,7 +1,5 @@
 ---
-# --------------
 # Zellij Plugins
-# --------------
 
 .config/zellij/plugins/vim-zellij-navigator.wasm:
   type: file
@@ -9,9 +7,7 @@
   checksum:
     sha256: "77e5a2f62f7c1a698caf2574493d5d75587e0fd877cfba34c48caf731c24c58d"
 
-# -------------
 # Kitty Plugins
-# -------------
 
 # UPSTREAM: The smart-splits.nvim python kittens must be placed in the kitty config root.
 # https://github.com/mrjones2014/smart-splits.nvim/blob/e892a5da963813119d053af5b2260e3cd9d9f037/lua/smart-splits/mux/kitty.lua#L112
@@ -37,9 +33,7 @@
   checksum:
     sha256: "7166083be39a80abe26bec5ca47f515ffc6b4fec36163ef8012485eaefa12bac"
 
-# ----------------
 # Catppuccin Theme
-# ----------------
 
 .local/share/theme/catppuccin/atuin:
   type: archive
