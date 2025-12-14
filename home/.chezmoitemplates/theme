@@ -17,6 +17,8 @@
   themes/${{ $name }}
 {{- else if eq .app "kitty" -}}
   {{ $name }}
+{{- else if eq .app "mise" -}}
+  {{ $name }}
 {{- else if eq .app "yazi" -}}
   {{- if eq .mode "light" -}}
     {{ $name.light }}

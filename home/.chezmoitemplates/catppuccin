@@ -20,6 +20,8 @@
   {{ joinPath $root "themes" (list "catppuccin" $flavor | join "-") -}}
 {{- else if eq .app "kitty" -}}
   Catppuccin-{{ $flavor | title }}
+{{- else if eq .app "mise" -}}
+  catppuccin
 {{- else if eq .app "yazi" -}}
   {{- if eq .mode "light" -}}
     catppuccin-{{ $lightFlavor }}
