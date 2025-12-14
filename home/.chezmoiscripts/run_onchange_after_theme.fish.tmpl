@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 if type --query fish_config
-    fish_config theme choose "{{ template "theme" (merge (dict "app" "fish") .) }}"
+    fish_config theme choose '{{ template "theme" (merge (dict "app" "fish") .) }}'
 else
     echo 'Cannot update fish theme: fish_config not found.'
     return 1
@@ -10,9 +10,9 @@ end
 if type --query kitten
     set kitten_config_path "$HOME/.config/kitty"
     mkdir -p $kitten_config_path
-    kitten themes --dump "{{ template "theme" (merge (dict "app" "kitty") .) }}" \
+    kitten themes --dump '{{ template "theme" (merge (dict "app" "kitty") .) }}' \
         > $kitten_config_path/current-theme.conf
-    kitten themes --reload-in=all "{{ template "theme" (merge (dict "app" "kitty") .) }}"
+    kitten themes --reload-in=all '{{ template "theme" (merge (dict "app" "kitty") .) }}'
 else
     echo 'Cannot update kitty theme: kitty or kitten not installed.'
     # TODO: Uncomment below when GUI stuff is ready.
