@@ -4,7 +4,7 @@ set --global tide_kitty_bg_color 'normal'
 function _tide_item_kitty \
     --description "Tide prompt item that shows if running inside kitty terminal"
 
-    if not set -q KITTY_WINDOW_ID
+    if not set --query KITTY_WINDOW_ID
         return
     end
 
