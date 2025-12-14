@@ -1,5 +1,5 @@
 function dotfiles_watch_and_apply \
-    --description "Watch and apply changes to dotfiles"
+    --description 'Watch and apply changes to dotfiles'
 
     set src (chezmoi source-path)
     echo "Watching $src for changes..."

@@ -12,7 +12,7 @@ function zellij_scrollback \
     mv $zellij_dump $zellij_scrollback
 
     # Set the scrollback pager to use less -r to render Nerd Font symbols.
-    # The -r option...cannot be set in a LESS environment variable.
+    # The -r option cannot be set in a LESS environment variable.
     less -r +G --chop-long-lines $zellij_scrollback
 
     echo $zellij_scrollback
