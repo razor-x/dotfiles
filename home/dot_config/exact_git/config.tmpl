@@ -1,3 +1,5 @@
+[core]
+	pager = delta --paging=always
 [user]
 	name = {{ .fullName | quote }}
 	email = {{ .emailAddress | quote }}
@@ -8,8 +10,6 @@
 	gpgsign = true
 [pull]
 	rebase = true
-[core]
-	pager = delta --paging=always
 [interactive]
 	diffFilter = delta --color-only
 [delta]
