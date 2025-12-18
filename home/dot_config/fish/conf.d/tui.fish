@@ -57,6 +57,8 @@ if status is-interactive
     abbr jsrepl node
     abbr fmtjs prettier -w --single-quote --jsx-single-quote --no-semi
 
+    abbr npr npm run
+
     if set --query ACONFMGR_CONFIG
         abbr archrc cd "$ACONFMGR_CONFIG/.."
     end
