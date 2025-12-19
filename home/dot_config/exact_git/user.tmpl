@@ -1,10 +1,12 @@
 {{- $gpgOut := output "gpg" "--list-secret-keys" "--keyid-format" "short" "--with-colons" -}}
 {{- $keyId := index ($gpgOut | regexFind "(?m)^sec:.*" | split ":") "_4" -}}
+
+{{ if $keyId -}}
+
 {{- $uid := index ($gpgOut | regexFind "(?m)^uid:.*" | split ":") "_9" -}}
 {{- $name := $uid | regexFind "^[^<]+" | trim -}}
 {{- $email := $uid | regexFind "<[^>]+>" | trimAll "<>" -}}
 
-{{ if $keyId -}}
 [user]
 	name = {{ $name | quote }}
 	email = {{ $email | quote }}
