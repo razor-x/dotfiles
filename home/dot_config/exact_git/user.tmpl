@@ -1,0 +1,8 @@
+[user]
+	name = {{ .fullName | quote }}
+	email = {{ .emailAddress | quote }}
+{{- if .gpgKeyId }}
+	signingkey = {{ .gpgKeyId | quote }}
+[commit]
+	gpgsign = true
+{{- end }}

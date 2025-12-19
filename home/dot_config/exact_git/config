@@ -1,9 +1,5 @@
 [core]
 	pager = delta --paging=always
-[user]
-	name = {{ .fullName | quote }}
-	email = {{ .emailAddress | quote }}
-	signingkey = {{ .gpgKeyId | quote }}
 [init]
 	defaultBranch = main
 [commit]
@@ -14,3 +10,5 @@
 	diffFilter = delta --color-only
 [delta]
 	navigate = true
+[include]
+	path = user
