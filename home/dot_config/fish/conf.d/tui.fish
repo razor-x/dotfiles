@@ -110,6 +110,8 @@ if status is-interactive
         abbr mirrorupg systemctl restart reflector.service
     end
 
+    abbr srv caddy file-server --listen :8080
+
     # Install Atuin shell plugin.
     if type --query atuin
         atuin init fish --disable-up-arrow --disable-ctrl-r | source
