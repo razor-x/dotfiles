@@ -110,7 +110,7 @@ if status is-interactive
         abbr mirrorupg systemctl restart reflector.service
     end
 
-    abbr srv caddy file-server --listen :8080
+    alias srv caddy_file_server
 
     # Install Atuin shell plugin.
     if type --query atuin
