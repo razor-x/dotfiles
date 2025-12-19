@@ -2,16 +2,7 @@
 
 My user land configuration managed with [chezmoi].
 
-> [!IMPORTANT]
-> If you would like to try these dotfiles, override the personal information on init
-> ```sh
-> chezmoi init --apply --source ~/config/dotfiles razor-x \
->   --override-data '{"fullName": "Your Name", "emailAddress": "you@example.com", "gpgKeyId": null}'
-> ```
-> To use them after trying them out, you should fork this repo, find and replace `razor-x` with your GitHub username, and edit [.chezmoi.yaml.tmpl](https://github.com/razor-x/dotfiles/blob/main/home/.chezmoi.yaml.tmpl) with your own information.
-
 [chezmoi]: https://www.chezmoi.io/
-[.chezmoi.yaml.tmpl]: ./home/.chezmoi.yaml.tmpl
 
 ## Requirements
 
@@ -96,11 +87,17 @@ cd ~/ \
 Then trust the key
 
 ```
-$ gpg --edit-key <email>
+$ gpg --edit-key <email_address>
 gpg> trust
 Your decision? 5 (Ultimate trust)
 Do you really want to set this key to ultimate trust? (y/N) y
 gpg> quit
+```
+
+Reapply the dotfiles
+
+```sh
+chezmoi apply
 ```
 
 ### Add an SSH passphrase

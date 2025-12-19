@@ -2,8 +2,6 @@
 	pager = delta --paging=always
 [init]
 	defaultBranch = main
-[commit]
-	gpgsign = true
 [pull]
 	rebase = true
 [interactive]

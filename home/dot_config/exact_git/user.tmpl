@@ -1,8 +1,16 @@
+{{- $gpgOut := output "gpg" "--list-secret-keys" "--keyid-format" "short" "--with-colons" -}}
+{{- $keyId := index ($gpgOut | regexFind "(?m)^sec:.*" | split ":") "_4" -}}
+{{- $uid := index ($gpgOut | regexFind "(?m)^uid:.*" | split ":") "_9" -}}
+{{- $name := $uid | regexFind "^[^<]+" | trim -}}
+{{- $email := $uid | regexFind "<[^>]+>" | trimAll "<>" -}}
+
+{{ if $keyId -}}
 [user]
-	name = {{ .fullName | quote }}
-	email = {{ .emailAddress | quote }}
-{{- if .gpgKeyId }}
-	signingkey = {{ .gpgKeyId | quote }}
+	name = {{ $name | quote }}
+	email = {{ $email | quote }}
+	signingkey = {{ $keyId | quote }}
 [commit]
 	gpgsign = true
-{{- end }}
+{{ else -}}
+# User config requires a private GPG key.
+{{ end -}}
