@@ -107,6 +107,7 @@ if status is-interactive
         abbr paclean aura -Sc
         abbr aurin aura -A
         abbr aurupg aura -Au
+        abbr mirrorupg systemctl restart reflector.service
     end
 
     # Install Atuin shell plugin.
