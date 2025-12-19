@@ -2,25 +2,34 @@
 
 My user land configuration managed with [chezmoi].
 
-## Requirements
-
-* [chezmoi].
+> [!IMPORTANT]
+> If you would like to try these dotfiles, override the personal information on init
+> ```sh
+> chezmoi init --apply --source ~/config/dotfiles razor-x \
+>   --override-data '{"fullName": "Your Name", "emailAddress": "you@example.com", "gpgKeyId": null}'
+> ```
+> To use them after trying them out, you should fork this repo, find and replace `razor-x` with your GitHub username, and edit [.chezmoi.yaml.tmpl](https://github.com/razor-x/dotfiles/blob/main/home/.chezmoi.yaml.tmpl) with your own information.
 
 [chezmoi]: https://www.chezmoi.io/
+[.chezmoi.yaml.tmpl]: ./home/.chezmoi.yaml.tmpl
 
-## Bootstrap new machine
+## Requirements
 
-> [!TIP]
-> After Bootstrapping, restart the machine.
+These dotfiles are designed to work on Arch Linux with the packages defined
+by my [Arch Linux Configuration][archrc].
 
-```sh
-chezmoi init --apply --source ~/config/dotfiles razor-x
-```
+[archrc]: https://github.com/razor-x/archrc
 
 ## RTFM
 
 ```
 man dotfiles
+```
+
+## Bootstrap new machine
+
+```sh
+chezmoi init --apply --source ~/config/dotfiles razor-x
 ```
 
 ### Add public key to GitHub
@@ -117,6 +126,14 @@ and enable Atuin sync by logging in with your password and encryption key
 ```sh
 chezmoi apply \
   && atuin login --username $USER
+```
+
+### Reboot
+
+Restart the machine
+
+```
+sudo reboot
 ```
 
 ## License
