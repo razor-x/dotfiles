@@ -96,6 +96,19 @@ if status is-interactive
         mise activate fish | source
     end
 
+    # TODO: Port more abbr and functions.
+    # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/archlinux/archlinux.plugin.zsh
+    if type --query aura
+        abbr pacman aura
+        abbr pacin aura -S
+        abbr pacmir aura -Syy
+        abbr pacins aura -U
+        abbr pacupg aura -Syu
+        abbr paclean aura -Sc
+        abbr aurin aura -A
+        abbr aurupg aura -Au
+    end
+
     # Install Atuin shell plugin.
     if type --query atuin
         atuin init fish --disable-up-arrow --disable-ctrl-r | source
