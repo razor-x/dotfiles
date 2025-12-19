@@ -59,6 +59,9 @@ if status is-interactive
 
     abbr npr npm run
 
+    abbr gfup git fetch --no-tags upstream
+    abbr gfmk git fetch --no-tags makenew
+
     if set --query ACONFMGR_CONFIG
         abbr archrc cd "$ACONFMGR_CONFIG/.."
     end
