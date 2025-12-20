@@ -41,6 +41,8 @@ if status is-interactive
     abbr dif delta
 
     abbr gg gitui
+    abbr --erase gsd
+    alias gsd git_find_replace
     alias gs git_idempotent_switch
 
     # Colorize help text using bat.
