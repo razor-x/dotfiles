@@ -100,8 +100,8 @@ if status is-interactive
     # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/archlinux/archlinux.plugin.zsh
     if type --query aura
         abbr pacman aura
-        abbr pacin aura -S
-        abbr pacrem aura -Rns
+        alias pacin arch_package_fzf_install
+        alias pacrem arch_package_fzf_remove
         abbr pacmir aura -Syy
         abbr pacins aura -U
         abbr pacupg aura -Syu
