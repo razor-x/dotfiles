@@ -10,6 +10,7 @@
 {{- end -}}
 
 # hash: {{ sha256sum $hash }}
+# MANPATH: {{ env "MANPATH" }}
 
 if type --query mandb
     mandb --user-db

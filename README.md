@@ -19,8 +19,16 @@ man dotfiles
 
 ## Bootstrap new machine
 
+Initialize chezmoi
+
 ```sh
 chezmoi init --apply --source ~/config/dotfiles razor-x
+```
+
+Restart the machine
+
+```
+sudo reboot
 ```
 
 ### Add public key to GitHub
@@ -117,8 +125,7 @@ Set the Atuin sync address
 $ set --export ATUIN_SYNC_ADDRESS https://atuin.example.com
 ```
 
-Then load it into the environment
-and enable Atuin sync by logging in with your password and encryption key
+Enable Atuin sync by logging in with your password and encryption key
 
 ```sh
 chezmoi apply \
