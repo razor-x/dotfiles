@@ -1,5 +1,6 @@
 function caddy_file_server \
     --argument-names port \
+    --wraps 'caddy file-server --listen' \
     --description 'Start a local Caddy file server'
 
     set --query port[1]
