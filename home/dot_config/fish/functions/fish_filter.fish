@@ -12,5 +12,5 @@ function fish_filter \
         set pipe "| $cmd "
     end
     fish_commandline_append $pipe
-    commandline -f end-of-line
+    commandline --function end-of-line
 end

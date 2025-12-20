@@ -2,10 +2,10 @@
 function yazi_change_cwd \
     --description 'Change the current working directory when exiting Yazi'
 
-    set tmp (mktemp -t 'yazi-cwd.XXXXXX')
+    set tmp (mktemp --tmpdir 'yazi-cwd.XXXXXX')
     yazi $argv --cwd-file="$tmp"
-    if read -z cwd <"$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+    if read --null cwd <"$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
         builtin cd -- "$cwd"
     end
-    rm -f -- "$tmp"
+    rm --force -- "$tmp"
 end

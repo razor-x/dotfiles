@@ -5,11 +5,14 @@ function fish_paginate \
     or return 1
 
     # Use delta for ripgrep with --json.
-    if string match -rq '^\s*rg\b' (commandline -j); and command -q delta
+    if string match -rq '^\s*rg\b' (commandline -j);
+        and command -q delta
+
         set cmd delta
 
         if not string match -rq -- '--json\b' (commandline -j)
-          commandline -j (commandline -j | string replace -r '^\s*rg\b' 'rg --json')
+          commandline -j (commandline -j \
+              | string replace '^\s*rg\b' 'rg --json')
         end
     end
 

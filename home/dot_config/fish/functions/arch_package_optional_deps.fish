@@ -1,7 +1,7 @@
 function arch_package_optional_deps \
     --description 'Show all missing optional dependencies'
 
-    pacman -Qi | awk '
+    pacman --query --info | awk '
       /^Name/ {pkg = $3}
       /^Optional Deps/ {in_opt = 1; found = 0; next}
       in_opt {
