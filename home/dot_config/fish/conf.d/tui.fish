@@ -101,6 +101,7 @@ if status is-interactive
     if type --query aura
         abbr pacman aura
         abbr pacin aura -S
+        abbr pacrem aura -Rns
         abbr pacmir aura -Syy
         abbr pacins aura -U
         abbr pacupg aura -Syu
