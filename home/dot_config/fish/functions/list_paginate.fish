@@ -3,5 +3,5 @@ function list_paginate \
 
     set cmd $PAGER
     or return 1
-    eza -la --color=always $argv | $cmd
+    eza --long --all --color=always $argv | $cmd
 end

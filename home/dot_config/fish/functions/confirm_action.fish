@@ -1,4 +1,5 @@
-function confirm_action -a message default_action \
+function confirm_action \
+    --argument-names message default_action \
     --description 'Prompt user for confirmation'
 
     if test "$default_action" = y
@@ -9,7 +10,7 @@ function confirm_action -a message default_action \
         set default_result 1
     end
 
-    read -P "$message $prompt " -n 1 confirm
+    read --prompt-str "$message $prompt " --nchars 1 confirm
     echo
 
     switch $confirm

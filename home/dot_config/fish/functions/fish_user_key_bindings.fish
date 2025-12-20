@@ -14,7 +14,7 @@ function fish_user_key_bindings \
         | grep --invert-match 'ctrl-space' \
         # Keep escape (ctrl-[) which toggles normal and insert mode.
         | grep --invert-match 'ctrl-\[' \
-        | string replace -r '^bind\s+(.*?)((ctrl|alt|shift)-\S+)\s.*' 'bind --erase $1$2' \
+        | string replace --regex '^bind\s+(.*?)((ctrl|alt|shift)-\S+)\s.*' 'bind --erase $1$2' \
         | source
 
     # Erase arrow key bindings.
@@ -71,7 +71,7 @@ function fish_user_key_bindings \
     bind ctrl-enter fish_clipboard_paste
     bind --mode insert ctrl-c clear-commandline repaint-mode
     bind --mode insert ctrl-v fish_clipboard_paste
-    bind --mode insert ctrl-comma 'commandline -i "(fish_clipboard_paste)"'
+    bind --mode insert ctrl-comma 'commandline --insert "(fish_clipboard_paste)"'
     bind --mode insert ctrl-. fish_clipboard_pipe
 
     # Clear scrollback.
@@ -104,6 +104,6 @@ function fish_user_key_bindings \
     # TODO: See if ctrl-space will work on Sway as expected.
     # https://github.com/razor-x/dotfiles/issues/2
     bind --preset --mode insert ctrl-space \
-        | string replace -r 'ctrl-space' 'ctrl-shift-space' \
+        | string replace --regex 'ctrl-space' 'ctrl-shift-space' \
         | source
 end

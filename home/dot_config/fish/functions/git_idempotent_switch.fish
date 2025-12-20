@@ -3,5 +3,5 @@ function git_idempotent_switch \
     --description 'Switch to a Git branch, creating it first if needed'
 
     git switch $branch 2>/dev/null
-    or git switch -c $branch
+    or git switch --create $branch
 end

@@ -2,7 +2,7 @@ function caddy_file_server \
     --argument-names port \
     --description 'Start a local Caddy file server'
 
-    set -q port[1]
+    set --query port[1]
     or set port 8080
 
     echo ''

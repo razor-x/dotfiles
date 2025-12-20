@@ -9,7 +9,7 @@ function dotfiles_watch_and_apply \
     # to exit the function if the first does not.
     while sleep 2
         chezmoi apply --init
-        fd . $src -t file | entr -d chezmoi apply --init
+        fd . $src --type file | entr -d chezmoi apply --init
         echo "File added to $src..."
     end
 end

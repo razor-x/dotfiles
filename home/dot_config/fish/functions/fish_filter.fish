@@ -8,7 +8,7 @@ function fish_filter \
     end
 
     set pipe " | $cmd"
-    if string match -rq -- ' \n\.$' "$(commandline -j; echo .)"
+    if string match --regex --quiet -- ' \n\.$' "$(commandline --current-job; echo .)"
         set pipe "| $cmd "
     end
     fish_commandline_append $pipe

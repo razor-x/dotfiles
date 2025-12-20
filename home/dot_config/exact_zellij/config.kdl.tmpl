@@ -10,7 +10,7 @@ theme "{{ template "theme" (merge (dict "app" "zellij") .) }}"
 show_startup_tips true
 
 // Treat git commit as nvim so Ctrl keybinds are passed to nvim.
-post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | grep -qE '(git commit|fzf)' && echo nvim || echo \"$RESURRECT_COMMAND\""
+post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | grep --quiet --extended-regexp '(git commit|fzf)' && echo nvim || echo \"$RESURRECT_COMMAND\""
 
 // Define and Load plugins.
 plugins {
