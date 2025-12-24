@@ -57,9 +57,11 @@ if status is-interactive
     abbr rbrepl pry
 
     abbr jsrepl node
-    abbr fmtjs prettier -w --single-quote --jsx-single-quote --no-semi
+    abbr fmtjs prettier --write --single-quote --jsx-single-quote --no-semi
 
     abbr npr npm run
+
+    abbr md glow --tui
 
     abbr gfup git fetch --no-tags upstream
     abbr gfmk git fetch --no-tags makenew
