@@ -3,6 +3,7 @@
 # hash: {{ include (joinPath .chezmoi.sourceDir "dot_config" "exact_yazi" "_package.toml") | sha256sum }}
 
 if type --query ya; and type --query yazi
+    rm -rf "$XDG_CONFIG_HOME/yazi/plugins"
     ya pkg install
 else
     echo 'Cannot install Yazi packages: yazi or ya not installed.'
