@@ -8,7 +8,7 @@ else
 end
 
 if type --query kitten
-    set kitten_config_path "$HOME/.config/kitty"
+    set kitten_config_path "$XDG_CONFIG_HOME/.config/kitty"
     mkdir -p $kitten_config_path
     kitten themes --dump '{{ template "theme" (merge (dict "app" "kitty") .) }}' \
         > $kitten_config_path/current-theme.conf
