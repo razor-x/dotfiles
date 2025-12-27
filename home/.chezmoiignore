@@ -4,7 +4,7 @@
 {{ range (list "completions" "conf.d" "functions" "themes") -}}
 .config/fish/{{ . }}/*.fish
 {{ end -}}
-{{ range (list "atuin" "batman" "batpipe" "mise" "zoxide") -}}
+{{ range (list "atuin" "batpipe" "mise" "zoxide") -}}
 !.config/fish/conf.d/{{ . }}.fish
 {{ end -}}
 {{ range (list "br") -}}
