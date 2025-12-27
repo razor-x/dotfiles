@@ -6,7 +6,8 @@ function autoload_private_keys --on-variable fish_autoload_private_keys \
     end
 
     if ssh-add -l &>/dev/null;
-        and gpg-connect-agent 'keyinfo --list' /bye 2>/dev/null | grep --quiet '1 P'
+        and gpg-connect-agent 'keyinfo --list' /bye 2>/dev/null \
+            | string match --regex --quiet '1 P'
         return
     end
 
