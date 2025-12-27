@@ -1,0 +1,6 @@
+all environment.d
+git config
+gitui keybinds
+tui.fish
+
+https://github.com/sharkdp/bat#integration-with-other-tools
