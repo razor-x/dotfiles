@@ -1,5 +1,13 @@
 ---
-# Zellij Plugins
+# GitUI
+
+.config/gitui/key_bindings.ron:
+  type: file
+  url: https://raw.githubusercontent.com/gitui-org/gitui/refs/heads/master/vim_style_key_config.ron
+  checksum:
+    sha256: "b982fd09208e953756dc4f3b23b1ac82f0c4c0e3c7a33d4b231a3c0c04435f56"
+
+# Zellij
 
 .config/zellij/plugins/vim-zellij-navigator.wasm:
   type: file
@@ -7,7 +15,7 @@
   checksum:
     sha256: "77e5a2f62f7c1a698caf2574493d5d75587e0fd877cfba34c48caf731c24c58d"
 
-# Kitty Plugins
+# Kitty
 
 # UPSTREAM: The smart-splits.nvim python kittens must be placed in the kitty config root.
 # https://github.com/mrjones2014/smart-splits.nvim/blob/e892a5da963813119d053af5b2260e3cd9d9f037/lua/smart-splits/mux/kitty.lua#L112
@@ -33,7 +41,7 @@
   checksum:
     sha256: "7166083be39a80abe26bec5ca47f515ffc6b4fec36163ef8012485eaefa12bac"
 
-# Catppuccin Theme
+# Catppuccin
 
 .local/share/theme/catppuccin/atuin:
   type: archive
