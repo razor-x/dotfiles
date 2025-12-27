@@ -11,9 +11,6 @@
 
 # hash: {{ sha256sum $hash }}
 
-# Clear all universal fish variables.
-rm -f "$XDG_CONFIG_HOME/fish/fish_variables"
-
 if type --query fish_config
     fish_config theme choose '{{ template "theme" (merge (dict "app" "fish") .) }}'
 else
