@@ -2,7 +2,7 @@ function fish_user_key_bindings \
     --description 'Fish automatically executes this function after setting all preset bindings'
 
     # Remove escape delay since alt bindings are not used.
-    set --global fish_escape_delay_ms 100
+    set --global fish_escape_delay_ms 10
 
     # Use hybrid Emacs-Vi bindings.
     fish_hybrid_key_bindings
@@ -31,9 +31,6 @@ function fish_user_key_bindings \
         --history='' \
         --processes='ctrl-\\' \
         --variables='ctrl-x'
-
-    # Set fifc fifc_binding.
-    set --global fifc_keybinding 'ctrl-tab'
 
     # Edit command buffer in editor.
     bind --mode default vv edit_command_buffer

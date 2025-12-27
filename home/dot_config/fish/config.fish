@@ -1,6 +1,3 @@
-# Clear Fish greeting.
-set --global fish_greeting
-
 if status is-interactive
     # Configure pinentry to use the correct TTY.
     # This must be done separately for each shell.
