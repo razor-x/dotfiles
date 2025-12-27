@@ -5,7 +5,7 @@ set --global tide_kitty_icon '󰄛'
 function _tide_item_kitty \
     --description "Tide prompt item that shows if running inside kitty terminal"
 
-    if test "$TERM" = xterm-kitty
+    if test "$TERM" != xterm-kitty
         return
     end
 
