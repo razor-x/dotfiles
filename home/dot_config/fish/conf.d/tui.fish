@@ -73,6 +73,7 @@ if status is-interactive
     abbr dotfiles cd "(chezmoi source-path)"
     abbr dotupg chezmoi update --apply --init
     alias dotwatch 'watchexec --watch (chezmoi source-path) -- chezmoi apply --init'
+    alias dotreset 'chezmoi state delete-bucket --bucket=scriptState && chezmoi state delete-bucket --bucket=entryState'
 
     # Use batpipe as the less preprocessor.
     if type --query batpipe
