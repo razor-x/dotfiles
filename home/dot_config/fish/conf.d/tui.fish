@@ -46,6 +46,7 @@ if status is-interactive
     alias gs git_idempotent_switch
 
     # Colorize help text using bat.
+    # https://github.com/sharkdp/bat#highlighting---help-messages
     abbr --add --position anywhere -- --help '--help | bat -plhelp'
 
     abbr rmf rm -rf
