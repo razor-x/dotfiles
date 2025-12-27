@@ -12,5 +12,5 @@ function configure_tide_prompt \
       --icons='Many icons' \
       --transient=No
 
-    set --global tide_left_prompt_items os kitty pwd git newline character
+    set --universal tide_left_prompt_items os kitty pwd git newline character
 end
