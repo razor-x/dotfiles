@@ -1,6 +1,5 @@
 all environment.d
 git config
-gitui keybinds
 tui.fish
 broot
 
