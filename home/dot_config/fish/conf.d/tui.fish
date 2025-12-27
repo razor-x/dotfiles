@@ -79,21 +79,6 @@ if status is-interactive
         and chezmoi state delete-bucket --bucket=entryState;
         and chezmoi apply --init'
 
-    # Use batpipe as the less preprocessor.
-    if type --query batpipe
-        eval (batpipe)
-    end
-
-    # User batman as the MANPAGER.
-    if type --query batman
-        batman --export-env | source
-    end
-
-    # Use zoxide.
-    if type --query zoxide
-        zoxide init --cmd j fish | source
-    end
-
     alias now='date +"%Y-%m-%dT%H:%M:%S.%3N%:z"'
     alias nowutc='date --utc +"%Y-%m-%dT%H:%M:%S.%3N%:z"'
     alias nowz='date --utc +"%Y-%m-%dT%H:%M:%S.%3NZ"'
@@ -101,10 +86,6 @@ if status is-interactive
 
     alias theme_kitty='kitten themes --reload-in=all'
     alias theme_fish='fish_config theme choose'
-
-    if type --query mise
-        mise activate fish | source
-    end
 
     # TODO: Port more abbr and functions.
     # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/archlinux/archlinux.plugin.zsh
@@ -122,16 +103,6 @@ if status is-interactive
     end
 
     alias srv caddy_file_server
-
-    # Install Atuin shell plugin.
-    if type --query atuin
-        atuin init fish --disable-up-arrow --disable-ctrl-r | source
-    end
-
-    # Install broot shell function.
-    if type --query broot
-        broot --print-shell-function fish | source
-    end
 
     # Set fifc editor.
     set --export fifc_editor $VISUAL
