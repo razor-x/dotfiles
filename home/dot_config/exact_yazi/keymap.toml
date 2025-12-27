@@ -6,7 +6,7 @@ desc = "Edit file in visual editor"
 [[mgr.prepend_keymap]]
 on   = [ "E" ]
 run  = "shell '$GUI_EDITOR \"$@\"'"
-desc = "Edit file in visual editor"
+desc = "Edit file in GUI editor"
 
 # https://github.com/ndtoan96/ouch.yazi#compression
 [[mgr.prepend_keymap]]
