@@ -25,8 +25,8 @@ if status is-interactive
     abbr x ouch d
 
     # view
-    abbr v bat -p --paging=always
-    abbr vv prettybat -p --paging=always
+    abbr v bat
+    abbr vv prettybat
 
     # Cat
     abbr c bat -pP
