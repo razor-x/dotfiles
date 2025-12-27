@@ -71,7 +71,8 @@ if status is-interactive
     end
 
     abbr dotfiles cd "(chezmoi source-path)"
-    alias dotwatch dotfiles_watch_and_apply
+    abbr dotupg chezmoi update --apply --init
+    alias dotwatch watchexec --watch (chezmoi source-path) -- chezmoi apply --init
 
     # Use batpipe as the less preprocessor.
     if type --query batpipe
