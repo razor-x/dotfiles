@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+
+# {{ output "broot" "--version" }}
+
+if type --query broot
+    broot --set-install-state installed
+else
+    echo 'Cannot setup broot: broot not found.'
+    return 1
+end

@@ -128,6 +128,11 @@ if status is-interactive
         atuin init fish --disable-up-arrow --disable-ctrl-r | source
     end
 
+    # Install broot shell function.
+    if type --query broot
+        broot --print-shell-function fish | source
+    end
+
     # Set fifc editor.
     set --export fifc_editor $VISUAL
 end
