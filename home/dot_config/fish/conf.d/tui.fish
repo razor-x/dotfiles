@@ -72,8 +72,8 @@ if status is-interactive
     end
 
     abbr dotfiles cd "(chezmoi source-path)"
-    abbr dotap chezmoi update --apply --init
-    abbr dotup chezmoi update --apply --init
+    abbr dotapp chezmoi apply --init
+    abbr dotupg chezmoi update --apply --init
     alias dotwatch 'watchexec --watch (chezmoi source-path) -- chezmoi apply --init'
     alias dotreset 'chezmoi state delete-bucket --bucket=scriptState;
         and chezmoi state delete-bucket --bucket=entryState;
