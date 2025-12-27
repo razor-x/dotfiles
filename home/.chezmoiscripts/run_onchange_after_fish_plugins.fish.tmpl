@@ -11,6 +11,9 @@
 
 # hash: {{ sha256sum $hash }}
 
+# Clear all universal fish variables.
+rm -f "$XDG_CONFIG_HOME/fish/fish_variables"
+
 if type --query fisher
     fisher update
 else
