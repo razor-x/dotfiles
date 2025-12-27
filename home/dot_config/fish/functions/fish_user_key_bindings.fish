@@ -71,8 +71,9 @@ function fish_user_key_bindings \
     bind ctrl-enter fish_clipboard_paste
     bind --mode insert ctrl-c clear-commandline repaint-mode
     bind --mode insert ctrl-v fish_clipboard_paste
-    bind --mode insert ctrl-comma 'commandline --insert "(fish_clipboard_paste)"'
-    bind --mode insert ctrl-. fish_clipboard_pipe
+    bind --mode insert ctrl-shift-v 'commandline --insert "(fish_clipboard_paste)"'
+    bind --mode insert ctrl-comma fish_pipe_from_clipboard
+    bind --mode insert ctrl-. fish_pipe_to_clipboard
 
     # Clear scrollback.
     bind --mode insert shift-backspace scrollback-push

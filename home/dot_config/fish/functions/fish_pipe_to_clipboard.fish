@@ -1,5 +1,5 @@
-function fish_clipboard_pipe \
-    --description 'Pipe the current command to the system clipboard'
+function fish_pipe_to_clipboard \
+    --description 'Pipe the current command into the system clipboard'
 
     set cmd fish_clipboard_copy
 
