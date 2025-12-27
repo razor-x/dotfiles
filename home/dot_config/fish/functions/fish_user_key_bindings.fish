@@ -64,16 +64,16 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-z undo
     bind --mode insert ctrl-shift-z redo
     bind --mode insert ctrl-t transpose-chars
-    bind --mode insert ctrl-q fish_paginate
-    bind --mode insert ctrl-g fish_filter
+    bind --mode insert ctrl-q pipe_to_pager
+    bind --mode insert ctrl-g pipe_to_filter
 
     # Access clipboard.
     bind ctrl-enter fish_clipboard_paste
     bind --mode insert ctrl-c clear-commandline repaint-mode
     bind --mode insert ctrl-v fish_clipboard_paste
     bind --mode insert ctrl-shift-v 'commandline --insert "(fish_clipboard_paste)"'
-    bind --mode insert ctrl-comma fish_pipe_from_clipboard
-    bind --mode insert ctrl-. fish_pipe_to_clipboard
+    bind --mode insert ctrl-comma pipe_from_clipboard
+    bind --mode insert ctrl-. pipe_to_clipboard
 
     # Clear scrollback.
     bind --mode insert shift-backspace scrollback-push

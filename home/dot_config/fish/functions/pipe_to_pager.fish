@@ -1,4 +1,4 @@
-function fish_paginate \
+function pipe_to_pager \
     --description 'Paginate the current command'
 
     set cmd $PAGER

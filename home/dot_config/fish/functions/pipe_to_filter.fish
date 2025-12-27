@@ -1,4 +1,4 @@
-function fish_filter \
+function pipe_to_filter \
     --description 'Filter the current command'
 
     if type --query rg
