@@ -8,7 +8,8 @@ function zellij_scrollback \
         return 1
     end
 
-    set zellij_scrollback "$HOME/scrollback.$(now).txt"
+    set now (date +"%Y-%m-%dT%H:%M:%S.%3N%:z")
+    set zellij_scrollback "$HOME/scrollback.$now.txt"
     mv $zellij_dump $zellij_scrollback
 
     # Set the scrollback pager to use less -r to render Nerd Font symbols.

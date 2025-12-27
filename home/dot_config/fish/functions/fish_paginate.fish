@@ -17,7 +17,7 @@ function fish_paginate \
     end
 
     set pipe " &| $cmd"
-    if string match --regex --quiet -- ' \n\.$' "$(commandline --current-job; echo .)"
+    if string match --regex --quiet -- ' \n\.$' "(commandline --current-job; echo .)"
         set pipe "&| $cmd"
     end
     fish_commandline_append $pipe
