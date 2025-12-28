@@ -103,6 +103,8 @@ if status is-interactive
         abbr mirrorupg systemctl restart reflector.service
     end
 
+    abbr unfaillock faillock --user $USER --reset
+
     alias srv caddy_file_server
 
     # Set fifc editor.
