@@ -94,6 +94,7 @@ if status is-interactive
         abbr pacman aura
         alias pacin arch_package_fzf_install
         alias pacrem arch_package_fzf_remove
+        alias pacdelta 'DIFFPROG=delta pacdiff --sudo'
         abbr pacmir aura -Syy
         abbr pacins aura -U
         abbr pacupg aura -Syu
