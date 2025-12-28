@@ -52,7 +52,7 @@ function fish_user_key_bindings \
 
     # Delete from prompt.
     bind --mode insert ctrl-b backward-delete-char
-    bind --mode insert ctrl-w backward-kill-word
+    bind --mode insert ctrl-w backward-kill-word-or-navi
     bind --mode insert ctrl-shift-w backward-kill-token
     bind --mode insert ctrl-backspace backward-kill-path-component
     bind --mode insert ctrl-delete kill-line

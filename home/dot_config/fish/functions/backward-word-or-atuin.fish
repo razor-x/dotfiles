@@ -1,5 +1,5 @@
 function backward-word-or-atuin \
-    --description 'Move the cursor back one work; if empty, open Atuin'
+    --description 'Move one word to the left; if empty, open Atuin'
 
     if string length --quiet -- (commandline)
         commandline --function backward-word
