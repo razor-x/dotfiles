@@ -5,3 +5,4 @@ broot
 https://github.com/sharkdp/bat#integration-with-other-tools
 man dotfiles
 devel
+manage navi repos with chezmoi externals
