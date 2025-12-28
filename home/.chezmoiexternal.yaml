@@ -74,6 +74,12 @@
   checksum:
     sha256: "7166083be39a80abe26bec5ca47f515ffc6b4fec36163ef8012485eaefa12bac"
 
+# navi
+
+.local/share/navi/cheats/denisidoro__cheats:
+  type: git-repo
+  url: https://github.com/denisidoro/cheats.git
+
 # Zellij
 
 .config/zellij/plugins/vim-zellij-navigator.wasm:
