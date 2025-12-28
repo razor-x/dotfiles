@@ -4,5 +4,4 @@ tui.fish
 broot
 https://github.com/sharkdp/bat#integration-with-other-tools
 man dotfiles
-arch_package_optional_deps
 devel
