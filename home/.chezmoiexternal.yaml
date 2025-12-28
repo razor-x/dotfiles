@@ -31,6 +31,14 @@
   checksum:
     sha256: "0e928438f3a967a5bc47aebcdf9899de1ce59ad4190cf291691364784361744d"
 
+#  cheat.sh
+.local/bin/cht.sh:
+  type: file
+  executable: true
+  url: https://cht.sh/:cht.sh
+  checksum:
+    sha256: "d3135e42b800ff2e7aac44d4dfe500f0f4e2c7eb00a1c2191b0dc8b28431f155"
+
 # GitUI
 
 .config/gitui/key_bindings.ron:
