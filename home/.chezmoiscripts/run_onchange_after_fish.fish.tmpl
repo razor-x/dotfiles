@@ -7,6 +7,11 @@
   {{- range (glob (printf "%s/*.fish" $dir)) -}}
     {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
   {{- end -}}
+
+  {{- $dir := printf "%s/.local/share/plugin/fish/%s" $.chezmoi.homeDir . -}}
+  {{- range (glob (printf "%s/*.fish" $dir)) -}}
+    {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
+  {{- end -}}
 {{- end -}}
 
 # hash: {{ sha256sum $hash }}
