@@ -3,7 +3,7 @@
 {{ $hash := "" }}
 {{- range untilStep 1 9 1 -}}
   {{- $section := . -}}
-  {{- $dir := printf "%s/dot_local/share/man/man%s" $.chezmoi.sourceDir $section -}}
+  {{- $dir := printf "%s/.local/share/man/man%s" $.chezmoi.homeDir $section -}}
   {{- range (glob (printf "%s/*.%s" $dir $section)) -}}
     {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
   {{- end -}}
