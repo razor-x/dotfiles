@@ -31,7 +31,8 @@
   checksum:
     sha256: "0e928438f3a967a5bc47aebcdf9899de1ce59ad4190cf291691364784361744d"
 
-#  cheat.sh
+# cheat.sh
+
 .local/bin/cht.sh:
   type: file
   executable: true
