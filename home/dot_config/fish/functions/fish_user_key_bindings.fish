@@ -79,8 +79,9 @@ function fish_user_key_bindings \
     # Get info.
     bind --mode insert ctrl-/ __fish_man_page
 
-    # Exit.
+    # Control.
     bind --mode insert ctrl-d exit
+    bind --mode insert ctrl-enter execute-in-split
 
     # Vi default (normal) mode bindings.
     bind --mode default U redo
@@ -103,7 +104,4 @@ function fish_user_key_bindings \
     bind --preset --mode insert ctrl-space \
         | string replace --regex 'ctrl-space' 'ctrl-shift-space' \
         | source
-
-    # TODO: Find new bind.
-    # bind --mode insert ctrl-enter fish_clipboard_paste
 end
