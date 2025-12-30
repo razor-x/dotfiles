@@ -66,7 +66,6 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-c clear-commandline repaint-mode
 
     # Access clipboard.
-    bind --mode insert ctrl-enter fish_clipboard_paste
     bind --mode insert ctrl-v fish_clipboard_paste
     bind --mode insert ctrl-shift-v 'commandline --insert "(fish_clipboard_paste)"'
     bind --mode insert ctrl-y 'commandline | string collect | fish_clipboard_copy'
@@ -104,4 +103,7 @@ function fish_user_key_bindings \
     bind --preset --mode insert ctrl-space \
         | string replace --regex 'ctrl-space' 'ctrl-shift-space' \
         | source
+
+    # TODO: Find new bind.
+    # bind --mode insert ctrl-enter fish_clipboard_paste
 end
