@@ -1,6 +1,11 @@
 function configure_tide_prompt \
     --description 'Set and persist tide prompt config'
 
+    # Configure _tide_item_kitty.
+    set --universal tide_kitty_color 'FFD1DC'
+    set --universal tide_kitty_bg_color 'normal'
+    set --universal tide_kitty_icon '󰄛'
+
     tide configure \
       --auto \
       --style=Lean \
