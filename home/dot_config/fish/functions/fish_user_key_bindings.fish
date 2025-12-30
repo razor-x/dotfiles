@@ -63,10 +63,11 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-t transpose-chars
     bind --mode insert ctrl-q pipe_to_pager
     bind --mode insert ctrl-g pipe_to_filter
+    bind --mode insert ctrl-c clear-commandline repaint-mode
 
     # Access clipboard.
     bind ctrl-enter fish_clipboard_paste
-    bind --mode insert ctrl-c clear-commandline repaint-mode
+    bind --mode insert ctrl-y 'commandline | string collect | fish_clipboard_copy'
     bind --mode insert ctrl-v fish_clipboard_paste
     bind --mode insert ctrl-shift-v 'commandline --insert "(fish_clipboard_paste)"'
     bind --mode insert ctrl-comma pipe_from_clipboard
@@ -77,8 +78,7 @@ function fish_user_key_bindings \
     bind --mode insert shift-delete clear-screen
 
     # Get info.
-    bind --mode insert ctrl-/ __fish_whatis_current_token
-    bind --mode insert ctrl-y __fish_man_page
+    bind --mode insert ctrl-/ __fish_man_page
 
     # Exit.
     bind --mode insert ctrl-d exit
