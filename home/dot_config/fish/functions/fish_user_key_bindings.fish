@@ -66,10 +66,10 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-c clear-commandline repaint-mode
 
     # Access clipboard.
-    bind ctrl-enter fish_clipboard_paste
-    bind --mode insert ctrl-y 'commandline | string collect | fish_clipboard_copy'
+    bind --mode insert ctrl-enter fish_clipboard_paste
     bind --mode insert ctrl-v fish_clipboard_paste
     bind --mode insert ctrl-shift-v 'commandline --insert "(fish_clipboard_paste)"'
+    bind --mode insert ctrl-y 'commandline | string collect | fish_clipboard_copy'
     bind --mode insert ctrl-comma pipe_from_clipboard
     bind --mode insert ctrl-. pipe_to_clipboard
 
