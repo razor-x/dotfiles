@@ -132,9 +132,20 @@ chezmoi apply \
   && atuin login --username $USER
 ```
 
+### Add a GitHub packages token
+
+Create and copy a
+[new personal access token (classic)](https://github.com/settings/tokens/new)
+with `read:packages` scope and name `<Hostname> Packages`
+
+```sh
+set --export GITHUB_PACKAGES_TOKEN (fish_clipboard_paste) \
+  && chezmoi apply
+```
+
 ### Reboot
 
-Restart the machine
+Reboot the machine
 
 ```
 sudo reboot
