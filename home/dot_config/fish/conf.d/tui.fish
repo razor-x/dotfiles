@@ -71,14 +71,7 @@ if status is-interactive
         abbr archrc cd "$ACONFMGR_CONFIG/.."
     end
 
-    abbr dotfiles cd "(chezmoi source-path)"
-    abbr dotapp chezmoi apply --init
-    abbr dotupg chezmoi update --apply --init
-    alias dotwatch 'watchexec --watch (chezmoi source-path) -- chezmoi apply --init'
-    alias dotreset 'chezmoi state delete-bucket --bucket=scriptState;
-        and chezmoi state delete-bucket --bucket=entryState;
-        and rm -rf ~/.config/fish
-        and chezmoi apply --init'
+    abbr dotfiles cd (chezmoi source-path)
 
     alias now='date +"%Y-%m-%dT%H:%M:%S.%3N%:z"'
     alias nowutc='date --utc +"%Y-%m-%dT%H:%M:%S.%3N%:z"'
