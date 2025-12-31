@@ -1,3 +1,5 @@
+default: watch
+
 apply:
   chezmoi apply --init
 
@@ -11,4 +13,4 @@ reset:
   chezmoi apply --init
 
 watch:
-  watchexec --watch (chezmoi source-path) -- chezmoi apply --init
+  watchexec --watch $(chezmoi source-path) -- chezmoi apply --init
