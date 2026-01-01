@@ -1,16 +1,29 @@
 #!/usr/bin/env fish
 
-{{ $hash := "" }}
+{{ $hash := include (joinPath .chezmoi.sourceDir ".." "README.md") | sha256sum -}}
 {{- range untilStep 1 9 1 -}}
   {{- $section := . -}}
-  {{- $dir := printf "%s/.local/share/man/man%s" $.chezmoi.homeDir $section -}}
-  {{- range (glob (printf "%s/*.%s" $dir $section)) -}}
+  {{- $dir := joinPath $.chezmoi.sourceDir "dot_local" "share" "man" (printf "man%d" $section) -}}
+  {{- range (glob (printf "%s/*.%d" $dir $section)) -}}
     {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
   {{- end -}}
 {{- end -}}
 
 # hash: {{ sha256sum $hash }}
 # MANPATH: {{ env "MANPATH" }}
+
+# Generate dotfiles.7 content from README.md
+cat $HOME/config/dotfiles/README.md \
+    | sd --flags s '.*<!-- begin man page -->\n?(.*?)\n?<!-- end man page -->.*' '$1' \
+    | sd '###' '#' \
+    | pandoc --from markdown --to man \
+    | cat {{ .chezmoi.sourceDir }}/dot_local/share/man/man7/dotfiles.7 - \
+    > $XDG_DATA_HOME/man/man7/dotfiles.7
+
+cat $HOME/config/dotfiles/README.md \
+    | string collect \
+    | string split --fields 1 '<!-- begin man page -->' \
+    | cat
 
 if type --query mandb
     mandb --user-db
