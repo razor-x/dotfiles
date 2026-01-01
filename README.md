@@ -27,6 +27,10 @@ dotupg
 
 ### Change to the source directory
 
+> [!IMPORTANT]
+> When removing source files that are not under an `exact_` path,
+> add the removed files to `.chezmoiremove`.
+
 ```sh
 dotfiles
 ```
