@@ -71,7 +71,8 @@ if status is-interactive
         abbr archrc cd "$ACONFMGR_CONFIG/.."
     end
 
-    abbr dotfiles cd (chezmoi source-path)
+    abbr dotfiles cd "(chezmoi source-path)"
+    alias dotupg 'chezmoi update --apply --init'
 
     alias now='date +"%Y-%m-%dT%H:%M:%S.%3N%:z"'
     alias nowutc='date --utc +"%Y-%m-%dT%H:%M:%S.%3N%:z"'

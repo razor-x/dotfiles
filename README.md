@@ -13,8 +13,40 @@ by my [Arch Linux Configuration][archrc].
 
 ## RTFM
 
-```
+```sh
 man dotfiles
+```
+
+## Daily operations
+
+### Update to the latest version
+
+```sh
+dotupg
+```
+
+### Change to the source directory
+
+```sh
+dotfiles
+```
+
+#### Apply changes
+
+```sh
+just apply
+```
+
+#### Watch for and apply changes
+
+```sh
+just watch
+```
+
+#### Reset state and reapply
+
+```sh
+just reset
 ```
 
 ## Bootstrap new machine
@@ -27,7 +59,7 @@ chezmoi init --apply --source ~/config/dotfiles razor-x
 
 Restart the machine
 
-```
+```sh
 sudo reboot
 ```
 
@@ -147,7 +179,7 @@ set --export GITHUB_PACKAGES_TOKEN (fish_clipboard_paste) \
 
 Reboot the machine
 
-```
+```sh
 sudo reboot
 ```
 
