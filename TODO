@@ -1,5 +1,4 @@
 devel
-all environment.d
 
 https://github.com/sharkdp/bat#integration-with-other-tools
 git config
