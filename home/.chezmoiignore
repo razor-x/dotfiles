@@ -13,9 +13,6 @@
 .config/kitty/{{ . }}.conf
 {{ end -}}
 
-# Ignore dotfiles.7 man page which is generated from the README.
-.local/share/man/man7/dotfiles.7
-
 # UPSTREAM: Ignore nushell history file until the location respects XDG.
 # https://github.com/nushell/nushell/issues/10100
 .config/nushell/history.txt

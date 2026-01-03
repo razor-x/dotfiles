@@ -4,4 +4,6 @@ dotfiles \- personalized terminal and graphical user interface
 .SH SYNOPSIS
 This manual documents the environment, aliases, and tools
 configured in razor-x/dotfiles.
-.\" Content is authored in README.md and included here via home/.chezmoiscripts/run_onchange_after_man.fish.tmpl.
+{{ output "fish"
+  (joinPath .chezmoi.sourceDir ".chezmoiscripts" ".man_from_readme.fish")
+  (joinPath .chezmoi.sourceDir ".." "README.md") }}
