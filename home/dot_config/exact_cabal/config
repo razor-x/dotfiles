@@ -1,0 +1,7 @@
+# Configuring Cabal for dynamic linking.
+# https://wiki.archlinux.org/title/Haskell#Configuring_Cabal_for_dynamic_linking
+library-vanilla: False
+shared: True
+executable-dynamic: True
+program-default-options
+  ghc-options: -dynamic
