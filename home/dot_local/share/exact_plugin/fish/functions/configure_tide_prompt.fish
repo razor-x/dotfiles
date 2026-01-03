@@ -1,10 +1,9 @@
 function configure_tide_prompt \
     --description 'Set and persist tide prompt config'
 
-    # Configure _tide_item_kitty.
-    set --universal tide_kitty_color 'FFD1DC'
-    set --universal tide_kitty_bg_color 'normal'
-    set --universal tide_kitty_icon '󰄛'
+    # Configure _tide_item_term.
+    set --universal tide_term_color 'FFD1DC'
+    set --universal tide_term_bg_color 'normal'
 
     tide configure \
       --auto \
@@ -17,5 +16,6 @@ function configure_tide_prompt \
       --icons='Many icons' \
       --transient=No
 
-    set --universal tide_left_prompt_items os kitty pwd git newline character
+    set --universal tide_left_prompt_items \
+        os term pwd git newline character
 end
