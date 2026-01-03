@@ -68,7 +68,7 @@ just watch
 just reset
 ```
 
-## Bootstrap new machine
+## Bootstrap a new machine
 
 Initialize chezmoi
 
