@@ -1,12 +1,12 @@
-.TH BASH-EXEC 1 "December 2025" "bash-exec 1.0" "User Commands"
+.TH BASH-EXEC 1 "December 2025" "env-exec 1.0" "User Commands"
 .SH NAME
-bash-exec \- environment-aware application launcher
+env-exec \- environment-aware application launcher
 .SH SYNOPSIS
-.B bash-exec
+.B env-exec
 .I command
 .RI [ arguments... ]
 .SH DESCRIPTION
-.B bash-exec
+.B env-exec
 loads environment variables from
 .I ~/.config/environment.d/
 before executing a command. This allows applications to load updated
@@ -18,7 +18,7 @@ session started. The window manager itself typically inherits its environment
 from the display manager or systemd user session. Modifying
 .I ~/.config/environment.d/
 files does not affect already-running processes.
-.B bash-exec
+.B env-exec
 solves this by sourcing environment configuration immediately before launching
 each application.
 .PP
@@ -27,7 +27,7 @@ The wrapper uses
 to replace itself with the target application, ensuring no additional process
 remains in the tree and avoiding any performance overhead.
 .SS Performance and Caching
-.B bash-exec
+.B env-exec
 only reloads environment variables when their content has changed. This is
 determined by comparing an embedded hash value (generated and maintained by
 .BR chezmoi )
@@ -37,14 +37,14 @@ environment variable. If the hash matches, variable loading is skipped, making
 subsequent invocations extremely fast with negligible overhead.
 .PP
 This means
-.B bash-exec
+.B env-exec
 only has a meaningful effect when environment variables have been modified in
 .I ~/.config/environment.d/
 and the user session has not been restarted since the modification. After
 restarting the user session, it will already have the updated environment,
 making the wrapper redundant until the next modification.
 .SS When to Use
-.B bash-exec
+.B env-exec
 is particularly useful when working on dotfile configurations, testing new
 environment variables, or updating secrets such as API tokens. Without this
 wrapper, testing environment changes would require completely restarting the
@@ -67,7 +67,7 @@ shells that were themselves started from bash (such as
 started from an interactive bash prompt), already have the correct environment
 and do not need this wrapper.
 .SS Limitations
-.B bash-exec
+.B env-exec
 cannot help with systemd user services or dbus-activated applications, as
 these inherit their environment from systemd's user manager rather than from
 the window manager. Managing environment variables for systemd user services
@@ -77,28 +77,28 @@ is outside the scope of this tool.
 Sway keybind for terminal:
 .RS 4
 .nf
-bindsym $mod+Return exec bash-exec kitty
+bindsym $mod+Return exec env-exec kitty
 .fi
 .RE
 .PP
 Sway keybind for GUI editor:
 .RS 4
 .nf
-bindsym $mod+e exec bash-exec neovide
+bindsym $mod+e exec env-exec neovide
 .fi
 .RE
 .PP
 Application launcher:
 .RS 4
 .nf
-bindsym $mod+d exec bash-exec wofi --show=drun
+bindsym $mod+d exec env-exec wofi --show=drun
 .fi
 .RE
 .PP
 Command line usage:
 .RS 4
 .nf
-bash-exec firefox
+env-exec firefox
 .fi
 .RE
 .SH FILES
