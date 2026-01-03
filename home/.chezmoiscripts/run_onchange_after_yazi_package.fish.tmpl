@@ -2,8 +2,10 @@
 
 # hash: {{ include (joinPath .chezmoi.homeDir ".config" "yazi" "package.toml") | sha256sum }}
 
+set config_path "$XDG_CONFIG_HOME/yazi"
+
 if type --query ya; and type --query yazi
-    rm -rf "$XDG_CONFIG_HOME/yazi/plugins"
+    rm --recursive --force "$config_path/plugins" "$config_path/flavors"
     ya pkg install
 else
     echo 'Cannot install Yazi packages: yazi or ya not installed.'

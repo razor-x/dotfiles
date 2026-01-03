@@ -9,7 +9,7 @@ update:
 reset:
   chezmoi state delete-bucket --bucket=scriptState;
   chezmoi state delete-bucket --bucket=entryState;
-  rm -rf ~/.config/fish
+  rm --recursive --force ~/.config/fish
   chezmoi apply --init
 
 watch:
