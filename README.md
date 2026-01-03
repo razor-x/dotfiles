@@ -7,9 +7,10 @@ My user land configuration managed with [chezmoi].
 ## Requirements
 
 These dotfiles are designed to work on Arch Linux with the packages defined
-by my [Arch Linux Configuration][archrc].
+by my [Arch Linux Configuration][archrc] and [XDG user environment variables][pam_env.conf].
 
 [archrc]: https://github.com/razor-x/archrc
+[pam_env.conf]: https://github.com/razor-x/archrc/blob/main/config/files/etc/security/pam_env.conf
 
 ## RTFM
 
