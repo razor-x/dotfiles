@@ -26,10 +26,9 @@ TODO
 
 ### Tools
 
-#### bat (1)
-
-A cat clone with syntax highlighting and Git integration.
-https://github.com/sharkdp/bat
+bat (1)
+:    A cat clone with syntax highlighting and Git integration.
+     https://github.com/sharkdp/bat
 
 <!-- end man page -->
 
