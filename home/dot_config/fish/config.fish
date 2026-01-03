@@ -3,7 +3,9 @@ if status is-interactive
     # This must be done separately for each shell.
     # https://wiki.archlinux.org/title/GnuPG#Configure_pinentry_to_use_the_correct_TTY
     set --export GPG_TTY (tty)
-    gpg-connect-agent updatestartuptty /bye >/dev/null
+    if type --query gpg-connect-agent
+        gpg-connect-agent updatestartuptty /bye >/dev/null
+    end
 
     # Use simple fish prompt in Linux virtual console.
     if test "$TERM" = linux
@@ -19,7 +21,8 @@ if status is-interactive
     if set --query SSH_CONNECTION;
         and not set --query TMUX;
         and not set --query ZELLIJ;
-        and test "$TERM" != xterm-kitty
+        and test "$TERM" != xterm-kitty;
+        and type --query zellij
 
         zellij attach --create ssh
         zellij delete-session ssh
