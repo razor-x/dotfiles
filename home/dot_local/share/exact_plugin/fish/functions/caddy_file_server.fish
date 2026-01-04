@@ -1,15 +1,21 @@
 function caddy_file_server \
-    --argument-names port \
-    --wraps 'caddy file-server --listen' \
+    --wraps 'caddy file-server' \
     --description 'Start a local Caddy file server'
 
-    set --query port[1]
-    or set port 8080
+    argparse 'listen=' -- $argv
+    or return
+
+    if set --query _flag_listen
+        set --function port (string split ':' $_flag_listen)[-1]
+    else
+        set --function port 8080
+        set --function _flag_listen ":$port"
+    end
 
     echo ''
     echo "> http://localhost:$port"
     echo ''
 
-    caddy file-server --listen :8080
+    caddy file-server --listen $_flag_listen $argv
 end
 
