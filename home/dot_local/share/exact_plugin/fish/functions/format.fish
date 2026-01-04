@@ -11,11 +11,10 @@ function format \
     end
 
     if set --query _flag_extension
-        set --function type $_flag_extension
-
-        # Normalize the extension to start with a dot.
-        if not string match --quiet '.*' $type
-            set type .$type
+        if not string match --quiet '.*' $_flag_extension
+            set --function extension .$_flag_extension
+        else
+            set --function extension $_flag_extension
         end
 
         if not isatty stdin
@@ -32,7 +31,7 @@ function format \
             return 1
         end
 
-        set --function type (path extension $file)
+        set --function extension (path extension $file)
         set --function use_stdin false
     else
         echo 'usage: format FILE'
@@ -40,7 +39,7 @@ function format \
         return 1
     end
 
-    if test -z "$type"
+    if test -z "$extension"
         echo "format: cannot format files missing a file extension: $file"
         return 1
     end
@@ -57,7 +56,7 @@ function format \
         set --function read_from_file true
     end
 
-    switch $type
+    switch $extension
         case .fish
             set --function cmd fish_indent
             if $write_to_file
@@ -82,10 +81,10 @@ function format \
             if $read_from_file
                 set --append cmd $file
             else
-                set --append cmd --parser typescript
+                set --append cmd --parser extension
             end
         case '*'
-            echo "Error: no formatter available for $type files"
+            echo "format: no formatter available for $extension files"
             return 2
     end
 
