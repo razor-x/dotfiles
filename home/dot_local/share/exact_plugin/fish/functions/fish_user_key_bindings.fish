@@ -11,7 +11,7 @@ function fish_user_key_bindings \
     bind \
         | grep --extended-regexp --no-ignore-case 'bind --preset (-M \w+ )?(ctrl|alt|shift)' \
         # Keep ctrl-space which inserts a literal space without expanding abbreviations.
-        | grep --invert-match 'ctrl-space' \
+        | grep --invert-match ctrl-space \
         # Keep escape (ctrl-[) which toggles normal and insert mode.
         | grep --invert-match 'ctrl-\[' \
         | string replace --regex '^bind\s+(.*?)((ctrl|alt|shift)-\S+)\s.*' 'bind --erase $1$2' \
@@ -87,7 +87,7 @@ function fish_user_key_bindings \
     bind --mode default U redo
 
     # Restore bindings for ctrl-m (enter) and ctrl-i (tab) in vconsole.
-    if test "$TERM" = "linux"
+    if test "$TERM" = linux
         bind --mode insert ctrl-m execute
         bind --mode insert ctrl-i complete
     end
@@ -102,6 +102,6 @@ function fish_user_key_bindings \
     # TODO: See if ctrl-space will work on Sway as expected.
     # https://github.com/razor-x/dotfiles/issues/2
     bind --preset --mode insert ctrl-space \
-        | string replace --regex 'ctrl-space' 'ctrl-shift-space' \
+        | string replace --regex ctrl-space ctrl-shift-space \
         | source
 end

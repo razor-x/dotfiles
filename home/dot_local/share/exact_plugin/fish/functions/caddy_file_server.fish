@@ -18,4 +18,3 @@ function caddy_file_server \
 
     caddy file-server --listen $_flag_listen $argv
 end
-

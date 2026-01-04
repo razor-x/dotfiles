@@ -8,7 +8,7 @@ function load_private_keys \
     end
 
     if not gpg-connect-agent 'keyinfo --list' /bye 2>/dev/null \
-        | string match --regex --quiet '1 P'
+            | string match --regex --quiet '1 P'
         echo '' | gpg --clearsign --armor &>/dev/null
     else
         echo 'GPG keys already loaded.'

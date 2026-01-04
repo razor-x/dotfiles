@@ -11,7 +11,7 @@ function pipe_to_pager \
         set --function cmd delta
 
         if not string match --regex --quiet -- '--json\b' (commandline --current-job)
-          commandline --current-job (commandline --current-job \
+            commandline --current-job (commandline --current-job \
               | string replace '^\s*rg\b' 'rg --json')
         end
     end

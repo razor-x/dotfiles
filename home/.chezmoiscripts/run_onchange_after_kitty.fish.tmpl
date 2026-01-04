@@ -3,8 +3,7 @@
 if type --query kitten
     set --local kitten_config_path "$XDG_CONFIG_HOME/.config/kitty"
     mkdir -p $kitten_config_path
-    kitten themes --dump '{{ template "theme" (merge (dict "app" "kitty") .) }}' \
-        > $kitten_config_path/current-theme.conf
+    kitten themes --dump '{{ template "theme" (merge (dict "app" "kitty") .) }}' >$kitten_config_path/current-theme.conf
     kitten themes --reload-in=all '{{ template "theme" (merge (dict "app" "kitty") .) }}'
 else
     echo 'Cannot update kitty theme: kitty or kitten not installed.'

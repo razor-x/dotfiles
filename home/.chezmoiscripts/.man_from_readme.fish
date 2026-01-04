@@ -11,10 +11,10 @@ set --local input (string split --fields 2 --max 1 '<!-- begin man page -->' $in
 
 string replace --all '### ' '# ' $input \
     | while read -l line
-        if string match --quiet '# *' -- $line
-            string upper $line
-        else
-            echo $line
-        end
-    end \
+    if string match --quiet '# *' -- $line
+        string upper $line
+    else
+        echo $line
+    end
+end \
     | pandoc --from markdown --to man

@@ -1,5 +1,5 @@
 function git_find_replace \
-    --wraps 'sd' \
+    --wraps sd \
     --description 'Find and replace with sd in all non-binary files tracked by git'
 
     set --function root (git rev-parse --show-toplevel)

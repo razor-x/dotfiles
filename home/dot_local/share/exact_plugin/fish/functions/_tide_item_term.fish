@@ -5,10 +5,10 @@ function _tide_item_term \
     set --function kitty_icon '󰄛'
 
     if test "$TERM" = linux
-        _tide_print_item 'term' $linux_icon
+        _tide_print_item term $linux_icon
     end
 
     if test "$TERM" = xterm-kitty
-        _tide_print_item 'term' $kitty_icon
+        _tide_print_item term $kitty_icon
     end
 end

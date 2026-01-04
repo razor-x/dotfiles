@@ -18,7 +18,7 @@ if status is-interactive
     alias l 'eza -l'
     alias ll 'eza -1'
     alias la 'eza -la'
-    alias ls 'eza'
+    alias ls eza
     alias lsp list_paginate
 
     # eXtract

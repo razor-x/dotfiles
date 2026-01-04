@@ -20,7 +20,7 @@
 set --universal fish_greeting
 
 # Set fifc fifc_binding.
-set --universal fifc_keybinding 'ctrl-tab'
+set --universal fifc_keybinding ctrl-tab
 
 if type --query fish_config
     fish_config theme choose '{{ template "theme" (merge (dict "app" "fish") .) }}'

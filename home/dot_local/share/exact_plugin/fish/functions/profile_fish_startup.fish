@@ -6,4 +6,3 @@ function profile_fish_startup \
     sort --numeric-sort --key=1 $tmp
     rm $tmp
 end
-
