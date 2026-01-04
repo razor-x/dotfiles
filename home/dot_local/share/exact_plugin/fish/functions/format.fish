@@ -5,9 +5,9 @@ function format \
     or return
 
     if isatty stdout
-        set --function use_stdout true
-    else
         set --function use_stdout false
+    else
+        set --function use_stdout true
     end
 
     if set --query _flag_extension
@@ -46,15 +46,24 @@ function format \
     end
 
     switch $type
-        case .js .jsx .ts .tsx
-            set --local cmd prettier --single-quote --jsx-single-quote --no-semi
-            if $use_stdin
-                set --append cmd --parser typescript
-            else
+        case .fish
+            set --local cmd fish_indent
+            if not $use_stdout
+                set --append cmd --write
+            end
+            if not $use_stdin
                 set --append cmd $file
             end
-            if $use_stdout
+            $cmd
+        case .js .jsx .ts .tsx
+            set --local cmd prettier --single-quote --jsx-single-quote --no-semi
+            if not $use_stdout
                 set --append cmd --write
+            end
+            if not $use_stdin
+                set --append cmd $file
+            else
+                set --append cmd --parser typescript
             end
             $cmd
         case '*'
