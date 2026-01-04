@@ -1,5 +1,6 @@
 # https://yazi-rs.github.io/docs/quick-start#shell-wrapper
 function yazi_change_cwd \
+    --wraps 'yazi' \
     --description 'Change the current working directory when exiting Yazi'
 
     set tmp (mktemp --tmpdir 'yazi-cwd.XXXXXX')
