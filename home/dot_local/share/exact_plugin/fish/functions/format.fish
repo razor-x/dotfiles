@@ -1,5 +1,5 @@
 function format \
-    --description 'Format a file with an appropriate code formatter; writes in-place unless piped'
+    --description 'Format a file or stdin with an appropriate code formatter; writes in-place unless piped'
 
     argparse 'e/extension=' -- $argv
     or return
