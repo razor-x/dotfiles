@@ -4,44 +4,16 @@ function format \
     argparse 'e/extension=' -- $argv
     or return
 
+    if isatty stdin
+        set --function use_stdin false
+    else
+        set --function use_stdin true
+    end
+
     if isatty stdout
         set --function use_stdout false
     else
         set --function use_stdout true
-    end
-
-    if set --query _flag_extension
-        if not string match --quiet '.*' $_flag_extension
-            set --function extension .$_flag_extension
-        else
-            set --function extension $_flag_extension
-        end
-
-        if not isatty stdin
-            set --function use_stdin true
-        else
-            echo "format: using -e/--extension requires input from stdin"
-            return 1
-        end
-    else if test (count $argv) -eq 1
-        set --function file $argv[1]
-
-        if not test -e "$file"
-            echo "format: no file exists named $file"
-            return 1
-        end
-
-        set --function extension (path extension $file)
-        set --function use_stdin false
-    else
-        echo 'usage: format FILE'
-        echo '       COMMAND | format (-e | --extension) EXT'
-        return 1
-    end
-
-    if test -z "$extension"
-        echo "format: cannot format files missing a file extension: $file"
-        return 1
     end
 
     if $use_stdout; or $use_stdin
@@ -54,6 +26,38 @@ function format \
         set --function read_from_file false
     else
         set --function read_from_file true
+    end
+
+    if set --query --function _flag_extension
+        if not string match --quiet '.*' $_flag_extension
+            set --function extension .$_flag_extension
+        else
+            set --function extension $_flag_extension
+        end
+    end
+
+    if $use_stdin; and test (count $argv) -eq 1
+        echo 'usage: format [(-e | --extension) EXT] FILE'
+        echo '       COMMAND | format (-e | --extension) EXT'
+        return 1
+    end
+
+    if test (count $argv) -eq 1
+        set --function file $argv[1]
+
+        if not test -e "$file"
+            echo "format: no file exists named $file"
+            return 1
+        end
+
+        if not set --query --function extension
+            set --function extension (path extension $file)
+        end
+    end
+
+    if test -z "$extension"
+        echo "format: cannot format files missing a file extension: $file"
+        return 1
     end
 
     switch $extension
@@ -83,7 +87,15 @@ function format \
             if $read_from_file
                 set --append cmd $file
             else
-                set --append cmd --parser extension
+                set --append cmd --parser typescript
+            end
+        case .bash .sh .zsh
+            set --function cmd shfmt
+            if $write_to_file
+                set --append cmd --write
+            end
+            if $read_from_file
+                set --append cmd $file
             end
         case '*'
             echo "format: no formatter available for $extension files"
