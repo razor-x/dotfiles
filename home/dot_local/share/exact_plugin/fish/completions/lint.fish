@@ -1,5 +1,5 @@
 complete \
-    --command format \
+    --command lint \
     --short-option e \
     --long-option extension \
     --description 'Set or override file extension' \
