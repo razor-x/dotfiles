@@ -45,29 +45,49 @@ function format \
         return 1
     end
 
+    if $use_stdout; or $use_stdin
+        set --function write_to_file false
+    else
+        set --function write_to_file true
+    end
+
+    if $use_stdin
+        set --function read_from_file false
+    else
+        set --function read_from_file true
+    end
+
     switch $type
         case .fish
-            set --local cmd fish_indent
-            if not $use_stdout
+            set --function cmd fish_indent
+            if $write_to_file
                 set --append cmd --write
             end
-            if not $use_stdin
+            if $read_from_file
                 set --append cmd $file
             end
-            $cmd
+        case .go
+            set --function cmd gofmt
+            if $write_to_file
+                set --append cmd -w
+            end
+            if $read_from_file
+                set --append cmd $file
+            end
         case .js .jsx .ts .tsx
-            set --local cmd prettier --single-quote --jsx-single-quote --no-semi
-            if not $use_stdout
+            set --function cmd prettier --single-quote --jsx-single-quote --no-semi
+            if $write_to_file
                 set --append cmd --write
             end
-            if not $use_stdin
+            if $read_from_file
                 set --append cmd $file
             else
                 set --append cmd --parser typescript
             end
-            $cmd
         case '*'
             echo "Error: no formatter available for $type files"
             return 2
     end
+
+    $cmd
 end
