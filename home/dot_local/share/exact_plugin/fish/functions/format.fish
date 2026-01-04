@@ -36,7 +36,8 @@ function format \
         end
     end
 
-    if $use_stdin; and test (count $argv) -eq 1
+    if begin; $use_stdin; and test (count $argv) -gt 0; end;
+        or not $use_stdin; and test (count $argv) -ne 1
         echo 'usage: format [(-e | --extension) EXT] FILE'
         echo '       COMMAND | format (-e | --extension) EXT'
         return 1
