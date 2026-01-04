@@ -6,9 +6,11 @@ function _tide_item_term \
 
     if test "$TERM" = linux
         _tide_print_item term $linux_icon
+        return
     end
 
     if test "$TERM" = xterm-kitty
         _tide_print_item term $kitty_icon
+        return
     end
 end
