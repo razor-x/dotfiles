@@ -2,6 +2,6 @@ complete \
     --command format \
     --short-option e \
     --long-option extension \
-    --description 'Specify file extension when reading from stdin' \
+    --description 'File extension for stdin input' \
     --exclusive \
     --arguments 'js jsx ts tsx'

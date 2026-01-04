@@ -25,11 +25,24 @@ function format \
             return 1
         end
     else if test (count $argv) -eq 1
-        set --function type (path extension $argv[1])
         set --function file $argv[1]
+
+        if not test -e "$file"
+            echo "Error: no file exists named $file"
+            return 1
+        end
+
+        set --function type (path extension $file)
         set --function use_stdin false
     else
-        echo "Usage: format FILE or cat FILE | format --extension EXT"
+        echo 'Usage:'
+        echo '    format FILE'
+        echo '    COMMAND | format (-e | --extension) EXT'
+        return 1
+    end
+
+    if test -z "$type"
+        echo "Error: cannot format files missing a file extension: $file"
         return 1
     end
 
@@ -46,7 +59,7 @@ function format \
             end
             $cmd
         case '*'
-            echo "No formatter available for $type file extension"
+            echo "Error: no formatter available for $type files"
             return 2
     end
 end
