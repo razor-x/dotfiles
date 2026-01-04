@@ -1,14 +1,14 @@
 function pipe_to_pager \
     --description 'Paginate the current command'
 
-    set cmd $PAGER
+    set --function cmd $PAGER
     or return 1
 
     # Use delta for ripgrep with --json.
     if string match --regex --quiet '^\s*rg\b' (commandline --current-job);
         and command --query delta
 
-        set cmd delta
+        set --function cmd delta
 
         if not string match --regex --quiet -- '--json\b' (commandline --current-job)
           commandline --current-job (commandline --current-job \
@@ -16,9 +16,9 @@ function pipe_to_pager \
         end
     end
 
-    set pipe " &| $cmd"
+    set --function pipe " &| $cmd"
     if string match --regex --quiet -- ' \n\.$' "(commandline --current-job; echo .)"
-        set pipe "&| $cmd"
+        set --function pipe "&| $cmd"
     end
     fish_commandline_append $pipe
 end

@@ -2,8 +2,8 @@
 
 # hash: {{ include (joinPath .chezmoi.homeDir ".config" "yazi" "package.toml") | sha256sum }}
 
-set config_path "$XDG_CONFIG_HOME/yazi"
-set state_path "$XDG_STATE_HOME/yazi"
+set --local config_path "$XDG_CONFIG_HOME/yazi"
+set --local state_path "$XDG_STATE_HOME/yazi"
 
 if type --query ya; and type --query yazi
     rm --recursive --force \

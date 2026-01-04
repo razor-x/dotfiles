@@ -14,7 +14,7 @@ if status is-interactive
 
     # Limit when prompted to load keys.
     if not set --query SSH_CONNECTION; and test "$TERM" != linux
-        set fish_autoload_private_keys true
+        set --global fish_autoload_private_keys true
     end
 
     # Autostart Zellij when connecting though SSH and not multiplexing.

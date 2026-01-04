@@ -1,15 +1,15 @@
 function zellij_scrollback \
     --description 'Save the Zellij scrollback and view it'
 
-    set zellij_dump '/tmp/zellij_scrollback.dump.txt'
+    set --function zellij_dump '/tmp/zellij_scrollback.dump.txt'
 
     if not test -f $zellij_dump
         echo 'Already saved and viewed the last dump, press Ctrl-C to close...'
         return 1
     end
 
-    set now (date +"%Y-%m-%dT%H:%M:%S.%3N%:z")
-    set zellij_scrollback "$HOME/scrollback.$now.txt"
+    set --function now (date +"%Y-%m-%dT%H:%M:%S.%3N%:z")
+    set --function zellij_scrollback "$HOME/scrollback.$now.txt"
     mv $zellij_dump $zellij_scrollback
 
     # Set the scrollback pager to use less -r to render Nerd Font symbols.

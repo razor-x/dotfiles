@@ -2,14 +2,14 @@ function pipe_to_filter \
     --description 'Filter the current command'
 
     if type --query rg
-        set cmd rg
+        set --function cmd rg
     else
-        set cmd grep
+        set --function cmd grep
     end
 
-    set pipe " | $cmd"
+    set --function pipe " | $cmd"
     if string match --regex --quiet -- ' \n\.$' "(commandline --current-job; echo .)"
-        set pipe "| $cmd "
+        set --function pipe "| $cmd "
     end
     fish_commandline_append $pipe
     commandline --function end-of-line

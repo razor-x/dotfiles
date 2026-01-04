@@ -3,7 +3,7 @@ function arch_package_fzf_remove \
     --wraps 'aura --remove --nosave --recursive' \
     --description 'Fuzzy-search through all available packages to install'
 
-    set cmd aura --remove --nosave --recursive
+    set --function cmd aura --remove --nosave --recursive
 
     if test (count $argv) -eq 0
         aura --sync --quiet --list core extra \

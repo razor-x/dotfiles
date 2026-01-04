@@ -5,9 +5,9 @@ if test (count $argv) -eq 0
     return 1
 end
 
-set input (cat $argv[1] | string collect)
-set input (string split --fields 1 --max 1 '<!-- end man page -->' $input)
-set input (string split --fields 2 --max 1 '<!-- begin man page -->' $input)
+set --local input (cat $argv[1] | string collect)
+set --local input (string split --fields 1 --max 1 '<!-- end man page -->' $input)
+set --local input (string split --fields 2 --max 1 '<!-- begin man page -->' $input)
 
 string replace --all '### ' '# ' $input \
     | while read -l line

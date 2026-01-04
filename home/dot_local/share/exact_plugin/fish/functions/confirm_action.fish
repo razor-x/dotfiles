@@ -3,11 +3,11 @@ function confirm_action \
     --description 'Prompt user for confirmation'
 
     if test "$default_action" = y
-        set prompt '[Y/n]'
-        set default_result 0
+        set --function prompt '[Y/n]'
+        set --function default_result 0
     else
-        set prompt '[y/N]'
-        set default_result 1
+        set --function prompt '[y/N]'
+        set --function default_result 1
     end
 
     read --prompt-str "$message $prompt " --nchars 1 confirm

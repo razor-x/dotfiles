@@ -3,7 +3,7 @@ function arch_package_fzf_install \
     --wraps 'aura --sync' \
     --description 'Fuzzy-search through all available packages to install'
 
-    set cmd aura --sync
+    set --function cmd aura --sync
 
     if test (count $argv) -eq 0
         aura --sync --quiet --list core extra \

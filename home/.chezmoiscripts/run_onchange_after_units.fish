@@ -2,7 +2,7 @@
 
 # hash: {{ template "user_env_hash" . }}
 
-set units \
+set --local units \
     atuin \
     ssh-agent
 
