@@ -2,6 +2,8 @@ require("config").setup()
 local pick = require("mini.pick")
 pick.setup()
 
+require("mini.completion").setup()
+
 vim.keymap.set("n", "<leader>e", function()
   pick.builtin.files({
     tool = "git", -- Uses git ls-files (tracked files only)
@@ -31,3 +33,15 @@ vim.keymap.set("n", "<leader><leader>k", smart_splits.swap_buf_up)
 vim.keymap.set("n", "<leader><leader>l", smart_splits.swap_buf_right)
 
 require("cutlass")
+
+vim.lsp.enable("clangd")
+vim.lsp.enable("pylsp")
+local map_multistep = require('mini.keymap').map_multistep
+map_multistep('i', '<Tab>',   { 'pmenu_next' })
+map_multistep('i', '<S-Tab>', { 'pmenu_prev' })
+map_multistep('i', '<CR>',    { 'pmenu_accept', 'minipairs_cr' })
+map_multistep('i', '<BS>',    { 'minipairs_bs' })
+
+vim.keymap.set('i', '<C-e>', function()
+  MiniPick.builtin.buffer_lines({ scope = 'current' })
+end)

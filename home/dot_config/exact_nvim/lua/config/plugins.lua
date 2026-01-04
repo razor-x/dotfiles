@@ -1,6 +1,7 @@
 return {
   { "nvim-mini/mini.nvim", version = "*" },
   { "mrjones2014/smart-splits.nvim", lazy = false },
+  { "neovim/nvim-lspconfig" },
   { "gbprod/cutlass.nvim", opts = {
     cut_key = "m",
   } },
