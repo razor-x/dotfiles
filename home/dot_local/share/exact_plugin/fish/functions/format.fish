@@ -42,6 +42,11 @@ function format \
         return 1
     end
 
+    if $use_stdin; and not set --query --function extension
+        echo 'usage: COMMAND | format (-e | --extension) EXT'
+        return 1
+    end
+
     if test (count $argv) -eq 1
         set --function file $argv[1]
 
@@ -57,6 +62,7 @@ function format \
 
     if test -z "$extension"
         echo "format: cannot format files missing a file extension: $file"
+        echo "use 'format -e EXT FILE' to format this file"
         return 1
     end
 
