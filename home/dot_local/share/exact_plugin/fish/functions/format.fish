@@ -94,7 +94,7 @@ function format \
             if $read_from_file
                 set --append cmd $file
             else
-                set --append cmd --parser typescript
+                set --append cmd --stdin-filepath "tmp.$extension"
             end
         case .bash .sh .zsh
             set --function cmd shfmt
