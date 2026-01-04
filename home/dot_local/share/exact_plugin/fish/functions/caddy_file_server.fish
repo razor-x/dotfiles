@@ -5,7 +5,7 @@ function caddy_file_server \
     argparse 'listen=' -- $argv
     or return
 
-    if set --query _flag_listen
+    if set --query --function _flag_listen
         set --function port (string split ':' $_flag_listen)[-1]
     else
         set --function port 8080

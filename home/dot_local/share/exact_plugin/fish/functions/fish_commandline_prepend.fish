@@ -16,7 +16,7 @@ function fish_commandline_prepend --description "Prepend the given string to the
     set -l cursor_location (commandline -C)
 
     set -l escaped (string escape --style=regex -- $to_prepend)
-    if set process (string replace -r -- "^$escaped" "" $process)
+    if set -l process (string replace -r -- "^$escaped" "" $process)
         commandline --replace -- $process
         set length_diff "-$length_diff"
     else
