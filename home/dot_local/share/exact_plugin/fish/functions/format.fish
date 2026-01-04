@@ -21,28 +21,27 @@ function format \
         if not isatty stdin
             set --function use_stdin true
         else
-            echo "Error: using -e/--extension requires input from stdin"
+            echo "format: using -e/--extension requires input from stdin"
             return 1
         end
     else if test (count $argv) -eq 1
         set --function file $argv[1]
 
         if not test -e "$file"
-            echo "Error: no file exists named $file"
+            echo "format: no file exists named $file"
             return 1
         end
 
         set --function type (path extension $file)
         set --function use_stdin false
     else
-        echo 'Usage:'
-        echo '    format FILE'
-        echo '    COMMAND | format (-e | --extension) EXT'
+        echo 'usage: format FILE'
+        echo '       COMMAND | format (-e | --extension) EXT'
         return 1
     end
 
     if test -z "$type"
-        echo "Error: cannot format files missing a file extension: $file"
+        echo "format: cannot format files missing a file extension: $file"
         return 1
     end
 
