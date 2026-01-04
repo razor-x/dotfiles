@@ -74,7 +74,9 @@ function format \
                 set --append cmd $file
             end
         case .js .jsx .ts .tsx
-            set --function cmd prettier --single-quote --jsx-single-quote --no-semi
+            set --function cmd prettier \
+                --single-quote --jsx-single-quote --no-semi \
+                --config-precedence file-override
             if $write_to_file
                 set --append cmd --write
             end
