@@ -1,5 +1,5 @@
 function _tide_item_term \
-    --description "Tide prompt item that shows which terminal is running"
+    --description 'Tide prompt item that shows which terminal is running'
 
     set --function linux_icon '󰌽'
     set --function kitty_icon '󰄛'
