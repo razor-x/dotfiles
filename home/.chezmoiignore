@@ -22,6 +22,9 @@
 # Ignore misc environment variables.
 .config/environment.d/99-misc.conf
 
+# Ignore delve test fixtures.
+.local/share/plugin/delve/test
+
 {{ if not (has .chezmoi.hostname (list "minto" "anny")) -}}
 .config/nvim/**
 .config/environment.d/xsecurelock.conf
