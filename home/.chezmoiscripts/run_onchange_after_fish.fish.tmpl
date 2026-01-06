@@ -2,10 +2,13 @@
 
 {{ $hash := include (joinPath .chezmoi.homeDir ".config" "fish" "fish_plugins") | sha256sum -}}
 
-{{- range (list "completions" "conf.d" "functions" "themes") -}}
-  {{- $dir := printf "%s/.local/share/plugin/fish/%s" $.chezmoi.homeDir . -}}
-  {{- range (glob (printf "%s/*.fish" $dir)) -}}
-    {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
+{{- range (list "fish" "delve") -}}
+  {{- $plugin := . -}}
+  {{- range (list "completions" "conf.d" "functions" "themes") -}}
+    {{- $dir := printf "%s/.local/share/plugin/%s/%s" $.chezmoi.homeDir $plugin . -}}
+    {{- range (glob (printf "%s/*.fish" $dir)) -}}
+      {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
