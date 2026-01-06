@@ -37,13 +37,14 @@ complete \
     --short-option e \
     --long-option extension \
     --exclusive \
-    --arguments '(__fish_complete_format_extensions)'
+    --arguments '(__fish_complete_format_extensions)' \
+    --description 'Explicitly set file extension'
 
 complete \
     --command format \
     --no-files \
     --condition 'not __fish_seen_argument --short e --long extension' \
-    --arguments '(__fish_complete_format_files)'
+    --arguments '(__fish_complete_format_files)' \
 
 complete \
     --command format \

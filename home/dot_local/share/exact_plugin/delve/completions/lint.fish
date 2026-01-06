@@ -37,7 +37,8 @@ complete \
     --short-option e \
     --long-option extension \
     --exclusive \
-    --arguments '(__fish_complete_lint_extensions)'
+    --arguments '(__fish_complete_lint_extensions)' \
+    --description 'Explicitly set file extension'
 
 complete \
     --command lint \
