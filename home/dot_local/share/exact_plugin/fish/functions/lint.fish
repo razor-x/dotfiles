@@ -94,6 +94,14 @@ function lint \
                 echo "lint: cannot lint $extension files from stdin"
                 return 2
             end
+        case .c
+            set --function cmd clang-tidy
+            if $read_from_file
+                set --append cmd $file
+            else
+                echo "lint: cannot lint $extension files from stdin"
+                return 2
+            end
         case '*'
             echo "lint: no linter available for $extension files"
             return 2

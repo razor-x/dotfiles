@@ -3,7 +3,9 @@ function __fish_complete_repl_files
     for file in \
         $token*.fish \
         $token*.js \
+        $token*.jsx \
         $token*.ts \
+        $token*.tsx \
         $token*.bash \
         $token*.sh \
         $token*.zsh \
@@ -18,7 +20,9 @@ function __fish_complete_repl_extensions
     printf '%s\t%s\n' \
         fish Fish \
         js JavaScript \
+        jsx 'JavaScript JSX' \
         ts TypeScript \
+        tsx 'TypeScript JSX' \
         bash Bash \
         sh Shell \
         zsh Zsh

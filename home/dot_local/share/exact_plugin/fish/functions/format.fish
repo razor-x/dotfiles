@@ -106,6 +106,14 @@ function format \
             if $read_from_file
                 set --append cmd $file
             end
+        case .c
+            set --function cmd clang-format
+            if $write_to_file
+                set --append cmd -i
+            end
+            if $read_from_file
+                set --append cmd $file
+            end
         case '*'
             echo "format: no formatter available for $extension files"
             return 2
