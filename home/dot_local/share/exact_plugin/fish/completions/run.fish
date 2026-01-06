@@ -4,14 +4,12 @@ function __fish_complete_run_files
         $token*.fish \
         $token*.go \
         $token*.js \
+        $token*.jsx \
         $token*.ts \
+        $token*.tsx \
         $token*.bash \
         $token*.sh \
         $token*.zsh \
-        $token*.py \
-        $token*.rb \
-        $token*.pl \
-        $token*.lua \
         $token*/
         if test -e $file
             echo $file
@@ -24,14 +22,12 @@ function __fish_complete_run_extensions
         fish Fish \
         go Go \
         js JavaScript \
+        jsx 'JavaScript JSX' \
         ts TypeScript \
+        tsx 'TypeScript JSX' \
         bash Bash \
         sh Shell \
-        zsh Zsh \
-        py Python \
-        rb Ruby \
-        pl Perl \
-        lua Lua
+        zsh Zsh
 end
 
 complete \

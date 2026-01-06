@@ -71,7 +71,7 @@ function lint \
                 echo "lint: cannot lint $extension files from stdin"
                 return 2
             end
-        case .js
+        case .js .jsx
             set --function cmd eslint --no-config-lookup
             if $read_from_file
                 set --append cmd $file

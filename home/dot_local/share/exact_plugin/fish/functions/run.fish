@@ -71,7 +71,7 @@ function run \
                 echo "run: cannot run $extension files from stdin"
                 return 2
             end
-        case .js .ts
+        case .js .jsx .ts .tsx
             set --function cmd bun run
             if $read_from_file
                 set --append cmd $file
@@ -87,28 +87,6 @@ function run \
             set --function cmd zsh
             if $read_from_file
                 set --append cmd $file
-            end
-        case .py
-            set --function cmd python
-            if $read_from_file
-                set --append cmd $file
-            end
-        case .rb
-            set --function cmd ruby
-            if $read_from_file
-                set --append cmd $file
-            end
-        case .pl
-            set --function cmd perl
-            if $read_from_file
-                set --append cmd $file
-            end
-        case .lua
-            set --function cmd lua
-            if $read_from_file
-                set --append cmd $file
-            else
-                set --append cmd -
             end
         case '*'
             echo "run: no runner available for $extension files"

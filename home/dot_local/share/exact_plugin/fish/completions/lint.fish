@@ -4,6 +4,7 @@ function __fish_complete_lint_files
         $token*.fish \
         $token*.go \
         $token*.js \
+        $token*.jsx \
         $token*.ts \
         $token*.tsx \
         $token*.bash \
@@ -21,6 +22,7 @@ function __fish_complete_lint_extensions
         fish Fish \
         go Go \
         js JavaScript \
+        jsx 'JavaScript JSX' \
         ts TypeScript \
         tsx 'TypeScript JSX' \
         bash Bash \
