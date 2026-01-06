@@ -28,7 +28,11 @@ function compile \
         case .c
             set --function cmd clang -o $output $file
         case .ts .tsx
-            set --function cmd tsc --outDir (path dirname $output) $file
+            set --function cmd tsc --outDir (path dirname $output)
+            if test $extension = .tsx
+                set --append --function cmd --jsx preserve
+            end
+            set --append --function cmd $file
         case '*'
             echo "compile: no compiler available for $extension files"
             return 2

@@ -100,6 +100,10 @@ function lint \
                 return 2
             end
             set --function cmd tsc --noEmit
+            if test $extension = .tsx
+                set --append --function cmd --jsx preserve
+            end
+            set --append --function cmd $file
             if $read_from_file
                 set --append cmd $file
             else
