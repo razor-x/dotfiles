@@ -3,7 +3,7 @@ function zellij_scrollback \
 
     set --function zellij_dump '/tmp/zellij_scrollback.dump.txt'
 
-    if not test -f $zellij_dump
+    if not test -f "$zellij_dump"
         echo 'Already saved and viewed the last dump, press Ctrl-C to close...'
         return 1
     end
