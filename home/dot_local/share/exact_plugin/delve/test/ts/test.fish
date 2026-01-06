@@ -19,6 +19,12 @@ format $dir/unformatted.ts | cat
 echo "-- format: stdin to stdout --"
 cat $dir/unformatted.ts | format -e ts
 
+echo "-- format: file in-place --"
+cp $dir/unformatted.ts $dir/format.tmp.ts
+format $dir/format.tmp.ts
+cat $dir/format.tmp.ts
+rm $dir/format.tmp.ts
+
 echo "-- lint: file (should fail) --"
 lint $dir/fixable.ts
 or echo "lint failed as expected"
@@ -26,3 +32,7 @@ or echo "lint failed as expected"
 echo "-- lint: stdin (should fail) --"
 cat $dir/fixable.ts | lint -e ts
 or echo "stdin not supported as expected"
+
+echo "-- lint: --fix not supported --"
+lint --fix $dir/fixable.ts
+or echo "lint --fix not supported as expected"

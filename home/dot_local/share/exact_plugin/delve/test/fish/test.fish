@@ -19,6 +19,12 @@ format $dir/unformatted.fish | cat
 echo "-- format: stdin to stdout --"
 cat $dir/unformatted.fish | format -e fish
 
+echo "-- format: file in-place --"
+cp $dir/unformatted.fish $dir/format.tmp.fish
+format $dir/format.tmp.fish
+cat $dir/format.tmp.fish
+rm $dir/format.tmp.fish
+
 echo "-- lint: file (should fail) --"
 lint $dir/fixable.fish
 or echo "lint failed as expected"
@@ -26,3 +32,7 @@ or echo "lint failed as expected"
 echo "-- lint: valid file --"
 lint $dir/main.fish
 and echo "lint passed"
+
+echo "-- lint: --fix not supported --"
+lint --fix $dir/fixable.fish
+or echo "lint --fix not supported as expected"
