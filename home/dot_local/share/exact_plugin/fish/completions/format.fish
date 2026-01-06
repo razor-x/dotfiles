@@ -1,10 +1,33 @@
 function __fish_complete_format_files
     set --local token (commandline --cut-at-cursor --current-token)
-    for file in $token*.{fish,go,js,jsx,ts,tsx,bash,sh,zsh} $token*/
+    for file in \
+            $token*.fish \
+            $token*.go \
+            $token*.js \
+            $token*.jsx \
+            $token*.ts \
+            $token*.tsx \
+            $token*.bash \
+            $token*.sh \
+            $token*.zsh \
+            $token*/
         if test -e $file
             echo $file
         end
     end
+end
+
+function __fish_complete_format_extensions
+    printf '%s\t%s\n' \
+        fish Fish \
+        go Go \
+        js JavaScript \
+        jsx 'JavaScript JSX' \
+        ts TypeScript \
+        tsx 'TypeScript JSX' \
+        bash Bash \
+        sh Shell \
+        zsh Zsh
 end
 
 complete \
@@ -12,8 +35,7 @@ complete \
     --short-option e \
     --long-option extension \
     --exclusive \
-    --arguments 'fish go js jsx ts tsx bash sh zsh' \
-    --description 'Syntax'
+    --arguments '(__fish_complete_format_extensions)'
 
 complete \
     --command format \
