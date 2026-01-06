@@ -1,13 +1,13 @@
 function __fish_complete_repl_files
     set --local token (commandline --cut-at-cursor --current-token)
     for file in \
-            $token*.fish \
-            $token*.js \
-            $token*.ts \
-            $token*.bash \
-            $token*.sh \
-            $token*.zsh \
-            $token*/
+        $token*.fish \
+        $token*.js \
+        $token*.ts \
+        $token*.bash \
+        $token*.sh \
+        $token*.zsh \
+        $token*/
         if test -e $file
             echo $file
         end

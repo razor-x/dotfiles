@@ -1,16 +1,16 @@
 function __fish_complete_format_files
     set --local token (commandline --cut-at-cursor --current-token)
     for file in \
-            $token*.fish \
-            $token*.go \
-            $token*.js \
-            $token*.jsx \
-            $token*.ts \
-            $token*.tsx \
-            $token*.bash \
-            $token*.sh \
-            $token*.zsh \
-            $token*/
+        $token*.fish \
+        $token*.go \
+        $token*.js \
+        $token*.jsx \
+        $token*.ts \
+        $token*.tsx \
+        $token*.bash \
+        $token*.sh \
+        $token*.zsh \
+        $token*/
         if test -e $file
             echo $file
         end

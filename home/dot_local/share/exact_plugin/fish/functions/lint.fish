@@ -24,7 +24,9 @@ function lint \
         end
     end
 
-    if begin; $use_stdin; and test (count $argv) -gt 0; end;
+    if begin
+            $use_stdin; and test (count $argv) -gt 0
+        end;
         or not $use_stdin; and test (count $argv) -ne 1
         echo 'usage: lint [(-e | --extension) EXT] FILE'
         echo '       COMMAND | lint (-e | --extension) EXT'
