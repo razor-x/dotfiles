@@ -2,6 +2,6 @@ complete \
     --command format \
     --short-option e \
     --long-option extension \
-    --description 'Set or override file extension' \
+    --description 'Language' \
     --exclusive \
     --arguments 'fish go js jsx ts tsx bash sh zsh'

@@ -3,7 +3,7 @@ complete \
     --no-files \
     --condition '__fish_is_first_arg' \
     --arguments 'fish js ts bash sh zsh' \
-    --description 'Language extension'
+    --description 'Language'
 
 complete \
     --command repl \
