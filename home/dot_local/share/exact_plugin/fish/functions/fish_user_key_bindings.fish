@@ -99,9 +99,7 @@ function fish_user_key_bindings \
         bind --mode $mode shift-tab complete-and-search
     end
 
-    # TODO: See if ctrl-space will work on Sway as expected.
-    # https://github.com/razor-x/dotfiles/issues/2
-    bind --preset --mode insert ctrl-space \
-        | string replace --regex ctrl-space ctrl-shift-space \
-        | source
+    # TODO: Bind ctrl-space and ctrl-shift-space
+    # bind --mode insert ctrl-space
+    # bind --mode insert ctrl-shift-space
 end
