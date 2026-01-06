@@ -41,6 +41,12 @@ complete \
 
 complete \
     --command lint \
+    --short-option f \
+    --long-option fix \
+    --description 'Automatically fix problems'
+
+complete \
+    --command lint \
     --no-files \
     --condition 'not __fish_seen_argument --short e --long extension' \
     --arguments '(__fish_complete_lint_files)'
