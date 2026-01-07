@@ -12,6 +12,7 @@ This is a **chezmoi-managed dotfiles repository** for Arch Linux user land confi
 - Heavy use of templating (`.tmpl` files) for dynamic configuration
 - Theme system with Catppuccin support across multiple applications
 - Integration with Fish shell, Neovim, Kitty, Zellij, and other CLI tools
+- Always use long CLI flags instead of short ones
 
 ## Essential Commands
 
