@@ -103,7 +103,8 @@ function fish_user_key_bindings \
 
     # TODO: Bind open keys.
     bind --mode insert ctrl-i 'commandline " git status"; commandline --function execute'
-    bind --mode insert ctrl-o 'commandline " git diff --cached"; commandline --function execute'
+    bind --mode insert ctrl-o 'commandline " git add --patch"; execute-in-stack'
+    bind --mode insert ctrl-u 'commandline " git diff --cached"; execute-in-stack'
     # bind --mode insert ctrl-u
     # bind --mode insert ctrl-;
 end
