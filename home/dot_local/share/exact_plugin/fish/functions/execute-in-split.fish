@@ -1,10 +1,10 @@
 function execute-in-split \
-    --description 'Executes the current commandline in a new split native to the current terminal emulator (if supported)'
+    --description 'Executes the current commandline in a new split native to the current terminal emulator (if supported); closes split on exit'
 
     commandline --function expand-abbr
     set --function cmd (commandline)
 
-    if type --query kitty; and test -n "$cmd"
+    if set --query KITTY_PID; type --query kitty; and test -n "$cmd"
         commandline --replace ''
 
         kitty @ launch --cwd=current --location=hsplit \
