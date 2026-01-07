@@ -1,5 +1,5 @@
 function __fish_complete_lint_files
-    set --local token (commandline --cut-at-cursor --current-token)
+    set --local token (string replace --regex '\.$' '' -- (commandline --cut-at-cursor --current-token))
     for file in \
         $token*.c \
         $token*.fish \
