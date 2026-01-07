@@ -3,6 +3,8 @@ function __fish_complete_compile_files
     for file in \
         $token*.c \
         $token*.go \
+        $token*.js \
+        $token*.jsx \
         $token*.ts \
         $token*.tsx \
         $token*/

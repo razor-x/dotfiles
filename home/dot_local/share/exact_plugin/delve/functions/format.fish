@@ -70,6 +70,14 @@ function format \
     end
 
     switch $extension
+        case .c
+            set --function cmd clang-format
+            if $write_to_file
+                set --append cmd -i
+            end
+            if $read_from_file
+                set --append cmd $file
+            end
         case .fish
             set --function cmd fish_indent
             if $write_to_file
@@ -98,18 +106,10 @@ function format \
             else
                 set --append cmd --stdin-filepath "tmp.$extension"
             end
-        case .bash .sh .zsh
+        case .sh .bash .zsh
             set --function cmd shfmt
             if $write_to_file
                 set --append cmd --write
-            end
-            if $read_from_file
-                set --append cmd $file
-            end
-        case .c
-            set --function cmd clang-format
-            if $write_to_file
-                set --append cmd -i
             end
             if $read_from_file
                 set --append cmd $file
