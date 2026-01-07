@@ -41,6 +41,7 @@ if status is-interactive
     abbr dif delta
 
     abbr gg gitui
+    abbr gdpr 'git diff (git merge-base main HEAD)'
     abbr --erase gsd
     alias gsd git_find_replace
     alias gs git_idempotent_switch
