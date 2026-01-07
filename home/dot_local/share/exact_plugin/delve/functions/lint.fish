@@ -71,11 +71,11 @@ function lint \
 
     switch $extension
         case .bash .sh .zsh
+            set --function cmd shellcheck
             if $fix
                 echo $fix_unsupported_message
                 return 2
             end
-            set --function cmd shellcheck
             if $read_from_file
                 set --append cmd $file
             else
@@ -83,10 +83,10 @@ function lint \
                 return 2
             end
         case .c
+            set --function cmd clang-tidy
             if $fix
                 set --append cmd --fix-errors
             end
-            set --function cmd clang-tidy
             if $read_from_file
                 set --append cmd $file
             else
@@ -94,11 +94,11 @@ function lint \
                 return 2
             end
         case .fish
+            set --function cmd fish --no-execute
             if $fix
                 echo $fix_unsupported_message
                 return 2
             end
-            set --function cmd fish --no-execute
             if $read_from_file
                 set --append cmd $file
             end
