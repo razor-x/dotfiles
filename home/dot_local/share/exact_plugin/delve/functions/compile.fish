@@ -28,7 +28,7 @@ function compile \
         case .go
             set --function cmd go build -o $output $file
         case .js .jsx .ts .tsx
-            set --function cmd bun build --outfile $output --compile $file
+            set --function cmd bun build --outfile $output $file
         case '*'
             echo "compile: no compiler available for $extension files"
             return 2
