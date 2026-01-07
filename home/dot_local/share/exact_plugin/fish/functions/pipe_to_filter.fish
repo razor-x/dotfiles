@@ -7,7 +7,7 @@ function pipe_to_filter \
         set --function cmd grep
     end
 
-    set --function pipe " | $cmd"
+    set --function pipe " | $cmd "
     if string match --regex --quiet -- ' \n\.$' "(commandline --current-job; echo .)"
         set --function pipe "| $cmd "
     end
