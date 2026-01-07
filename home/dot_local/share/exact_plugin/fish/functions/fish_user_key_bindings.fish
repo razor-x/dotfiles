@@ -25,9 +25,9 @@ function fish_user_key_bindings \
 
     # Configure fzf bindings.
     fzf_configure_bindings \
-        --directory='ctrl-i' \
+        --directory='ctrl-space' \
         --git_log="ctrl-'" \
-        --git_status='ctrl-;' \
+        --git_status='ctrl-shift-space' \
         --history='' \
         --processes='ctrl-\\' \
         --variables='ctrl-x'
@@ -41,8 +41,8 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-n down-or-search
 
     # Navigate prompt.
-    bind --mode insert ctrl-o forward-char
-    bind --mode insert ctrl-u backward-char
+    bind --mode insert ctrl-shift-h backward-char
+    bind --mode insert ctrl-shift-l forward-char
     bind --mode insert ctrl-f forward-word
     bind --mode insert ctrl-r backward-word-or-atuin
     bind --mode insert ctrl-shift-f forward-token
@@ -99,7 +99,9 @@ function fish_user_key_bindings \
         bind --mode $mode shift-tab complete-and-search
     end
 
-    # TODO: Bind ctrl-space and ctrl-shift-space
-    # bind --mode insert ctrl-space
-    # bind --mode insert ctrl-shift-space
+    # TODO: Bind open keys.
+    # bind --mode insert ctrl-i
+    # bind --mode insert ctrl-u
+    # bind --mode insert ctrl-o
+    # bind --mode insert ctrl-;
 end
