@@ -103,17 +103,21 @@ function format \
                 set --append cmd $file
             end
         case .js .jsx .ts .tsx
-            set --function cmd biome \
-                --indent-style=space \
-                --jsx-quote-style=single \
-                --semicolons=as-needed
+            set --function cmd biome format
+            if not biome rage 2>/dev/null \
+                | string match --quiet '*Status:*Loaded successfully*'
+                set --append cmd \
+                    --indent-style=space \
+                    --jsx-quote-style=single \
+                    --semicolons=as-needed
+            end
             if $write_to_file
                 set --append cmd --write
             end
             if $read_from_file
                 set --append cmd $file
             else
-                set --append cmd --stdin-filepath "tmp.$extension"
+                set --append cmd --stdin-file-path "tmp.$extension"
             end
         case '*'
             echo "format: no formatter available for $extension files"
