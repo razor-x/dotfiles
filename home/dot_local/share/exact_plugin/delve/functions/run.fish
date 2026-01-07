@@ -57,6 +57,9 @@ function run \
         return 1
     end
 
+    set --local stdin_unsupported_message \
+        "run: cannot run $extension files from stdin"
+
     switch $extension
         case .fish
             set --function cmd fish
@@ -68,7 +71,7 @@ function run \
             if $read_from_file
                 set --append cmd $file
             else
-                echo "run: cannot run $extension files from stdin"
+                echo $stdin_unsupported_message
                 return 2
             end
         case .js .jsx .ts .tsx

@@ -63,17 +63,23 @@ function lint \
         return 1
     end
 
+    set --local fix_unsupported_message \
+        "lint: -f/--fix is not supported for $extension files"
+
+    set --local stdin_unsupported_message \
+        "lint: cannot lint $extension files from stdin"
+
     switch $extension
         case .bash .sh .zsh
             if $fix
-                echo "lint: -f/--fix is not supported for $extension files"
+                echo $fix_unsupported_message
                 return 2
             end
             set --function cmd shellcheck
             if $read_from_file
                 set --append cmd $file
             else
-                echo "lint: cannot lint $extension files from stdin"
+                echo $stdin_unsupported_message
                 return 2
             end
         case .c
@@ -84,12 +90,12 @@ function lint \
             if $read_from_file
                 set --append cmd $file
             else
-                echo "lint: cannot lint $extension files from stdin"
+                echo $fix_unsupported_message
                 return 2
             end
         case .fish
             if $fix
-                echo "lint: -f/--fix is not supported for $extension files"
+                echo $fix_unsupported_message
                 return 2
             end
             set --function cmd fish --no-execute
@@ -104,7 +110,7 @@ function lint \
             if $read_from_file
                 set --append cmd $file
             else
-                echo "lint: cannot lint $extension files from stdin"
+                echo $stdin_unsupported_message
                 return 2
             end
         case .js .jsx
@@ -130,7 +136,7 @@ function lint \
             if $read_from_file
                 set --append cmd $file
             else
-                echo "lint: cannot lint $extension files from stdin"
+                echo $stdin_unsupported_message
                 return 2
             end
         case '*'
