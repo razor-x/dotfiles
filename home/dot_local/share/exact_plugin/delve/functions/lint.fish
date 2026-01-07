@@ -113,31 +113,15 @@ function lint \
                 echo $stdin_unsupported_message
                 return 2
             end
-        case .js .jsx
-            set --function cmd eslint --no-config-lookup
+        case .js .jsx .ts .tsx
+            set --function cmd biome lint
             if $fix
-                set --append cmd --fix
+                set --append cmd --write
             end
             if $read_from_file
                 set --append cmd $file
             else
-                set --append cmd --stdin --stdin-filename "tmp.$extension"
-            end
-        case .ts .tsx
-            if $fix
-                echo "lint: -f/--fix is not supported for $extension files"
-                return 2
-            end
-            set --function cmd tsc --noEmit
-            if test $extension = .tsx
-                set --append --function cmd --jsx preserve
-            end
-            set --append --function cmd $file
-            if $read_from_file
-                set --append cmd $file
-            else
-                echo $stdin_unsupported_message
-                return 2
+                set --append cmd --stdin-file-path="tmp.$extension"
             end
         case '*'
             echo "lint: no linter available for $extension files"
