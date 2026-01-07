@@ -70,6 +70,14 @@ function format \
     end
 
     switch $extension
+        case .bash .sh .zsh
+            set --function cmd shfmt
+            if $write_to_file
+                set --append cmd --write
+            end
+            if $read_from_file
+                set --append cmd $file
+            end
         case .c
             set --function cmd clang-format
             if $write_to_file
@@ -105,14 +113,6 @@ function format \
                 set --append cmd $file
             else
                 set --append cmd --stdin-filepath "tmp.$extension"
-            end
-        case .sh .bash .zsh
-            set --function cmd shfmt
-            if $write_to_file
-                set --append cmd --write
-            end
-            if $read_from_file
-                set --append cmd $file
             end
         case '*'
             echo "format: no formatter available for $extension files"

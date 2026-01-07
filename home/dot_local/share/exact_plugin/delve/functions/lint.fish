@@ -64,6 +64,29 @@ function lint \
     end
 
     switch $extension
+        case .bash .sh .zsh
+            if $fix
+                echo "lint: -f/--fix is not supported for $extension files"
+                return 2
+            end
+            set --function cmd shellcheck
+            if $read_from_file
+                set --append cmd $file
+            else
+                echo "lint: cannot lint $extension files from stdin"
+                return 2
+            end
+        case .c
+            if $fix
+                set --append cmd --fix-errors
+            end
+            set --function cmd clang-tidy
+            if $read_from_file
+                set --append cmd $file
+            else
+                echo "lint: cannot lint $extension files from stdin"
+                return 2
+            end
         case .fish
             if $fix
                 echo "lint: -f/--fix is not supported for $extension files"
@@ -104,29 +127,6 @@ function lint \
                 set --append --function cmd --jsx preserve
             end
             set --append --function cmd $file
-            if $read_from_file
-                set --append cmd $file
-            else
-                echo "lint: cannot lint $extension files from stdin"
-                return 2
-            end
-        case .bash .sh .zsh
-            if $fix
-                echo "lint: -f/--fix is not supported for $extension files"
-                return 2
-            end
-            set --function cmd shellcheck
-            if $read_from_file
-                set --append cmd $file
-            else
-                echo "lint: cannot lint $extension files from stdin"
-                return 2
-            end
-        case .c
-            if $fix
-                set --append cmd --fix-errors
-            end
-            set --function cmd clang-tidy
             if $read_from_file
                 set --append cmd $file
             else

@@ -26,6 +26,11 @@ function repl \
     end
 
     switch $extension
+        case .bash .sh .zsh
+            set --function cmd shellcheck
+            if $read_from_file
+                set --append cmd $file
+            end
         case .fish
             set --function cmd fish --interactive
             if $read_from_file
@@ -35,11 +40,6 @@ function repl \
             set --function cmd deno repl
             if $read_from_file
                 set --append cmd --eval-file $file
-            end
-        case .bash .sh .zsh
-            set --function cmd shellcheck
-            if $read_from_file
-                set --append cmd $file
             end
         case '*'
             echo "repl: no REPL available for $extension files"
