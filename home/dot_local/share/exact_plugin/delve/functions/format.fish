@@ -109,7 +109,8 @@ function format \
                 set --append cmd \
                     --indent-style=space \
                     --jsx-quote-style=single \
-                    --semicolons=as-needed
+                    --semicolons=as-needed \
+                    --javascript-formatter-quote-style=single
             end
             if $write_to_file
                 set --append cmd --write
