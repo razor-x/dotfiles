@@ -25,11 +25,15 @@ function repl \
         end
     end
 
+    set --function stdin_unsupported_message \
+        "repl: loading a file into a $extension REPL is not supported"
+
     switch $extension
         case .bash .sh .zsh
             set --function cmd (string sub --start 2 $extension) -i
             if $read_from_file
-                set --append cmd $file
+                echo $stdin_unsupported_message
+                return 2
             end
         case .fish
             set --function cmd fish --interactive
