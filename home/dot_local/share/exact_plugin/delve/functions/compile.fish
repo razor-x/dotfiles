@@ -30,7 +30,7 @@ function compile \
         case .js .jsx .ts .tsx
             set --function cmd bun build \
                 --target browser \
-                --outfile "$output$extension.dist.js" \
+                --outfile "$output.dist.js" \
                 $file
         case '*'
             echo "compile: no compiler available for $extension files"
