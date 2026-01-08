@@ -90,7 +90,7 @@ function lint \
             if $read_from_file
                 set --append cmd $file
             else
-                echo $fix_unsupported_message
+                echo $stdin_unsupported_message
                 return 2
             end
         case .fish
