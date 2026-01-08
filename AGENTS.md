@@ -16,38 +16,7 @@ This is a **chezmoi-managed dotfiles repository** for Arch Linux user land confi
 
 ## Essential Commands
 
-### Daily Operations
-
-Apply changes from source to home directory:
-```sh
-just apply
-# OR
-chezmoi apply --init
-```
-
-Watch for changes and auto-apply:
-```sh
-just watch
-# OR
-watchexec --watch $(chezmoi source-path) -- chezmoi apply --init
-```
-
-Reset state and reapply everything:
-```sh
-just reset
-# OR manually:
-chezmoi state delete-bucket --bucket=scriptState
-chezmoi state delete-bucket --bucket=entryState
-rm --recursive --force ~/.config/fish
-chezmoi apply --init
-```
-
-Update dotfiles from remote:
-```sh
-just update
-# OR
-chezmoi update --apply --init
-```
+Do NOT run chezmoi commands or just commands: the user is responsible for running those.
 
 ### Navigation
 
