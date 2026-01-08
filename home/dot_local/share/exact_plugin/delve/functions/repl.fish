@@ -27,7 +27,7 @@ function repl \
 
     switch $extension
         case .bash .sh .zsh
-            set --function cmd shellcheck
+            set --function cmd (string sub --start 2 $extension) -i
             if $read_from_file
                 set --append cmd $file
             end
