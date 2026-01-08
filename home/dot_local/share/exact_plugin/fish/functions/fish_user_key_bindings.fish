@@ -44,6 +44,8 @@ function fish_user_key_bindings \
     bind --erase --preset --mode insert backspace
     bind --mode insert backspace backward-char
     bind --mode insert ctrl-shift-l forward-char
+    bind --mode insert ctrl-shift-k up-line
+    bind --mode insert ctrl-shift-j down-line-or-continuation
     bind --mode insert ctrl-f forward-word
     bind --mode insert ctrl-r backward-word-or-atuin
     bind --mode insert ctrl-shift-f forward-token
@@ -106,8 +108,6 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-i 'commandline " git status"; commandline --function execute'
     bind --mode insert ctrl-o 'commandline " git add --patch"; execute-in-stack'
     bind --mode insert ctrl-u 'commandline " git diff --cached"; execute-in-stack'
-    # bind --mode insert ctrl-shift-k
-    # bind --mode insert ctrl-shift-j
     # bind --mode insert ctrl-u
     # bind --mode insert ctrl-;
     # bind --mode insert ctrl-b
