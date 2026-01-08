@@ -41,8 +41,8 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-n down-or-search
 
     # Navigate prompt.
-    bind --mode insert ctrl-shift-h backward-char
-    bind --mode insert ctrl-shift-l forward-char
+    bind --mode insert ctrl-shift-j backward-char
+    bind --mode insert ctrl-shift-k forward-char
     bind --mode insert ctrl-f forward-word
     bind --mode insert ctrl-r backward-word-or-atuin
     bind --mode insert ctrl-shift-f forward-token
@@ -51,7 +51,7 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-e end-of-line accept-autosuggestion
 
     # Delete from prompt.
-    bind --mode insert ctrl-b backward-delete-char
+    bind --mode insert ctrl-shift-h backward-delete-char
     bind --mode insert ctrl-w backward-kill-word-or-navi
     bind --mode insert ctrl-shift-w backward-kill-token
     bind --mode insert ctrl-backspace backward-kill-path-component
@@ -105,6 +105,8 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-i 'commandline " git status"; commandline --function execute'
     bind --mode insert ctrl-o 'commandline " git add --patch"; execute-in-stack'
     bind --mode insert ctrl-u 'commandline " git diff --cached"; execute-in-stack'
+    # bind --mode insert ctrl-shift-l
     # bind --mode insert ctrl-u
     # bind --mode insert ctrl-;
+    # bind --mode insert ctrl-b
 end
