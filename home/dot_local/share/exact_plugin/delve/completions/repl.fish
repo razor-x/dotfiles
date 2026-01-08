@@ -1,5 +1,7 @@
 function __fish_complete_repl_files
-    set --local token (string replace --regex '\.$' '' -- (commandline --cut-at-cursor --current-token))
+    set --function token \
+        (string replace --regex '\.$' '' -- (commandline --cut-at-cursor --current-token))
+
     for file in \
         $token*.fish \
         $token*.js \

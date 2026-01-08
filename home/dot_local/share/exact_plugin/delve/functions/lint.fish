@@ -63,10 +63,10 @@ function lint \
         return 1
     end
 
-    set --local fix_unsupported_message \
+    set --function fix_unsupported_message \
         "lint: -f/--fix is not supported for $extension files"
 
-    set --local stdin_unsupported_message \
+    set --function stdin_unsupported_message \
         "lint: cannot lint $extension files from stdin"
 
     switch $extension

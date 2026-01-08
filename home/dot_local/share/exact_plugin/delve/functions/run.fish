@@ -57,7 +57,7 @@ function run \
         return 1
     end
 
-    set --local stdin_unsupported_message \
+    set --function stdin_unsupported_message \
         "run: cannot run $extension files from stdin"
 
     switch $extension
