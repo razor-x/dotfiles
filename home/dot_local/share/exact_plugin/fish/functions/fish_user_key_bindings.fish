@@ -69,7 +69,7 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-v fish_clipboard_paste
     bind --mode insert ctrl-shift-v 'commandline --insert "(fish_clipboard_paste)"'
     bind --mode insert ctrl-y 'commandline | string collect | fish_clipboard_copy'
-    bind --mode insert ctrl-shift-c 'commandline --insert fish_clipboard_copy '
+    bind --mode insert ctrl-shift-c copy_file_to_clipboard
     bind --mode insert ctrl-comma pipe_from_clipboard
     bind --mode insert ctrl-. pipe_to_clipboard
 
