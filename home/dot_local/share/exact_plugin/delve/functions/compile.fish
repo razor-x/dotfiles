@@ -30,6 +30,10 @@ function compile \
         case .js .jsx .ts .tsx
             set --function cmd bun build \
                 --target browser \
+                --external react \
+                --external react/jsx-runtime \
+                --external react/jsx-dev-runtime \
+                --external react-dom \
                 --outfile "$output.dist.js" \
                 $file
         case '*'
