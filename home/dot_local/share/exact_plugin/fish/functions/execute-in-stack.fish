@@ -8,11 +8,7 @@ function execute-in-stack \
         commandline --replace ''
 
         kitty @ goto-layout stack
-
-        # Use script (instead of exec) which allocates a pty for interactive commands, e.g., git add --patch.
-        # Pipe to /dev/null to discard the typescript recording file.
-        script --quiet --command 'fish --interactive --command "'$cmd'"' /dev/null
-
+        fish --interactive --command $cmd
         kitty @ last-used-layout
     else
         commandline --function execute
