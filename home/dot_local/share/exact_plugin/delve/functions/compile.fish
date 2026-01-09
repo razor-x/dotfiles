@@ -23,6 +23,42 @@ function compile \
     set --function output (path change-extension '' $file)
     set --function basename (path basename $output)
 
+    set --function html_document \
+'<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <title>__basename__</title>
+  <script type="module" src="__basename__.dist.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
+'
+
+    set --function html_document_with_react \
+'<!doctype html>
+<html lang="en-US">
+<head>
+  <title>__basename__</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react?dev",
+        "react/jsx-dev-runtime": "https://esm.sh/react/jsx-dev-runtime?dev",
+        "react-dom/client": "https://esm.sh/react-dom/client?dev"
+      }
+    }
+  </script>
+  <script type="module" src="__basename__.dist.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
+'
+
     switch $extension
         case .c
             set --function cmd clang -o $output $file
@@ -34,16 +70,8 @@ function compile \
                 --outfile "$output.dist.js" \
                 $file
             or return
-
-            echo "<!DOCTYPE html>
-<html>
-<head>
-  <title>$basename</title>
-</head>
-<body>
-  <script type=\"module\" src=\"$basename.dist.js\"></script>
-</body>
-</html>" > "$output.html"
+            string replace --all __basename__ $basename \
+                $html_document > "$output.html"
             return
         case .jsx .tsx
             bun build \
@@ -55,27 +83,8 @@ function compile \
                 --outfile "$output.dist.js" \
                 $file
             or return
-
-            echo "<!DOCTYPE html>
-<html>
-<head>
-  <title>$basename</title>
-  <script type=\"importmap\">
-    {
-      \"imports\": {
-        \"react\": \"https://esm.sh/react@18?dev\",
-        \"react/jsx-runtime\": \"https://esm.sh/react@18/jsx-runtime?dev\",
-        \"react/jsx-dev-runtime\": \"https://esm.sh/react@18/jsx-dev-runtime?dev\",
-        \"react-dom/client\": \"https://esm.sh/react-dom@18/client?dev\"
-      }
-    }
-  </script>
-</head>
-<body>
-  <div id=\"root\"></div>
-  <script type=\"module\" src=\"$basename.dist.js\"></script>
-</body>
-</html>" > "$output.html"
+            string replace --all __basename__ $basename \
+                $html_document_with_react > "$output.html"
             return
         case '*'
             echo "compile: no compiler available for $extension files"
