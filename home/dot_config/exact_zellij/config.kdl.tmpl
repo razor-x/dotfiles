@@ -249,25 +249,25 @@ keybinds clear-defaults=true {
         bind "Alt Shift tab" { CloseTab; }
         bind "Alt tab" { NewTab; }
         bind "Alt w" { CloseFocus; }
-        bind "Ctrl h" {
+        bind "Ctrl Shift h" {
             MessagePlugin "vim-zellij-navigator" {
                 name "move_focus";
                 payload "left";
             };
         }
-        bind "Ctrl j" {
+        bind "Ctrl Shift j" {
             MessagePlugin "vim-zellij-navigator" {
                 name "move_focus";
                 payload "down";
             };
         }
-        bind "Ctrl k" {
+        bind "Ctrl Shift k" {
             MessagePlugin "vim-zellij-navigator" {
                 name "move_focus";
                 payload "up";
             };
         }
-        bind "Ctrl l" {
+        bind "Ctrl Shift l" {
             MessagePlugin "vim-zellij-navigator" {
                 name "move_focus";
                 payload "right";
