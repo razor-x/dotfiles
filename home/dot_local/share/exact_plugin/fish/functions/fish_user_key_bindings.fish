@@ -43,9 +43,9 @@ function fish_user_key_bindings \
     # Navigate prompt.
     bind --erase --preset --mode insert backspace
     bind --mode insert backspace backward-char
-    bind --mode insert ctrl-shift-l forward-char
-    bind --mode insert ctrl-shift-k up-line
-    bind --mode insert ctrl-shift-j down-line-or-continuation
+    bind --mode insert ctrl-l forward-char
+    bind --mode insert ctrl-k up-line
+    bind --mode insert ctrl-j down-line-or-continuation
     bind --mode insert ctrl-f forward-word
     bind --mode insert ctrl-r backward-word-or-atuin
     bind --mode insert ctrl-shift-f forward-token
@@ -54,7 +54,7 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-e end-of-line accept-autosuggestion
 
     # Delete from prompt.
-    bind --mode insert ctrl-shift-h backward-delete-char
+    bind --mode insert ctrl-h backward-delete-char
     bind --mode insert ctrl-w backward-kill-word-or-navi
     bind --mode insert ctrl-shift-w backward-kill-token
     bind --mode insert ctrl-backspace backward-kill-path-component
