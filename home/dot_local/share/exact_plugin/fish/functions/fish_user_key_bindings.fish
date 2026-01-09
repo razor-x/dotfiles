@@ -85,8 +85,13 @@ function fish_user_key_bindings \
 
     # Control.
     bind --mode insert ctrl-d exit
-    bind --mode insert ctrl-enter execute-in-stack
-    bind --mode insert ctrl-shift-enter execute-in-split
+
+    # Execute.
+    for mode in default insert visual
+        bind --mode $mode ctrl-enter execute-in-stack
+        bind --mode $mode ctrl-shift-enter execute-in-split
+        bind --mode $mode shift-enter execute-in-tab
+    end
 
     # Vi default (normal) mode bindings.
     bind --mode default U redo
