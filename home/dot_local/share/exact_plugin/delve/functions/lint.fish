@@ -47,7 +47,7 @@ function lint \
     if test (count $argv) -eq 1
         set --function file $argv[1]
 
-        if not test -e "$file"
+        if not test -f "$file"
             echo "lint: no file exists named $file"
             return 1
         end

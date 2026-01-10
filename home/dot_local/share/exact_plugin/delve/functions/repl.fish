@@ -12,7 +12,7 @@ function repl \
         set --function file $argv[1]
         set --function read_from_file true
 
-        if not test -e "$file"
+        if not test -f "$file"
             echo "repl: no file exists named $file"
             return 1
         end
