@@ -1,7 +1,7 @@
 function lint \
     --description 'Lint a file or stdin with an appropriate code linter'
 
-    argparse 'e/extension=' 'f/fix' -- $argv
+    argparse 'e/extension=' -- $argv
     or return
 
     if isatty stdin
@@ -16,12 +16,6 @@ function lint \
         set --function read_from_file true
     end
 
-    if set --query _flag_fix
-        set --function fix true
-    else
-        set --function fix false
-    end
-
     if set --query --function _flag_extension
         if not string match --quiet '.*' $_flag_extension
             set --function extension .$_flag_extension
@@ -34,7 +28,7 @@ function lint \
             $use_stdin; and test (count $argv) -gt 0
         end;
         or not $use_stdin; and test (count $argv) -ne 1
-        echo 'usage: lint [(-e | --extension) EXT] [(-f | --fix)] FILE'
+        echo 'usage: lint [(-e | --extension) EXT] FILE'
         echo '       COMMAND | lint (-e | --extension) EXT'
         return 1
     end
@@ -63,19 +57,12 @@ function lint \
         return 1
     end
 
-    set --function fix_unsupported_message \
-        "lint: -f/--fix is not supported for $extension files"
-
     set --function stdin_unsupported_message \
         "lint: cannot lint $extension files from stdin"
 
     switch $extension
         case .bash .sh .zsh
             set --function cmd shellcheck
-            if $fix
-                echo $fix_unsupported_message
-                return 2
-            end
             if $read_from_file
                 set --append cmd $file
             else
@@ -84,9 +71,6 @@ function lint \
             end
         case .c
             set --function cmd clang-tidy
-            if $fix
-                set --append cmd --fix-errors
-            end
             if $read_from_file
                 set --append cmd $file
             else
@@ -95,18 +79,11 @@ function lint \
             end
         case .fish
             set --function cmd fish --no-execute
-            if $fix
-                echo $fix_unsupported_message
-                return 2
-            end
             if $read_from_file
                 set --append cmd $file
             end
         case .go
             set --function cmd golangci-lint run
-            if $fix
-                set --append cmd --fix
-            end
             if $read_from_file
                 set --append cmd $file
             else
@@ -115,9 +92,6 @@ function lint \
             end
         case .js .jsx .ts .tsx
             set --function cmd biome lint
-            if $fix
-                set --append cmd --write
-            end
             if $read_from_file
                 set --append cmd $file
             else
