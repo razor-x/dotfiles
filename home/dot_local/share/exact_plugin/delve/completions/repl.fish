@@ -8,9 +8,6 @@ function __fish_complete_repl_files
         $token*.jsx \
         $token*.ts \
         $token*.tsx \
-        $token*.bash \
-        $token*.sh \
-        $token*.zsh \
         $token*/
         if test -e $file
             echo $file
