@@ -24,6 +24,10 @@ function typecheck \
         return 1
     end
 
+    if not set --query --function extension
+        set --function extension (path extension $file)
+    end
+
     if test -z "$extension"
         echo "typecheck: cannot typecheck files missing a file extension: $file"
         echo "use 'typecheck -e EXT FILE' to typecheck this file"
@@ -37,7 +41,7 @@ function typecheck \
             set --function cmd go vet $file
         case .ts .tsx
             set --function cmd tsc --noEmit
-            if $extension = .tsx
+            if test $extension = .tsx
                 set --append cmd --jsx react-jsx --skipLibCheck
             end
             set --append cmd $file
