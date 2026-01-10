@@ -36,7 +36,11 @@ function typecheck \
         case .go
             set --function cmd go vet $file
         case .ts .tsx
-            set --function cmd tsc --noEmit $file
+            set --function cmd tsc --noEmit
+            if $extension = .tsx
+                set --append cmd --jsx react-jsx --skipLibCheck
+            end
+            set --append cmd $file
         case '*'
             echo "typecheck: no type checker available for $extension files"
             return 2
