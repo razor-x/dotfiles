@@ -36,7 +36,7 @@ function fix \
 
     switch $extension
         case .c
-            set --function cmd clang-tidy --fix-errors $file
+            set --function cmd clang-tidy --fix-errors $file --
         case .go
             set --function cmd golangci-lint run --fix $file
         case .js .jsx .ts .tsx

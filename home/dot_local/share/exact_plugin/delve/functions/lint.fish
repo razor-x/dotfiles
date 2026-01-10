@@ -72,7 +72,7 @@ function lint \
         case .c
             set --function cmd clang-tidy
             if $read_from_file
-                set --append cmd $file
+                set --append cmd $file --
             else
                 echo $stdin_unsupported_message
                 return 2
