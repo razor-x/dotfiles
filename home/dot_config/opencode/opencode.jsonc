@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "keybinds": {
+    "input_backspace": "ctrl+h",
+    "input_move_left": "backspace",
+    "input_move_right": "ctrl+l",
+    "input_move_up": "ctrl+k",
+    "input_move_down": "ctrl+j",
+  }
+}
