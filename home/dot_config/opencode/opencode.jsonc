@@ -52,7 +52,7 @@
     "input_clear": "ctrl+c",
     "input_paste": "ctrl+v",
     "input_submit": "return",
-    "input_newline": "shift+return,alt+return,ctrl+j",
+    "input_newline": "shift+return",
     "input_move_left": "backspace",
     "input_move_right": "ctrl+l",
     "input_move_up": "ctrl+k",
