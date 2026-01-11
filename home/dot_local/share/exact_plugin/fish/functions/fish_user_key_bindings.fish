@@ -58,9 +58,11 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-w backward-kill-word-or-navi
     bind --mode insert ctrl-shift-w backward-kill-token
     bind --mode insert ctrl-backspace backward-kill-path-component
-    bind --mode insert ctrl-shift-backspace backward-kill-line
+    bind --mode insert shift-backspace backward-kill-line
+    bind --mode insert ctrl-shift-backspace kill-whole-line
     bind --mode insert ctrl-delete kill-path-component
-    bind --mode insert ctrl-shift-delete kill-line
+    bind --mode insert shift-delete kill-line
+    bind --mode insert ctrl-shift-delete kill-whole-line
 
     # Manipulate prompt.
     bind --mode insert ctrl-z undo
@@ -79,8 +81,8 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-. pipe_to_clipboard
 
     # Clear scrollback.
-    bind --mode insert shift-backspace scrollback-push
-    bind --mode insert shift-delete clear-screen
+    bind --mode insert ctrl-shift-c scrollback-push
+    bind --mode insert ctrl-shift-d clear-screen
 
     # Get info.
     bind --mode insert ctrl-/ __fish_man_page
