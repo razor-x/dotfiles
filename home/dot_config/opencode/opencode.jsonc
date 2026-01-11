@@ -5,7 +5,9 @@
     // https://github.com/anomalyco/opencode/issues/3657#issuecomment-3734001607
     "leader": "ctrl+d,ctrl+space",
 
+    // UPSTREAM: Anything bound to <leader>q will not trigger.
     "app_exit": "<leader>q",
+
     "editor_open": "<leader>e",
     "theme_list": "<leader>t",
     "sidebar_toggle": "<leader>b",
