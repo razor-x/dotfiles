@@ -58,7 +58,9 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-w backward-kill-word-or-navi
     bind --mode insert ctrl-shift-w backward-kill-token
     bind --mode insert ctrl-backspace backward-kill-path-component
-    bind --mode insert ctrl-delete kill-line
+    bind --mode insert ctrl-shift-backspace backward-kill-line
+    bind --mode insert ctrl-delete kill-path-component
+    bind --mode insert ctrl-shift-delete kill-line
 
     # Manipulate prompt.
     bind --mode insert ctrl-z undo
