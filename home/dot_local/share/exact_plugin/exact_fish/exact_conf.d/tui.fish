@@ -50,7 +50,7 @@ if status is-interactive
 
     # Colorize help text using bat.
     # https://github.com/sharkdp/bat#highlighting---help-messages
-    abbr --add --position anywhere -- --help '--help | bat -plhelp --paging=always'
+    abbr --add --position anywhere -- --help '--help | bat -plhelp'
 
     abbr rmf rm -rf
 
