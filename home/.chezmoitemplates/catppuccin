@@ -23,7 +23,7 @@
 {{- else if eq .app "mise" -}}
   catppuccin
 {{- else if eq .app "opencode" -}}
-  {{- if has $flavor (list "macchiato") -}}
+  {{- if has $flavor (list "frappe" "macchiato") -}}
     catppuccin-{{ $flavor }}
   {{- else -}}
     catppuccin
