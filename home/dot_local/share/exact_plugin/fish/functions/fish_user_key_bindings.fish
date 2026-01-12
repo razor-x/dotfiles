@@ -113,10 +113,19 @@ function fish_user_key_bindings \
         bind --mode $mode shift-tab complete-and-search
     end
 
+    # Show Git status.
+    bind --mode insert ctrl-i \
+        'commandline " git status"; commandline --function execute'
+
+    # Interactively stage changes with Git.
+    bind --mode insert ctrl-o \
+        'commandline " git add --patch"; execute-in-stack'
+
+    # Show diff of staged changes with Git.
+    bind --mode insert ctrl-u \
+        'commandline " git diff --cached"; execute-in-stack'
+
     # TODO: Bind open keys.
-    bind --mode insert ctrl-i 'commandline " git status"; commandline --function execute'
-    bind --mode insert ctrl-o 'commandline " git add --patch"; execute-in-stack'
-    bind --mode insert ctrl-u 'commandline " git diff --cached"; execute-in-stack'
     # bind --mode insert ctrl-u
     # bind --mode insert ctrl-;
     # bind --mode insert ctrl-b
