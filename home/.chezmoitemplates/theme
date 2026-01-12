@@ -29,6 +29,8 @@
   {{- end -}}
 {{- else if eq .app "zellij" -}}
   {{ $name }}
+{{- else if eq .app "opencode" -}}
+  {{ $name }}
 {{- else -}}
   {{- fail (printf "No catppuccin theme installed for %s." .app) -}}
 {{- end -}}

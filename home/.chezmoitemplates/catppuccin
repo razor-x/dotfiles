@@ -22,6 +22,12 @@
   Catppuccin-{{ $flavor | title }}
 {{- else if eq .app "mise" -}}
   catppuccin
+{{- else if eq .app "opencode" -}}
+  {{- if has $flavor (list "macchiato") -}}
+    catppuccin-{{ $flavor }}
+  {{- else -}}
+    catppuccin
+  {{- end -}}
 {{- else if eq .app "yazi" -}}
   {{- if eq .mode "light" -}}
     catppuccin-{{ $lightFlavor }}

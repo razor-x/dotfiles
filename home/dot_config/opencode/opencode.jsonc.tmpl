@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "theme": "{{ template "theme" (merge (dict "app" "opencode") .) }}",
   "keybinds": {
     // UPSTREAM: Mapping ctrl+space to leader is not working.
     // https://github.com/anomalyco/opencode/issues/3657#issuecomment-3734001607
