@@ -19,8 +19,8 @@
 .config/yazi/{{ . }}
 {{ end -}}
 
-# Ignore misc environment variables.
-.config/environment.d/99-misc.conf
+# Ignore private environment variables.
+.config/environment.d/99-private.conf
 
 {{ if not (has .chezmoi.hostname (list "minto" "anny")) -}}
 .config/nvim/**
