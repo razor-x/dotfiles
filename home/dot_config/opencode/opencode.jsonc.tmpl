@@ -6,6 +6,22 @@
       "*/opencode/tool-output/*": "allow"
     }
   },
+  "mcp": {
+    "github": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp",
+      "oauth": false,
+      "headers": {
+        "Authorization": "Bearer {env:GITHUB_MCP_TOKEN}"
+      },
+      "enabled": true
+    },
+    "linear": {
+      "type": "remote",
+      "url": "https://mcp.linear.app/mcp",
+      "enabled": true
+    }
+  },
   "keybinds": {
     // UPSTREAM: Mapping ctrl+space to leader is not working.
     // https://github.com/anomalyco/opencode/issues/3657#issuecomment-3734001607
