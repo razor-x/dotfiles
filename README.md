@@ -194,6 +194,16 @@ set --export GITHUB_PACKAGES_TOKEN (fish_clipboard_paste) \
   && chezmoi apply
 ```
 
+### Add an MCP OAuth Client Secret
+
+Open the [OpenCode MCP OAuth app](https://github.com/settings/apps/opencode-mcp),
+generate and copy a new client secret
+
+```sh
+set --export GITHUB_MCP_CLIENT_SECRET (fish_clipboard_paste) \
+  && chezmoi apply
+```
+
 ### Reboot
 
 Reboot the machine
