@@ -81,8 +81,7 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-. pipe_to_clipboard
 
     # Clear scrollback.
-    bind --mode insert ctrl-shift-c scrollback-push
-    bind --mode insert ctrl-shift-d clear-screen
+    bind --mode insert ctrl-shift-d scrollback-push
 
     # Get info.
     bind --mode insert ctrl-/ __fish_man_page
