@@ -91,9 +91,9 @@ function fish_user_key_bindings \
 
     # Execute.
     for mode in default insert visual
-        bind --mode $mode ctrl-enter execute-in-stack
-        bind --mode $mode ctrl-shift-enter execute-in-split
-        bind --mode $mode shift-enter execute-in-tab
+        bind --mode $mode shift-enter execute-in-stack
+        bind --mode $mode ctrl-enter execute-in-split
+        bind --mode $mode ctrl-shift-enter execute-in-tab
     end
 
     # Vi default (normal) mode bindings.
