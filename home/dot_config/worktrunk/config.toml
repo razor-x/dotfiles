@@ -1,0 +1,3 @@
+# Nested bare repo (git clone --bare <url> project/.git)
+# Creates: ~/code/project/feature-auth (sibling to .git)
+worktree-path = "../{{ branch | sanitize }}"
