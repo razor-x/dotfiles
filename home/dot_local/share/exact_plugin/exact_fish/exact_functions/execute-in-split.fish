@@ -4,11 +4,8 @@ function execute-in-split \
     argparse 'before' -- $argv
     or return
 
-    set --function cmd $argv
-    if test -z "$cmd"
-        commandline --function expand-abbr
-        set --function cmd (commandline)
-    end
+    commandline --function expand-abbr
+    set --function cmd (commandline)
 
     set --function location after
     if set --query _flag_before
