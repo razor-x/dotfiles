@@ -117,19 +117,28 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-i \
         'commandline " git status"; commandline --function execute'
 
+    # Reset all staged changes with Git.
+    bind --mode insert ctrl-shift-i \
+        'commandline " git reset ."; commandline --function execute'
+
     # Interactively stage changes with Git.
     bind --mode insert ctrl-o \
         'commandline " git add --patch"; execute-in-stack'
-
-    # Show diff of staged changes with Git.
-    bind --mode insert ctrl-u \
-        'commandline " git diff --cached"; execute-in-stack'
 
     # Start opencode in a new split.
     bind --mode insert ctrl-shift-o \
         'commandline " opencode"; execute-in-split'
 
+    # Show diff of staged changes with Git.
+    bind --mode insert ctrl-u \
+        'commandline " git diff --cached"; execute-in-stack'
+
+    # Show diff of proposed changes with Git.
+    bind --mode insert ctrl-shift-u \
+        'commandline " git diff (git merge-base main HEAD)"; execute-in-stack'
+
     # TODO: Bind open keys.
-    # bind --mode insert ctrl-u
+    # bind --mode insert ctrl-shift-i
     # bind --mode insert ctrl-b
+    # bind --mode insert ctrl-shift-b
 end
