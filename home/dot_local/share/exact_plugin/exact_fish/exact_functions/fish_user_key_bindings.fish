@@ -11,6 +11,7 @@ function fish_user_key_bindings \
     bind \
         | grep --extended-regexp --no-ignore-case 'bind --preset (-M \w+ )?(ctrl|alt|shift)' \
         # Keep ctrl-space which inserts a literal space without expanding abbreviations.
+        # Pressing j then space on home row mods will often be read as ctrl-space and thus must work like space.
         | grep --invert-match ctrl-space \
         # Keep escape (ctrl-[) which toggles normal and insert mode.
         | grep --invert-match 'ctrl-\[' \
@@ -25,7 +26,7 @@ function fish_user_key_bindings \
 
     # Configure fzf bindings.
     fzf_configure_bindings \
-        --directory='ctrl-space' \
+        --directory='shift-space' \
         --git_log="ctrl-'" \
         --git_status='ctrl-shift-space' \
         --history='' \
