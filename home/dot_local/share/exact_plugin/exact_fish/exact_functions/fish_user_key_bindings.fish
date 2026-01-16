@@ -26,9 +26,9 @@ function fish_user_key_bindings \
 
     # Configure fzf bindings.
     fzf_configure_bindings \
-        --directory='shift-space' \
+        --directory='ctrl-shift-space' \
         --git_log="ctrl-'" \
-        --git_status='ctrl-shift-space' \
+        --git_status='ctrl-;' \
         --history='' \
         --processes='ctrl-\\' \
         --variables='ctrl-x'
@@ -127,6 +127,5 @@ function fish_user_key_bindings \
 
     # TODO: Bind open keys.
     # bind --mode insert ctrl-u
-    # bind --mode insert ctrl-;
     # bind --mode insert ctrl-b
 end
