@@ -125,9 +125,9 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-o \
         'commandline " git add --patch"; execute-in-stack'
 
-    # Start opencode in a new split.
+    # Focus opencode or open it in in a new split.
     bind --mode insert ctrl-shift-o \
-        'commandline " opencode"; execute-in-split --before'
+        'focus_or_execute_in_split --before --command opencode'
 
     # Show diff of staged changes with Git.
     bind --mode insert ctrl-u \
