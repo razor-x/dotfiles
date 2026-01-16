@@ -125,15 +125,23 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-o \
         'commandline " git add --patch"; execute-in-stack'
 
-    # Start opencode in a new split.
-    bind --mode insert ctrl-shift-o \
-        'commandline " opencode"; execute-in-split --before'
+    # Open GitUI in a new stack
+    bind --mode insert ctrl-shift-g \
+        'commandline " gitui"; execute-in-stack'
 
-    # Show diff of staged changes with Git.
+    # Focus Neovim or open it in a new split.
+    bind --mode insert ctrl-shift-\; \
+        'execute-in-split-or-focus --before nvim'
+
+    # Focus OpenCode or open it in a new split.
+    bind --mode insert ctrl-shift-o \
+        'execute-in-split-or-focus --before opencode'
+
+    # Show stacked diff of staged changes with Git.
     bind --mode insert ctrl-u \
         'commandline " git diff --cached"; execute-in-stack'
 
-    # Show diff of proposed changes with Git.
+    # Show stacked diff of proposed changes with Git.
     bind --mode insert ctrl-shift-u \
         'commandline " git diff (git merge-base main HEAD)"; execute-in-stack'
 

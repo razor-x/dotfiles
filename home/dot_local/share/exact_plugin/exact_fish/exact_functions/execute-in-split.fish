@@ -4,8 +4,11 @@ function execute-in-split \
     argparse 'before' -- $argv
     or return
 
-    commandline --function expand-abbr
-    set --function cmd (commandline)
+    set --function cmd $argv
+    if test -z "$cmd"
+        commandline --function expand-abbr
+        set --function cmd (commandline)
+    end
 
     set --function location after
     if set --query _flag_before
@@ -18,6 +21,7 @@ function execute-in-split \
         kitty @ launch --cwd=current --location=$location \
             fish --interactive --command $cmd
     else
+        commandline --replace " $cmd"
         commandline --function execute
     end
 end
