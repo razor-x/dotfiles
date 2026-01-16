@@ -106,6 +106,8 @@ if status is-interactive
 
     alias srv caddy_file_server
 
+    alias o opencode
+
     # Set fifc editor.
     set --export fifc_editor $VISUAL
 end

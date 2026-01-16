@@ -125,6 +125,10 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-u \
         'commandline " git diff --cached"; execute-in-stack'
 
+    # Start opencode in a new split.
+    bind --mode insert ctrl-shift-o \
+        'commandline " opencode"; execute-in-split'
+
     # TODO: Bind open keys.
     # bind --mode insert ctrl-u
     # bind --mode insert ctrl-b
