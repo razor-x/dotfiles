@@ -127,7 +127,7 @@ function fish_user_key_bindings \
 
     # Start opencode in a new split.
     bind --mode insert ctrl-shift-o \
-        'commandline " opencode"; execute-in-split'
+        'commandline " opencode"; execute-in-split --before'
 
     # Show diff of staged changes with Git.
     bind --mode insert ctrl-u \
