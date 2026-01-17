@@ -39,6 +39,8 @@ function typecheck \
             set --function cmd clang-check $file
         case .go
             set --function cmd go vet $file
+        case .py
+            set --function cmd pyright $file
         case .ts .tsx
             set --function cmd tsc --noEmit
             if test $extension = .tsx

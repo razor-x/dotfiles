@@ -8,6 +8,7 @@ function __fish_complete_repl_files
         $token*.jsx \
         $token*.ts \
         $token*.tsx \
+        $token*.py \
         $token*/
         if test -e $file
             echo $file
@@ -22,6 +23,7 @@ function __fish_complete_repl_extensions
         jsx 'JavaScript JSX' \
         ts TypeScript \
         tsx 'TypeScript JSX' \
+        py Python \
         bash Bash \
         sh Shell \
         zsh Zsh

@@ -102,6 +102,17 @@ function format \
             if $read_from_file
                 set --append cmd $file
             end
+        case .py
+            set --function cmd ruff format
+            if $read_from_file; and not $write_to_file
+                command cat $file | ruff format --stdin-filename $file -
+                return
+            end
+            if $read_from_file
+                set --append cmd $file
+            else
+                set --append cmd --stdin-filename tmp.py -
+            end
         case .js .jsx .ts .tsx
             set --function cmd biome format
             if not biome rage 2>/dev/null \

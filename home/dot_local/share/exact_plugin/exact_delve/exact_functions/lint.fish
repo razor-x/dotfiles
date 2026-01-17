@@ -90,6 +90,13 @@ function lint \
                 echo $stdin_unsupported_message
                 return 2
             end
+        case .py
+            set --function cmd ruff check
+            if $read_from_file
+                set --append cmd $file
+            else
+                set --append cmd --stdin-filename tmp.py -
+            end
         case .js .jsx .ts .tsx
             set --function cmd biome lint
             if $read_from_file

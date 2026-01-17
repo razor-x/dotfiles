@@ -7,6 +7,7 @@ function __fish_complete_typecheck_files
         $token*.go \
         $token*.ts \
         $token*.tsx \
+        $token*.py \
         $token*/
         if test -e $file
             echo $file
@@ -19,7 +20,8 @@ function __fish_complete_typecheck_extensions
         c C \
         go Go \
         ts TypeScript \
-        tsx 'TypeScript JSX'
+        tsx 'TypeScript JSX' \
+        py Python
 end
 
 complete \

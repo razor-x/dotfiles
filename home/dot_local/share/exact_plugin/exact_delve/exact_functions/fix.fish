@@ -39,6 +39,8 @@ function fix \
             set --function cmd clang-tidy --fix-errors $file --
         case .go
             set --function cmd golangci-lint run --fix $file
+        case .py
+            set --function cmd ruff check --fix $file
         case .js .jsx .ts .tsx
             set --function cmd biome lint --write $file
         case '*'

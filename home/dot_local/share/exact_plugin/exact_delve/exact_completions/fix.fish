@@ -9,6 +9,7 @@ function __fish_complete_fix_files
         $token*.jsx \
         $token*.ts \
         $token*.tsx \
+        $token*.py \
         $token*/
         if test -e $file
             echo $file
@@ -23,7 +24,8 @@ function __fish_complete_fix_extensions
         js JavaScript \
         jsx 'JavaScript JSX' \
         ts TypeScript \
-        tsx 'TypeScript JSX'
+        tsx 'TypeScript JSX' \
+        py Python
 end
 
 complete \
