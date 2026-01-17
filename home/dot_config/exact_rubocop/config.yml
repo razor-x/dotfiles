@@ -1,6 +1,0 @@
----
-# Allows running rubocop on isolated files outside of a project.
-# Otherwise, rubocop will print a warning.
-# https://docs.rubocop.org/rubocop/versioning.html#pending-cops
-AllCops:
-  NewCops: enable

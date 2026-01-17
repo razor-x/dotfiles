@@ -113,7 +113,7 @@ function format \
                 set --append cmd --stdin-filename tmp.py -
             end
         case .rb
-            set --function cmd rubocop --force-default-config --fix-layout --autocorrect
+            set --function cmd rubocop --enable-pending-cops --fix-layout --autocorrect
             if $read_from_file
                 set --append cmd $file
             else
