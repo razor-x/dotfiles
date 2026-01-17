@@ -104,9 +104,8 @@ function format \
             end
         case .py
             set --function cmd ruff format
-            if $read_from_file; and not $write_to_file
-                command cat $file | ruff format --stdin-filename $file -
-                return
+            if not $write_to_file
+                set --append cmd --check
             end
             if $read_from_file
                 set --append cmd $file
