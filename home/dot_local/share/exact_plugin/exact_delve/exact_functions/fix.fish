@@ -41,6 +41,8 @@ function fix \
             set --function cmd golangci-lint run --fix $file
         case .py
             set --function cmd ruff check --fix $file
+        case .rb
+            set --function cmd rubocop --force-default-config --lint --autocorrect $file
         case .js .jsx .ts .tsx
             set --function cmd biome lint --write $file
         case '*'

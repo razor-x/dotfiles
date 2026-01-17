@@ -88,6 +88,11 @@ function run \
             else
                 set --append cmd -
             end
+        case .rb
+            set --function cmd ruby
+            if $read_from_file
+                set --append cmd $file
+            end
         case .bash .sh
             set --function cmd bash
             if $read_from_file

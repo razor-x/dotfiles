@@ -45,6 +45,11 @@ function repl \
             if $read_from_file
                 set --append cmd --eval-file $file
             end
+        case .rb
+            set --function cmd pry
+            if $read_from_file
+                set --append cmd --require $file
+            end
         case .py
             set --function cmd bpython --interactive
             if $read_from_file

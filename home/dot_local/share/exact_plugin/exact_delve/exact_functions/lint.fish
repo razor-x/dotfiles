@@ -97,6 +97,13 @@ function lint \
             else
                 set --append cmd --stdin-filename tmp.py -
             end
+        case .rb
+            set --function cmd rubocop --force-default-config --lint
+            if $read_from_file
+                set --append cmd $file
+            else
+                set --append cmd --stdin tmp.rb
+            end
         case .js .jsx .ts .tsx
             set --function cmd biome lint
             if $read_from_file
