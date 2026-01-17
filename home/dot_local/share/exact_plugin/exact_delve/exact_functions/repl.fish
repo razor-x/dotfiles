@@ -48,6 +48,10 @@ function repl \
         case .rb
             set --function cmd pry
             if $read_from_file
+                if not string match --quiet '.*' $file;
+                    or not string match --quiet '/*' $file
+                    set --function file "./$file"
+                end
                 set --append cmd --require $file
             end
         case .py
