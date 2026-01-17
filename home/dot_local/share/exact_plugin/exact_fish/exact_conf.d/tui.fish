@@ -57,13 +57,6 @@ if status is-interactive
 
     alias d yazi_change_cwd
 
-    abbr cljrepl lein repl
-    abbr pyrepl bpython
-    abbr rbrepl pry
-
-    abbr jsrepl node
-    abbr fmtjs prettier --write --single-quote --jsx-single-quote --no-semi
-
     abbr npr npm run
 
     abbr md glow --tui
