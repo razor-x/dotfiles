@@ -1,5 +1,5 @@
-function typecheck \
-    --description 'Typecheck a file with an appropriate type checker'
+function check \
+    --description 'Check a file with an appropriate static analyzer'
 
     argparse 'e/extension=' -- $argv
     or return
@@ -13,14 +13,14 @@ function typecheck \
     end
 
     if test (count $argv) -ne 1
-        echo 'usage: typecheck [(-e | --extension) EXT] FILE'
+        echo 'usage: check [(-e | --extension) EXT] FILE'
         return 1
     end
 
     set --function file $argv[1]
 
     if not test -f "$file"
-        echo "typecheck: no file exists named $file"
+        echo "check: no file exists named $file"
         return 1
     end
 
@@ -29,8 +29,8 @@ function typecheck \
     end
 
     if test -z "$extension"
-        echo "typecheck: cannot typecheck files missing a file extension: $file"
-        echo "use 'typecheck -e EXT FILE' to typecheck this file"
+        echo "check: cannot check files missing a file extension: $file"
+        echo "use 'check -e EXT FILE' to check this file"
         return 1
     end
 
@@ -48,7 +48,7 @@ function typecheck \
             end
             set --append cmd $file
         case '*'
-            echo "typecheck: no type checker available for $extension files"
+            echo "check: no checker available for $extension files"
             return 2
     end
 

@@ -1,4 +1,4 @@
-function __fish_complete_typecheck_files
+function __fish_complete_check_files
     set --function token \
         (string replace --regex '\.$' '' -- (commandline --cut-at-cursor --current-token))
 
@@ -15,7 +15,7 @@ function __fish_complete_typecheck_files
     end
 end
 
-function __fish_complete_typecheck_extensions
+function __fish_complete_check_extensions
     printf '%s\t%s\n' \
         c C \
         go Go \
@@ -25,19 +25,19 @@ function __fish_complete_typecheck_extensions
 end
 
 complete \
-    --command typecheck \
+    --command check \
     --short-option e \
     --long-option extension \
     --exclusive \
-    --arguments '(__fish_complete_typecheck_extensions)' \
+    --arguments '(__fish_complete_check_extensions)' \
     --description 'Explicitly set file extension'
 
 complete \
-    --command typecheck \
+    --command check \
     --no-files \
     --condition 'not __fish_seen_argument --short e --long extension' \
-    --arguments '(__fish_complete_typecheck_files)'
+    --arguments '(__fish_complete_check_files)'
 
 complete \
-    --command typecheck \
+    --command check \
     --condition '__fish_seen_argument --short e --long extension'
