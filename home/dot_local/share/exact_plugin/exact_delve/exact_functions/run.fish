@@ -61,6 +61,16 @@ function run \
         "run: cannot run $extension files from stdin"
 
     switch $extension
+        case .bash .sh
+            set --function cmd bash
+            if $read_from_file
+                set --append cmd $file
+            end
+        case .zsh
+            set --function cmd zsh
+            if $read_from_file
+                set --append cmd $file
+            end
         case .fish
             set --function cmd fish
             if $read_from_file
@@ -90,16 +100,6 @@ function run \
             end
         case .rb
             set --function cmd ruby
-            if $read_from_file
-                set --append cmd $file
-            end
-        case .bash .sh
-            set --function cmd bash
-            if $read_from_file
-                set --append cmd $file
-            end
-        case .zsh
-            set --function cmd zsh
             if $read_from_file
                 set --append cmd $file
             end
