@@ -57,8 +57,13 @@ function run \
         return 1
     end
 
-    set --function stdin_unsupported_message \
-        "run: cannot run $extension files from stdin"
+    set --function tmp_extensions \
+        .go
+
+    if not $read_from_file; and contains $extension $tmp_extensions
+        set --function file (mktemp --suffix $extension)
+        cat > $file
+    end
 
     switch $extension
         case .bash .sh
@@ -77,13 +82,7 @@ function run \
                 set --append cmd $file
             end
         case .go
-            set --function cmd go run
-            if $read_from_file
-                set --append cmd $file
-            else
-                echo $stdin_unsupported_message
-                return 2
-            end
+            set --function cmd go run $file
         case .js .jsx .ts .tsx
             set --function cmd bun run
             if $read_from_file
