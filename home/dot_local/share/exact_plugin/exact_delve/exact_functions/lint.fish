@@ -57,39 +57,28 @@ function lint \
         return 1
     end
 
-    set --function stdin_unsupported_message \
-        "lint: cannot lint $extension files from stdin"
+    set --function tmp_extensions \
+        .bash .sh .zsh \
+        .c \
+        .go
+
+    if not $read_from_file; and contains $extension $tmp_extensions
+        set --function file (mktemp --suffix $extension)
+        cat > $file
+    end
 
     switch $extension
         case .bash .sh .zsh
-            set --function cmd shellcheck
-            if $read_from_file
-                set --append cmd $file
-            else
-                echo $stdin_unsupported_message
-                return 2
-            end
+            set --function cmd shellcheck $file
         case .c
-            set --function cmd clang-tidy
-            if $read_from_file
-                set --append cmd $file --
-            else
-                echo $stdin_unsupported_message
-                return 2
-            end
+            set --function cmd clang-tidy $file --
         case .fish
             set --function cmd fish --no-execute
             if $read_from_file
                 set --append cmd $file
             end
         case .go
-            set --function cmd golangci-lint run
-            if $read_from_file
-                set --append cmd $file
-            else
-                echo $stdin_unsupported_message
-                return 2
-            end
+            set --function cmd golangci-lint run $file
         case .py
             set --function cmd ruff check
             if $read_from_file
