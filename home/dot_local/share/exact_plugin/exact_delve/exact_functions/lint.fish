@@ -70,8 +70,6 @@ function lint \
     switch $extension
         case .bash .sh .zsh
             set --function cmd shellcheck $file
-        case .c
-            set --function cmd clang-tidy $file --
         case .fish
             set --function cmd fish --no-execute
             if $read_from_file

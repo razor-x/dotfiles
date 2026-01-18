@@ -38,8 +38,6 @@ function fix \
     # TODO: if $read_from_file but not $write_to_file don't --write
 
     switch $extension
-        case .c
-            set --function cmd clang-tidy --fix-errors $file --
         case .go
             set --function cmd golangci-lint run --fix $file
         case .py

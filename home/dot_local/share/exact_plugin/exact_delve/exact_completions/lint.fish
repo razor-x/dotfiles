@@ -3,7 +3,6 @@ function __fish_complete_lint_files
         (string replace --regex '\.$' '' -- (commandline --cut-at-cursor --current-token))
 
     for file in \
-        $token*.c \
         $token*.fish \
         $token*.go \
         $token*.js \
@@ -26,7 +25,6 @@ end
 
 function __fish_complete_lint_extensions
     printf '%s\t%s\n' \
-        c C \
         fish Fish \
         go Go \
         js JavaScript \

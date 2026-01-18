@@ -3,7 +3,6 @@ function __fish_complete_fix_files
         (string replace --regex '\.$' '' -- (commandline --cut-at-cursor --current-token))
 
     for file in \
-        $token*.c \
         $token*.go \
         $token*.js \
         $token*.jsx \
@@ -21,7 +20,6 @@ end
 
 function __fish_complete_fix_extensions
     printf '%s\t%s\n' \
-        c C \
         go Go \
         js JavaScript \
         jsx 'JavaScript JSX' \
