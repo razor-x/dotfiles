@@ -55,7 +55,6 @@ vim.lsp.enable("phpactor")
 
 vim.lsp.enable("pyright")
 vim.lsp.enable("ruff")
-vim.lsp.enable("ruff_ls")
 
 vim.lsp.enable("ruby_lsp")
 vim.lsp.enable("rubocop")
