@@ -58,6 +58,7 @@ function run \
     end
 
     set --function tmp_extensions \
+        .c \
         .go
 
     if not $read_from_file; and contains $extension $tmp_extensions
@@ -76,6 +77,9 @@ function run \
             if $read_from_file
                 set --append cmd $file
             end
+        case .c
+            set --function cmd (path change-extension '' $file)
+            clang -o $cmd $file
         case .fish
             set --function cmd fish
             if $read_from_file
