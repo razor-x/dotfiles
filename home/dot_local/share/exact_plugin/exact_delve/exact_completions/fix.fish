@@ -9,6 +9,9 @@ function __fish_complete_fix_files
         $token*.jsx \
         $token*.ts \
         $token*.tsx \
+        $token*.json \
+        $token*.css \
+        $token*.html \
         $token*.py \
         $token*.rb \
         $token*/
@@ -26,6 +29,9 @@ function __fish_complete_fix_extensions
         jsx 'JavaScript JSX' \
         ts TypeScript \
         tsx 'TypeScript JSX' \
+        json 'JSON' \
+        css 'CSS' \
+        html 'HTML' \
         py Python \
         rb Ruby
 end
