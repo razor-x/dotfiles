@@ -61,6 +61,7 @@ vim.lsp.enable("ruby_lsp")
 vim.lsp.enable("rubocop")
 
 vim.lsp.enable("bashls")
+vim.lsp.enable("fish_lsp")
 
 local map_multistep = require('mini.keymap').map_multistep
 map_multistep('i', '<Tab>',   { 'pmenu_next' })
