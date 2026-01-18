@@ -10,7 +10,6 @@ function __fish_complete_fix_files
         $token*.ts \
         $token*.tsx \
         $token*.css \
-        $token*.html \
         $token*.py \
         $token*.rb \
         $token*/
@@ -29,7 +28,6 @@ function __fish_complete_fix_extensions
         ts TypeScript \
         tsx 'TypeScript JSX' \
         css 'CSS' \
-        html 'HTML' \
         py Python \
         rb Ruby
 end
