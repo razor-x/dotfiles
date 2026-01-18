@@ -35,7 +35,33 @@ vim.keymap.set("n", "<leader><leader>l", smart_splits.swap_buf_right)
 require("cutlass")
 
 vim.lsp.enable("clangd")
-vim.lsp.enable("pylsp")
+
+vim.lsp.enable("clojure_lsp")
+-- TODO cljfmt, kondo ?
+
+vim.lsp.enable("gopls")
+vim.lsp.enable("golangci_lint_ls")
+
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("biome")
+
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("stylua")
+vim.lsp.enable("selene3p_ls")
+
+vim.lsp.enable("psalm")
+vim.lsp.enable("phpactor")
+-- TODO mago ?
+
+vim.lsp.enable("pyright")
+vim.lsp.enable("ruff")
+vim.lsp.enable("ruff_ls")
+
+vim.lsp.enable("ruby_lsp")
+vim.lsp.enable("rubocop")
+
+vim.lsp.enable("bashls")
+
 local map_multistep = require('mini.keymap').map_multistep
 map_multistep('i', '<Tab>',   { 'pmenu_next' })
 map_multistep('i', '<S-Tab>', { 'pmenu_prev' })
