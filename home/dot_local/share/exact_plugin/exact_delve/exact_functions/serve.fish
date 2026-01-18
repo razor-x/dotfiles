@@ -1,6 +1,6 @@
-function caddy_file_server \
+function serve \
     --wraps 'caddy file-server' \
-    --description 'Start a local Caddy file server'
+    --description 'Start a local HTTP static file server'
 
     argparse 'listen=' -- $argv
     or return

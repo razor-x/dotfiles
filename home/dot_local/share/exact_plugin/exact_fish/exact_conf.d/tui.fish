@@ -99,7 +99,7 @@ if status is-interactive
 
     abbr unfaillock faillock --user $USER --reset
 
-    alias srv caddy_file_server
+    alias srv serve
 
     abbr o opencode
 
