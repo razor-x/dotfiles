@@ -25,10 +25,7 @@ function __fish_complete_repl_extensions
         ts TypeScript \
         tsx 'TypeScript JSX' \
         py Python \
-        rb Ruby \
-        bash Bash \
-        sh Shell \
-        zsh Zsh
+        rb Ruby
 end
 
 complete \
