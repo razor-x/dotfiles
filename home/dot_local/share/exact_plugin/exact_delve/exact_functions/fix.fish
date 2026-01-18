@@ -34,6 +34,9 @@ function fix \
         return 1
     end
 
+    # TODO: Update usage and allow stdin support
+    # TODO: if $read_from_file but not $write_to_file don't --write
+
     switch $extension
         case .c
             set --function cmd clang-tidy --fix-errors $file --

@@ -34,6 +34,8 @@ function check \
         return 1
     end
 
+    # TODO: Update usage and allow stdin support
+
     switch $extension
         case .c
             set --function cmd clang-check $file

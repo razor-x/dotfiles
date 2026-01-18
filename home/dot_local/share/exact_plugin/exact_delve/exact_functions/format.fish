@@ -69,6 +69,8 @@ function format \
         return 1
     end
 
+    # TODO: if $read_from_file but not $write_to_file don't --write
+
     switch $extension
         case .bash .sh .zsh
             set --function cmd shfmt
