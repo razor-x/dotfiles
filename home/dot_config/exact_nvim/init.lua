@@ -47,7 +47,6 @@ vim.lsp.enable("biome")
 
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("stylua")
-vim.lsp.enable("selene3p_ls")
 
 vim.lsp.enable("psalm")
 vim.lsp.enable("phpactor")
