@@ -10,6 +10,7 @@ function __fish_complete_lint_files
         $token*.ts \
         $token*.tsx \
         $token*.json \
+        $token*.jsonc \
         $token*.css \
         $token*.py \
         $token*.rb \
@@ -32,6 +33,7 @@ function __fish_complete_lint_extensions
         ts TypeScript \
         tsx 'TypeScript JSX' \
         json 'JSON' \
+        jsonc 'JSON with Comments' \
         css 'CSS' \
         py Python \
         rb Ruby \

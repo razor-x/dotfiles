@@ -121,7 +121,7 @@ function format \
             else
                 set --append cmd --stdin tmp.rb
             end
-        case .js .jsx .ts .tsx .json .css
+        case .js .jsx .ts .tsx .json .jsonc .css
             set --function cmd biome format
             if not biome rage 2>/dev/null \
                 | string match --quiet '*Status:*Loaded successfully*'
