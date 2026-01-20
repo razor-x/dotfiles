@@ -2,8 +2,14 @@
 	pager = delta --paging=always
 [init]
 	defaultBranch = main
+[fetch]
+	prune = true
+	prunetags = true
 [pull]
 	rebase = true
+[rebase]
+	autosquash = true
+	autostash = true
 [interactive]
 	diffFilter = delta --color-only
 [delta]
