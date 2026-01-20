@@ -147,6 +147,11 @@ function format \
             else
                 set --append cmd -
             end
+        case .yaml .yml
+            set --function cmd yq --prettyPrint
+            if $read_from_file
+                set --append cmd --inplace $file
+            end
         case '*'
             echo "format: no formatter available for $extension files"
             return 2
