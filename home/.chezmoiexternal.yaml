@@ -40,6 +40,13 @@
   checksum:
     sha256: "d3135e42b800ff2e7aac44d4dfe500f0f4e2c7eb00a1c2191b0dc8b28431f155"
 
+# delta
+.config/git/delta_themes:
+  type: file
+  url: https://raw.githubusercontent.com/dandavison/delta/acd758f7a08df6c2ac5542a2c5a4034c664a9ed8/themes.gitconfig
+  checksum:
+    sha256: "90f1b33b86f3517500786f36523464eb6d6e2f57da34e65f378c0d4dcd6878de"
+
 # GitUI
 
 .config/gitui/key_bindings.ron:
