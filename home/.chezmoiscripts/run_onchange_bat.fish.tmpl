@@ -1,0 +1,21 @@
+#!/usr/bin/env fish
+
+{{ $hash := include (joinPath .chezmoi.homeDir ".config" "bat" "config") | sha256sum -}}
+
+{{- range (glob (printf "%s/.config/bat/themes/*.tmTheme" .chezmoi.homeDir)) -}}
+  {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
+{{- end -}}
+
+{{- range (glob (printf "%s/.config/bat/syntaxes/*.sublime-syntax" .chezmoi.homeDir)) -}}
+  {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
+{{- end -}}
+
+# hash: {{ sha256sum $hash }}
+
+# Rebuild bat's cache.
+if type --query bat
+    bat cache --build
+else
+    echo 'Cannot rebuild bat cache: bat not found.'
+    return 1
+end
