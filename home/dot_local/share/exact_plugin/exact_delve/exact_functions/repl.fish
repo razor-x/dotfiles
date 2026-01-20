@@ -35,6 +35,12 @@ function repl \
                 echo $stdin_unsupported_message
                 return 2
             end
+        case .clj
+            set --function cmd lein repl
+            if $read_from_file
+                echo $stdin_unsupported_message
+                return 2
+            end
         case .fish
             set --function cmd fish --interactive
             if $read_from_file

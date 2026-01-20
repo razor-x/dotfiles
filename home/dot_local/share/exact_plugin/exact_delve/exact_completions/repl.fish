@@ -4,6 +4,7 @@ function __fish_complete_repl_files
 
     for file in \
         $token*.fish \
+        $token*.clj \
         $token*.js \
         $token*.jsx \
         $token*.ts \
@@ -20,6 +21,7 @@ end
 function __fish_complete_repl_extensions
     printf '%s\t%s\n' \
         fish Fish \
+        clj Clojure \
         js JavaScript \
         jsx 'JavaScript JSX' \
         ts TypeScript \
