@@ -3,6 +3,7 @@ function __fish_complete_lint_files
         (string replace --regex '\.$' '' -- (commandline --cut-at-cursor --current-token))
 
     for file in \
+        $token*.clj \
         $token*.fish \
         $token*.go \
         $token*.js \
@@ -27,6 +28,7 @@ end
 
 function __fish_complete_lint_extensions
     printf '%s\t%s\n' \
+        clj Clojure \
         fish Fish \
         go Go \
         js JavaScript \

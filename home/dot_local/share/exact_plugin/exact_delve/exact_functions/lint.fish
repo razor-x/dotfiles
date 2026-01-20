@@ -70,6 +70,13 @@ function lint \
     switch $extension
         case .bash .sh .zsh
             set --function cmd shellcheck $file
+        case .clj
+            set --function cmd clj-kondo --lint
+            if $read_from_file
+                set --append cmd $file
+            else
+                set --append cmd -
+            end
         case .fish
             set --function cmd fish --no-execute
             if $read_from_file
