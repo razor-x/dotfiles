@@ -15,6 +15,10 @@
 [diff]
 	algorithm = histogram
 	colorMoved = default
+[branch]
+	sort = -committerdate
+[tag]
+	sort = -version:refname
 [interactive]
 	diffFilter = delta --color-only
 [delta]
