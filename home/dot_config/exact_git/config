@@ -10,6 +10,8 @@
 [rebase]
 	autosquash = true
 	autostash = true
+[merge]
+	conflictStyle = zdiff3
 [rerere]
 	enabled = true
 [diff]
