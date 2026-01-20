@@ -11,6 +11,16 @@
   checksum:
     sha256: "566e6c20f62be92ee9817f395c50e33fc230724e014a00ee60858e881d8d4dd0"
 
+.local/share/theme/catppuccin/bat:
+  type: archive
+  url: https://github.com/catppuccin/bat/archive/6810349b28055dce54076712fc05fc68da4b8ec0.tar.gz
+  exact: true
+  stripComponents: 1
+  include:
+    - '*/themes/**'
+  checksum:
+    sha256: "ec46aaa6ccf997404d7577c201d893ee7f791246c9e99e57e39b7c2c55197618"
+
 .local/share/theme/catppuccin/delta:
   type: archive
   url: https://github.com/catppuccin/delta/archive/74b47a345638a2f19b3e5bdb9d7e4984066f9ac7.tar.gz
