@@ -14,6 +14,7 @@ function __fish_complete_format_files
         $token*.jsonc \
         $token*.html \
         $token*.css \
+        $token*.graphql \
         $token*.py \
         $token*.rb \
         $token*.bash \
@@ -39,6 +40,7 @@ function __fish_complete_format_extensions
         jsonc 'JSON with Comments' \
         html 'HTML' \
         css 'CSS' \
+        graphql 'GraphQL' \
         py Python \
         rb Ruby \
         bash Bash \

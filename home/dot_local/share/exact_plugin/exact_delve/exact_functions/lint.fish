@@ -91,7 +91,7 @@ function lint \
             else
                 set --append cmd --stdin tmp.rb
             end
-        case .js .jsx .ts .tsx .json .jsonc .css
+        case .js .jsx .ts .tsx .json .jsonc .css .graphql
             set --function cmd biome lint
             if $read_from_file
                 set --append cmd $file
