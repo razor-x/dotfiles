@@ -1,0 +1,7 @@
+[include]
+	path = delta_themes
+[include]
+	path = delta_catppuccin
+[delta]
+	navigate = true
+	features =  {{ template "theme" (merge (dict "app" "delta") .) }} zebra-dark

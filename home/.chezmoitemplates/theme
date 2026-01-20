@@ -9,6 +9,8 @@
   themes/{{ $name }}
 {{- else if eq .app "bat" -}}
   {{ $name }}
+{{- else if eq .app "delta" -}}
+  {{ $name }}
 {{- else if eq .app "fish" -}}
   {{ $name }}
 {{- else if eq .app "eza" -}}

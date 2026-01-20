@@ -24,10 +24,6 @@
 [interactive]
 	diffFilter = delta --color-only
 [include]
-	path = delta_themes
-[delta]
-	navigate = true
-	# TODO: Add to cheimoz theme
-	features = arctic-fox zebra-dark
+	path = delta
 [include]
 	path = user

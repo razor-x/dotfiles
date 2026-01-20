@@ -11,6 +11,16 @@
   checksum:
     sha256: "566e6c20f62be92ee9817f395c50e33fc230724e014a00ee60858e881d8d4dd0"
 
+.local/share/theme/catppuccin/delta:
+  type: archive
+  url: https://github.com/catppuccin/delta/archive/74b47a345638a2f19b3e5bdb9d7e4984066f9ac7.tar.gz
+  exact: true
+  stripComponents: 1
+  include:
+    - '*/catppuccin.gitconfig'
+  checksum:
+    sha256: "c4650ffaf593f7250d3c5987fab6493b252b2f9f142cb74593e7803f6307fac7"
+
 .local/share/theme/catppuccin/eza:
   type: archive
   url: https://github.com/catppuccin/eza/archive/70f805f6cc27fa5b91750b75afb4296a0ec7fec9.tar.gz

@@ -12,6 +12,8 @@
   {{ joinPath $root "themes" $flavor (list "catppuccin" $flavor $accent | join "-") -}}
 {{- else if eq .app "bat" -}}
   Catppuccin {{ $flavor | title }}
+{{- else if eq .app "delta" -}}
+  catppuccin-{{ $flavor }}
 {{- else if eq .app "eza" -}}
   {{ joinPath $root "themes" $flavor (list "catppuccin" $flavor $accent | join "-") -}}
 {{- else if eq .app "fish" -}}
