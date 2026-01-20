@@ -4,6 +4,7 @@ function __fish_complete_format_files
 
     for file in \
         $token*.c \
+        $token*.clj \
         $token*.fish \
         $token*.go \
         $token*.js \
@@ -33,6 +34,7 @@ end
 function __fish_complete_format_extensions
     printf '%s\t%s\n' \
         c C \
+        clj Clojure \
         fish Fish \
         go Go \
         js JavaScript \

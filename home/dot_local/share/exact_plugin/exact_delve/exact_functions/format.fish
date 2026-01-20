@@ -88,6 +88,13 @@ function format \
             if $read_from_file
                 set --append cmd $file
             end
+        case .clj
+            set --function cmd cljfmt fix
+            if $read_from_file
+                set --append cmd $file
+            else
+                set --append cmd -
+            end
         case .fish
             set --function cmd fish_indent
             if $write_to_file
