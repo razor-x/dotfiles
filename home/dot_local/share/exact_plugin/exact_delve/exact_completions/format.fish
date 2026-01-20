@@ -12,6 +12,7 @@ function __fish_complete_format_files
         $token*.tsx \
         $token*.json \
         $token*.jsonc \
+        $token*.html \
         $token*.css \
         $token*.py \
         $token*.rb \
@@ -36,6 +37,7 @@ function __fish_complete_format_extensions
         tsx 'TypeScript JSX' \
         json 'JSON' \
         jsonc 'JSON with Comments' \
+        html 'HTML' \
         css 'CSS' \
         py Python \
         rb Ruby \

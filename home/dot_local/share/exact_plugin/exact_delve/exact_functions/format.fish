@@ -121,7 +121,7 @@ function format \
             else
                 set --append cmd --stdin tmp.rb
             end
-        case .js .jsx .ts .tsx .json .jsonc .css
+        case .js .jsx .ts .tsx .json .jsonc .html .css
             set --function cmd biome format
             if not biome rage 2>/dev/null \
                 | string match --quiet '*Status:*Loaded successfully*'
@@ -129,7 +129,8 @@ function format \
                     --indent-style=space \
                     --jsx-quote-style=single \
                     --semicolons=as-needed \
-                    --javascript-formatter-quote-style=single
+                    --javascript-formatter-quote-style=single \
+                    --html-formatter-enabled=true
             end
             if $write_to_file
                 set --append cmd --write
