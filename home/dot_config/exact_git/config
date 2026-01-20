@@ -10,6 +10,11 @@
 [rebase]
 	autosquash = true
 	autostash = true
+[rerere]
+	enabled = true
+[diff]
+	algorithm = histogram
+	colorMoved = default
 [interactive]
 	diffFilter = delta --color-only
 [delta]
