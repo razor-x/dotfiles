@@ -140,6 +140,13 @@ function format \
             else
                 set --append cmd --stdin-file-path "tmp.$extension"
             end
+        case .md
+            set --function cmd mdformat
+            if $read_from_file
+                set --append cmd $file
+            else
+                set --append cmd -
+            end
         case '*'
             echo "format: no formatter available for $extension files"
             return 2

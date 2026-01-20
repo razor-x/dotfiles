@@ -15,6 +15,7 @@ function __fish_complete_format_files
         $token*.html \
         $token*.css \
         $token*.graphql \
+        $token*.md \
         $token*.py \
         $token*.rb \
         $token*.bash \
@@ -41,6 +42,7 @@ function __fish_complete_format_extensions
         html 'HTML' \
         css 'CSS' \
         graphql 'GraphQL' \
+        md 'Markdown' \
         py Python \
         rb Ruby \
         bash Bash \
