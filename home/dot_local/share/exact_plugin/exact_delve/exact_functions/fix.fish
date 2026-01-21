@@ -40,12 +40,12 @@ function fix \
     switch $extension
         case .go
             set --function cmd golangci-lint run --fix $file
+        case .js .jsx .ts .tsx .css
+            set --function cmd biome lint --write $file
         case .py
             set --function cmd ruff check --fix $file
         case .rb
             set --function cmd rubocop --enable-pending-cops --lint --autocorrect $file
-        case .js .jsx .ts .tsx .css
-            set --function cmd biome lint --write $file
         case '*'
             echo "fix: no fixer available for $extension files"
             return 2

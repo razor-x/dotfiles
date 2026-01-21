@@ -111,23 +111,6 @@ function format \
             if $read_from_file
                 set --append cmd $file
             end
-        case .py
-            set --function cmd ruff format
-            if $read_from_file
-                set --append cmd $file
-                if not $write_to_file
-                    set --append cmd -
-                end
-            else
-                set --append cmd --stdin-filename tmp.py -
-            end
-        case .rb
-            set --function cmd rubocop --enable-pending-cops --fix-layout --autocorrect
-            if $read_from_file
-                set --append cmd $file
-            else
-                set --append cmd --stdin tmp.rb
-            end
         case .js .jsx .ts .tsx .json .jsonc .html .css .graphql
             set --function cmd biome format
             if not biome rage 2>/dev/null \
@@ -158,6 +141,23 @@ function format \
             set --function cmd yq --prettyPrint
             if $read_from_file
                 set --append cmd --inplace $file
+            end
+        case .py
+            set --function cmd ruff format
+            if $read_from_file
+                set --append cmd $file
+                if not $write_to_file
+                    set --append cmd -
+                end
+            else
+                set --append cmd --stdin-filename tmp.py -
+            end
+        case .rb
+            set --function cmd rubocop --enable-pending-cops --fix-layout --autocorrect
+            if $read_from_file
+                set --append cmd $file
+            else
+                set --append cmd --stdin tmp.rb
             end
         case '*'
             echo "format: no formatter available for $extension files"

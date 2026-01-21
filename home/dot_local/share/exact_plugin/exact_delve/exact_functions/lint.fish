@@ -84,6 +84,13 @@ function lint \
             end
         case .go
             set --function cmd golangci-lint run $file
+        case .js .jsx .ts .tsx .json .jsonc .css .graphql
+            set --function cmd biome lint
+            if $read_from_file
+                set --append cmd $file
+            else
+                set --append cmd --stdin-file-path="tmp.$extension"
+            end
         case .py
             set --function cmd ruff check
             if $read_from_file
@@ -97,13 +104,6 @@ function lint \
                 set --append cmd $file
             else
                 set --append cmd --stdin tmp.rb
-            end
-        case .js .jsx .ts .tsx .json .jsonc .css .graphql
-            set --function cmd biome lint
-            if $read_from_file
-                set --append cmd $file
-            else
-                set --append cmd --stdin-file-path="tmp.$extension"
             end
         case '*'
             echo "lint: no linter available for $extension files"
