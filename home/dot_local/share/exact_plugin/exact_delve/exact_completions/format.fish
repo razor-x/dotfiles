@@ -3,6 +3,9 @@ function __fish_complete_format_files
         (string replace --regex '\.$' '' -- (commandline --cut-at-cursor --current-token))
 
     for file in \
+        $token*.bash \
+        $token*.sh \
+        $token*.zsh \
         $token*.c \
         $token*.clj \
         $token*.fish \
@@ -21,9 +24,6 @@ function __fish_complete_format_files
         $token*.yaml \
         $token*.py \
         $token*.rb \
-        $token*.bash \
-        $token*.sh \
-        $token*.zsh \
         $token*/
         if test -e $file
             echo $file
@@ -33,6 +33,9 @@ end
 
 function __fish_complete_format_extensions
     printf '%s\t%s\n' \
+        bash Bash \
+        sh Shell \
+        zsh Zsh \
         c C \
         clj Clojure \
         fish Fish \
@@ -50,10 +53,7 @@ function __fish_complete_format_extensions
         yml 'YAML' \
         yaml 'YAML' \
         py Python \
-        rb Ruby \
-        bash Bash \
-        sh Shell \
-        zsh Zsh
+        rb Ruby
 end
 
 complete \

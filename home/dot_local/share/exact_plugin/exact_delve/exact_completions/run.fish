@@ -3,6 +3,9 @@ function __fish_complete_run_files
         (string replace --regex '\.$' '' -- (commandline --cut-at-cursor --current-token))
 
     for file in \
+        $token*.bash \
+        $token*.sh \
+        $token*.zsh \
         $token*.fish \
         $token*.go \
         $token*.js \
@@ -11,9 +14,6 @@ function __fish_complete_run_files
         $token*.tsx \
         $token*.py \
         $token*.rb \
-        $token*.bash \
-        $token*.sh \
-        $token*.zsh \
         $token*/
         if test -e $file
             echo $file
@@ -23,6 +23,9 @@ end
 
 function __fish_complete_run_extensions
     printf '%s\t%s\n' \
+        bash Bash \
+        sh Shell \
+        zsh Zsh \
         fish Fish \
         go Go \
         js JavaScript \
@@ -30,10 +33,7 @@ function __fish_complete_run_extensions
         ts TypeScript \
         tsx 'TypeScript JSX' \
         py Python \
-        rb Ruby \
-        bash Bash \
-        sh Shell \
-        zsh Zsh
+        rb Ruby
 end
 
 complete \

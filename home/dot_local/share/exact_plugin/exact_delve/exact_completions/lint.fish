@@ -3,6 +3,9 @@ function __fish_complete_lint_files
         (string replace --regex '\.$' '' -- (commandline --cut-at-cursor --current-token))
 
     for file in \
+        $token*.bash \
+        $token*.sh \
+        $token*.zsh \
         $token*.clj \
         $token*.fish \
         $token*.go \
@@ -16,9 +19,6 @@ function __fish_complete_lint_files
         $token*.graphql \
         $token*.py \
         $token*.rb \
-        $token*.bash \
-        $token*.sh \
-        $token*.zsh \
         $token*/
         if test -e $file
             echo $file
@@ -28,6 +28,9 @@ end
 
 function __fish_complete_lint_extensions
     printf '%s\t%s\n' \
+        bash Bash \
+        sh Shell \
+        zsh Zsh \
         clj Clojure \
         fish Fish \
         go Go \
@@ -40,10 +43,7 @@ function __fish_complete_lint_extensions
         css 'CSS' \
         graphql 'GraphQL' \
         py Python \
-        rb Ruby \
-        bash Bash \
-        sh Shell \
-        zsh Zsh
+        rb Ruby
 end
 
 complete \
