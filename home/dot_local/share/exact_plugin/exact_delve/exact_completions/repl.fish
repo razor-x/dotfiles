@@ -20,6 +20,9 @@ end
 
 function __fish_complete_repl_extensions
     printf '%s\t%s\n' \
+        bash Bash \
+        sh Shell \
+        zsh Zsh \
         fish Fish \
         clj Clojure \
         js JavaScript \
