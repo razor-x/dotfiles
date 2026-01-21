@@ -94,6 +94,11 @@ function run \
             else
                 set --append cmd -
             end
+        case .lua
+            set --function cmd lua
+            if $read_from_file
+                set --append cmd $file
+            end
         case .py
             set --function cmd python
             if $read_from_file

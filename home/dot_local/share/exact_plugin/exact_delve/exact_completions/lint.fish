@@ -17,6 +17,7 @@ function __fish_complete_lint_files
         $token*.jsonc \
         $token*.css \
         $token*.graphql \
+        $token*.lua \
         $token*.py \
         $token*.rb \
         $token*/
@@ -42,6 +43,7 @@ function __fish_complete_lint_extensions
         jsonc 'JSON with Comments' \
         css 'CSS' \
         graphql 'GraphQL' \
+        lua 'Lua' \
         py Python \
         rb Ruby
 end

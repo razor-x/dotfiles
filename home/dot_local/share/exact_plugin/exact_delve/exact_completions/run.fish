@@ -12,6 +12,7 @@ function __fish_complete_run_files
         $token*.jsx \
         $token*.ts \
         $token*.tsx \
+        $token*.lua \
         $token*.py \
         $token*.rb \
         $token*/
@@ -32,6 +33,7 @@ function __fish_complete_run_extensions
         jsx 'JavaScript JSX' \
         ts TypeScript \
         tsx 'TypeScript JSX' \
+        lua 'Lua' \
         py Python \
         rb Ruby
 end

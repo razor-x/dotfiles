@@ -142,6 +142,13 @@ function format \
             if $read_from_file
                 set --append cmd --inplace $file
             end
+        case .lua
+            set --function cmd stylua
+            if $read_from_file
+                set --append cmd $file
+            else
+                set --append cmd --stdin-filepath tmp.lua -
+            end
         case .py
             set --function cmd ruff format
             if $read_from_file

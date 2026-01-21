@@ -91,6 +91,13 @@ function lint \
             else
                 set --append cmd --stdin-file-path="tmp.$extension"
             end
+        case .lua
+            set --function cmd selene
+            if $read_from_file
+                set --append cmd $file
+            else
+                set --append cmd -
+            end
         case .py
             set --function cmd ruff check
             if $read_from_file

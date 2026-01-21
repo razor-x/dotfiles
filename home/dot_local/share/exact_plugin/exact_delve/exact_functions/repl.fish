@@ -51,6 +51,11 @@ function repl \
             if $read_from_file
                 set --append cmd --eval-file $file
             end
+        case .lua
+            set --function cmd lua
+            if $read_from_file
+                set --append cmd -i $file
+            end
         case .py
             set --function cmd bpython --interactive
             if $read_from_file
