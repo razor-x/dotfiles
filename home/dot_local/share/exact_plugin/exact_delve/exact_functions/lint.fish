@@ -60,7 +60,8 @@ function lint \
     set --function tmp_extensions \
         .bash .sh .zsh \
         .c \
-        .go
+        .go \
+        .php
 
     if not $read_from_file; and contains $extension $tmp_extensions
         set --function file (mktemp --suffix $extension)
@@ -98,6 +99,8 @@ function lint \
             else
                 set --append cmd -
             end
+        case .php
+            set --function cmd mago lint $file
         case .py
             set --function cmd ruff check
             if $read_from_file

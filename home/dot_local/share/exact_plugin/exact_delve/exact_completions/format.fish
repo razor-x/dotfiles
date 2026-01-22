@@ -23,6 +23,7 @@ function __fish_complete_format_files
         $token*.yml \
         $token*.yaml \
         $token*.lua \
+        $token*.php \
         $token*.py \
         $token*.rb \
         $token*/
@@ -54,6 +55,7 @@ function __fish_complete_format_extensions
         yml YAML \
         yaml YAML \
         lua Lua \
+        php PHP \
         py Python \
         rb Ruby
 end

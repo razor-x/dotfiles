@@ -41,6 +41,8 @@ function check \
             set --function cmd clang-check $file
         case .go
             set --function cmd go vet $file
+        case .php
+            set --function cmd mago analyse $file
         case .py
             set --function cmd pyright $file
         case .ts .tsx

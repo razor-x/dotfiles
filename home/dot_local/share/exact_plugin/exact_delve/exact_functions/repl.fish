@@ -25,20 +25,20 @@ function repl \
         end
     end
 
-    set --function stdin_unsupported_message \
+    set --function file_unsupported_message \
         "repl: loading a file into a $extension REPL is not supported"
 
     switch $extension
         case .bash .sh .zsh
             set --function cmd (string sub --start 2 $extension) -i
             if $read_from_file
-                echo $stdin_unsupported_message
+                echo $file_unsupported_message
                 return 2
             end
         case .clj
             set --function cmd lein repl
             if $read_from_file
-                echo $stdin_unsupported_message
+                echo $file_unsupported_message
                 return 2
             end
         case .fish
@@ -55,6 +55,12 @@ function repl \
             set --function cmd lua
             if $read_from_file
                 set --append cmd -i $file
+            end
+        case .php
+            set --function cmd php --interactive
+            if $read_from_file
+                echo $file_unsupported_message
+                return 2
             end
         case .py
             set --function cmd bpython --interactive

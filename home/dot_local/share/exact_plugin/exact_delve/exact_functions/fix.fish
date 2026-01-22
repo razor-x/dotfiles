@@ -42,6 +42,8 @@ function fix \
             set --function cmd golangci-lint run --fix $file
         case .js .jsx .ts .tsx .css
             set --function cmd biome lint --write $file
+        case .php
+            set --function cmd mago lint --fix $file
         case .py
             set --function cmd ruff check --fix $file
         case .rb

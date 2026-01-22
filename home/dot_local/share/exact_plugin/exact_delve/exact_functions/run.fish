@@ -99,6 +99,11 @@ function run \
             if $read_from_file
                 set --append cmd $file
             end
+        case .php
+            set --function cmd php
+            if $read_from_file
+                set --append cmd $file
+            end
         case .py
             set --function cmd python
             if $read_from_file

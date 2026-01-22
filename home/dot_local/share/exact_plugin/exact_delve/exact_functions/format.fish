@@ -69,6 +69,14 @@ function format \
         return 1
     end
 
+    set --function tmp_extensions \
+        .php
+
+    if not $read_from_file; and contains $extension $tmp_extensions
+        set --function file (mktemp --suffix $extension)
+        cat > $file
+    end
+
     # TODO: if $read_from_file but not $write_to_file don't --write
 
     switch $extension
@@ -148,6 +156,14 @@ function format \
                 set --append cmd $file
             else
                 set --append cmd --stdin-filepath tmp.lua -
+            end
+        case .php
+            set --function cmd mago format $file
+            if not $read_from_file
+                # TODO: Print formatted tmp file.
+                # set --append cmd " && cat $file"
+                echo "format: stdin for $extension REPL is not supported"
+                return 2
             end
         case .py
             set --function cmd ruff format

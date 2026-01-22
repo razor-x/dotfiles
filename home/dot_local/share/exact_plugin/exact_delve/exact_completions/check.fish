@@ -7,6 +7,7 @@ function __fish_complete_check_files
         $token*.go \
         $token*.ts \
         $token*.tsx \
+        $token*.php \
         $token*.py \
         $token*/
         if test -e $file
@@ -21,6 +22,7 @@ function __fish_complete_check_extensions
         go Go \
         ts TypeScript \
         tsx 'TypeScript JSX' \
+        php PHP \
         py Python
 end
 

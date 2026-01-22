@@ -18,6 +18,7 @@ function __fish_complete_lint_files
         $token*.css \
         $token*.graphql \
         $token*.lua \
+        $token*.php \
         $token*.py \
         $token*.rb \
         $token*/
@@ -44,6 +45,7 @@ function __fish_complete_lint_extensions
         css CSS \
         graphql GraphQL \
         lua Lua \
+        php PHP \
         py Python \
         rb Ruby
 end
