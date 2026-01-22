@@ -30,7 +30,7 @@ function __fish_complete_repl_extensions
         jsx 'JavaScript JSX' \
         ts TypeScript \
         tsx 'TypeScript JSX' \
-        lua 'Lua' \
+        lua Lua \
         py Python \
         rb Ruby
 end

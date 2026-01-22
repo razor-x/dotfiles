@@ -45,15 +45,15 @@ function __fish_complete_format_extensions
         jsx 'JavaScript JSX' \
         ts TypeScript \
         tsx 'TypeScript JSX' \
-        json 'JSON' \
+        json JSON \
         jsonc 'JSON with Comments' \
-        html 'HTML' \
-        css 'CSS' \
-        graphql 'GraphQL' \
-        md 'Markdown' \
-        yml 'YAML' \
-        yaml 'YAML' \
-        lua 'Lua' \
+        html HTML \
+        css CSS \
+        graphql GraphQL \
+        md Markdown \
+        yml YAML \
+        yaml YAML \
+        lua Lua \
         py Python \
         rb Ruby
 end

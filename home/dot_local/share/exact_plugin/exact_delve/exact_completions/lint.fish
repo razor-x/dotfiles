@@ -39,11 +39,11 @@ function __fish_complete_lint_extensions
         jsx 'JavaScript JSX' \
         ts TypeScript \
         tsx 'TypeScript JSX' \
-        json 'JSON' \
+        json JSON \
         jsonc 'JSON with Comments' \
-        css 'CSS' \
-        graphql 'GraphQL' \
-        lua 'Lua' \
+        css CSS \
+        graphql GraphQL \
+        lua Lua \
         py Python \
         rb Ruby
 end

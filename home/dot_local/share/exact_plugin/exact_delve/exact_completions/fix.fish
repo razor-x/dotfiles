@@ -25,7 +25,7 @@ function __fish_complete_fix_extensions
         jsx 'JavaScript JSX' \
         ts TypeScript \
         tsx 'TypeScript JSX' \
-        css 'CSS' \
+        css CSS \
         py Python \
         rb Ruby
 end
