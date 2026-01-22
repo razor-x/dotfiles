@@ -160,10 +160,8 @@ function format \
         case .php
             set --function cmd mago format $file
             if not $read_from_file
-                # TODO: Print formatted tmp file.
-                # set --append cmd " && cat $file"
-                echo "format: stdin for $extension REPL is not supported"
-                return 2
+                $cmd
+                set --function cmd cat $file
             end
         case .py
             set --function cmd ruff format
