@@ -1,9 +1,5 @@
 devel - github stars
 
-https://github.com/sharkdp/bat#integration-with-other-tools
-- prettybat => add alias that uses delve format pipeline instead, abbr vv format foo.ext | bat
-
-
 tui.fish
 
 broot

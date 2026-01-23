@@ -26,6 +26,8 @@ if status is-interactive
 
     # view
     abbr v bat
+    # TODO: Abbr or alias once format can handle read from file to stdout
+    # abbr vv format foo.ext | bat
     abbr vv prettybat
 
     # find
