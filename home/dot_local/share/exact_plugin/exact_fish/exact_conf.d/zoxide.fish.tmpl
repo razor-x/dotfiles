@@ -1,2 +1,4 @@
 # Use zoxide.
-{{ output "zoxide" "init" "--cmd" "j" "fish" }}
+if status is-interactive
+    {{ output "zoxide" "init" "--cmd" "j" "fish" }}
+end

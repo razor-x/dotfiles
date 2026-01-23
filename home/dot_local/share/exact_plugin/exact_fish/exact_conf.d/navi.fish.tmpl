@@ -1,2 +1,4 @@
 # Install navi shell widget.
-{{ output "navi" "widget" "fish" }}
+if status is-interactive
+    {{ output "navi" "widget" "fish" }}
+end

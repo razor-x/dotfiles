@@ -1,2 +1,4 @@
 # Use worktrunk.
-{{ output "wt" "config" "shell" "init" "fish" }}
+if status is-interactive
+    {{ output "wt" "config" "shell" "init" "fish" }}
+end

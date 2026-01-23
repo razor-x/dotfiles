@@ -1,2 +1,4 @@
 # Use batpipe as the less preprocessor.
-{{ output "fish" "--command" "batpipe" }}
+if status is-interactive
+    {{ output "fish" "--command" "batpipe" }}
+end
