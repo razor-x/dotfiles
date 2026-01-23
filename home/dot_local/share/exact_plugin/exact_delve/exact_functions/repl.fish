@@ -46,7 +46,7 @@ function repl \
             if $read_from_file
                 set --append cmd --init-command "source $file"
             end
-        case .js .jsx .ts .tsx
+        case .js .ts
             set --function cmd deno repl
             if $read_from_file
                 set --append cmd --eval-file $file

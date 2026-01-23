@@ -6,9 +6,7 @@ function __fish_complete_repl_files
         $token*.fish \
         $token*.clj \
         $token*.js \
-        $token*.jsx \
         $token*.ts \
-        $token*.tsx \
         $token*.lua \
         $token*.php \
         $token*.py \
@@ -28,9 +26,7 @@ function __fish_complete_repl_extensions
         fish Fish \
         clj Clojure \
         js JavaScript \
-        jsx 'JavaScript JSX' \
         ts TypeScript \
-        tsx 'TypeScript JSX' \
         lua Lua \
         php PHP \
         py Python \
