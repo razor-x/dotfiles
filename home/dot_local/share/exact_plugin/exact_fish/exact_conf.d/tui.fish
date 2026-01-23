@@ -28,6 +28,11 @@ if status is-interactive
     abbr v bat
     abbr vv prettybat
 
+    # find
+    abbr f fd
+    # TODO: make abbv work like this
+    # abbr ff fd … -X bat
+
     # Cat
     abbr c bat -pP
 
