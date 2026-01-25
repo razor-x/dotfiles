@@ -69,7 +69,8 @@ if status is-interactive
 
     abbr md glow --tui
 
-    abbr m just
+    abbr m mise
+    abbr mm just
 
     abbr gfup git fetch --no-tags upstream
     abbr gfmk git fetch --no-tags makenew
