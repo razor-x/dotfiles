@@ -71,7 +71,11 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-t transpose-chars
     bind --mode insert ctrl-q pipe_to_pager
     bind --mode insert ctrl-g pipe_to_filter
-    bind --mode insert ctrl-c clear-commandline repaint-mode
+
+    # Clear prompt.
+    for mode in default insert visual
+        bind --mode $mode ctrl-c clear-commandline repaint-mode
+    end
 
     # Access clipboard.
     bind --mode insert ctrl-v fish_clipboard_paste
