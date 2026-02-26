@@ -191,7 +191,7 @@ with `read:packages` scope and name `<Hostname> Packages`
 
 ```sh
 set --export GITHUB_PACKAGES_TOKEN (fish_clipboard_paste) \
-  && chezmoi apply
+  && chezmoi apply \
   && atuin sync
 ```
 
