@@ -180,7 +180,8 @@ Enable Atuin sync by logging in with your password and encryption key
 
 ```sh
 chezmoi apply \
-  && atuin login --username $USER
+  && atuin login --username $USER \
+  && atuin sync
 ```
 
 ### Add a GitHub packages token
@@ -191,8 +192,7 @@ with `read:packages` scope and name `<Hostname> Packages`
 
 ```sh
 set --export GITHUB_PACKAGES_TOKEN (fish_clipboard_paste) \
-  && chezmoi apply \
-  && atuin sync
+  && chezmoi apply
 ```
 
 ### Add an MCP OAuth Client Secret
