@@ -78,7 +78,7 @@ if status is-interactive
     abbr mm just
 
     abbr gfup git fetch --no-tags upstream
-    abbr gfmk git fetch --no-tags makenew
+    abbr gfmk git -c fetch.prune=false -c fetch.pruneTags=false fetch --no-tags makenew
 
     if set --query ACONFMGR_CONFIG
         abbr archrc cd "$ACONFMGR_CONFIG/.."
