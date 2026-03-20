@@ -1,10 +1,11 @@
 import os
+import shutil
 
 from kitty.boss import Boss, Window
 from kittens.tui.handler import result_handler
 
 
-def main(args: list[str]) -> str:
+def main(args: list[str]) -> str | None:
     pass
 
 
@@ -16,10 +17,16 @@ def handle_result(
         return
 
     cmd = args[1]
+    mise = shutil.which("mise")
 
     window = _find_window_running_cmd(cmd, boss)
     if window is None:
-        boss.launch("--cwd=current", "--location=before", *args[1:])
+        if mise is not None:
+            boss.launch(
+                "--cwd=current", "--location=before", mise, "exec", "--", *args[1:]
+            )
+        else:
+            boss.launch("--cwd=current", "--location=before", *args[1:])
     else:
         boss.set_active_window(window, switch_os_window_if_needed=True)
 
@@ -35,8 +42,7 @@ def _find_window_running_cmd(cmd: str, boss: Boss) -> Window | None:
             if len(cmdline) == 0:
                 continue
 
-            foreground_cmd = cmdline[0]
-            if foreground_cmd == cmd or os.path.basename(foreground_cmd) == cmd:
+            if any(arg == cmd or os.path.basename(arg) == cmd for arg in cmdline):
                 return window
 
     return None
