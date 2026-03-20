@@ -9,3 +9,12 @@ if [[ $USER_ENV_HASH != '{{ template "user_env_hash" . }}' ]] \
     set +a
   done
 fi
+
+# Always reload private environment variables.
+for f in "$HOME"/.config/environment.d/*-private.conf; do
+  set -a
+  if [[ -f "$f" ]]; then
+    source "$f"
+  fi
+  set +a
+done
