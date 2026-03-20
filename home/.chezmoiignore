@@ -23,6 +23,5 @@
 .config/environment.d/99-private.conf
 
 {{ if not (has .chezmoi.hostname (list "minto" "anny")) -}}
-.config/nvim/**
 .config/environment.d/xsecurelock.conf
 {{ end -}}
