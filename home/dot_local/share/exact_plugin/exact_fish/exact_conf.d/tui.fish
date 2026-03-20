@@ -37,6 +37,7 @@ if status is-interactive
 
     # Cat
     abbr c bat -pP
+    abbr cc copy_file_to_clipboard
 
     # MultipleX
     abbr mx zellij
