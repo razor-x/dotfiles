@@ -70,7 +70,7 @@ function lint \
 
     if not $read_from_file; and contains $extension $tmp_extensions
         set --function file (mktemp --suffix $extension)
-        cat > $file
+        cat >$file
     end
 
     switch $extension

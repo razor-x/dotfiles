@@ -24,7 +24,7 @@ function compile \
     set --function basename (path basename $output)
 
     set --function html_document \
-'<!doctype html>
+        '<!doctype html>
 <html lang="en-US">
 <head>
   <meta charset="utf-8">
@@ -38,7 +38,7 @@ function compile \
 '
 
     set --function html_document_with_react \
-'<!doctype html>
+        '<!doctype html>
 <html lang="en-US">
 <head>
   <title>__basename__</title>
@@ -71,7 +71,7 @@ function compile \
                 $file
             or return
             string replace --all __basename__ $basename \
-                $html_document > "$output.html"
+                $html_document >"$output.html"
             return
         case .jsx .tsx
             bun build \
@@ -84,7 +84,7 @@ function compile \
                 $file
             or return
             string replace --all __basename__ $basename \
-                $html_document_with_react > "$output.html"
+                $html_document_with_react >"$output.html"
             return
         case '*'
             echo "compile: no compiler available for $extension files"

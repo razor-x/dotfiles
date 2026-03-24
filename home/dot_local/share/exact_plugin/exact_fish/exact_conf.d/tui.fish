@@ -58,10 +58,9 @@ if status is-interactive
     abbr gw wt
     alias gws git_wt_idempotent_switch
 
-
     # UPSTREAM: Substitute for missing worktrunk prune command.
     # https://github.com/max-sixty/worktrunk/issues/948
-    alias 'wtprune' "git branch -vv | grep -E ': gone\]' | grep -E '^\+' | awk '{print $2}' | fzf -m --sync --bind start:last+select-all --bind q:abort | xargs -I% wt remove -f -D -y %"
+    alias wtprune "git branch -vv | grep -E ': gone\]' | grep -E '^\+' | awk '{print $2}' | fzf -m --sync --bind start:last+select-all --bind q:abort | xargs -I% wt remove -f -D -y %"
 
     # Colorize help text using bat.
     # https://github.com/sharkdp/bat#highlighting---help-messages

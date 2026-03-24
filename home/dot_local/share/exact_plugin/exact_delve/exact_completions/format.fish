@@ -72,8 +72,7 @@ complete \
     --command format \
     --no-files \
     --condition 'not __fish_seen_argument --short e --long extension' \
-    --arguments '(__fish_complete_format_files)' \
-
+    --arguments '(__fish_complete_format_files)'
 complete \
     --command format \
     --condition '__fish_seen_argument --short e --long extension'

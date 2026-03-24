@@ -4,7 +4,8 @@ function execute-in-tab \
     commandline --function expand-abbr
     set --function cmd (commandline)
 
-    if set --query KITTY_PID; type --query kitty; and test -n "$cmd"
+    if set --query KITTY_PID
+        type --query kitty; and test -n "$cmd"
         commandline --replace ''
 
         kitty @ launch --cwd=current --type=tab \

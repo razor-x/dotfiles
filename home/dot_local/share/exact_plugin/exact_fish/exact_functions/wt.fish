@@ -1,2 +1,1 @@
-# Install Worktrunk shell integration
-{{ output "wt" "config" "shell" "init" "fish" }}
+{ { output wt config shell init fish } }

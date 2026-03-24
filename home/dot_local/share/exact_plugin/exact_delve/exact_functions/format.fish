@@ -69,7 +69,7 @@ function format \
 
     if not $read_from_file; and contains $extension $tmp_extensions
         set --function file (mktemp --suffix $extension)
-        cat > $file
+        cat >$file
     end
 
     # TODO: if $read_from_file but not $write_to_file don't --write
@@ -117,7 +117,7 @@ function format \
         case .js .jsx .ts .tsx .json .jsonc .html .css .graphql
             set --function cmd biome format
             if not biome rage 2>/dev/null \
-                | string match --quiet '*Status:*Loaded successfully*'
+                    | string match --quiet '*Status:*Loaded successfully*'
                 set --append cmd \
                     --indent-style=space \
                     --jsx-quote-style=single \
