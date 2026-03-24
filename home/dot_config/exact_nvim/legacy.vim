@@ -127,10 +127,13 @@ augroup command-line-local-mappings
   autocmd CmdwinLeave * vnoremap <S-Esc> q:
 augroup END
 
-" Use ctrl-h, ctrl-l, and backspace to navigate command input.
+" Use backspace, ctrl-h, and ctrl-l to navigate command input.
 cnoremap <BS> <Left>
 cnoremap <C-H> <BS>
 cnoremap <C-L> <Right>
+
+" Use ctrl-a to jump to start of command input.
+cnoremap <C-A> <Home>
 
 " Use ctrl-k and ctrl-j to navigate command history.
 cnoremap <C-K> <Up>
