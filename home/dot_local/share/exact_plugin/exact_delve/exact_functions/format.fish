@@ -12,22 +12,12 @@ function format \
         set --function use_stdin false
     end
 
-    if isatty stdout
-        set --function use_stdout false
-    else
-        set --function use_stdout true
-    end
-
-    if $use_stdout; or $use_stdin
-        set --function write_to_file false
-    else
-        set --function write_to_file true
-    end
-
     if $use_stdin
         set --function read_from_file false
+        set --function write_to_file false
     else
         set --function read_from_file true
+        set --function write_to_file true
     end
 
     if set --query --function _flag_extension
