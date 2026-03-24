@@ -2,15 +2,10 @@
 
 My user land configuration managed with [chezmoi].
 
-[chezmoi]: https://www.chezmoi.io/
-
 ## Requirements
 
 These dotfiles are designed to work on Arch Linux with the packages defined
 by my [Arch Linux Configuration][archrc] and [XDG user environment variables][pam_env.conf].
-
-[archrc]: https://github.com/razor-x/archrc
-[pam_env.conf]: https://github.com/razor-x/archrc/blob/main/config/files/etc/security/pam_env.conf
 
 ## RTFM
 
@@ -27,8 +22,8 @@ TODO
 ### Tools
 
 bat (1)
-:    A cat clone with syntax highlighting and Git integration.
-     https://github.com/sharkdp/bat
+: A cat clone with syntax highlighting and Git integration.
+https://github.com/sharkdp/bat
 
 <!-- end man page -->
 
@@ -229,3 +224,7 @@ loss of use, data, or profits; or business interruption) however caused and on
 any theory of liability, whether in contract, strict liability, or tort
 (including negligence or otherwise) arising in any way out of the use of this
 software, even if advised of the possibility of such damage.
+
+[archrc]: https://github.com/razor-x/archrc
+[chezmoi]: https://www.chezmoi.io/
+[pam_env.conf]: https://github.com/razor-x/archrc/blob/main/config/files/etc/security/pam_env.conf
