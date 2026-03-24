@@ -23,6 +23,8 @@
 	sort = -version:refname
 [interactive]
 	diffFilter = delta --color-only
+[alias]
+	root = rev-parse --show-toplevel
 [include]
 	path = delta
 [include]
