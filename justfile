@@ -16,12 +16,21 @@ reset:
   chezmoi apply --init
 
 format:
-  fd --extension fish --type file --print0 . home | xargs --null --no-run-if-empty --max-args 1 fish --command 'format $argv[1]' --
-  fd --extension lua --type file --print0 . home | xargs --null --no-run-if-empty --max-args 1 fish --command 'format $argv[1]' --
-  fd --extension json --type file --print0 . home | xargs --null --no-run-if-empty --max-args 1 fish --command 'format $argv[1]' --
-  fd --extension md --type file --print0 . | xargs --null --no-run-if-empty --max-args 1 fish --command 'format $argv[1]' --
-  fd --extension py --type file --print0 . home | xargs --null --no-run-if-empty --max-args 1 fish --command 'format $argv[1]' --
-  fd --extension clj --type file --print0 . home | xargs --null --no-run-if-empty --max-args 1 fish --command 'format $argv[1]' --
+  fd \
+    --print0 \
+    --type file \
+    --extension clj \
+    --extension fish \
+    --extension json \
+    --extension lua \
+    --extension md \
+    --extension py \
+    . \
+    | xargs \
+        --null \
+        --no-run-if-empty \
+        --max-args 1 \
+        fish --command 'format $argv[1]' --
 
 watch:
   watchexec --watch $(chezmoi source-path) -- chezmoi apply --init
