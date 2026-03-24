@@ -4,10 +4,12 @@ function run \
     argparse 'e/extension=' -- $argv
     or return
 
-    if isatty stdin
-        set --function use_stdin false
-    else
+    set --function arg_count (count $argv)
+
+    if test $arg_count -eq 0
         set --function use_stdin true
+    else
+        set --function use_stdin false
     end
 
     if $use_stdin
@@ -24,10 +26,13 @@ function run \
         end
     end
 
-    if begin
-            $use_stdin; and test (count $argv) -gt 0
-        end;
-        or not $use_stdin; and test (count $argv) -ne 1
+    if test $arg_count -gt 1
+        echo 'usage: run [(-e | --extension) EXT] FILE'
+        echo '       COMMAND | run (-e | --extension) EXT'
+        return 1
+    end
+
+    if $use_stdin; and isatty stdin
         echo 'usage: run [(-e | --extension) EXT] FILE'
         echo '       COMMAND | run (-e | --extension) EXT'
         return 1
@@ -38,7 +43,7 @@ function run \
         return 1
     end
 
-    if test (count $argv) -eq 1
+    if test $arg_count -eq 1
         set --function file $argv[1]
 
         if not test -f "$file"
