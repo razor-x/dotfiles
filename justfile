@@ -18,6 +18,8 @@ reset:
 format:
   fd \
     --print0 \
+    --hidden \
+    --exclude .lazy-lock.json \
     --type file \
     --extension clj \
     --extension fish \
