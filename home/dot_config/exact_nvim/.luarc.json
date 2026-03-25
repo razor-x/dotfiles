@@ -1,5 +1,0 @@
-{
-  "Lua.diagnostics.globals": ["vim", "MiniPick"],
-  "Lua.workspace.checkThirdParty": false,
-  "Lua.workspace.library": ["$VIMRUNTIME"]
-}
