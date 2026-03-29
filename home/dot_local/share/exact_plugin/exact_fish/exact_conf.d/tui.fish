@@ -74,8 +74,8 @@ if status is-interactive
 
     abbr md glow --tui
 
-    abbr m mise
-    abbr mm just
+    abbr m just
+    abbr mm mise
 
     abbr gfup git fetch --no-tags upstream
     abbr gfmk git -c fetch.prune=false -c fetch.pruneTags=false fetch --no-tags makenew
