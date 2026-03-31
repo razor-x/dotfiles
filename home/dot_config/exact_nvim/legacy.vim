@@ -1,3 +1,6 @@
+" Add shortcut to restart server and reload configuration.
+nnoremap <silent> <F5> :restart<CR>
+
 " Map space to leader.
 let mapleader = "\<Space>"
 let maplocalleader = "\\"
