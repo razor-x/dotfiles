@@ -6,23 +6,6 @@ return {
     cut_key = "m",
   } },
   {
-    "folke/trouble.nvim",
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
-    cmd = "Trouble",
-    keys = {
-      {
-        "<leader>xx",
-        "<cmd>Trouble diagnostics toggle<cr>",
-        desc = "Diagnostics (Trouble)",
-      },
-      {
-        "<leader>D",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-        desc = "Buffer Diagnostics (Trouble)",
-      },
-    },
-  },
-  {
     "mikesmithgh/kitty-scrollback.nvim",
     enabled = true,
     lazy = true,
