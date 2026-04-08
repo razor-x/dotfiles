@@ -38,14 +38,6 @@ function M.setup()
   vim.opt.foldmethod = "syntax"
   vim.opt.foldenable = false
 
-  -- Set default autocompletion behavior.
-  vim.opt.completeopt:append("noinsert")
-
-  -- Hide some autocompletion messages.
-  vim.opt.shortmess:append("c")
-
-  -- Enable omni completion.
-  vim.opt.omnifunc = "syntaxcomplete#Complete"
 
   -- Set default tex flavor.
   vim.g.tex_flavor = "latex"
