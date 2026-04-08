@@ -1,13 +1,13 @@
 local bootstrap = require("config.bootstrap")
 local dotfiles = require("config.dotfiles")
-local editor = require("config.options")
+local options = require("config.options")
 
 local Config = {}
 
 Config.setup = function()
   bootstrap()
 
-  -- editor.setup()
+  options.setup()
 
   vim.cmd("source " .. vim.fn.stdpath("config") .. "/legacy.vim")
 

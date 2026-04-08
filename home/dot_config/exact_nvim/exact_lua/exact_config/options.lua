@@ -40,7 +40,7 @@ function M.setup()
   -- Disable bell and visual bell.
   vim.opt.errorbells = false
   vim.opt.visualbell = true
-  vim.opt.t_vb = ""
+  -- vim.opt.t_vb = ""
 
   -- Set default autocompletion behavior.
   vim.opt.completeopt:append("noinsert")
