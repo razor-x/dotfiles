@@ -35,4 +35,4 @@ format:
         fish --command 'format $argv[1]' --
 
 watch:
-  watchexec --watch $(chezmoi source-path) -- chezmoi apply --init
+  watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force
