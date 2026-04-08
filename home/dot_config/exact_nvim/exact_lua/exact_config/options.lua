@@ -21,7 +21,7 @@ function M.setup()
   vim.opt.signcolumn = "yes"
 
   -- Set nonzero scrolloff.
-  vim.opt.scrolloff = 3
+  vim.opt.scrolloff = 5
 
   -- Set indentation preferences.
   vim.opt.smartindent = true
