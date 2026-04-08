@@ -23,6 +23,10 @@ return {
     },
   },
   {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  {
     "mikesmithgh/kitty-scrollback.nvim",
     enabled = true,
     lazy = true,

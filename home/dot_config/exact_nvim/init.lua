@@ -4,6 +4,8 @@ pick.setup()
 
 require("mini.completion").setup()
 
+require("lualine").setup()
+
 vim.keymap.set("n", "<leader>e", function()
   pick.builtin.files({
     tool = "git", -- Uses git ls-files (tracked files only)
