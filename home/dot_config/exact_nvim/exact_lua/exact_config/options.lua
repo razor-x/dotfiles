@@ -10,8 +10,9 @@ function M.setup()
   -- Hide buffers instead of closing them.
   vim.opt.hidden = true
 
-  -- Open splits below by default.
+  -- Open splits below or to the right by default.
   vim.opt.splitbelow = true
+  vim.opt.splitright = true
 
   -- Show line numbers.
   vim.opt.number = true
