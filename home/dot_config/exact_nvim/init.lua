@@ -1,4 +1,4 @@
-require("nvimrc").setup()
+require("config").setup()
 local pick = require("mini.pick")
 pick.setup()
 
