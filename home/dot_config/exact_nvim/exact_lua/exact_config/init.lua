@@ -1,6 +1,6 @@
 local bootstrap = require("config.bootstrap")
 local dotfiles = require("config.dotfiles")
-local editor = require("config.editor")
+local editor = require("config.options")
 
 local Config = {}
 
