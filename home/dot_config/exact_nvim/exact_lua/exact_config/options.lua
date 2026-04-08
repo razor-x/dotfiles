@@ -38,11 +38,6 @@ function M.setup()
   vim.opt.foldmethod = "syntax"
   vim.opt.foldenable = false
 
-  -- Disable bell and visual bell.
-  vim.opt.errorbells = false
-  vim.opt.visualbell = true
-  -- vim.opt.t_vb = ""
-
   -- Set default autocompletion behavior.
   vim.opt.completeopt:append("noinsert")
 
