@@ -38,6 +38,8 @@ function M.setup()
   vim.opt.foldmethod = "syntax"
   vim.opt.foldenable = false
 
+  -- Enable EditorConfig.
+  vim.g.editorconfig = true
 
   -- Set default tex flavor.
   vim.g.tex_flavor = "latex"
