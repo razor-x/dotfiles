@@ -1,4 +1,11 @@
-require("config").setup()
+local config = require("config")
+
+local plugin_import = "plugins"
+if os.getenv("NVIM_DISABLE_PLUGINS") then
+  plugin_import = nil
+end
+config.setup(plugin_import)
+
 local pick = require("mini.pick")
 pick.setup()
 
