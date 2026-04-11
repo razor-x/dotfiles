@@ -27,7 +27,7 @@ function M.setup()
   vim.keymap.set("n", "<CR>", ":")
   vim.keymap.set("v", "<CR>", ":")
 
-  -- Restore enter locally in command-line and quickfix buffers.
+  -- Use enter normally in command-line and quickfix buffers instead of the remapping to escape.
   local cr_local_mappings = vim.api.nvim_create_augroup("cr-local-mappings", { clear = true })
   vim.api.nvim_create_autocmd("CmdwinEnter", {
     group = cr_local_mappings,
@@ -66,7 +66,7 @@ function M.setup()
   vim.keymap.set("n", "&", M.cmd("&&"), { silent = true })
   vim.keymap.set("x", "&", M.cmd("&&"), { silent = true })
 
-  -- Allow shift-escape to open and close command-line window.
+  -- Use shift-escape to open and close the command-line window.
   vim.keymap.set("n", "<S-Esc>", "q:")
   local command_line_local_mappings = vim.api.nvim_create_augroup("command-line-local-mappings", { clear = true })
   vim.api.nvim_create_autocmd("CmdwinEnter", {
@@ -107,16 +107,16 @@ function M.setup()
   vim.keymap.set("c", "<C-K>", "<Up>")
   vim.keymap.set("c", "<C-J>", "<Down>")
 
-  -- Provide alternate mapping for q since it is overridden above.
+  -- Use tab to access macro recording since q is overridden above.
   vim.keymap.set("n", "<Tab>", "q")
   vim.keymap.set("n", "<Tab><Tab>", "qq<Esc>")
   vim.keymap.set("v", "<Tab>", "q")
   vim.keymap.set("v", "<Tab><Tab>", "qq")
 
-  -- Provide alternate mapping for tab.
+  -- Use ctrl-tab to trigger the original tab mapping.
   vim.keymap.set("n", "<C-Tab>", "<Tab>")
 
-  -- Add shortcut for @q.
+  -- Use ctrl-q to replay the q register.
   vim.keymap.set("n", "<C-Q>", "@q")
   vim.keymap.set("v", "<C-Q>", "@q")
 
@@ -192,7 +192,7 @@ function M.setup()
     M.system_clipboard_mappings(register, false)
   end, { silent = true })
 
-  -- Toggle colored column.
+  -- Use yom to toggle the color column.
   vim.keymap.set("n", "yom", function()
     if vim.opt.colorcolumn == "" then
       vim.opt.colorcolumn = "81"
@@ -220,7 +220,7 @@ function M.system_clipboard_mappings(register, quiet)
   vim.keymap.set("n", "<Leader>P", '"' .. register .. "P")
 
   -- Use easyclip substitution with the system clipboard.
-  -- TODO: Depends on plugin.
+  -- TODO: Depends on the easyclip plugin.
   vim.keymap.set("v", "<C-;>", '"' .. register .. ":", { remap = true })
   vim.keymap.set("n", "<C-;>", '"' .. register .. ":", { remap = true })
   vim.keymap.set("n", "<C-;><C-;>", '"' .. register .. "::", { remap = true })
