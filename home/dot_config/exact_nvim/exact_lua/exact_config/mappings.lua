@@ -8,11 +8,6 @@ function M.setup()
   -- Use F5 to restart server and reload configuration.
   vim.keymap.set("n", "<F5>", M.cmd("restart"), { silent = true })
 
-  -- Add aliases for consistent behavior of ctrl-space.
-  vim.keymap.set("n", "<NUL>", "<C-Space>", { remap = true })
-  vim.keymap.set("i", "<NUL>", "<C-Space>", { remap = true })
-  vim.keymap.set("c", "<NUL>", "<C-Space>", { remap = true })
-
   -- Map enter to escape in insert mode.
   vim.keymap.set("i", "<CR>", "<Esc>")
 
