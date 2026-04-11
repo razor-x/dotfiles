@@ -113,9 +113,6 @@ function M.setup()
   vim.keymap.set("v", "<Tab>", "q")
   vim.keymap.set("v", "<Tab><Tab>", "qq")
 
-  -- Use ctrl-tab to trigger the original tab mapping.
-  vim.keymap.set("n", "<C-Tab>", "<Tab>")
-
   -- Use ctrl-q to replay the q register.
   vim.keymap.set("n", "<C-Q>", "@q")
   vim.keymap.set("v", "<C-Q>", "@q")
