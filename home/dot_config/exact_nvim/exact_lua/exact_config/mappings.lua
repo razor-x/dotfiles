@@ -191,12 +191,12 @@ function M.setup()
   vim.keymap.set("n", "<C-G>", "M")
 
   -- Create the system clipboard mappings using the + register.
-  System_clipboard_mappings("+", true)
+  M.system_clipboard_mappings("+", true)
 
   -- Toggle system clipboard mappings between the + and * registers.
   vim.keymap.set("n", "yoP", function()
     local register = vim.g.mapped_system_clipboard == "+" and "*" or "+"
-    System_clipboard_mappings(register, false)
+    M.system_clipboard_mappings(register, false)
   end, { silent = true })
 
   -- Toggle colored column.
@@ -209,7 +209,7 @@ function M.setup()
   end, { silent = true })
 end
 
-function System_clipboard_mappings(register, quiet)
+function M.system_clipboard_mappings(register, quiet)
   -- Copy to system clipboard.
   vim.keymap.set("n", "<Leader>c", '"' .. register .. "y")
   vim.keymap.set("v", "<Leader>c", '"' .. register .. "y")
