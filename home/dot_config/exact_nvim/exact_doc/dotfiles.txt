@@ -1,0 +1,177 @@
+*dotfiles.txt* Neovim config from dotfiles.
+
+==============================================================================
+MAPPINGS                                                  *dotfiles-mappings*
+
+Mappings are nonrecursive unless otherwise noted.
+
+                                                        *yoP*
+yoP                     Toggle system clipboard mappings between the `+`
+                        and `*` registers.
+
+                                                        *yom*
+yom                     Toggle `colorcolumn` between `81` and disabled.
+
+                                                        *q*
+q                       Mapped to the motion `ge` (recursive).
+
+                                                        *Q*
+Q                       Mapped to the motion `gE` (recursive).
+
+                                                        *U*
+U                       Mapped to `<C-R>` (redo).
+
+                                                        *&*
+&                       Synonym for `:&&`.
+
+                                                        *'*
+'                       Mapped to `` ` ``.
+
+                                                        *`*
+`                       Mapped to `'`.
+
+                                                        *<F5>*
+<F5>                    Restart Neovim and reload the configuration.
+
+                                                        *<BS>*
+<BS>                    In insert mode, move one character left.
+                        In command-line mode, move one character left.
+
+                                                        *<CR>*
+<CR>                    In insert mode, exit to normal mode.
+                        In normal and visual mode, enter command-line mode.
+                        In the command-line window and quickfix buffers,
+                        keep the default `<CR>` behavior.
+
+                                                        *<C-CR>*
+<C-CR>                  Insert a newline from normal mode and stay in insert
+                        mode (recursive).
+
+                                                        *<S-CR>*
+<S-CR>                  Same as `<C-CR>` (recursive).
+
+                                                        *<S-Esc>*
+<S-Esc>                 Toggle the command-line window in normal and visual
+                        mode.
+
+                                                        *<C-A>*
+<C-A>                   In command-line mode, jump to the start of the
+                        command line.
+
+                                                        *<C-G>*
+<C-G>                   Mapped to `M`.
+
+                                                        *<C-H>*
+<C-H>                   In insert mode, backspace.
+                        In command-line mode, backspace.
+
+                                                        *<C-J>*
+<C-J>                   In command-line mode, move forward in command
+                        history.
+
+                                                        *<C-K>*
+<C-K>                   In insert mode, split the line at the cursor.
+                        In command-line mode, move backward in command
+                        history.
+
+                                                        *<C-L>*
+<C-L>                   In insert mode, move one character right.
+                        In command-line mode, move one character right.
+
+                                                        *<C-Q>*
+<C-Q>                   Replay register `q`.
+
+                                                        *<C-R>*
+<C-R>                   Mapped to `U`.
+
+                                                        *<Tab>*
+<Tab>                   Start macro recording using register `q`.
+
+                                                        *<Tab><Tab>*
+<Tab><Tab>              Record a macro into register `q`.
+
+                                                *<Leader><Leader>*
+<Leader><Leader>        Toggle the fold under the cursor.
+
+                                        *<Leader>h* *<Leader>j*
+                                        *<Leader>k* *<Leader>l*
+<Leader>{hjkl}          Split the current window in the given direction.
+
+                                        *<Leader>H* *<Leader>J*
+                                        *<Leader>K* *<Leader>L*
+<Leader>{HJKL}          Split the frame at the outer edge in the given
+                        direction.
+
+                                                *<Leader><Tab>*
+<Leader><Tab>           Open a new tab.
+
+                                                *<Leader><S-Tab>*
+<Leader><S-Tab>         Close the current tab.
+
+                                                        *<C-,>*
+<C-,>                   Go to the previous tab.
+
+                                                        *<C-.>*
+<C-.>                   Go to the next tab.
+
+                                        *<Leader>:* *<Leader>/* *<Leader>?*
+<Leader>:               Open the command-line window.
+<Leader>/               Open the search history window for `/`.
+<Leader>?               Open the search history window for `?`.
+
+                                                        *<Leader>xz*
+<Leader>xz              Synonym for `:pclose`.
+
+                                                        *<Leader>o*
+<Leader>o               Synonym for `:nohlsearch`.
+
+                                                        *<Leader>n*
+<Leader>n               Synonym for `:enew`.
+
+                                                        *<Leader>E*
+<Leader>E               Synonym for `:edit!`.
+
+                                                        *<Leader>s*
+<Leader>s               Synonym for `:update`.
+
+                                                        *<Leader>S*
+<Leader>S               Synonym for `:write!`.
+
+                                                *<Leader><CR>*
+<Leader><CR>            Synonym for `:quit`.
+
+                                                        *<Leader>q*
+<Leader>q               Synonym for `:quitall`.
+
+                                                        *<Leader>Q*
+<Leader>Q               Synonym for `:quitall!`.
+
+                                                        *<Leader>=*
+<Leader>=               Start `:put =` from the expression register.
+
+                                        *<Leader>c* *<Leader>C*
+                                        *<Leader>cc*
+<Leader>c{motion}       Yank to the mapped system clipboard register.
+<Leader>C               Yank to end of line to the mapped system clipboard
+                        register.
+<Leader>cc              Yank the current line to the mapped system clipboard
+                        register.
+
+                                        *<Leader>m* *<Leader>M*
+                                        *<Leader>mm*
+<Leader>m{motion}       Delete to the mapped system clipboard register.
+<Leader>M               Delete to end of line to the mapped system clipboard
+                        register.
+<Leader>mm              Delete the current line to the mapped system clipboard
+                        register.
+
+                                        *<Leader>p* *<Leader>P*
+<Leader>{pP}            Paste from the mapped system clipboard register.
+
+                                                *<C-;>* *<C-;><C-;>*
+<C-;>                   Use the mapped system clipboard register with the
+                        substitution operator (recursive).
+<C-;><C-;>              Substitute the whole line with the mapped system
+                        clipboard register (recursive).
+
+ vim:tw=78:ts=8:noet:ft=help:norl:
