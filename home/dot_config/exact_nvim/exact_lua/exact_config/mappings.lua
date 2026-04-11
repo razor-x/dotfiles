@@ -6,7 +6,7 @@ function M.setup()
   vim.g.maplocalleader = "\\"
 
   -- Add shortcut to restart server and reload configuration.
-  vim.keymap.set("n", "<F5>", ":restart<CR>", { silent = true })
+  vim.keymap.set("n", "<F5>", M.cmd("restart"), { silent = true })
 
   -- Add aliases for consistent behavior of ctrl-space.
   vim.keymap.set("n", "<NUL>", "<C-Space>", { remap = true })
@@ -70,8 +70,8 @@ function M.setup()
   vim.keymap.set("v", "'", "`")
 
   -- Make & behave like &&.
-  vim.keymap.set("n", "&", ":<C-U>&&<CR>", { silent = true })
-  vim.keymap.set("x", "&", ":<C-U>&&<CR>", { silent = true })
+  vim.keymap.set("n", "&", M.cmd("&&"), { silent = true })
+  vim.keymap.set("x", "&", M.cmd("&&"), { silent = true })
 
   -- Allow shift-escape to open and close command-line window.
   vim.keymap.set("n", "<S-Esc>", "q:")
@@ -80,8 +80,8 @@ function M.setup()
     group = command_line_local_mappings,
     pattern = "*",
     callback = function()
-      vim.keymap.set("n", "<S-Esc>", ":<C-U>q<CR>", { silent = true })
-      vim.keymap.set("v", "<S-Esc>", ":<C-U>q<CR>", { silent = true })
+      vim.keymap.set("n", "<S-Esc>", M.cmd("q"), { silent = true })
+      vim.keymap.set("v", "<S-Esc>", M.cmd("q"), { silent = true })
     end,
   })
   vim.api.nvim_create_autocmd("CmdwinLeave", {
@@ -131,20 +131,20 @@ function M.setup()
   vim.keymap.set("n", "<Leader><Leader>", "za")
 
   -- Add shortcuts to split the window.
-  vim.keymap.set("n", "<Leader>h", ":<C-U>leftabove vsplit<CR>", { silent = true })
-  vim.keymap.set("n", "<Leader>l", ":<C-U>rightbelow vsplit<CR>", { silent = true })
-  vim.keymap.set("n", "<Leader>k", ":<C-U>leftabove split<CR>", { silent = true })
-  vim.keymap.set("n", "<Leader>j", ":<C-U>rightbelow split<CR>", { silent = true })
+  vim.keymap.set("n", "<Leader>h", M.cmd("leftabove vsplit"), { silent = true })
+  vim.keymap.set("n", "<Leader>l", M.cmd("rightbelow vsplit"), { silent = true })
+  vim.keymap.set("n", "<Leader>k", M.cmd("leftabove split"), { silent = true })
+  vim.keymap.set("n", "<Leader>j", M.cmd("rightbelow split"), { silent = true })
 
   -- Add shortcuts to split the frame.
-  vim.keymap.set("n", "<Leader>H", ":<C-U>topleft vsplit<CR>", { silent = true })
-  vim.keymap.set("n", "<Leader>L", ":<C-U>botright vsplit<CR>", { silent = true })
-  vim.keymap.set("n", "<Leader>K", ":<C-U>topleft split<CR>", { silent = true })
-  vim.keymap.set("n", "<Leader>J", ":<C-U>botright split<CR>", { silent = true })
+  vim.keymap.set("n", "<Leader>H", M.cmd("topleft vsplit"), { silent = true })
+  vim.keymap.set("n", "<Leader>L", M.cmd("botright vsplit"), { silent = true })
+  vim.keymap.set("n", "<Leader>K", M.cmd("topleft split"), { silent = true })
+  vim.keymap.set("n", "<Leader>J", M.cmd("botright split"), { silent = true })
 
   -- Add shortcuts to open and close tabs.
-  vim.keymap.set("n", "<Leader><Tab>", ":<C-U>tabnew<CR>", { silent = true })
-  vim.keymap.set("n", "<Leader><S-Tab>", ":<C-U>tabclose<CR>", { silent = true })
+  vim.keymap.set("n", "<Leader><Tab>", M.cmd("tabnew"), { silent = true })
+  vim.keymap.set("n", "<Leader><S-Tab>", M.cmd("tabclose"), { silent = true })
 
   -- Add shortcuts to cycle through tabs.
   vim.keymap.set("n", "<C-,>", "gT")
@@ -159,30 +159,30 @@ function M.setup()
   vim.keymap.set("v", "<Leader>?", "q?")
 
   -- Add shortcut to close preview window.
-  vim.keymap.set("n", "<Leader>xz", ":<C-U>pclose<CR>", { silent = true })
+  vim.keymap.set("n", "<Leader>xz", M.cmd("pclose"), { silent = true })
 
   -- Add shortcut to clear highlighting until next search.
-  vim.keymap.set("n", "<Leader>o", ":<C-U>nohlsearch<CR>", { silent = true })
+  vim.keymap.set("n", "<Leader>o", M.cmd("nohlsearch"), { silent = true })
 
   -- Add shortcut for new.
-  vim.keymap.set("n", "<Leader>n", ":<C-U>enew<CR>", { silent = true })
+  vim.keymap.set("n", "<Leader>n", M.cmd("enew"), { silent = true })
 
   -- Add shortcut to force reload file.
-  vim.keymap.set("n", "<Leader>E", ":<C-U>edit!<CR>", { silent = true })
+  vim.keymap.set("n", "<Leader>E", M.cmd("edit!"), { silent = true })
 
   -- Add shortcuts for update and force write.
-  vim.keymap.set("n", "<Leader>s", ":<C-U>update<CR>", { silent = true })
-  vim.keymap.set("n", "<Leader>S", ":<C-U>write!<CR>", { silent = true })
+  vim.keymap.set("n", "<Leader>s", M.cmd("update"), { silent = true })
+  vim.keymap.set("n", "<Leader>S", M.cmd("write!"), { silent = true })
 
   -- Add shortcuts for quit.
-  vim.keymap.set("n", "<Leader><CR>", ":<C-U>quit<CR>", { silent = true })
-  vim.keymap.set("v", "<Leader><CR>", ":<C-U>quit<CR>", { silent = true })
+  vim.keymap.set("n", "<Leader><CR>", M.cmd("quit"), { silent = true })
+  vim.keymap.set("v", "<Leader><CR>", M.cmd("quit"), { silent = true })
 
   -- Add shortcuts for force quit and quit all.
-  vim.keymap.set("n", "<Leader>q", ":<C-U>quitall<CR>", { silent = true })
-  vim.keymap.set("v", "<Leader>q", ":<C-U>quitall<CR>", { silent = true })
-  vim.keymap.set("n", "<Leader>Q", ":<C-U>quitall!<CR>", { silent = true })
-  vim.keymap.set("v", "<Leader>Q", ":<C-U>quitall!<CR>", { silent = true })
+  vim.keymap.set("n", "<Leader>q", M.cmd("quitall"), { silent = true })
+  vim.keymap.set("v", "<Leader>q", M.cmd("quitall"), { silent = true })
+  vim.keymap.set("n", "<Leader>Q", M.cmd("quitall!"), { silent = true })
+  vim.keymap.set("v", "<Leader>Q", M.cmd("quitall!"), { silent = true })
 
   -- Add shortcut to paste from the expression register.
   vim.keymap.set("n", "<Leader>=", ":<C-U>put =")
@@ -236,6 +236,12 @@ function M.system_clipboard_mappings(register, quiet)
 
   if not quiet then
     vim.notify("Setting system register to " .. register)
+  end
+end
+
+function M.cmd(command)
+  return function()
+    vim.cmd(command)
   end
 end
 
