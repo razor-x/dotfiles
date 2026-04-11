@@ -27,27 +27,20 @@ function M.setup()
   vim.keymap.set("n", "<CR>", ":")
   vim.keymap.set("v", "<CR>", ":")
 
-  -- Fix enter behavior in quickfix and command-line windows.
+  -- Restore enter locally in command-line and quickfix buffers.
   local cr_local_mappings = vim.api.nvim_create_augroup("cr-local-mappings", { clear = true })
-  vim.api.nvim_create_autocmd("BufReadPost", {
+  vim.api.nvim_create_autocmd("CmdwinEnter", {
     group = cr_local_mappings,
-    pattern = "quickfix",
+    pattern = "*",
     callback = function(event)
       vim.keymap.set("n", "<CR>", "<CR>", { buffer = event.buf })
     end,
   })
-  vim.api.nvim_create_autocmd("CmdwinEnter", {
+  vim.api.nvim_create_autocmd("FileType", {
     group = cr_local_mappings,
-    pattern = "*",
-    callback = function()
-      vim.keymap.set("n", "<CR>", "<CR>")
-    end,
-  })
-  vim.api.nvim_create_autocmd("CmdwinLeave", {
-    group = cr_local_mappings,
-    pattern = "*",
-    callback = function()
-      vim.keymap.set("n", "<CR>", ":")
+    pattern = "qf",
+    callback = function(event)
+      vim.keymap.set("n", "<CR>", "<CR>", { buffer = event.buf })
     end,
   })
 
