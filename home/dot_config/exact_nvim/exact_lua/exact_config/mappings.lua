@@ -201,7 +201,7 @@ function M.setup()
 
   -- Toggle colored column.
   vim.keymap.set("n", "yom", function()
-    if vim.opt.colorcolumn:get()[1] == nil then
+    if vim.wo.colorcolumn == "" then
       vim.opt.colorcolumn = "81"
     else
       vim.opt.colorcolumn = ""
