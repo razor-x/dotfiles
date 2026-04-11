@@ -5,7 +5,7 @@ function M.setup()
   vim.g.mapleader = " "
   vim.g.maplocalleader = "\\"
 
-  -- Add shortcut to restart server and reload configuration.
+  -- Use F5 to restart server and reload configuration.
   vim.keymap.set("n", "<F5>", M.cmd("restart"), { silent = true })
 
   -- Add aliases for consistent behavior of ctrl-space.
@@ -86,13 +86,13 @@ function M.setup()
     end,
   })
 
-  -- Use ctrl-h to as backspace in insert mode.
+  -- Use ctrl-h as backspace in insert mode.
   vim.keymap.set("i", "<C-H>", "<BS>")
 
   -- Use ctrl-k as split line in insert mode.
   vim.keymap.set("i", "<C-K>", "<CR><Up><C-O>$")
 
-  -- Use ctrl-k as split line in insert mode.
+  -- Use ctrl-l as right in insert mode.
   vim.keymap.set("i", "<C-L>", "<Right>")
 
   -- Use backspace, ctrl-h, and ctrl-l to navigate command input.
@@ -180,7 +180,7 @@ function M.setup()
   -- Add shortcut to paste from the expression register.
   vim.keymap.set("n", "<Leader>=", ":<C-U>put =")
 
-  -- Use <C-G> for M.
+  -- Use ctrl-g to jump to the middle of the screen.
   vim.keymap.set("n", "<C-G>", "M")
 
   -- Create the system clipboard mappings using the + register.
@@ -219,7 +219,7 @@ function M.system_clipboard_mappings(register, quiet)
   vim.keymap.set("n", "<Leader>p", '"' .. register .. "p")
   vim.keymap.set("n", "<Leader>P", '"' .. register .. "P")
 
-  -- Substitute from the system clipboard easyclip.
+  -- Use easyclip substitution with the system clipboard.
   -- TODO: Depends on plugin.
   vim.keymap.set("v", "<C-;>", '"' .. register .. ":", { remap = true })
   vim.keymap.set("n", "<C-;>", '"' .. register .. ":", { remap = true })
