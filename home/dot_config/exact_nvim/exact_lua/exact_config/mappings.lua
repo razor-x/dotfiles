@@ -104,7 +104,7 @@ function M.setup()
 
   -- Use tab to access macro recording since q is remapped above.
   vim.keymap.set("n", "<Tab>", "q")
-  vim.keymap.set("n", "<Tab><Tab>", "qq<Esc>")
+  vim.keymap.set("n", "<Tab><Tab>", "qq")
   vim.keymap.set("v", "<Tab>", "q")
   vim.keymap.set("v", "<Tab><Tab>", "qq")
 
