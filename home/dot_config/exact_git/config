@@ -23,16 +23,35 @@
 	sort = -version:refname
 [interactive]
 	diffFilter = delta --color-only
+	singleKey=true
 [alias]
 	root = rev-parse --show-toplevel
 	pr-diff = "!git diff \"$(git merge-base main HEAD)\""
 
+	# Git Commands to audit a project.
 	# https://piechowski.io/post/git-commands-before-reading-code/
-	audit-churn = "!git log --format=format: --name-only --since=\"1 year ago\" | sort | uniq -c | sort -nr | head -20"
-	audit-contributors = shortlog -sn --no-merges
-	audit-hotspots = "!git log -i -E --grep=\"fix|bug|broken\" --name-only --format='' | sort | uniq -c | sort -nr | head -20"
-	audit-velocity = "!git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c"
-	audit-firefighting = "!git log --oneline --since=\"1 year ago\" | grep -iE 'revert|hotfix|emergency|rollback'"
+	audit-churn = "!git log --name-only --format=format: --since='1 year ago' \
+		| sort \
+		| uniq --count \
+		| sort --numeric-sort --reverse \
+		| head --lines=20"
+
+	audit-contributors = "!git --no-pager shortlog --summary --numbered --no-merges"
+
+	audit-hotspots = "!git log --regexp-ignore-case --extended-regexp --name-only --format='' \
+		--grep='fix|bug|broken' \
+		| sort \
+		| uniq --count \
+		| sort --numeric-sort --reverse \
+		| head --lines=20"
+
+	audit-velocity = "!git log --format=%ad --date=format:%Y-%m \
+		| sort \
+		| uniq --count"
+
+	audit-firefighting = "!git --no-pager log --pretty=oneline --abbrev-commit \
+		--since='1 year ago' --regexp-ignore-case --extended-regexp \
+		--grep='revert|hotfix|emergency|rollback'"
 [include]
 	path = delta
 [include]
