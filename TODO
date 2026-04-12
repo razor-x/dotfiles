@@ -4,3 +4,8 @@ tui.fish
 
 broot
 man dotfiles
+
+neovim bind ideas
+
+ctrl-enter -> open action menu, e.g., like ctrl-enter in opencode
+<Leader><Leader> as a "ctrl-shift" kind of overload for less common actions

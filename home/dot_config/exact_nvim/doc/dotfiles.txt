@@ -58,9 +58,6 @@ U                       Redo. Equivalent to |CTRL-R|.
 <C-CR>                  Split the line at the cursor from normal mode and
                         enter insert mode (recursive). Uses |i_<CR>|.
 
-                                                        *<S-CR>*
-<S-CR>                  Same as `<C-CR>` (recursive). Uses |i_<CR>|.
-
                                                         *<S-Esc>*
 <S-Esc>                 Toggle the command-line window from normal mode.
                         See |q:| and |cmdwin|.

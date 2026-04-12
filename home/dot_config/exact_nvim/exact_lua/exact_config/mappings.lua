@@ -14,8 +14,7 @@ function M.setup()
   -- Use backspace as left in insert mode.
   vim.keymap.set("i", "<BS>", "<Left>")
 
-  -- Use ctrl-enter or shift-enter to split line and insert in normal mode.
-  vim.keymap.set("n", "<C-CR>", "i<C-CR>", { remap = true })
+  -- Use shift-enter to split line and insert from normal mode.
   vim.keymap.set("n", "<S-CR>", "i<C-CR>", { remap = true })
 
   -- Use enter to open command-line mode.
