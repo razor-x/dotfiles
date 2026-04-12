@@ -102,7 +102,7 @@ function M.setup()
   vim.keymap.set("c", "<C-K>", "<Up>")
   vim.keymap.set("c", "<C-J>", "<Down>")
 
-  -- Use tab to access macro recording since q is overridden above.
+  -- Use tab to access macro recording since q is remapped above.
   vim.keymap.set("n", "<Tab>", "q")
   vim.keymap.set("n", "<Tab><Tab>", "qq<Esc>")
   vim.keymap.set("v", "<Tab>", "q")
@@ -112,13 +112,13 @@ function M.setup()
   vim.keymap.set("n", "<C-Q>", "@q")
   vim.keymap.set("v", "<C-Q>", "@q")
 
-  -- Add shortcuts to split the window.
+  -- Use leader-{hjkl} to split the current window.
   vim.keymap.set("n", "<Leader>h", M.cmd("leftabove vsplit"), { silent = true })
   vim.keymap.set("n", "<Leader>l", M.cmd("rightbelow vsplit"), { silent = true })
   vim.keymap.set("n", "<Leader>k", M.cmd("leftabove split"), { silent = true })
   vim.keymap.set("n", "<Leader>j", M.cmd("rightbelow split"), { silent = true })
 
-  -- Add shortcuts to split the frame.
+  -- Use leader-{HJKL} to split the frame edges.
   vim.keymap.set("n", "<Leader>H", M.cmd("topleft vsplit"), { silent = true })
   vim.keymap.set("n", "<Leader>L", M.cmd("botright vsplit"), { silent = true })
   vim.keymap.set("n", "<Leader>K", M.cmd("topleft split"), { silent = true })
@@ -146,7 +146,7 @@ function M.setup()
   -- Add shortcut to clear highlighting until next search.
   vim.keymap.set("n", "<Leader>o", M.cmd("nohlsearch"), { silent = true })
 
-  -- Add shortcut for new.
+  -- Use leader-n to open a new empty buffer.
   vim.keymap.set("n", "<Leader>n", M.cmd("enew"), { silent = true })
 
   -- Add shortcut to force reload file.
