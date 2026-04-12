@@ -26,7 +26,7 @@
 	singleKey=true
 [alias]
 	root = rev-parse --show-toplevel
-	pr-diff = "!git diff \"$(git merge-base main HEAD)\""
+	pr-diff = "!git diff $(git merge-base main HEAD)"
 
 	# Git Commands to audit a project.
 	# https://piechowski.io/post/git-commands-before-reading-code/
