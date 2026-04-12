@@ -6,7 +6,7 @@ local options = require("config.options")
 local M = {}
 
 ---@param plugin_import string | nil Module name to load plugins from
-M.setup = function(plugin_import)
+function M.setup(plugin_import)
   options.setup()
   mappings.setup()
 
