@@ -139,7 +139,7 @@ function fish_user_key_bindings \
 
     # Show stacked diff of proposed changes with Git.
     bind --mode insert ctrl-shift-u \
-        'commandline " git diff (git merge-base main HEAD)"; execute-in-stack'
+        'commandline " git pr-diff"; execute-in-stack'
 
     # TODO: Bind open keys.
     # bind --mode insert ctrl-shift-\;

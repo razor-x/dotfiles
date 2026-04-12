@@ -25,6 +25,7 @@
 	diffFilter = delta --color-only
 [alias]
 	root = rev-parse --show-toplevel
+	pr-diff = "!git diff \"$(git merge-base main HEAD)\""
 
 	# https://piechowski.io/post/git-commands-before-reading-code/
 	audit-churn = "!git log --format=format: --name-only --since=\"1 year ago\" | sort | uniq -c | sort -nr | head -20"
