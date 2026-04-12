@@ -8,7 +8,7 @@ function M.setup()
   -- Use F5 to restart server and reload configuration.
   vim.keymap.set("n", "<F5>", M.cmd("restart"), { silent = true })
 
-  -- Map enter to escape in insert mode.
+  -- Use enter to leave insert mode.
   vim.keymap.set("i", "<CR>", "<Esc>")
 
   -- Use backspace as left in insert mode.
@@ -39,7 +39,7 @@ function M.setup()
     end,
   })
 
-  -- Use q and Q for ge and gE.
+  -- Use q and Q to move backward by word end.
   vim.keymap.set("n", "q", "ge", { remap = true })
   vim.keymap.set("v", "q", "ge", { remap = true })
   vim.keymap.set("o", "q", "ge", { remap = true })
@@ -47,17 +47,17 @@ function M.setup()
   vim.keymap.set("v", "Q", "gE", { remap = true })
   vim.keymap.set("o", "Q", "gE", { remap = true })
 
-  -- Map U to redo and <C-R> to U.
+  -- Use U to redo and ctrl-r to restore the current line.
   vim.keymap.set("n", "U", "<C-R>")
   vim.keymap.set("n", "<C-R>", "U")
 
-  -- Swap ` with '.
+  -- Use ` for linewise mark jumps and ' for exact-position mark jumps.
   vim.keymap.set("n", "`", "'")
   vim.keymap.set("v", "`", "'")
   vim.keymap.set("n", "'", "`")
   vim.keymap.set("v", "'", "`")
 
-  -- Make & behave like &&.
+  -- Use & to repeat the last substitution with its flags.
   vim.keymap.set("n", "&", M.cmd("&&"), { silent = true })
   vim.keymap.set("x", "&", M.cmd("&&"), { silent = true })
 
@@ -112,7 +112,7 @@ function M.setup()
   vim.keymap.set("n", "<C-Q>", "@q")
   vim.keymap.set("v", "<C-Q>", "@q")
 
-  -- Add shortcut to toggle folds.
+  -- Use leader-leader to toggle the current fold.
   vim.keymap.set("n", "<Leader><Leader>", "za")
 
   -- Add shortcuts to split the window.
@@ -131,7 +131,7 @@ function M.setup()
   vim.keymap.set("n", "<Leader><Tab>", M.cmd("tabnew"), { silent = true })
   vim.keymap.set("n", "<Leader><S-Tab>", M.cmd("tabclose"), { silent = true })
 
-  -- Add shortcuts to cycle through tabs.
+  -- Use ctrl-, and ctrl-. to cycle through tabs.
   vim.keymap.set("n", "<C-,>", "gT")
   vim.keymap.set("n", "<C-.>", "gt")
 
@@ -169,16 +169,16 @@ function M.setup()
   vim.keymap.set("n", "<Leader>Q", M.cmd("quitall!"), { silent = true })
   vim.keymap.set("v", "<Leader>Q", M.cmd("quitall!"), { silent = true })
 
-  -- Add shortcut to paste from the expression register.
+  -- Use leader-= to paste from the expression register.
   vim.keymap.set("n", "<Leader>=", ":<C-U>put =")
 
   -- Use ctrl-g to jump to the middle of the screen.
   vim.keymap.set("n", "<C-G>", "M")
 
-  -- Create the system clipboard mappings using the + register.
+  -- Use the + register for system clipboard mappings.
   M.system_clipboard_mappings("+", true)
 
-  -- Toggle system clipboard mappings between the + and * registers.
+  -- Use yoP to switch system clipboard mappings between + and *.
   vim.keymap.set("n", "yoP", function()
     local register = vim.g.mapped_system_clipboard == "+" and "*" or "+"
     M.system_clipboard_mappings(register, false)
