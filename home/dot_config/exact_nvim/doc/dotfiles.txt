@@ -7,169 +7,200 @@ Mappings are nonrecursive unless otherwise noted.
 
                                                         *yoP*
 yoP                     Toggle system clipboard mappings between the `+`
-                        and `*` registers.
+                        and `*` registers. See |quote| and |clipboard|.
 
                                                         *yom*
 yom                     Toggle `colorcolumn` between `81` and disabled.
+                        See |'colorcolumn'|.
 
                                                         *q*
 q                       Move backward to the end of the previous word
-                        (recursive).
+                        (recursive). Equivalent to |ge|.
 
                                                         *Q*
 Q                       Move backward to the end of the previous WORD
-                        (recursive).
+                        (recursive). Equivalent to |gE|.
 
                                                         *U*
-U                       Mapped to `<C-R>` (redo).
+U                       Redo. Equivalent to |CTRL-R|.
 
                                                         *&*
-&                       Synonym for `:&&`.
+&                       Repeat the last substitution with its flags.
+                        Equivalent to |:&&|.
 
                                                         *'*
-'                       Use exact-position mark jumps.
+'{mark}                 Jump to the exact position of {mark}.
+                        This swaps the usual behavior of |'a| and |`a|.
 
                                                         *`*
-`                       Use linewise mark jumps.
+`{mark}                 Jump to the line of {mark}.
+                        This swaps the usual behavior of |`a| and |'a|.
 
                                                         *<F5>*
 <F5>                    Restart Neovim and reload the configuration.
+                        See |:restart|.
 
                                                         *<BS>*
 <BS>                    In insert mode, move one character left.
+                        Equivalent to |i_<Left>|.
                         In command-line mode, move one character left.
+                        Equivalent to |c_<Left>|.
 
                                                         *<CR>*
 <CR>                    In insert mode, exit to normal mode.
+                        Equivalent to |i_<Esc>|.
                         In normal and visual mode, enter command-line mode.
+                        See |:|.
                         In the command-line window and quickfix buffers,
                         keep the default `<CR>` behavior.
 
                                                         *<C-CR>*
 <C-CR>                  Split the line at the cursor from normal mode and
-                        enter insert mode (recursive).
+                        enter insert mode (recursive). Uses |i_<CR>|.
 
                                                         *<S-CR>*
-<S-CR>                  Same as `<C-CR>` (recursive).
+<S-CR>                  Same as `<C-CR>` (recursive). Uses |i_<CR>|.
 
                                                         *<S-Esc>*
-<S-Esc>                 Toggle the command-line window from normal mode
+<S-Esc>                 Toggle the command-line window from normal mode.
+                        See |q:| and |cmdwin|.
 
                                                         *<C-A>*
 <C-A>                   In command-line mode, jump to the start of the
-                        command line.
+                        command line. Equivalent to |c_<Home>|.
 
                                                         *<C-G>*
-<C-G>                   Mapped to `M`.
+<C-G>                   Jump to the middle of the screen. Equivalent to |M|.
 
                                                         *<C-H>*
 <C-H>                   In insert mode, backspace.
+                        Equivalent to |i_<BS>|.
                         In command-line mode, backspace.
+                        Equivalent to |c_<BS>|.
 
                                                         *<C-J>*
 <C-J>                   In command-line mode, move forward in command
-                        history.
+                        history. See |c_CTRL-N| and |cmdline-history|.
 
                                                         *<C-K>*
 <C-K>                   In insert mode, split the line at the cursor.
+                        Uses |i_<CR>|.
                         In command-line mode, move backward in command
-                        history.
+                        history. See |c_CTRL-P| and |cmdline-history|.
 
                                                         *<C-L>*
 <C-L>                   In insert mode, move one character right.
+                        Equivalent to |i_<Right>|.
                         In command-line mode, move one character right.
+                        Equivalent to |c_<Right>|.
 
                                                         *<C-Q>*
-<C-Q>                   Replay register `q`.
+<C-Q>                   Replay register `q`. See |@| and |recording|.
 
                                                         *<C-R>*
-<C-R>                   Mapped to `U`.
+<C-R>                   Restore the current line to its state before the
+                        last change. See |undo-redo|.
 
                                                         *<Tab>*
 <Tab>                   Start macro recording using register `q`.
+                        Equivalent to |recording|.
 
                                                         *<Tab><Tab>*
 <Tab><Tab>              Start recording a macro into register `q`.
+                        Uses |recording|.
 
                                         *<Leader>h* *<Leader>j*
                                         *<Leader>k* *<Leader>l*
 <Leader>{hjkl}          Split the current window in the given direction.
+                        Uses |:split|, |:vsplit|, |:leftabove|, and
+                        |:rightbelow|.
 
                                         *<Leader>H* *<Leader>J*
                                         *<Leader>K* *<Leader>L*
 <Leader>{HJKL}          Split the frame at the outer edge in the given
-                        direction.
+                        direction. Uses |:split|, |:vsplit|, |:topleft|,
+                        and |:botright|.
 
                                                 *<Leader><Tab>*
-<Leader><Tab>           Open a new tab.
+<Leader><Tab>           Open a new tab. Equivalent to |:tabnew|.
 
                                                 *<Leader><S-Tab>*
-<Leader><S-Tab>         Close the current tab.
+<Leader><S-Tab>         Close the current tab. Equivalent to |:tabclose|.
 
                                                         *<C-,>*
-<C-,>                   Go to the previous tab.
+<C-,>                   Go to the previous tab. Equivalent to |gT|.
 
                                                         *<C-.>*
-<C-.>                   Go to the next tab.
+<C-.>                   Go to the next tab. Equivalent to |gt|.
 
                                         *<Leader>:* *<Leader>/* *<Leader>?*
 <Leader>:               Open the command-line history window.
+                        Equivalent to |q:|.
 <Leader>/               Open the search history window for `/`.
+                        Equivalent to |q/|.
 <Leader>?               Open the search history window for `?`.
+                        Equivalent to |q?|.
 
                                                         *<Leader>xz*
-<Leader>xz              Synonym for `:pclose`.
+<Leader>xz              Close the preview window. Equivalent to |:pclose|.
 
                                                         *<Leader>o*
-<Leader>o               Synonym for `:nohlsearch`.
+<Leader>o               Clear search highlighting. Equivalent to
+                        |:nohlsearch|.
 
                                                         *<Leader>n*
-<Leader>n               Synonym for `:enew`.
+<Leader>n               Open a new empty buffer. Equivalent to |:enew|.
 
                                                         *<Leader>E*
-<Leader>E               Synonym for `:edit!`.
+<Leader>E               Reload the current file, discarding changes.
+                        Equivalent to |:edit!|.
 
                                                         *<Leader>s*
-<Leader>s               Synonym for `:update`.
+<Leader>s               Write the file only if it changed.
+                        Equivalent to |:update|.
 
                                                         *<Leader>S*
-<Leader>S               Synonym for `:write!`.
+<Leader>S               Force write the file. Equivalent to |:w!|.
 
                                                 *<Leader><CR>*
-<Leader><CR>            Synonym for `:quit`.
+<Leader><CR>            Quit the current window. Equivalent to |:quit|.
 
                                                         *<Leader>q*
-<Leader>q               Synonym for `:quitall`.
+<Leader>q               Quit all windows. Equivalent to |:quitall|.
 
                                                         *<Leader>Q*
-<Leader>Q               Synonym for `:quitall!`.
+<Leader>Q               Force quit all windows. Equivalent to |:quita!|.
 
                                                         *<Leader>=*
 <Leader>=               Start `:put =` from the expression register.
+                        See |:put| and |quote=|.
 
                                         *<Leader>c* *<Leader>C*
                                         *<Leader>cc*
 <Leader>c{motion}       Yank to the mapped system clipboard register.
+                        See |quote| and |clipboard|.
 <Leader>C               Yank to end of line to the mapped system clipboard
-                        register.
+                        register. See |quote| and |clipboard|.
 <Leader>cc              Yank the current line to the mapped system clipboard
-                        register.
+                        register. See |quote| and |clipboard|.
 
                                         *<Leader>m* *<Leader>M*
                                         *<Leader>mm*
 <Leader>m{motion}       Delete to the mapped system clipboard register.
+                        See |quote| and |clipboard|.
 <Leader>M               Delete to end of line to the mapped system clipboard
-                        register.
+                        register. See |quote| and |clipboard|.
 <Leader>mm              Delete the current line to the mapped system clipboard
-                        register.
+                        register. See |quote| and |clipboard|.
 
                                         *<Leader>p* *<Leader>P*
 <Leader>{pP}            Paste from the mapped system clipboard register.
+                        See |quote| and |clipboard|.
 
                                                 *<C-;>* *<C-;><C-;>*
 <C-;>                   Use the mapped system clipboard register with the
-                        substitution operator (recursive).
+                        substitution operator (recursive). See |quote|.
 <C-;><C-;>              Substitute the whole line with the mapped system
-                        clipboard register (recursive).
+                        clipboard register (recursive). See |quote|.
 
  vim:tw=78:ts=8:noet:ft=help:norl:
