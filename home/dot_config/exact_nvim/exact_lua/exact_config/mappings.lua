@@ -112,9 +112,6 @@ function M.setup()
   vim.keymap.set("n", "<C-Q>", "@q")
   vim.keymap.set("v", "<C-Q>", "@q")
 
-  -- Use leader-leader to toggle the current fold.
-  vim.keymap.set("n", "<Leader><Leader>", "za")
-
   -- Add shortcuts to split the window.
   vim.keymap.set("n", "<Leader>h", M.cmd("leftabove vsplit"), { silent = true })
   vim.keymap.set("n", "<Leader>l", M.cmd("rightbelow vsplit"), { silent = true })

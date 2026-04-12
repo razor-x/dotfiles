@@ -90,9 +90,6 @@ U                       Mapped to `<C-R>` (redo).
                                                         *<Tab><Tab>*
 <Tab><Tab>              Record a macro into register `q`.
 
-                                                *<Leader><Leader>*
-<Leader><Leader>        Toggle the fold under the cursor.
-
                                         *<Leader>h* *<Leader>j*
                                         *<Leader>k* *<Leader>l*
 <Leader>{hjkl}          Split the current window in the given direction.
