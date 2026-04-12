@@ -25,6 +25,13 @@
 	diffFilter = delta --color-only
 [alias]
 	root = rev-parse --show-toplevel
+
+	# https://piechowski.io/post/git-commands-before-reading-code/
+	audit-churn = "!git log --format=format: --name-only --since=\"1 year ago\" | sort | uniq -c | sort -nr | head -20"
+	audit-contributors = shortlog -sn --no-merges
+	audit-hotspots = "!git log -i -E --grep=\"fix|bug|broken\" --name-only --format='' | sort | uniq -c | sort -nr | head -20"
+	audit-velocity = "!git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c"
+	audit-firefighting = "!git log --oneline --since=\"1 year ago\" | grep -iE 'revert|hotfix|emergency|rollback'"
 [include]
 	path = delta
 [include]
