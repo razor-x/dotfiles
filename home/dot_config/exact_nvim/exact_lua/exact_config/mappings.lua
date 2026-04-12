@@ -61,7 +61,7 @@ function M.setup()
   vim.keymap.set("n", "&", M.cmd("&&"), { silent = true })
   vim.keymap.set("x", "&", M.cmd("&&"), { silent = true })
 
-  -- Use shift-escape to open and close the command-line window.
+  -- Use shift-escape to toggle the command-line window from normal mode.
   vim.keymap.set("n", "<S-Esc>", "q:")
   local command_line_local_mappings = vim.api.nvim_create_augroup("command-line-local-mappings", { clear = true })
   vim.api.nvim_create_autocmd("CmdwinEnter", {

@@ -13,10 +13,12 @@ yoP                     Toggle system clipboard mappings between the `+`
 yom                     Toggle `colorcolumn` between `81` and disabled.
 
                                                         *q*
-q                       Mapped to the motion `ge` (recursive).
+q                       Move backward to the end of the previous word
+                        (recursive).
 
                                                         *Q*
-Q                       Mapped to the motion `gE` (recursive).
+Q                       Move backward to the end of the previous WORD
+                        (recursive).
 
                                                         *U*
 U                       Mapped to `<C-R>` (redo).
@@ -25,10 +27,10 @@ U                       Mapped to `<C-R>` (redo).
 &                       Synonym for `:&&`.
 
                                                         *'*
-'                       Mapped to `` ` ``.
+'                       Use exact-position mark jumps.
 
                                                         *`*
-`                       Mapped to `'`.
+`                       Use linewise mark jumps.
 
                                                         *<F5>*
 <F5>                    Restart Neovim and reload the configuration.
@@ -44,15 +46,14 @@ U                       Mapped to `<C-R>` (redo).
                         keep the default `<CR>` behavior.
 
                                                         *<C-CR>*
-<C-CR>                  Insert a newline from normal mode and stay in insert
-                        mode (recursive).
+<C-CR>                  Split the line at the cursor from normal mode and
+                        enter insert mode (recursive).
 
                                                         *<S-CR>*
 <S-CR>                  Same as `<C-CR>` (recursive).
 
                                                         *<S-Esc>*
-<S-Esc>                 Toggle the command-line window in normal and visual
-                        mode.
+<S-Esc>                 Toggle the command-line window from normal mode
 
                                                         *<C-A>*
 <C-A>                   In command-line mode, jump to the start of the
@@ -88,7 +89,7 @@ U                       Mapped to `<C-R>` (redo).
 <Tab>                   Start macro recording using register `q`.
 
                                                         *<Tab><Tab>*
-<Tab><Tab>              Record a macro into register `q`.
+<Tab><Tab>              Start recording a macro into register `q`.
 
                                         *<Leader>h* *<Leader>j*
                                         *<Leader>k* *<Leader>l*
@@ -112,7 +113,7 @@ U                       Mapped to `<C-R>` (redo).
 <C-.>                   Go to the next tab.
 
                                         *<Leader>:* *<Leader>/* *<Leader>?*
-<Leader>:               Open the command-line window.
+<Leader>:               Open the command-line history window.
 <Leader>/               Open the search history window for `/`.
 <Leader>?               Open the search history window for `?`.
 
