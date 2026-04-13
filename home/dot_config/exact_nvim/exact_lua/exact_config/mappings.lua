@@ -11,12 +11,6 @@ function M.setup()
   -- Use enter to leave insert mode.
   vim.keymap.set("i", "<CR>", "<Esc>")
 
-  -- Use backspace as left in insert mode.
-  vim.keymap.set("i", "<BS>", "<Left>")
-
-  -- Use shift-enter to split line and insert from normal mode.
-  vim.keymap.set("n", "<S-CR>", "i<C-CR>", { remap = true })
-
   -- Use enter to open command-line mode.
   vim.keymap.set("n", "<CR>", ":")
   vim.keymap.set("v", "<CR>", ":")
@@ -37,6 +31,33 @@ function M.setup()
       vim.keymap.set("n", "<CR>", "<CR>", { buffer = event.buf })
     end,
   })
+
+  -- Use shift-enter to split line and insert from normal mode.
+  vim.keymap.set("n", "<S-CR>", "i<C-CR>", { remap = true })
+
+  -- Use backspace as left in insert mode.
+  vim.keymap.set("i", "<BS>", "<Left>")
+
+  -- Use ctrl-k as split line in-place in insert mode.
+  vim.keymap.set("i", "<C-K>", "<CR><Up><C-O>$")
+
+  -- Use ctrl-l as right in insert mode.
+  vim.keymap.set("i", "<C-L>", "<Right>")
+
+  -- Use ctrl-h as backspace in insert mode.
+  vim.keymap.set("i", "<C-H>", "<BS>")
+
+  -- Use backspace, ctrl-h, and ctrl-l to navigate command input.
+  vim.keymap.set("c", "<BS>", "<Left>")
+  vim.keymap.set("c", "<C-H>", "<BS>")
+  vim.keymap.set("c", "<C-L>", "<Right>")
+
+  -- Use ctrl-a to jump to start of command input.
+  vim.keymap.set("c", "<C-A>", "<Home>")
+
+  -- Use ctrl-k and ctrl-j to navigate command history.
+  vim.keymap.set("c", "<C-K>", "<Up>")
+  vim.keymap.set("c", "<C-J>", "<Down>")
 
   -- Use q and Q to move backward by word end.
   vim.keymap.set("n", "q", "ge", { remap = true })
@@ -84,27 +105,6 @@ function M.setup()
     end,
   })
 
-  -- Use ctrl-h as backspace in insert mode.
-  vim.keymap.set("i", "<C-H>", "<BS>")
-
-  -- Use ctrl-k as split line in-place in insert mode.
-  vim.keymap.set("i", "<C-K>", "<CR><Up><C-O>$")
-
-  -- Use ctrl-l as right in insert mode.
-  vim.keymap.set("i", "<C-L>", "<Right>")
-
-  -- Use backspace, ctrl-h, and ctrl-l to navigate command input.
-  vim.keymap.set("c", "<BS>", "<Left>")
-  vim.keymap.set("c", "<C-H>", "<BS>")
-  vim.keymap.set("c", "<C-L>", "<Right>")
-
-  -- Use ctrl-a to jump to start of command input.
-  vim.keymap.set("c", "<C-A>", "<Home>")
-
-  -- Use ctrl-k and ctrl-j to navigate command history.
-  vim.keymap.set("c", "<C-K>", "<Up>")
-  vim.keymap.set("c", "<C-J>", "<Down>")
-
   -- Use leader-{hjkl} to split the current window.
   vim.keymap.set("n", "<Leader>h", M.cmd("leftabove vsplit"), { silent = true })
   vim.keymap.set("n", "<Leader>l", M.cmd("rightbelow vsplit"), { silent = true })
@@ -134,6 +134,7 @@ function M.setup()
   vim.keymap.set("v", "<Leader>?", "q?")
 
   -- Add shortcut to close preview window.
+  -- TODO: Does this still make sense?
   vim.keymap.set("n", "<Leader>xz", M.cmd("pclose"), { silent = true })
 
   -- Add shortcut to clear highlighting until next search.
@@ -163,6 +164,7 @@ function M.setup()
   vim.keymap.set("n", "<Leader>=", ":<C-U>put =")
 
   -- Use ctrl-g to jump to the middle of the screen.
+  -- TODO: This is only mapped since M is needed for a plugin.
   vim.keymap.set("n", "<C-G>", "M")
 
   -- Use the + register for system clipboard mappings.
