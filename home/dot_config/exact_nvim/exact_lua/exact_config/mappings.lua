@@ -46,6 +46,16 @@ function M.setup()
   vim.keymap.set("v", "Q", "gE", { remap = true })
   vim.keymap.set("o", "Q", "gE", { remap = true })
 
+  -- Use tab to access macro recording.
+  vim.keymap.set("n", "<Tab>", "q")
+  vim.keymap.set("n", "<Tab><Tab>", "qq")
+  vim.keymap.set("v", "<Tab>", "q")
+  vim.keymap.set("v", "<Tab><Tab>", "qq")
+
+  -- Use ctrl-q to replay the q register.
+  vim.keymap.set("n", "<C-Q>", "@q")
+  vim.keymap.set("v", "<C-Q>", "@q")
+
   -- Use U to redo and ctrl-r to restore the current line.
   vim.keymap.set("n", "U", "<C-R>")
   vim.keymap.set("n", "<C-R>", "U")
@@ -77,7 +87,7 @@ function M.setup()
   -- Use ctrl-h as backspace in insert mode.
   vim.keymap.set("i", "<C-H>", "<BS>")
 
-  -- Use ctrl-k as split line in insert mode.
+  -- Use ctrl-k as split line in-place in insert mode.
   vim.keymap.set("i", "<C-K>", "<CR><Up><C-O>$")
 
   -- Use ctrl-l as right in insert mode.
@@ -94,16 +104,6 @@ function M.setup()
   -- Use ctrl-k and ctrl-j to navigate command history.
   vim.keymap.set("c", "<C-K>", "<Up>")
   vim.keymap.set("c", "<C-J>", "<Down>")
-
-  -- Use tab to access macro recording since q is remapped above.
-  vim.keymap.set("n", "<Tab>", "q")
-  vim.keymap.set("n", "<Tab><Tab>", "qq")
-  vim.keymap.set("v", "<Tab>", "q")
-  vim.keymap.set("v", "<Tab><Tab>", "qq")
-
-  -- Use ctrl-q to replay the q register.
-  vim.keymap.set("n", "<C-Q>", "@q")
-  vim.keymap.set("v", "<C-Q>", "@q")
 
   -- Use leader-{hjkl} to split the current window.
   vim.keymap.set("n", "<Leader>h", M.cmd("leftabove vsplit"), { silent = true })
