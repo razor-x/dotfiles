@@ -12,8 +12,6 @@ pick.setup()
 
 require("mini.completion").setup()
 
-require("lualine").setup()
-
 vim.keymap.set("n", "<leader>e", function()
   pick.builtin.files({
     tool = "git", -- Uses git ls-files (tracked files only)
@@ -23,24 +21,6 @@ end, { desc = "Pick git tracked files" })
 vim.keymap.set("n", "<leader>f", function()
   pick.builtin.files() -- Defaults to 'rg' which respects .gitignore and global ignore
 end, { desc = "Pick all files in cwd" })
-
-local smart_splits = require("smart-splits")
-
-vim.keymap.set("n", "<A-h>", smart_splits.resize_left)
-vim.keymap.set("n", "<A-j>", smart_splits.resize_down)
-vim.keymap.set("n", "<A-k>", smart_splits.resize_up)
-vim.keymap.set("n", "<A-l>", smart_splits.resize_right)
--- moving between splits
-vim.keymap.set("n", "<C-h>", smart_splits.move_cursor_left)
-vim.keymap.set("n", "<C-j>", smart_splits.move_cursor_down)
-vim.keymap.set("n", "<C-k>", smart_splits.move_cursor_up)
-vim.keymap.set("n", "<C-l>", smart_splits.move_cursor_right)
-vim.keymap.set("n", "<C-\\>", smart_splits.move_cursor_previous)
--- swapping buffers between windows
-vim.keymap.set("n", "<leader><leader>h", smart_splits.swap_buf_left)
-vim.keymap.set("n", "<leader><leader>j", smart_splits.swap_buf_down)
-vim.keymap.set("n", "<leader><leader>k", smart_splits.swap_buf_up)
-vim.keymap.set("n", "<leader><leader>l", smart_splits.swap_buf_right)
 
 local map_multistep = require("mini.keymap").map_multistep
 map_multistep("i", "<Tab>", { "pmenu_next" })
