@@ -28,14 +28,6 @@ U                       Redo. Equivalent to |CTRL-R|.
 &                       Repeat the last substitution with its flags.
                         Equivalent to |:&&|.
 
-                                                        *'*
-'{mark}                 Jump to the exact position of {mark}.
-                        This swaps the usual behavior of |'a| and |`a|.
-
-                                                        *`*
-`{mark}                 Jump to the line of {mark}.
-                        This swaps the usual behavior of |`a| and |'a|.
-
                                                         *<F5>*
 <F5>                    Restart Neovim and reload the configuration.
                         See |:restart|.

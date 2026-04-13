@@ -50,12 +50,6 @@ function M.setup()
   vim.keymap.set("n", "U", "<C-R>")
   vim.keymap.set("n", "<C-R>", "U")
 
-  -- Use ` for linewise mark jumps and ' for exact-position mark jumps.
-  vim.keymap.set("n", "`", "'")
-  vim.keymap.set("v", "`", "'")
-  vim.keymap.set("n", "'", "`")
-  vim.keymap.set("v", "'", "`")
-
   -- Use & to repeat the last substitution with its flags.
   vim.keymap.set("n", "&", M.cmd("&&"), { silent = true })
   vim.keymap.set("x", "&", M.cmd("&&"), { silent = true })
