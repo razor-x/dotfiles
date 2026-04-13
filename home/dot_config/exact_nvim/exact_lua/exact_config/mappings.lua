@@ -186,6 +186,8 @@ function M.setup()
   end, { silent = true })
 end
 
+---@param register string The register to bind the mappings to
+---@param quiet boolean Whether to show a notification
 function M.system_clipboard_mappings(register, quiet)
   -- Copy to system clipboard.
   vim.keymap.set("n", "<Leader>c", '"' .. register .. "y")
@@ -216,6 +218,7 @@ function M.system_clipboard_mappings(register, quiet)
   end
 end
 
+---@param command string Command to run with vim.cmd
 function M.cmd(command)
   return function()
     vim.cmd(command)
