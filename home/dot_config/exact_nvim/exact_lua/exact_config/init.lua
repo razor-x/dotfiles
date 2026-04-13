@@ -1,5 +1,6 @@
+local dotfiles = require("dotfiles")
+
 local bootstrap = require("config.bootstrap")
-local dotfiles = require("config.dotfiles")
 local mappings = require("config.mappings")
 local options = require("config.options")
 
@@ -13,7 +14,7 @@ function M.setup(plugin_import)
   if plugin_import then
     bootstrap("https://github.com/folke/lazy.nvim.git", "11.17.5")
     require("lazy").setup({
-      lockfile = dotfiles.source_dir .. "/.lazy-lock.json",
+      lockfile = vim.fs.joinpath(dotfiles.config_dir, ".lazy-lock.json"),
       import = plugin_import,
     })
   end

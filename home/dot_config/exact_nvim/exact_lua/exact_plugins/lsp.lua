@@ -1,3 +1,5 @@
+local dotfiles = require("dotfiles")
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -33,6 +35,10 @@ return {
   {
     "folke/lazydev.nvim",
     ft = "lua",
-    opts = {},
+    opts = {
+      enabled = function(root_dir)
+        return vim.fs.normalize(root_dir) == vim.fs.normalize(dotfiles.root_dir)
+      end,
+    },
   },
 }
