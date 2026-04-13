@@ -133,10 +133,6 @@ function M.setup()
   vim.keymap.set("n", "<Leader>?", "q?")
   vim.keymap.set("v", "<Leader>?", "q?")
 
-  -- Add shortcut to close preview window.
-  -- TODO: Does this still make sense?
-  vim.keymap.set("n", "<Leader>xz", M.cmd("pclose"), { silent = true })
-
   -- Add shortcut to clear highlighting until next search.
   vim.keymap.set("n", "<Leader>o", M.cmd("nohlsearch"), { silent = true })
 
@@ -162,6 +158,10 @@ function M.setup()
 
   -- Use leader-= to paste from the expression register.
   vim.keymap.set("n", "<Leader>=", ":<C-U>put =")
+
+  -- Add shortcut to close preview window.
+  -- TODO: Does this still make sense?
+  vim.keymap.set("n", "<Leader>xz", M.cmd("pclose"), { silent = true })
 
   -- Use ctrl-g to jump to the middle of the screen.
   -- TODO: This is only mapped since M is needed for a plugin.
