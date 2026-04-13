@@ -14,7 +14,7 @@ function M.setup(plugin_import)
     bootstrap()
     require("lazy").setup({
       lockfile = dotfiles.source_dir .. "/.lazy-lock.json",
-      import = "plugins",
+      import = plugin_import,
     })
   end
 end
