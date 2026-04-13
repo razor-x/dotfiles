@@ -42,8 +42,6 @@ vim.keymap.set("n", "<leader><leader>j", smart_splits.swap_buf_down)
 vim.keymap.set("n", "<leader><leader>k", smart_splits.swap_buf_up)
 vim.keymap.set("n", "<leader><leader>l", smart_splits.swap_buf_right)
 
-require("cutlass")
-
 local map_multistep = require("mini.keymap").map_multistep
 map_multistep("i", "<Tab>", { "pmenu_next" })
 map_multistep("i", "<S-Tab>", { "pmenu_prev" })
