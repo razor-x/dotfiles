@@ -1,7 +1,8 @@
 #!/usr/bin/env fish
 
+{{ $hash := include (joinPath .chezmoi.sourceDir "dot_config" "exact_nvim" ".lazy-lock.json") | sha256sum -}}
+
 {{ $dir := joinPath .chezmoi.homeDir ".config" "nvim" "doc" -}}
-{{ $hash := "" -}}
 {{- range (glob (printf "%s/*.txt" $dir)) -}}
   {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
 {{- end -}}
@@ -9,7 +10,8 @@
 # hash: {{ sha256sum $hash }}
 
 if type --query nvim
-    nvim --clean --headless '+helptags {{ $dir }}' +qall
+    nvim --headless '+Lazy! restore' +qall
+    nvim --headless '+helptags {{ $dir }}' +qall
 else
     echo 'Cannot generate Neovim helptags: nvim not found.'
     return 1
