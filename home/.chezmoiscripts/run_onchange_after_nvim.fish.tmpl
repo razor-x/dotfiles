@@ -13,6 +13,6 @@ if type --query nvim
     nvim --headless '+Lazy! restore' +qall
     nvim --headless '+helptags {{ $dir }}' +qall
 else
-    echo 'Cannot generate Neovim helptags: nvim not found.'
+    echo 'Cannot generate Neovim helptags or install plugins: nvim not found.'
     return 1
 end
