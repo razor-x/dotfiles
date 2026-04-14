@@ -11,7 +11,7 @@ function M.setup(plugin_import)
   options.setup()
   mappings.setup()
 
-  if plugin_import then
+  if plugin_import ~= nil then
     bootstrap("https://github.com/folke/lazy.nvim.git", "11.17.5")
     require("lazy").setup({
       lockfile = vim.fs.joinpath(dotfiles.config_dir, ".lazy-lock.json"),
