@@ -86,6 +86,7 @@ function M.setup()
   vim.keymap.set("x", "&", M.cmd("&&"), { silent = true })
 
   -- Use shift-escape to toggle the command-line window from normal mode.
+  -- TODO: Consider better bind for S-Esc.
   vim.keymap.set("n", "<S-Esc>", "q:")
   local command_line_local_mappings = vim.api.nvim_create_augroup("command-line-local-mappings", { clear = true })
   vim.api.nvim_create_autocmd("CmdwinEnter", {
@@ -111,15 +112,20 @@ function M.setup()
   vim.keymap.set("n", "<Leader>k", M.cmd("leftabove split"), { silent = true })
   vim.keymap.set("n", "<Leader>j", M.cmd("rightbelow split"), { silent = true })
 
-  -- Use leader-{HJKL} to split the frame edges.
+  -- Use leader-{HJKL} and leader-leader-{hjkl} to split the frame edges.
   vim.keymap.set("n", "<Leader>H", M.cmd("topleft vsplit"), { silent = true })
+  vim.keymap.set("n", "<Leader><Leader>h", M.cmd("topleft vsplit"), { silent = true })
   vim.keymap.set("n", "<Leader>L", M.cmd("botright vsplit"), { silent = true })
+  vim.keymap.set("n", "<Leader><Leader>l", M.cmd("botright vsplit"), { silent = true })
   vim.keymap.set("n", "<Leader>K", M.cmd("topleft split"), { silent = true })
+  vim.keymap.set("n", "<Leader><Leader>k", M.cmd("topleft split"), { silent = true })
   vim.keymap.set("n", "<Leader>J", M.cmd("botright split"), { silent = true })
+  vim.keymap.set("n", "<Leader><Leader>j", M.cmd("botright split"), { silent = true })
 
   -- Add shortcuts to open and close tabs.
   vim.keymap.set("n", "<Leader><Tab>", M.cmd("tabnew"), { silent = true })
   vim.keymap.set("n", "<Leader><S-Tab>", M.cmd("tabclose"), { silent = true })
+  vim.keymap.set("n", "<Leader><Leader><Tab>", M.cmd("tabclose"), { silent = true })
 
   -- Use ctrl-, and ctrl-. to cycle through tabs.
   vim.keymap.set("n", "<C-,>", "gT")
@@ -128,10 +134,14 @@ function M.setup()
   -- Add shortcuts to open command-line and search history windows.
   vim.keymap.set("n", "<Leader>:", "q:")
   vim.keymap.set("v", "<Leader>:", "q:")
+  vim.keymap.set("n", "<Leader><Leader>;", "q:")
+  vim.keymap.set("v", "<Leader><Leader>;", "q:")
   vim.keymap.set("n", "<Leader>/", "q/")
   vim.keymap.set("v", "<Leader>/", "q/")
   vim.keymap.set("n", "<Leader>?", "q?")
   vim.keymap.set("v", "<Leader>?", "q?")
+  vim.keymap.set("n", "<Leader><Leader>/", "q?")
+  vim.keymap.set("v", "<Leader><Leader>/", "q?")
 
   -- Add shortcut to clear highlighting until next search.
   vim.keymap.set("n", "<Leader>o", M.cmd("nohlsearch"), { silent = true })
@@ -141,10 +151,12 @@ function M.setup()
 
   -- Add shortcut to force reload file.
   vim.keymap.set("n", "<Leader>E", M.cmd("edit!"), { silent = true })
+  vim.keymap.set("n", "<Leader><Leader>e", M.cmd("edit!"), { silent = true })
 
   -- Add shortcuts for update and force write.
   vim.keymap.set("n", "<Leader>s", M.cmd("update"), { silent = true })
   vim.keymap.set("n", "<Leader>S", M.cmd("write!"), { silent = true })
+  vim.keymap.set("n", "<Leader><Leader>s", M.cmd("write!"), { silent = true })
 
   -- Add shortcuts for quit.
   vim.keymap.set("n", "<Leader><CR>", M.cmd("quit"), { silent = true })
@@ -155,6 +167,8 @@ function M.setup()
   vim.keymap.set("v", "<Leader>q", M.cmd("quitall"), { silent = true })
   vim.keymap.set("n", "<Leader>Q", M.cmd("quitall!"), { silent = true })
   vim.keymap.set("v", "<Leader>Q", M.cmd("quitall!"), { silent = true })
+  vim.keymap.set("n", "<Leader><Leader>q", M.cmd("quitall!"), { silent = true })
+  vim.keymap.set("v", "<Leader><Leader>q", M.cmd("quitall!"), { silent = true })
 
   -- Use leader-= to paste from the expression register.
   vim.keymap.set("n", "<Leader>=", ":<C-U>put =")
@@ -193,17 +207,20 @@ function M.system_clipboard_mappings(register, quiet)
   vim.keymap.set("n", "<Leader>c", '"' .. register .. "y")
   vim.keymap.set("v", "<Leader>c", '"' .. register .. "y")
   vim.keymap.set("n", "<Leader>C", '"' .. register .. "Y")
+  vim.keymap.set("n", "<Leader><Leader>c", '"' .. register .. "Y")
   vim.keymap.set("n", "<Leader>cc", '"' .. register .. "yy")
 
   -- Move to system clipboard.
   vim.keymap.set("n", "<Leader>m", '"' .. register .. "d")
   vim.keymap.set("v", "<Leader>m", '"' .. register .. "d")
   vim.keymap.set("n", "<Leader>M", '"' .. register .. "D")
+  vim.keymap.set("n", "<Leader><Leader>m", '"' .. register .. "D")
   vim.keymap.set("n", "<Leader>mm", '"' .. register .. "dd")
 
   -- Paste from system clipboard.
   vim.keymap.set("n", "<Leader>p", '"' .. register .. "p")
   vim.keymap.set("n", "<Leader>P", '"' .. register .. "P")
+  vim.keymap.set("n", "<Leader><Leader>p", '"' .. register .. "P")
 
   -- Use easyclip substitution with the system clipboard.
   -- TODO: Depends on the easyclip plugin.

@@ -4,6 +4,8 @@
 MAPPINGS                                                  *dotfiles-mappings*
 
 Mappings are nonrecursive unless otherwise noted.
+Shifted `<Leader>` mappings also have an unshifted alias using
+`<Leader><Leader>` plus the unshifted key when possible.
 
                                                         *yoP*
 yoP                     Toggle system clipboard mappings between the `+`
@@ -106,6 +108,10 @@ U                       Redo. Equivalent to |CTRL-R|.
 
                                         *<Leader>H* *<Leader>J*
                                         *<Leader>K* *<Leader>L*
+                                        *<Leader><Leader>h*
+                                        *<Leader><Leader>j*
+                                        *<Leader><Leader>k*
+                                        *<Leader><Leader>l*
 <Leader>{HJKL}          Split the frame at the outer edge in the given
                         direction. Uses |:split|, |:vsplit|, |:topleft|,
                         and |:botright|.
@@ -114,6 +120,7 @@ U                       Redo. Equivalent to |CTRL-R|.
 <Leader><Tab>           Open a new tab. Equivalent to |:tabnew|.
 
                                                 *<Leader><S-Tab>*
+                                                *<Leader><Leader><Tab>*
 <Leader><S-Tab>         Close the current tab. Equivalent to |:tabclose|.
 
                                                         *<C-,>*
@@ -123,6 +130,7 @@ U                       Redo. Equivalent to |CTRL-R|.
 <C-.>                   Go to the next tab. Equivalent to |gt|.
 
                                         *<Leader>:* *<Leader>/* *<Leader>?*
+                                        *<Leader><Leader>/*
 <Leader>:               Open the command-line history window.
                         Equivalent to |q:|.
 <Leader>/               Open the search history window for `/`.
@@ -141,6 +149,7 @@ U                       Redo. Equivalent to |CTRL-R|.
 <Leader>n               Open a new empty buffer. Equivalent to |:enew|.
 
                                                         *<Leader>E*
+                                                *<Leader><Leader>e>*
 <Leader>E               Reload the current file, discarding changes.
                         Equivalent to |:edit!|.
 
@@ -149,6 +158,7 @@ U                       Redo. Equivalent to |CTRL-R|.
                         Equivalent to |:update|.
 
                                                         *<Leader>S*
+                                                *<Leader><Leader>s>*
 <Leader>S               Force write the file. Equivalent to |:w!|.
 
                                                 *<Leader><CR>*
@@ -158,6 +168,7 @@ U                       Redo. Equivalent to |CTRL-R|.
 <Leader>q               Quit all windows. Equivalent to |:quitall|.
 
                                                         *<Leader>Q*
+                                                *<Leader><Leader>q>*
 <Leader>Q               Force quit all windows. Equivalent to |:quita!|.
 
                                                         *<Leader>=*
@@ -165,6 +176,7 @@ U                       Redo. Equivalent to |CTRL-R|.
                         See |:put| and |quote=|.
 
                                         *<Leader>c* *<Leader>C*
+                                        *<Leader><Leader>c*
                                         *<Leader>cc*
 <Leader>c{motion}       Yank to the mapped system clipboard register.
                         See |quote| and |clipboard|.
@@ -174,6 +186,7 @@ U                       Redo. Equivalent to |CTRL-R|.
                         register. See |quote| and |clipboard|.
 
                                         *<Leader>m* *<Leader>M*
+                                        *<Leader><Leader>m*
                                         *<Leader>mm*
 <Leader>m{motion}       Delete to the mapped system clipboard register.
                         See |quote| and |clipboard|.
@@ -183,6 +196,7 @@ U                       Redo. Equivalent to |CTRL-R|.
                         register. See |quote| and |clipboard|.
 
                                         *<Leader>p* *<Leader>P*
+                                        *<Leader><Leader>p*
 <Leader>{pP}            Paste from the mapped system clipboard register.
                         See |quote| and |clipboard|.
 
