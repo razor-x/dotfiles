@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+
+# version: {{ output "wt" "--version" }}
+
+if type --query wt; and type --query opencode
+    wt config plugins opencode install --yes
+else
+    echo 'Cannot setup Worktrunk OpenCode plugin: wt or opencode not found.'
+    return 1
+end
