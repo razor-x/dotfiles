@@ -56,8 +56,8 @@ if status is-interactive
     abbr --erase gsd
     alias gsd git_find_replace
     alias gs git_idempotent_switch
-    abbr gw wt
-    alias gws git_wt_idempotent_switch
+    abbr w wt
+    alias ws git_wt_idempotent_switch
 
     # UPSTREAM: Substitute for missing worktrunk prune command.
     # https://github.com/max-sixty/worktrunk/issues/948
