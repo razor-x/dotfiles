@@ -1,4 +1,4 @@
 worktree-path = ".worktrees/{{ branch | sanitize }}"
 
-[post-create]
+[pre-start]
 copy = "wt step copy-ignored"
