@@ -1,5 +1,7 @@
 local dotfiles = require("dotfiles")
 
+---@module "lazy.types"
+---@type LazySpec
 return {
   {
     "neovim/nvim-lspconfig",
@@ -33,12 +35,13 @@ return {
     end,
   },
   {
+    ---@module "lazydev"
     "folke/lazydev.nvim",
     ft = "lua",
     opts = {
       enabled = function(root_dir)
         return vim.fs.normalize(root_dir) == vim.fs.normalize(dotfiles.root_dir)
       end,
-    },
+    } --[[@as lazydev.Config]],
   },
 }
