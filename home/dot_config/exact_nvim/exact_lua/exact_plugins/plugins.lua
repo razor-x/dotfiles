@@ -42,19 +42,19 @@ return {
     lazy = false,
     ---@param opts SmartSplitsConfig
     config = function(_, opts)
-      local smart_splits = require("smart-splits")
-      smart_splits.setup(opts)
+      local SmartSplits = require("smart-splits")
+      SmartSplits.setup(opts)
 
-      vim.keymap.set("n", "<A-h>", smart_splits.resize_left)
-      vim.keymap.set("n", "<A-j>", smart_splits.resize_down)
-      vim.keymap.set("n", "<A-k>", smart_splits.resize_up)
-      vim.keymap.set("n", "<A-l>", smart_splits.resize_right)
+      vim.keymap.set("n", "<A-h>", SmartSplits.resize_left)
+      vim.keymap.set("n", "<A-j>", SmartSplits.resize_down)
+      vim.keymap.set("n", "<A-k>", SmartSplits.resize_up)
+      vim.keymap.set("n", "<A-l>", SmartSplits.resize_right)
       -- moving between splits
-      vim.keymap.set("n", "<C-h>", smart_splits.move_cursor_left)
-      vim.keymap.set("n", "<C-j>", smart_splits.move_cursor_down)
-      vim.keymap.set("n", "<C-k>", smart_splits.move_cursor_up)
-      vim.keymap.set("n", "<C-l>", smart_splits.move_cursor_right)
-      vim.keymap.set("n", "<C-\\>", smart_splits.move_cursor_previous)
+      vim.keymap.set("n", "<C-h>", SmartSplits.move_cursor_left)
+      vim.keymap.set("n", "<C-j>", SmartSplits.move_cursor_down)
+      vim.keymap.set("n", "<C-k>", SmartSplits.move_cursor_up)
+      vim.keymap.set("n", "<C-l>", SmartSplits.move_cursor_right)
+      vim.keymap.set("n", "<C-\\>", SmartSplits.move_cursor_previous)
     end,
   },
   {
