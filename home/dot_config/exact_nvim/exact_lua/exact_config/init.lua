@@ -17,7 +17,7 @@ function M.setup(plugin_import)
       lockfile = vim.fs.joinpath(dotfiles.config_dir, ".lazy-lock.json"),
       spec = {
         { import = plugin_import },
-      }
+      },
     })
   end
 end

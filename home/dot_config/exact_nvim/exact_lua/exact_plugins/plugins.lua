@@ -1,28 +1,36 @@
 ---@type LazySpec
+
 return {
   {
-    "nvim-mini/mini.nvim",
+    "nvim-mini/mini.files",
+    opts = {},
+  },
+  {
+    "nvim-mini/mini.completion",
+    opts = {},
+  },
+  {
+    "nvim-mini/mini.pick",
+    dependencies = { "nvim-mini/mini.keymap" },
     config = function()
-      local pick = require("mini.pick")
-      pick.setup()
-
-      require("mini.completion").setup()
+      local MiniPick = require("mini.pick")
+      MiniPick.setup()
 
       vim.keymap.set("n", "<leader>e", function()
-        pick.builtin.files({
+        MiniPick.builtin.files({
           tool = "git", -- Uses git ls-files (tracked files only)
         })
       end, { desc = "Pick git tracked files" })
 
       vim.keymap.set("n", "<leader>f", function()
-        pick.builtin.files() -- Defaults to 'rg' which respects .gitignore and global ignore
+        MiniPick.builtin.files() -- Defaults to 'rg' which respects .gitignore and global ignore
       end, { desc = "Pick all files in cwd" })
 
-      local map_multistep = require("mini.keymap").map_multistep
-      map_multistep("i", "<Tab>", { "pmenu_next" })
-      map_multistep("i", "<S-Tab>", { "pmenu_prev" })
-      map_multistep("i", "<C-l>", { "pmenu_accept", "minipairs_cr" })
-      map_multistep("i", "<BS>", { "minipairs_bs" })
+      local MiniKeymap = require("mini.keymap")
+      MiniKeymap.map_multistep("i", "<Tab>", { "pmenu_next" })
+      MiniKeymap.map_multistep("i", "<S-Tab>", { "pmenu_prev" })
+      MiniKeymap.map_multistep("i", "<C-l>", { "pmenu_accept", "minipairs_cr" })
+      MiniKeymap.map_multistep("i", "<BS>", { "minipairs_bs" })
 
       vim.keymap.set("i", "<C-e>", function()
         MiniPick.builtin.buffer_lines({ scope = "current" })
