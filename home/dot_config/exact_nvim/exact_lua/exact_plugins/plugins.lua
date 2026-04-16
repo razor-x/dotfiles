@@ -6,6 +6,10 @@ return {
     opts = {},
   },
   {
+    "nvim-mini/mini.surround",
+    opts = {},
+  },
+  {
     "nvim-mini/mini.completion",
     opts = {},
   },
