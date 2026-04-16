@@ -35,14 +35,14 @@ return {
     end,
   },
   {
-    ---@module "lazydev"
     "folke/lazydev.nvim",
-    ft = "lua",
+    ---@module "lazydev"
     ---@type lazydev.Config
     opts = {
       enabled = function(root_dir)
         return vim.fs.normalize(root_dir) == vim.fs.normalize(dotfiles.root_dir)
       end,
-    }
+    },
+    ft = "lua",
   },
 }

@@ -1,5 +1,5 @@
+---@module "lazy.types"
 ---@type LazySpec
-
 return {
   {
     "nvim-mini/mini.files",
@@ -12,9 +12,10 @@ return {
   {
     "nvim-mini/mini.pick",
     dependencies = { "nvim-mini/mini.keymap" },
-    config = function()
+    opts = {},
+    config = function(_, opts)
       local MiniPick = require("mini.pick")
-      MiniPick.setup()
+      MiniPick.setup(opts)
 
       vim.keymap.set("n", "<leader>e", function()
         MiniPick.builtin.files({
@@ -23,7 +24,7 @@ return {
       end, { desc = "Pick git tracked files" })
 
       vim.keymap.set("n", "<leader>f", function()
-        MiniPick.builtin.files() -- Defaults to 'rg' which respects .gitignore and global ignore
+        MiniPick.builtin.files()
       end, { desc = "Pick all files in cwd" })
 
       local MiniKeymap = require("mini.keymap")
@@ -39,8 +40,10 @@ return {
   },
   {
     "mrjones2014/smart-splits.nvim",
-    lazy = false,
-    ---@param opts SmartSplitsConfig
+    ---@module "smart-splits"
+    ---@type SmartSplitsConfig
+    opts = { ---@diagnostic disable-line:missing-fields
+    },
     config = function(_, opts)
       local SmartSplits = require("smart-splits")
       SmartSplits.setup(opts)
@@ -63,16 +66,16 @@ return {
     end,
   },
   {
-    ---@class CutlassOptions
-    ---@field cut_key? string
     "gbprod/cutlass.nvim",
     opts = {
       cut_key = "m",
-    } --[[@as CutlassOptions]],
+    }
   },
   {
     "folke/trouble.nvim",
-    opts = {} --[[@as trouble.Config]],
+    ---@module "trouble"
+    ---@type trouble.Config
+    opts = {},
     cmd = "Trouble",
     keys = {
       {
@@ -94,14 +97,14 @@ return {
   },
   {
     "mikesmithgh/kitty-scrollback.nvim",
-    enabled = true,
-    lazy = true,
+    ---@module "kitty-scrollback"
+    ---@type KsbOpts
+    opts = {},
     cmd = {
       "KittyScrollbackGenerateKittens",
       "KittyScrollbackCheckHealth",
       "KittyScrollbackGenerateCommandLineEditing",
     },
     event = { "User KittyScrollbackLaunch" },
-    opts = {} --[[@as KsbOpts]],
   },
 }
