@@ -11,9 +11,9 @@ function M.setup()
   -- Use enter to leave insert mode.
   vim.keymap.set("i", "<CR>", "<Esc>")
 
-  -- Use enter to open command-line mode.
-  vim.keymap.set("n", "<CR>", ":")
-  vim.keymap.set("v", "<CR>", ":")
+  -- Use ctrl-enter to open command-line mode.
+  vim.keymap.set("n", "<C-CR>", ":")
+  vim.keymap.set("v", "<C-CR>", ":")
 
   -- Use enter normally in command-line and quickfix buffers instead of the remapping to escape.
   local cr_local_mappings = vim.api.nvim_create_augroup("cr-local-mappings", { clear = true })

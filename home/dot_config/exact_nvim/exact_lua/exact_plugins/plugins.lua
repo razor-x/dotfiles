@@ -2,6 +2,14 @@
 ---@type LazySpec
 return {
   {
+    "nvim-mini/mini.jump2d",
+    opts = {
+      mappings = {
+        start_jumping = '<CR>',
+      }
+    },
+  },
+  {
     "nvim-mini/mini.files",
     opts = {},
   },
