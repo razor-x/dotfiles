@@ -1,5 +1,3 @@
-local dotfiles = require("dotfiles")
-
 ---@module "lazy.types"
 ---@type LazySpec
 return {
@@ -33,16 +31,5 @@ return {
       vim.lsp.enable("bashls")
       vim.lsp.enable("fish_lsp")
     end,
-  },
-  {
-    "folke/lazydev.nvim",
-    ---@module "lazydev"
-    ---@type lazydev.Config
-    opts = {
-      enabled = function(root_dir)
-        return vim.fs.normalize(root_dir) == vim.fs.normalize(dotfiles.root_dir)
-      end,
-    },
-    ft = "lua",
   },
 }

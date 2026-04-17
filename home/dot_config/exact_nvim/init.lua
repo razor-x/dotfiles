@@ -1,10 +1,25 @@
-local config = require("config")
+local bootstrap = require("bootstrap")
+local dotfiles = require("dotfiles")
 
----@type string | nil
-local plugin_import = "plugins"
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
-if os.getenv("NVIM_DISABLE_PLUGINS") then
-  plugin_import = nil
-end
+bootstrap("https://github.com/folke/lazy.nvim.git", "11.17.5")
 
-config.setup(plugin_import)
+require("lazy").setup({
+  lockfile = vim.fs.joinpath(dotfiles.config_dir, ".lazy-lock.json"),
+  spec = {
+    { import = "plugins" },
+    {
+      "folke/lazydev.nvim",
+      ---@module "lazydev"
+      ---@type lazydev.Config
+      opts = {
+        enabled = function(root_dir)
+          return vim.fs.normalize(root_dir) == vim.fs.normalize(dotfiles.root_dir)
+        end,
+      },
+      ft = "lua",
+    },
+  },
+})
