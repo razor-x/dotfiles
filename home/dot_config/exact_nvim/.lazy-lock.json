@@ -4,6 +4,7 @@
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lazydev.nvim": { "branch": "main", "commit": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d" },
   "lualine.nvim": { "branch": "master", "commit": "a905eeebc4e63fdc48b5135d3bf8aea5618fb21c" },
+  "mini.basics": { "branch": "main", "commit": "30b9d5c026965bbf6cfedc0d30ee66273f6c4084" },
   "mini.clue": { "branch": "main", "commit": "43bd6cf1c3ccdea46d403c32dbc4629fa6afa09d" },
   "mini.completion": { "branch": "main", "commit": "ffbdb06d2fa6a3fcef3891108bb38e33223b27a7" },
   "mini.files": { "branch": "main", "commit": "e8db416c9f5dbce70f5501da28263d45c0a4df6b" },
