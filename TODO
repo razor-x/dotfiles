@@ -9,3 +9,16 @@ neovim bind ideas
 
 ctrl-enter -> open action menu, e.g., like ctrl-enter in opencode
 <Leader><Leader> as a "ctrl-shift" kind of overload for less common actions
+
+neovim keys to consider remapping
+
+Z - backspace in normal mode - almost always use something else to delete stuff in normal mode
+
+H & L - top / bottom of screen - rarely useful, prime home row keys
+
+: - will remap to register-replace
+
+m & M - will remap to "move"
+
+- need to find an alt bind for setting marks
+
