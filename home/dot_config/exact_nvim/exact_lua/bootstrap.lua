@@ -1,7 +1,16 @@
 ---@param lazy_repo string Git repo URL to the lazy plugin manager
 ---@param lazy_version string Git tag to clone
 return function(lazy_repo, lazy_version)
+  if lazy_repo == nil then
+    lazy_repo = "https://github.com/folke/lazy.nvim.git"
+  end
+
+  if lazy_version == nil then
+    lazy_version = "stable"
+  end
+
   local lazy_path = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy", "lazy.nvim")
+
   if not (vim.uv or vim.loop).fs_stat(lazy_path) then
     local out = vim.fn.system({
       "git",
