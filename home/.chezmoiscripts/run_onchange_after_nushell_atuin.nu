@@ -9,5 +9,8 @@ if (which atuin | is-not-empty) {
   atuin init nu | save --force $"($atuin_path)/init.nu"
 } else {
   print 'Cannot install atuin Nushell shell integration: atuin not found.'
+  if (($env.CODESPACES? | default '') == 'true') {
+    exit 0
+  }
   exit 1
 }
