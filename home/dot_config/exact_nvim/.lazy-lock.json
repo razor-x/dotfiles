@@ -5,7 +5,6 @@
   "lazydev.nvim": { "branch": "main", "commit": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d" },
   "lualine.nvim": { "branch": "master", "commit": "a905eeebc4e63fdc48b5135d3bf8aea5618fb21c" },
   "mini.basics": { "branch": "main", "commit": "30b9d5c026965bbf6cfedc0d30ee66273f6c4084" },
-  "mini.clue": { "branch": "main", "commit": "43bd6cf1c3ccdea46d403c32dbc4629fa6afa09d" },
   "mini.completion": { "branch": "main", "commit": "ffbdb06d2fa6a3fcef3891108bb38e33223b27a7" },
   "mini.files": { "branch": "main", "commit": "e8db416c9f5dbce70f5501da28263d45c0a4df6b" },
   "mini.jump2d": { "branch": "main", "commit": "c0df3170873b712b61951781aeee9942a92ba1f1" },
@@ -15,5 +14,6 @@
   "nvim-lspconfig": { "branch": "master", "commit": "d10ce09e42bb0ca8600fd610c3bb58676e61208d" },
   "nvim-web-devicons": { "branch": "master", "commit": "c72328a5494b4502947a022fe69c0c47e53b6aa6" },
   "smart-splits.nvim": { "branch": "master", "commit": "ba2850ff3d3b09785a7105c69d06a12117d4b97d" },
-  "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" }
+  "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
+  "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
 }
