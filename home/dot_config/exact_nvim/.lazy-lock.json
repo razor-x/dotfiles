@@ -7,6 +7,7 @@
   "mini.basics": { "branch": "main", "commit": "30b9d5c026965bbf6cfedc0d30ee66273f6c4084" },
   "mini.completion": { "branch": "main", "commit": "ffbdb06d2fa6a3fcef3891108bb38e33223b27a7" },
   "mini.files": { "branch": "main", "commit": "e8db416c9f5dbce70f5501da28263d45c0a4df6b" },
+  "mini.icons": { "branch": "main", "commit": "bac6317300e205335df425296570d84322730067" },
   "mini.jump2d": { "branch": "main", "commit": "c0df3170873b712b61951781aeee9942a92ba1f1" },
   "mini.keymap": { "branch": "main", "commit": "dc3b688b26a810f519cdd0572a27587a138ced78" },
   "mini.pick": { "branch": "main", "commit": "437d44eb57312f23e6b931704694fc294922cd88" },

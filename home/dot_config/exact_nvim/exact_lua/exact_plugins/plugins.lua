@@ -2,6 +2,9 @@
 ---@type LazySpec
 return {
   {
+    "nvim-mini/mini.icons",
+  },
+  {
     "nvim-mini/mini.jump2d",
     opts = {
       mappings = {
@@ -11,6 +14,7 @@ return {
   },
   {
     "folke/which-key.nvim",
+    dependencies = { "nvim-mini/mini.icons" },
     event = "VeryLazy",
     opts = {
       -- your configuration comes here
