@@ -8,7 +8,6 @@ if [ -n "${CODESPACES:-}" ] && command -v apt-get >/dev/null 2>&1; then
   sudo apt-get update -y
   sudo apt-get install -y \
     bat \
-    broot \
     fd-find \
     fish \
     gh \
