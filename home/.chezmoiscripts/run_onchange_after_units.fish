@@ -23,5 +23,8 @@ if type --query systemctl
     end
 else
     echo 'Cannot setup systemd user units: systemctl not found.'
+    if set --query CODESPACES; and test "$CODESPACES" = true
+        return 0
+    end
     return 1
 end

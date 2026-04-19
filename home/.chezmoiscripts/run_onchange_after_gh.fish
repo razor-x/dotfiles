@@ -12,5 +12,8 @@ if type --query gh
         'workflow run version.yml --raw-field version="$1"'
 else
     echo 'Cannot setup GitHub CLI: gh not found.'
+    if set --query CODESPACES; and test "$CODESPACES" = true
+        return 0
+    end
     return 1
 end

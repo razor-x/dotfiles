@@ -24,6 +24,9 @@ if type --query fish_config
     fish_config theme choose '{{ template "theme" (merge (dict "app" "fish") .) }}'
 else
     echo 'Cannot update fish theme: fish_config not found.'
+    if set --query CODESPACES; and test "$CODESPACES" = true
+        return 0
+    end
     return 1
 end
 
@@ -31,6 +34,9 @@ if type --query fisher
     fisher update
 else
     echo 'Cannot update fish plugins: fisher is not installed.'
+    if set --query CODESPACES; and test "$CODESPACES" = true
+        return 0
+    end
     return 1
 end
 
@@ -38,5 +44,8 @@ if type --query tide
     configure_tide_prompt
 else
     echo 'Cannot configure Tide: the tide fish plugin is not installed.'
+    if set --query CODESPACES; and test "$CODESPACES" = true
+        return 0
+    end
     return 1
 end

@@ -4,6 +4,28 @@
 # -u: exit on unset variables
 set -eu
 
+if [ -n "${CODESPACES:-}" ] && command -v apt-get >/dev/null 2>&1; then
+  sudo apt-get update -y
+  sudo apt-get install -y \
+    bat \
+    broot \
+    fd-find \
+    fish \
+    gh \
+    gnupg \
+    neovim \
+    pandoc \
+    zoxide
+
+  mkdir -p "${HOME}/.local/bin"
+  if [ ! -e "${HOME}/.local/bin/bat" ] && command -v batcat >/dev/null 2>&1; then
+    ln -s "$(command -v batcat)" "${HOME}/.local/bin/bat"
+  fi
+  if [ ! -e "${HOME}/.local/bin/fd" ] && command -v fdfind >/dev/null 2>&1; then
+    ln -s "$(command -v fdfind)" "${HOME}/.local/bin/fd"
+  fi
+fi
+
 if ! chezmoi="$(command -v chezmoi)"; then
   bin_dir="${HOME}/.local/bin"
   chezmoi="${bin_dir}/chezmoi"

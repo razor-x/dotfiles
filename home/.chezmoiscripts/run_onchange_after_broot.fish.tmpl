@@ -6,5 +6,8 @@ if type --query broot
     broot --set-install-state installed
 else
     echo 'Cannot setup broot: broot not found.'
+    if set --query CODESPACES; and test "$CODESPACES" = true
+        return 0
+    end
     return 1
 end
