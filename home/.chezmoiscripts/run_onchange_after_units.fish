@@ -2,6 +2,10 @@
 
 # hash: {{ template "user_env_hash" . }}
 
+if set --query CODESPACES; and test "$CODESPACES" = true
+    return 0
+end
+
 # Do not delete items from this list: move them to units_to_disable instead.
 set --local units_to_enable \
     atuin \
@@ -23,8 +27,5 @@ if type --query systemctl
     end
 else
     echo 'Cannot setup systemd user units: systemctl not found.'
-    if set --query CODESPACES; and test "$CODESPACES" = true
-        return 0
-    end
     return 1
 end
