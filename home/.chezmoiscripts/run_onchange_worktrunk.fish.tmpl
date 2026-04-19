@@ -1,10 +1,10 @@
 #!/usr/bin/env fish
 
-{{- if lookPath "wt" -}}
+{{ if lookPath "wt" }}
 # version: {{ output "wt" "--version" }}
-{{- else if not (eq (env "CODESPACES") "true") -}}
-{{- fail "wt not found" -}}
-{{- end -}}
+{{ else if not (eq (env "CODESPACES") "true") }}
+{{ fail "wt not found" }}
+{{ end }}
 
 if type --query wt; and type --query opencode
     wt config plugins opencode install --yes
