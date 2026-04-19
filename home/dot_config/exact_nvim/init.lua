@@ -1,10 +1,16 @@
 local bootstrap = require("bootstrap")
-local dotfiles = require("dotfiles")
+
+local has_dotfiles, dotfiles = pcall(require, "dotfiles")
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 bootstrap("https://github.com/folke/lazy.nvim.git", "11.17.5")
+
+if not has_dotfiles then
+  require("lazy").setup({ { import = "exact_plugins" } })
+  return
+end
 
 require("lazy").setup({
   lockfile = vim.fs.joinpath(dotfiles.config_dir, ".lazy-lock.json"),
