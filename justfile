@@ -27,6 +27,7 @@ format:
     --extension lua \
     --extension md \
     --extension py \
+    --extension sh \
     . \
     | xargs \
         --null \
@@ -36,3 +37,7 @@ format:
 
 watch:
   watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force
+
+generate:
+  chezmoi generate install.sh > bootstrap.sh
+  fish --command 'format bootstrap.sh'
