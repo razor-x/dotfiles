@@ -8,7 +8,7 @@ vim.g.maplocalleader = "\\"
 bootstrap("https://github.com/folke/lazy.nvim.git", "11.17.5")
 
 if not has_dotfiles then
-  require("lazy").setup({ { import = "exact_plugins" } })
+  require("lazy").setup({ { import = "plugins" } })
   return
 end
 
