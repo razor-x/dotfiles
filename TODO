@@ -38,14 +38,14 @@ m & M - will remap to "move"
 - [ ] mini.basics        Common configuration presets
 - [ ] mini.bracketed     Go forward/backward with square brackets
 - [ ] mini.bufremove     Remove buffers
-- [ ] mini.clue          Show next key clues
+- [n] mini.clue          Show next key clues
 - [ ] mini.cmdline       Command line tweaks
 - [ ] mini.deps          Plugin manager
 - [ ] mini.diff          Work with diff hunks
 - [ ] mini.extra         Extra ‘mini.nvim’ functionality
 - [ ] mini.files         Navigate and manipulate file system
 - [ ] mini.git           Git integration
-- [ ] mini.jump          Jump to next/previous single character
+- [n] mini.jump          Jump to next/previous single character
 - [ ] mini.jump2d        Jump within visible lines
 - [ ] mini.misc          Miscellaneous functions
 - [ ] mini.pick          Pick anything

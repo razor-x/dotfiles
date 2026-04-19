@@ -2,9 +2,6 @@
 ---@type LazySpec
 return {
   {
-    "nvim-mini/mini.icons",
-  },
-  {
     "nvim-mini/mini.jump2d",
     opts = {
       mappings = {
