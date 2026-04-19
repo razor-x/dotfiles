@@ -24,18 +24,22 @@ m & M - will remap to "move"
 
 # mini.nvim
 
-- [ ] mini.ai            Extend and create a/i textobjects
+x = done and fully setup
+y = yes, will use
+n = no can't or won't use
+
+- [y] mini.ai            Extend and create a/i textobjects
 - [ ] mini.align         Align text interactively
 - [ ] mini.comment       Comment lines
 - [ ] mini.completion    Completion and signature help
-- [ ] mini.keymap        Special key mappings
+- [y] mini.keymap        Special key mappings
 - [ ] mini.move          Move any selection in any direction
 - [ ] mini.operators     Text edit operators
-- [ ] mini.pairs         Autopairs
+- [y] mini.pairs         Autopairs
 - [ ] mini.snippets      Manage and expand snippets
 - [ ] mini.splitjoin     Split and join arguments
 - [ ] mini.surround      Surround actions
-- [ ] mini.basics        Common configuration presets
+- [y] mini.basics        Common configuration presets
 - [ ] mini.bracketed     Go forward/backward with square brackets
 - [ ] mini.bufremove     Remove buffers
 - [n] mini.clue          Show next key clues
@@ -46,7 +50,7 @@ m & M - will remap to "move"
 - [ ] mini.files         Navigate and manipulate file system
 - [ ] mini.git           Git integration
 - [n] mini.jump          Jump to next/previous single character
-- [ ] mini.jump2d        Jump within visible lines
+- [y] mini.jump2d        Jump within visible lines
 - [ ] mini.misc          Miscellaneous functions
 - [ ] mini.pick          Pick anything
 - [ ] mini.sessions      Session management
@@ -57,7 +61,7 @@ m & M - will remap to "move"
 - [ ] mini.cursorword    Autohighlight word under cursor
 - [ ] mini.hipatterns    Highlight patterns in text
 - [ ] mini.hues          Generate configurable color scheme
-- [ ] mini.icons         Icon provider
+- [y] mini.icons         Icon provider
 - [ ] mini.indentscope   Visualize and work with indent scope
 - [ ] mini.map           Window with buffer text overview
 - [ ] mini.notify        Show notifications
@@ -67,4 +71,4 @@ m & M - will remap to "move"
 - [ ] mini.trailspace    Trailspace (highlight and remove)
 - [ ] mini.doc           Generate Neovim help files
 - [ ] mini.fuzzy         Fuzzy matching
-- [ ] mini.test          Test Neovim plugins
+- [n] mini.test          Test Neovim plugins
