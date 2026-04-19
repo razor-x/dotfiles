@@ -8,12 +8,12 @@ if status is-interactive
     end
 
     # Use simple fish prompt in Linux virtual console.
-    if test "$TERM" = linux
+    if set --query TERM; and test "$TERM" = linux
         fish_config prompt choose default
     end
 
     # Limit when prompted to load keys.
-    if not set --query SSH_CONNECTION; and test "$TERM" != linux
+    if not set --query SSH_CONNECTION; and set --query TERM; and test "$TERM" != linux
         set fish_autoload_private_keys true
     end
 
@@ -21,7 +21,7 @@ if status is-interactive
     if set --query SSH_CONNECTION;
         and not set --query TMUX;
         and not set --query ZELLIJ;
-        and test "$TERM" != xterm-kitty;
+        and set --query TERM; and test "$TERM" != xterm-kitty;
         and type --query zellij
 
         zellij attach --create ssh

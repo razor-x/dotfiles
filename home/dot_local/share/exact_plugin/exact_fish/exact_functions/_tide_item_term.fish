@@ -4,12 +4,12 @@ function _tide_item_term \
     set --function linux_icon '󰌽'
     set --function kitty_icon '󰄛'
 
-    if test "$TERM" = linux
+    if set --query TERM; and test "$TERM" = linux
         _tide_print_item term $linux_icon
         return
     end
 
-    if test "$TERM" = xterm-kitty
+    if set --query TERM; and test "$TERM" = xterm-kitty
         _tide_print_item term $kitty_icon
         return
     end

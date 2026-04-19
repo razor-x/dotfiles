@@ -105,7 +105,7 @@ function fish_user_key_bindings \
     bind --mode default U redo
 
     # Restore bindings for ctrl-m (enter) and ctrl-i (tab) in vconsole.
-    if test "$TERM" = linux
+    if set --query TERM; and test "$TERM" = linux
         bind --mode insert ctrl-m execute
         bind --mode insert ctrl-i complete
     end
