@@ -1,4 +1,8 @@
+{{- if lookPath "atuin" -}}
 # Install Atuin shell plugin.
 if status is-interactive
     {{ output "atuin" "init" "fish" "--disable-up-arrow" "--disable-ctrl-r" }}
 end
+{{- else if not (eq (env "CODESPACES") "true") -}}
+{{- fail "atuin not found" -}}
+{{- end -}}

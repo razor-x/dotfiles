@@ -4,6 +4,10 @@ dotfiles \- personalized terminal and graphical user interface
 .SH SYNOPSIS
 This manual documents the environment, aliases, and tools
 configured in razor-x/dotfiles.
+{{- if and (lookPath "fish") (lookPath "pandoc") -}}
 {{ output "fish"
   (joinPath .chezmoi.sourceDir ".chezmoiscripts" ".man_from_readme.fish")
   (joinPath .chezmoi.sourceDir ".." "README.md") }}
+{{- else if not (eq (env "CODESPACES") "true") -}}
+{{- fail "fish or pandoc not found" -}}
+{{- end -}}

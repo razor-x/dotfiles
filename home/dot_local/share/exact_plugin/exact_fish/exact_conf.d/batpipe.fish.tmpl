@@ -1,4 +1,8 @@
+{{- if lookPath "fish" -}}
 # Use batpipe as the less preprocessor.
 if status is-interactive
     {{ output "fish" "--command" "batpipe" }}
 end
+{{- else if not (eq (env "CODESPACES") "true") -}}
+{{- fail "fish not found" -}}
+{{- end -}}

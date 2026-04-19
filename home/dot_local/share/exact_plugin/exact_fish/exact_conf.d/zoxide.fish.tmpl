@@ -1,4 +1,8 @@
+{{- if lookPath "zoxide" -}}
 # Use zoxide.
 if status is-interactive
     {{ output "zoxide" "init" "--cmd" "z" "fish" }}
 end
+{{- else if not (eq (env "CODESPACES") "true") -}}
+{{- fail "zoxide not found" -}}
+{{- end -}}

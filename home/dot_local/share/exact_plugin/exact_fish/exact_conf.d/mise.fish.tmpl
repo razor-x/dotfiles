@@ -1,2 +1,6 @@
+{{- if lookPath "mise" -}}
 # Activate mise.
 {{ output "mise" "activate" "fish" }}
+{{- else if not (eq (env "CODESPACES") "true") -}}
+{{- fail "mise not found" -}}
+{{- end -}}

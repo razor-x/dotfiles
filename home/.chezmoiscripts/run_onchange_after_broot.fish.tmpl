@@ -1,6 +1,10 @@
 #!/usr/bin/env fish
 
+{{- if lookPath "broot" -}}
 # {{ output "broot" "--version" }}
+{{- else if not (eq (env "CODESPACES") "true") -}}
+{{- fail "broot not found" -}}
+{{- end -}}
 
 if type --query broot
     broot --set-install-state installed

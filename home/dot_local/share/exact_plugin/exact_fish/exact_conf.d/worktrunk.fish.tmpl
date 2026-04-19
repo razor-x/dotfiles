@@ -1,4 +1,8 @@
+{{- if lookPath "wt" -}}
 # Use worktrunk.
 if status is-interactive
     {{ output "wt" "config" "shell" "init" "fish" }}
 end
+{{- else if not (eq (env "CODESPACES") "true") -}}
+{{- fail "wt not found" -}}
+{{- end -}}

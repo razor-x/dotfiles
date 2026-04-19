@@ -1,3 +1,4 @@
+{{- if lookPath "gpg" -}}
 {{- $gpgOut := output "gpg" "--list-secret-keys" "--keyid-format" "short" "--with-colons" -}}
 {{- $keyId := index ($gpgOut | regexFind "(?m)^sec:.*" | split ":") "_4" -}}
 
@@ -16,3 +17,8 @@
 {{ else -}}
 # User config requires a private GPG key.
 {{ end -}}
+{{- else if eq (env "CODESPACES") "true" -}}
+# User config requires a private GPG key.
+{{- else -}}
+{{- fail "gpg not found" -}}
+{{- end -}}

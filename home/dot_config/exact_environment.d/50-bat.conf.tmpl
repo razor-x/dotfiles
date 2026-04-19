@@ -2,4 +2,8 @@
 BATDIFF_USE_DELTA=true
 
 # Use batman as the MANPAGER.
+{{- if lookPath "batman" -}}
 {{ output "batman" "--export-env" | replace "export " "" }}
+{{- else if not (eq (env "CODESPACES") "true") -}}
+{{- fail "batman not found" -}}
+{{- end -}}

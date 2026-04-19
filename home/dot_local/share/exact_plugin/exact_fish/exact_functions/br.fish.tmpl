@@ -1,2 +1,6 @@
+{{- if lookPath "broot" -}}
 # Install Atuin shell plugin.
 {{ output "broot" "--print-shell-function" "fish" }}
+{{- else if not (eq (env "CODESPACES") "true") -}}
+{{- fail "broot not found" -}}
+{{- end -}}

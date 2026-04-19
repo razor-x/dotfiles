@@ -1,4 +1,8 @@
+{{- if lookPath "navi" -}}
 # Install navi shell widget.
 if status is-interactive
     {{ output "navi" "widget" "fish" }}
 end
+{{- else if not (eq (env "CODESPACES") "true") -}}
+{{- fail "navi not found" -}}
+{{- end -}}
