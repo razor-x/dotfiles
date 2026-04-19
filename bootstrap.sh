@@ -5,6 +5,8 @@
 set -eu
 
 if [ -n "${CODESPACES:-}" ] && command -v apt-get >/dev/null 2>&1; then
+  wget -qO- https://apt.fury.io/nushell/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/fury-nushell.gpg
+  echo "deb [signed-by=/etc/apt/keyrings/fury-nushell.gpg] https://apt.fury.io/nushell/ /" | sudo tee /etc/apt/sources.list.d/fury-nushell.list
   sudo apt-get update -y
   sudo apt-get install -y \
     bat \
@@ -13,6 +15,7 @@ if [ -n "${CODESPACES:-}" ] && command -v apt-get >/dev/null 2>&1; then
     gh \
     gnupg \
     neovim \
+    nushell \
     pandoc \
     zoxide
 
