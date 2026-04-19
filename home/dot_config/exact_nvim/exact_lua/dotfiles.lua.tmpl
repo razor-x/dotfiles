@@ -1,4 +1,5 @@
 return {
   root_dir = vim.fs.dirname("{{ .chezmoi.sourceDir }}"),
   config_dir = vim.fs.joinpath("{{ .chezmoi.sourceDir }}", "dot_config", "exact_nvim"),
+  colorscheme = "{{ template "theme" (merge (dict "app" "neovim") .) }}"
 }

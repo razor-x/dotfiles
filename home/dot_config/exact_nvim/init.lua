@@ -9,6 +9,18 @@ bootstrap("https://github.com/folke/lazy.nvim.git", "11.17.5")
 require("lazy").setup({
   lockfile = vim.fs.joinpath(dotfiles.config_dir, ".lazy-lock.json"),
   spec = {
+    {
+      "catppuccin/nvim",
+      name = "catppuccin",
+      priority = 1000,
+      opts = {
+        auto_integrations = true,
+      },
+      config = function(_, opts)
+        require("catppuccin").setup(opts)
+        vim.cmd.colorscheme(dotfiles.colorscheme)
+      end,
+    },
     { import = "plugins" },
     {
       "folke/lazydev.nvim",

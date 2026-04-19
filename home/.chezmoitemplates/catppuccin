@@ -24,6 +24,8 @@
   Catppuccin-{{ $flavor | title }}
 {{- else if eq .app "mise" -}}
   catppuccin
+{{- else if eq .app "neovim" -}}
+  catppuccin-{{ $flavor }}
 {{- else if eq .app "opencode" -}}
   {{- if has $flavor (list "frappe" "macchiato") -}}
     catppuccin-{{ $flavor }}

@@ -21,6 +21,8 @@
   {{ $name }}
 {{- else if eq .app "mise" -}}
   {{ $name }}
+{{- else if eq .app "neovim" -}}
+  {{ $name }}
 {{- else if eq .app "yazi" -}}
   {{- if eq .mode "light" -}}
     {{ $name.light }}
