@@ -43,7 +43,7 @@ n = no can't or won't use
 - [ ] mini.bracketed     Go forward/backward with square brackets
 - [ ] mini.bufremove     Remove buffers
 - [n] mini.clue          Show next key clues
-- [ ] mini.cmdline       Command line tweaks
+- [y] mini.cmdline       Command line tweaks
 - [ ] mini.deps          Plugin manager
 - [ ] mini.diff          Work with diff hunks
 - [ ] mini.extra         Extra ‘mini.nvim’ functionality

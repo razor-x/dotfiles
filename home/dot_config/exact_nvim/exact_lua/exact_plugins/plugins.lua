@@ -29,6 +29,10 @@ return {
     },
   },
   {
+    "nvim-mini/mini.cmdline",
+    opts = {},
+  },
+  {
     "nvim-mini/mini.files",
     opts = {},
   },
