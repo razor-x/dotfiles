@@ -217,7 +217,7 @@ curl -fsSL https://raw.githubusercontent.com/razor-x/dotfiles/main/nvimrc.sh | s
 ```
 
 To install it as an isolated app,
-pass the desired NVIM_APPNAME as the first argument
+pass the desired `NVIM_APPNAME` as the first argument
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/razor-x/dotfiles/main/nvimrc.sh | sh -s -- razor-x
