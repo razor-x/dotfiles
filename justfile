@@ -40,4 +40,5 @@ watch:
 
 generate:
   chezmoi generate install.sh > bootstrap.sh
+  sd 'init --apply' 'init --force --keep-going --apply' bootstrap.sh
   fish --command 'format bootstrap.sh'
