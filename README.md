@@ -7,6 +7,22 @@ My user land configuration managed with [chezmoi].
 These dotfiles are designed to work on Arch Linux with the packages defined
 by my [Arch Linux Configuration][archrc] and [XDG user environment variables][pam_env.conf].
 
+## Standalone Neovim Configuration
+
+Install the Neovim config as a standalone app with:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/razor-x/dotfiles/main/nvimrc.sh | sh
+```
+
+This defaults to the app name `razor-x`, so run Neovim with `NVIM_APPNAME=razor-x`.
+
+To install it as your default Neovim config instead, pass `nvim` as the app name:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/razor-x/dotfiles/main/nvimrc.sh | sh -s -- nvim
+```
+
 ## RTFM
 
 ```sh
