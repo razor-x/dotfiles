@@ -4,6 +4,22 @@ function fix \
     argparse 'e/extension=' -- $argv
     or return
 
+    set --function arg_count (count $argv)
+
+    if test $arg_count -eq 0
+        set --function use_stdin true
+    else
+        set --function use_stdin false
+    end
+
+    if $use_stdin
+        set --function read_from_file false
+        set --function write_to_file false
+    else
+        set --function read_from_file true
+        set --function write_to_file true
+    end
+
     if set --query --function _flag_extension
         if not string match --quiet '.*' $_flag_extension
             set --function extension .$_flag_extension
@@ -12,20 +28,34 @@ function fix \
         end
     end
 
-    if test (count $argv) -ne 1
+    if test $arg_count -gt 1
         echo 'usage: fix [(-e | --extension) EXT] FILE'
+        echo '       COMMAND | fix (-e | --extension) EXT'
         return 1
     end
 
-    set --function file $argv[1]
-
-    if not test -f "$file"
-        echo "fix: no file exists named $file"
+    if $use_stdin; and isatty stdin
+        echo 'usage: fix [(-e | --extension) EXT] FILE'
+        echo '       COMMAND | fix (-e | --extension) EXT'
         return 1
     end
 
-    if not set --query --function extension
-        set --function extension (path extension $file)
+    if $use_stdin; and not set --query --function extension
+        echo 'usage: COMMAND | fix (-e | --extension) EXT'
+        return 1
+    end
+
+    if test $arg_count -eq 1
+        set --function file $argv[1]
+
+        if not test -f "$file"
+            echo "fix: no file exists named $file"
+            return 1
+        end
+
+        if not set --query --function extension
+            set --function extension (path extension $file)
+        end
     end
 
     if test -z "$extension"
@@ -34,8 +64,21 @@ function fix \
         return 1
     end
 
-    # TODO: Update usage and allow stdin support
-    # TODO: if $read_from_file but not $write_to_file don't --write
+    set --function tmp_extensions \
+        .go \
+        .js \
+        .jsx \
+        .ts \
+        .tsx \
+        .css \
+        .php \
+        .py \
+        .rb
+
+    if not $read_from_file; and contains $extension $tmp_extensions
+        set --function file (mktemp --suffix $extension)
+        cat > "$file"
+    end
 
     switch $extension
         case .go
@@ -54,4 +97,8 @@ function fix \
     end
 
     $cmd
+
+    if not $write_to_file
+        cat "$file"
+    end
 end

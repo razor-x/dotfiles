@@ -4,6 +4,20 @@ function check \
     argparse 'e/extension=' -- $argv
     or return
 
+    set --function arg_count (count $argv)
+
+    if test $arg_count -eq 0
+        set --function use_stdin true
+    else
+        set --function use_stdin false
+    end
+
+    if $use_stdin
+        set --function read_from_file false
+    else
+        set --function read_from_file true
+    end
+
     if set --query --function _flag_extension
         if not string match --quiet '.*' $_flag_extension
             set --function extension .$_flag_extension
@@ -12,20 +26,34 @@ function check \
         end
     end
 
-    if test (count $argv) -ne 1
+    if test $arg_count -gt 1
         echo 'usage: check [(-e | --extension) EXT] FILE'
+        echo '       COMMAND | check (-e | --extension) EXT'
         return 1
     end
 
-    set --function file $argv[1]
-
-    if not test -f "$file"
-        echo "check: no file exists named $file"
+    if $use_stdin; and isatty stdin
+        echo 'usage: check [(-e | --extension) EXT] FILE'
+        echo '       COMMAND | check (-e | --extension) EXT'
         return 1
     end
 
-    if not set --query --function extension
-        set --function extension (path extension $file)
+    if $use_stdin; and not set --query --function extension
+        echo 'usage: COMMAND | check (-e | --extension) EXT'
+        return 1
+    end
+
+    if test $arg_count -eq 1
+        set --function file $argv[1]
+
+        if not test -f "$file"
+            echo "check: no file exists named $file"
+            return 1
+        end
+
+        if not set --query --function extension
+            set --function extension (path extension $file)
+        end
     end
 
     if test -z "$extension"
@@ -34,7 +62,18 @@ function check \
         return 1
     end
 
-    # TODO: Update usage and allow stdin support
+    set --function tmp_extensions \
+        .c \
+        .go \
+        .php \
+        .py \
+        .ts \
+        .tsx
+
+    if not $read_from_file; and contains $extension $tmp_extensions
+        set --function file (mktemp --suffix $extension)
+        cat > "$file"
+    end
 
     switch $extension
         case .c
