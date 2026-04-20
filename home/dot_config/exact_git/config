@@ -27,6 +27,7 @@
 [alias]
 	root = rev-parse --show-toplevel
 	pr-diff = "!git diff $(git merge-base main HEAD)"
+	switch-or-create = "!f() { git switch \"$@\" 2>/dev/null || git switch --create \"$@\"; }; f"
 
 	# Git Commands to audit a project.
 	# https://piechowski.io/post/git-commands-before-reading-code/

@@ -55,7 +55,7 @@ if status is-interactive
     abbr gstac! git stash clear
     abbr --erase gsd
     alias gsd git_find_replace
-    alias gs git_idempotent_switch
+    abbr gs 'git switch-or-create'
     abbr w wt
     alias ws git_wt_idempotent_switch
 
