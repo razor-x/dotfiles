@@ -14,6 +14,26 @@ return {
     end,
   },
   {
+    "nvim-mini/mini.bufremove",
+    opts = {},
+    keys = {
+      {
+        "<leader>w",
+        function()
+          require("mini.bufremove").delete(0, false)
+        end,
+        desc = "Delete Buffer",
+      },
+      {
+        "<leader>W",
+        function()
+          require("mini.bufremove").delete(0, true)
+        end,
+        desc = "Force Delete Buffer",
+      },
+    },
+  },
+  {
     "nvim-mini/mini.jump2d",
     opts = {
       mappings = {
