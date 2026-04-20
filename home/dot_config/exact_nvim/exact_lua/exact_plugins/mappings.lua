@@ -55,6 +55,14 @@ M.spec = {
           end,
         }
       end
+      local pmenu_cancel = {
+        condition = function()
+          return vim.fn.pumvisible() == 1
+        end,
+        action = function()
+          return "<C-e><Esc>"
+        end,
+      }
 
       -- Use ctrl-h as backspace in insert mode.
       MiniKeymap.map_multistep("i", "<C-H>", { "minipairs_bs", fallback("<BS>") })
@@ -66,6 +74,8 @@ M.spec = {
       MiniKeymap.map_multistep("i", "<C-K>", { "pmenu_prev", fallback("<CR><Up><C-O>$") })
       -- Use ctrl-l as right in insert mode, or accept in popup.
       MiniKeymap.map_multistep("i", "<C-L>", { "pmenu_accept", fallback("<Right>") })
+      -- Use escape to cancel popup selection before leaving insert mode.
+      MiniKeymap.map_multistep("i", "<Esc>", { pmenu_cancel })
 
       -- Use backspace, ctrl-h, and ctrl-l to navigate command input.
       vim.keymap.set("c", "<BS>", "<Left>")
