@@ -34,6 +34,10 @@ return {
     },
   },
   {
+    "nvim-mini/mini.pairs",
+    opts = {},
+  },
+  {
     "nvim-mini/mini.jump2d",
     opts = {
       mappings = {
