@@ -1,0 +1,9 @@
+function __wt_complete_switch_or_create
+    set --local line (commandline --cut-at-cursor --current-process)
+    complete --do-complete \
+        (string replace --regex '^wt[[:space:]]+switch-or-create' 'wt switch' -- $line)
+end
+
+complete --no-files --command wt \
+    --condition '__fish_seen_subcommand_from switch-or-create' \
+    --arguments '(__wt_complete_switch_or_create)'
