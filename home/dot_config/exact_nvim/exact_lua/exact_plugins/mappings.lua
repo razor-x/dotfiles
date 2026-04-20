@@ -45,37 +45,19 @@ M.spec = {
       vim.keymap.set("i", "<BS>", "<Left>")
 
       local MiniKeymap = require("mini.keymap")
-      local fallback = function(keys)
-        return {
-          condition = function()
-            return true
-          end,
-          action = function()
-            return keys
-          end,
-        }
-      end
-      local pmenu_cancel = {
-        condition = function()
-          return vim.fn.pumvisible() == 1
-        end,
-        action = function()
-          return "<C-e><Esc>"
-        end,
-      }
 
       -- Use ctrl-h as backspace in insert mode.
-      MiniKeymap.map_multistep("i", "<C-H>", { "minipairs_bs", fallback("<BS>") })
+      MiniKeymap.map_multistep("i", "<C-H>", { "minipairs_bs", M.multistep_fallback("<BS>") })
 
       -- Use ctrl-j as split line in insert mode, or navigate the popup menu.
       MiniKeymap.map_multistep("i", "<C-J>", { "pmenu_next" })
 
       -- Use ctrl-k as split line in-place in insert mode, or navigate the popup menu.
-      MiniKeymap.map_multistep("i", "<C-K>", { "pmenu_prev", fallback("<CR><Up><C-O>$") })
+      MiniKeymap.map_multistep("i", "<C-K>", { "pmenu_prev", M.multistep_fallback("<CR><Up><C-O>$") })
       -- Use ctrl-l as right in insert mode, or accept in popup.
-      MiniKeymap.map_multistep("i", "<C-L>", { "pmenu_accept", fallback("<Right>") })
+      MiniKeymap.map_multistep("i", "<C-L>", { "pmenu_accept", M.multistep_fallback("<Right>") })
       -- Use escape to cancel popup selection before leaving insert mode.
-      MiniKeymap.map_multistep("i", "<Esc>", { pmenu_cancel })
+      MiniKeymap.map_multistep("i", "<Esc>", { M.multiste_pmenu_cancel })
 
       -- Use backspace, ctrl-h, and ctrl-l to navigate command input.
       vim.keymap.set("c", "<BS>", "<Left>")
@@ -273,5 +255,25 @@ function M.cmd(command)
     vim.cmd(command)
   end
 end
+
+function M.multistep_fallback(keys)
+  return {
+    condition = function()
+      return true
+    end,
+    action = function()
+      return keys
+    end,
+  }
+end
+
+M.multiste_pmenu_cancel = {
+  condition = function()
+    return vim.fn.pumvisible() == 1
+  end,
+  action = function()
+    return "<C-e><Esc>"
+  end,
+}
 
 return M.spec
