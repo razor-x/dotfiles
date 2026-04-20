@@ -137,6 +137,24 @@ return {
     },
   },
   {
+    "gbprod/substitute.nvim",
+    opts = {},
+    keys = {
+      {
+        ":",
+        function()
+          require("substitute").operator()
+        end,
+      },
+      {
+        "::",
+        function()
+          require("substitute").line()
+        end,
+      },
+    },
+  },
+  {
     "folke/trouble.nvim",
     ---@module "trouble"
     ---@type trouble.Config
