@@ -44,14 +44,28 @@ M.spec = {
       -- Use backspace as left in insert mode.
       vim.keymap.set("i", "<BS>", "<Left>")
 
-      -- Use ctrl-k as split line in-place in insert mode.
-      vim.keymap.set("i", "<C-K>", "<CR><Up><C-O>$")
-
-      -- Use ctrl-l as right in insert mode.
-      vim.keymap.set("i", "<C-L>", "<Right>")
+      local MiniKeymap = require("mini.keymap")
+      local fallback = function(keys)
+        return {
+          condition = function()
+            return true
+          end,
+          action = function()
+            return keys
+          end,
+        }
+      end
 
       -- Use ctrl-h as backspace in insert mode.
-      vim.keymap.set("i", "<C-H>", "<BS>")
+      MiniKeymap.map_multistep("i", "<C-H>", { "minipairs_bs", fallback("<BS>") })
+
+      -- Use ctrl-j as split line in insert mode, or navigate the popup menu.
+      MiniKeymap.map_multistep("i", "<C-J>", { "pmenu_next" })
+
+      -- Use ctrl-k as split line in-place in insert mode, or navigate the popup menu.
+      MiniKeymap.map_multistep("i", "<C-K>", { "pmenu_prev", fallback("<CR><Up><C-O>$") })
+      -- Use ctrl-l as right in insert mode, or accept in popup.
+      MiniKeymap.map_multistep("i", "<C-L>", { "pmenu_accept", fallback("<Right>") })
 
       -- Use backspace, ctrl-h, and ctrl-l to navigate command input.
       vim.keymap.set("c", "<BS>", "<Left>")

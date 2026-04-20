@@ -58,7 +58,6 @@ return {
   },
   {
     "nvim-mini/mini.pick",
-    dependencies = { "nvim-mini/mini.keymap" },
     opts = {},
     config = function(_, opts)
       local MiniPick = require("mini.pick")
@@ -73,12 +72,6 @@ return {
       vim.keymap.set("n", "<leader>f", function()
         MiniPick.builtin.files()
       end, { desc = "Pick all files in cwd" })
-
-      local MiniKeymap = require("mini.keymap")
-      MiniKeymap.map_multistep("i", "<Tab>", { "pmenu_next" })
-      MiniKeymap.map_multistep("i", "<S-Tab>", { "pmenu_prev" })
-      MiniKeymap.map_multistep("i", "<C-l>", { "pmenu_accept", "minipairs_cr" })
-      MiniKeymap.map_multistep("i", "<BS>", { "minipairs_bs" })
 
       vim.keymap.set("i", "<C-e>", function()
         MiniPick.builtin.buffer_lines({ scope = "current" })

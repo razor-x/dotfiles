@@ -6,6 +6,7 @@ broot
 man dotfiles
 
 add descriptions to neovim binds
+ensure all shadows neovim binds get alt bind, e.g., i_CTRL-K
 
 neovim bind ideas
 
