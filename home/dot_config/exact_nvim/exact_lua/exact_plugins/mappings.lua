@@ -54,8 +54,12 @@ M.spec = {
 
       -- Use ctrl-k as split line in-place in insert mode, or navigate the popup menu.
       MiniKeymap.map_multistep("i", "<C-K>", { "pmenu_prev", M.multistep_fallback("<CR><Up><C-O>$") })
-      -- Use ctrl-l as right in insert mode, or accept in popup.
-      MiniKeymap.map_multistep("i", "<C-L>", { "pmenu_accept", M.multistep_fallback("<Right>") })
+      -- Use ctrl-l as right in insert mode, or accept the current/first popup item.
+      MiniKeymap.map_multistep("i", "<C-L>", {
+        "pmenu_accept",
+        M.multistep_pmenu_accept_first,
+        M.multistep_fallback("<Right>"),
+      })
       -- Use escape to cancel popup selection before leaving insert mode.
       MiniKeymap.map_multistep("i", "<Esc>", { M.multiste_pmenu_cancel })
 
@@ -273,6 +277,15 @@ M.multiste_pmenu_cancel = {
   end,
   action = function()
     return "<C-e><Esc>"
+  end,
+}
+
+M.multistep_pmenu_accept_first = {
+  condition = function()
+    return vim.fn.pumvisible() == 1 and vim.fn.complete_info({ "selected" }).selected == -1
+  end,
+  action = function()
+    return "<C-n><C-y>"
   end,
 }
 
