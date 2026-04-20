@@ -73,9 +73,10 @@ return {
         MiniPick.builtin.files()
       end, { desc = "Pick all files in cwd" })
 
-      vim.keymap.set("i", "<C-e>", function()
-        MiniPick.builtin.buffer_lines({ scope = "current" })
-      end)
+      -- TODO: Need a buffer picker
+      -- vim.keymap.set("i", "<C-e>", function()
+      --   MiniPick.builtin.buffer_lines({ scope = "current" })
+      -- end)
     end,
   },
   {
