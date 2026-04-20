@@ -25,6 +25,16 @@ m & M - will remap to "move"
 
 - need to find an alt bind for setting marks
 
+Rules for nvim plugin specs
+
+Rules for nvim plugin specs
+1. Every plugins/*.lua file is an interface module.
+2. Every interface module must include at least one real plugin that justifies the file.
+3. Built-in mappings may live in that file if they belong to the same interface.
+4. Built-in mappings can live in init on whichever spec is the best conceptual owner.
+5. Plugin-specific mappings should live on the corresponding plugin spec when possible.
+6. Prefer keys for plugin entrypoints and init for built-in or interface glue mappings.
+
 # mini.nvim
 
 x = done and fully setup
