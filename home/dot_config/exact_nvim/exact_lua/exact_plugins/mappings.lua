@@ -7,10 +7,6 @@ M.spec = {
     "nvim-mini/mini.keymap",
     priority = 900,
     init = function()
-      -- Map leader to space and local leader to \.
-      vim.g.mapleader = " "
-      vim.g.maplocalleader = "\\"
-
       -- Use F5 to restart server and reload configuration.
       vim.keymap.set("n", "<F5>", M.cmd("restart"), { silent = true })
 
