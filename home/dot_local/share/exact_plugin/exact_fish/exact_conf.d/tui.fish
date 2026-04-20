@@ -57,7 +57,7 @@ if status is-interactive
     alias gsd git_find_replace
     abbr gs 'git switch-or-create'
     abbr w wt
-    alias ws git_wt_idempotent_switch
+    abbr ws 'wt switch-or-create'
 
     # UPSTREAM: Substitute for missing worktrunk prune command.
     # https://github.com/max-sixty/worktrunk/issues/948

@@ -1,4 +1,7 @@
 worktree-path = ".worktrees/{{ branch | sanitize }}"
 
+[aliases]
+switch-or-create = "wt switch {{ args }} 2>/dev/null || wt switch --create {{ args }}"
+
 [post-start]
 copy = "wt step copy-ignored"
