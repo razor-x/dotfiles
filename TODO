@@ -5,6 +5,8 @@ tui.fish
 broot
 man dotfiles
 
+add descriptions to neovim binds
+
 neovim bind ideas
 
 ctrl-enter -> open action menu, e.g., like ctrl-enter in opencode
