@@ -224,7 +224,7 @@ M.spec = {
   },
   {
     "nvim-mini/mini.cmdline",
-    init = function ()
+    init = function()
       -- TODO: Consider better bind for S-Esc.
       vim.keymap.set("n", "<S-Esc>", "q:", { desc = "Open command-line window" })
       local command_line_local_mappings = vim.api.nvim_create_augroup("command-line-local-mappings", { clear = true })
