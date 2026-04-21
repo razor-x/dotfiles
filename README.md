@@ -208,21 +208,6 @@ Reboot the machine
 sudo reboot
 ```
 
-## Standalone Neovim Configuration
-
-The included Neovim config may be installed independently
-
-```sh
-curl -fsSL https://raw.githubusercontent.com/razor-x/dotfiles/main/nvimrc.sh | sh
-```
-
-To install it as an isolated app,
-pass the desired `NVIM_APPNAME` as the first argument
-
-```sh
-curl -fsSL https://raw.githubusercontent.com/razor-x/dotfiles/main/nvimrc.sh | sh -s -- razor-x
-```
-
 ## License
 
 These configuration files are licensed under the MIT license.
