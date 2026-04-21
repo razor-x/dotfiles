@@ -9,6 +9,95 @@ M.spec = {
     ---@type SmartSplitsConfig
     opts = { ---@diagnostic disable-line:missing-fields
     },
+    init = function ()
+      vim.keymap.set("n", "<Leader>h", M.cmd("leftabove vsplit"), { desc = "Split current window left", silent = true })
+      vim.keymap.set(
+        "n",
+        "<Leader>l",
+        M.cmd("rightbelow vsplit"),
+        { desc = "Split current window right", silent = true }
+      )
+      vim.keymap.set("n", "<Leader>k", M.cmd("leftabove split"), { desc = "Split current window above", silent = true })
+      vim.keymap.set(
+        "n",
+        "<Leader>j",
+        M.cmd("rightbelow split"),
+        { desc = "Split current window below", silent = true }
+      )
+
+      vim.keymap.set("n", "<Leader>H", M.cmd("topleft vsplit"), { desc = "Split at left edge", silent = true })
+      vim.keymap.set("n", "<Leader><Leader>h", M.cmd("topleft vsplit"), { desc = "Split at left edge", silent = true })
+      vim.keymap.set("n", "<Leader>L", M.cmd("botright vsplit"), { desc = "Split at right edge", silent = true })
+      vim.keymap.set(
+        "n",
+        "<Leader><Leader>l",
+        M.cmd("botright vsplit"),
+        { desc = "Split at right edge", silent = true }
+      )
+      vim.keymap.set("n", "<Leader>K", M.cmd("topleft split"), { desc = "Split at top edge", silent = true })
+      vim.keymap.set("n", "<Leader><Leader>k", M.cmd("topleft split"), { desc = "Split at top edge", silent = true })
+      vim.keymap.set("n", "<Leader>J", M.cmd("botright split"), { desc = "Split at bottom edge", silent = true })
+      vim.keymap.set(
+        "n",
+        "<Leader><Leader>j",
+        M.cmd("botright split"),
+        { desc = "Split at bottom edge", silent = true }
+      )
+
+      vim.keymap.set("n", "<Leader><Tab>", M.cmd("tabnew"), { desc = "Open a new tab page", silent = true })
+      vim.keymap.set("n", "<Leader><S-Tab>", M.cmd("tabclose"), { desc = "Close the current tab page", silent = true })
+      vim.keymap.set(
+        "n",
+        "<Leader><Leader><Tab>",
+        M.cmd("tabclose"),
+        { desc = "Close the current tab page", silent = true }
+      )
+
+      vim.keymap.set("n", "<C-,>", "gT", { desc = "Go to the previous tab page" })
+      vim.keymap.set("n", "<C-.>", "gt", { desc = "Go to the next tab page" })
+
+      vim.keymap.set("n", "<Leader>:", "q:", { desc = "Open command-line window" })
+      vim.keymap.set("v", "<Leader>:", "q:", { desc = "Open command-line window" })
+      vim.keymap.set("n", "<Leader><Leader>;", "q:", { desc = "Open command-line window" })
+      vim.keymap.set("v", "<Leader><Leader>;", "q:", { desc = "Open command-line window" })
+      vim.keymap.set("n", "<Leader>/", "q/", { desc = "Open search command-line window" })
+      vim.keymap.set("v", "<Leader>/", "q/", { desc = "Open search command-line window" })
+      vim.keymap.set("n", "<Leader>?", "q?", { desc = "Open backward search command-line window" })
+      vim.keymap.set("v", "<Leader>?", "q?", { desc = "Open backward search command-line window" })
+      vim.keymap.set("n", "<Leader><Leader>/", "q?", { desc = "Open backward search command-line window" })
+      vim.keymap.set("v", "<Leader><Leader>/", "q?", { desc = "Open backward search command-line window" })
+
+      vim.keymap.set("n", "<Leader>n", M.cmd("enew"), { desc = "Edit a new, unnamed buffer", silent = true })
+
+      vim.keymap.set("n", "<Leader><CR>", M.cmd("quit"), { desc = "Quit the current window", silent = true })
+      vim.keymap.set("v", "<Leader><CR>", M.cmd("quit"), { desc = "Quit the current window", silent = true })
+
+      vim.keymap.set("n", "<Leader>q", M.cmd("quitall"), { desc = "Exit Vim", silent = true })
+      vim.keymap.set("v", "<Leader>q", M.cmd("quitall"), { desc = "Exit Vim", silent = true })
+      vim.keymap.set("n", "<Leader>Q", M.cmd("quitall!"), { desc = "Exit Vim without saving changes", silent = true })
+      vim.keymap.set("v", "<Leader>Q", M.cmd("quitall!"), { desc = "Exit Vim without saving changes", silent = true })
+      vim.keymap.set(
+        "n",
+        "<Leader><Leader>q",
+        M.cmd("quitall!"),
+        { desc = "Exit Vim without saving changes", silent = true }
+      )
+      vim.keymap.set(
+        "v",
+        "<Leader><Leader>q",
+        M.cmd("quitall!"),
+        { desc = "Exit Vim without saving changes", silent = true }
+      )
+
+      -- TODO: Does this still make sense?
+      vim.keymap.set(
+        "n",
+        "<Leader>xz",
+        M.cmd("pclose"),
+        { desc = "Close any Preview window currently open", silent = true }
+      )
+
+    end,
     config = function(_, opts)
       local SmartSplits = require("smart-splits")
       SmartSplits.setup(opts)
@@ -63,5 +152,12 @@ M.spec = {
     event = { "User KittyScrollbackLaunch" },
   },
 }
+
+---@param command string Command to run with vim.cmd
+function M.cmd(command)
+  return function()
+    vim.cmd(command)
+  end
+end
 
 return M.spec
