@@ -113,30 +113,6 @@ M.spec = {
 
       vim.keymap.set("i", "<BS>", "<Left>", { desc = "Cursor left" })
 
-      local MiniKeymap = require("mini.keymap")
-
-      MiniKeymap.map_multistep("i", "<C-H>", { "minipairs_bs", M.multistep_fallback("<BS>") }, {
-        desc = "Delete character before cursor",
-      })
-
-      MiniKeymap.map_multistep("i", "<C-J>", { "pmenu_next" }, {
-        desc = "Select next completion item or split line",
-      })
-
-      MiniKeymap.map_multistep("i", "<C-K>", { "pmenu_prev", M.multistep_fallback("<CR><Up><C-O>$") }, {
-        desc = "Select previous completion item or split line in place",
-      })
-      MiniKeymap.map_multistep("i", "<C-L>", {
-        "pmenu_accept",
-        M.multistep_pmenu_accept_first,
-        M.multistep_fallback("<Right>"),
-      }, {
-        desc = "Accept completion item or move cursor right",
-      })
-      MiniKeymap.map_multistep("i", "<Esc>", { M.multiste_pmenu_cancel }, {
-        desc = "Cancel completion and exit Insert mode",
-      })
-
       vim.keymap.set("c", "<BS>", "<Left>", { desc = "Cursor left" })
       vim.keymap.set("c", "<C-H>", "<BS>", { desc = "Delete character before cursor" })
       vim.keymap.set("c", "<C-L>", "<Right>", { desc = "Cursor right" })
@@ -226,6 +202,34 @@ M.spec = {
         end
       end, { desc = "Toggle colorcolumn", silent = true })
     end,
+    opts = {},
+    config = function (_, opts)
+      local MiniKeymap = require("mini.keymap")
+      MiniKeymap.setup(opts)
+
+      MiniKeymap.map_multistep("i", "<C-H>", { "minipairs_bs", M.multistep_fallback("<BS>") }, {
+        desc = "Delete character before cursor",
+      })
+
+      MiniKeymap.map_multistep("i", "<C-J>", { "pmenu_next" }, {
+        desc = "Select next completion item or split line",
+      })
+
+      MiniKeymap.map_multistep("i", "<C-K>", { "pmenu_prev", M.multistep_fallback("<CR><Up><C-O>$") }, {
+        desc = "Select previous completion item or split line in place",
+      })
+      MiniKeymap.map_multistep("i", "<C-L>", {
+        "pmenu_accept",
+        M.multistep_pmenu_accept_first,
+        M.multistep_fallback("<Right>"),
+      }, {
+        desc = "Accept completion item or move cursor right",
+      })
+      MiniKeymap.map_multistep("i", "<Esc>", { M.multiste_pmenu_cancel }, {
+        desc = "Cancel completion and exit Insert mode",
+      })
+
+    end
   },
   {
     "nvim-mini/mini.pairs",
