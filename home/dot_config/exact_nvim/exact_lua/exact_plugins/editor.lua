@@ -224,6 +224,38 @@ M.spec = {
   },
   {
     "nvim-mini/mini.cmdline",
+    init = function ()
+      -- TODO: Consider better bind for S-Esc.
+      vim.keymap.set("n", "<S-Esc>", "q:", { desc = "Open command-line window" })
+      local command_line_local_mappings = vim.api.nvim_create_augroup("command-line-local-mappings", { clear = true })
+      vim.api.nvim_create_autocmd("CmdwinEnter", {
+        group = command_line_local_mappings,
+        pattern = "*",
+        callback = function()
+          vim.keymap.set("n", "<S-Esc>", M.cmd("q"), { desc = "Quit the current window", silent = true })
+          vim.keymap.set("v", "<S-Esc>", M.cmd("q"), { desc = "Quit the current window", silent = true })
+        end,
+      })
+      vim.api.nvim_create_autocmd("CmdwinLeave", {
+        group = command_line_local_mappings,
+        pattern = "*",
+        callback = function()
+          vim.keymap.set("n", "<S-Esc>", "q:", { desc = "Open command-line window" })
+          vim.keymap.set("v", "<S-Esc>", "q:", { desc = "Open command-line window" })
+        end,
+      })
+
+      vim.keymap.set("n", "<Leader>:", "q:", { desc = "Open command-line window" })
+      vim.keymap.set("v", "<Leader>:", "q:", { desc = "Open command-line window" })
+      vim.keymap.set("n", "<Leader><Leader>;", "q:", { desc = "Open command-line window" })
+      vim.keymap.set("v", "<Leader><Leader>;", "q:", { desc = "Open command-line window" })
+      vim.keymap.set("n", "<Leader>/", "q/", { desc = "Open search command-line window" })
+      vim.keymap.set("v", "<Leader>/", "q/", { desc = "Open search command-line window" })
+      vim.keymap.set("n", "<Leader>?", "q?", { desc = "Open backward search command-line window" })
+      vim.keymap.set("v", "<Leader>?", "q?", { desc = "Open backward search command-line window" })
+      vim.keymap.set("n", "<Leader><Leader>/", "q?", { desc = "Open backward search command-line window" })
+      vim.keymap.set("v", "<Leader><Leader>/", "q?", { desc = "Open backward search command-line window" })
+    end,
     opts = {
       autocomplete = {
         enable = false,
