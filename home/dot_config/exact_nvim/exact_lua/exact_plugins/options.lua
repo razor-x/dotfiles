@@ -8,6 +8,9 @@ return {
       -- Hide buffers instead of closing them.
       vim.opt.hidden = true
 
+      -- Wrap long lines.
+      vim.opt.wrap = true
+
       -- Set nonzero scrolloff.
       vim.opt.scrolloff = 5
 
