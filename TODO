@@ -25,6 +25,12 @@ m & M - will remap to "move"
 
 - need to find an alt bind for setting marks
 
+neovim stuff
+
+- crtl-h needs to be <BS> in picker / fzf
+- plugin to run rg on project and show hits in quickfix
+- project wide find/replace (or on all open files, or folder).
+
 # mini.nvim
 
 x = done and fully setup
