@@ -143,26 +143,6 @@ M.spec = {
       vim.keymap.set("n", "&", M.cmd("&&"), { desc = "Repeat last substitute with same flags", silent = true })
       vim.keymap.set("x", "&", M.cmd("&&"), { desc = "Repeat last substitute with same flags", silent = true })
 
-      -- TODO: Consider better bind for S-Esc.
-      vim.keymap.set("n", "<S-Esc>", "q:", { desc = "Open command-line window" })
-      local command_line_local_mappings = vim.api.nvim_create_augroup("command-line-local-mappings", { clear = true })
-      vim.api.nvim_create_autocmd("CmdwinEnter", {
-        group = command_line_local_mappings,
-        pattern = "*",
-        callback = function()
-          vim.keymap.set("n", "<S-Esc>", M.cmd("q"), { desc = "Quit the current window", silent = true })
-          vim.keymap.set("v", "<S-Esc>", M.cmd("q"), { desc = "Quit the current window", silent = true })
-        end,
-      })
-      vim.api.nvim_create_autocmd("CmdwinLeave", {
-        group = command_line_local_mappings,
-        pattern = "*",
-        callback = function()
-          vim.keymap.set("n", "<S-Esc>", "q:", { desc = "Open command-line window" })
-          vim.keymap.set("v", "<S-Esc>", "q:", { desc = "Open command-line window" })
-        end,
-      })
-
       vim.keymap.set("n", "<Leader>o", M.cmd("nohlsearch"), { desc = "Stop search highlighting", silent = true })
 
       vim.keymap.set(

@@ -56,6 +56,26 @@ M.spec = {
       vim.keymap.set("n", "<C-,>", "gT", { desc = "Go to the previous tab page" })
       vim.keymap.set("n", "<C-.>", "gt", { desc = "Go to the next tab page" })
 
+      -- TODO: Consider better bind for S-Esc.
+      vim.keymap.set("n", "<S-Esc>", "q:", { desc = "Open command-line window" })
+      local command_line_local_mappings = vim.api.nvim_create_augroup("command-line-local-mappings", { clear = true })
+      vim.api.nvim_create_autocmd("CmdwinEnter", {
+        group = command_line_local_mappings,
+        pattern = "*",
+        callback = function()
+          vim.keymap.set("n", "<S-Esc>", M.cmd("q"), { desc = "Quit the current window", silent = true })
+          vim.keymap.set("v", "<S-Esc>", M.cmd("q"), { desc = "Quit the current window", silent = true })
+        end,
+      })
+      vim.api.nvim_create_autocmd("CmdwinLeave", {
+        group = command_line_local_mappings,
+        pattern = "*",
+        callback = function()
+          vim.keymap.set("n", "<S-Esc>", "q:", { desc = "Open command-line window" })
+          vim.keymap.set("v", "<S-Esc>", "q:", { desc = "Open command-line window" })
+        end,
+      })
+
       vim.keymap.set("n", "<Leader>:", "q:", { desc = "Open command-line window" })
       vim.keymap.set("v", "<Leader>:", "q:", { desc = "Open command-line window" })
       vim.keymap.set("n", "<Leader><Leader>;", "q:", { desc = "Open command-line window" })
