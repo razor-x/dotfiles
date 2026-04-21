@@ -9,7 +9,7 @@ M.spec = {
     ---@type SmartSplitsConfig
     opts = { ---@diagnostic disable-line:missing-fields
     },
-    init = function ()
+    init = function()
       vim.keymap.set("n", "<Leader>h", M.cmd("leftabove vsplit"), { desc = "Split current window left", silent = true })
       vim.keymap.set(
         "n",
@@ -116,7 +116,6 @@ M.spec = {
         M.cmd("pclose"),
         { desc = "Close any Preview window currently open", silent = true }
       )
-
     end,
     config = function(_, opts)
       local SmartSplits = require("smart-splits")

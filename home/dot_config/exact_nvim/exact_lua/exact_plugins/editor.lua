@@ -183,7 +183,7 @@ M.spec = {
       end, { desc = "Toggle colorcolumn", silent = true })
     end,
     opts = {},
-    config = function (_, opts)
+    config = function(_, opts)
       local MiniKeymap = require("mini.keymap")
       MiniKeymap.setup(opts)
 
@@ -208,8 +208,7 @@ M.spec = {
       MiniKeymap.map_multistep("i", "<Esc>", { M.multiste_pmenu_cancel }, {
         desc = "Cancel completion and exit Insert mode",
       })
-
-    end
+    end,
   },
   {
     "nvim-mini/mini.pairs",
@@ -225,7 +224,11 @@ M.spec = {
   },
   {
     "nvim-mini/mini.cmdline",
-    opts = {},
+    opts = {
+      autocorrect = {
+        enable = false,
+      },
+    },
   },
   {
     "nvim-mini/mini.surround",

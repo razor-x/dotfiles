@@ -3,7 +3,7 @@ local M = {}
 ---@module "lazy.types"
 ---@type LazySpec
 M.spec = {
-{
+  {
     "neovim/nvim-lspconfig",
     init = function()
       vim.lsp.enable("clangd")
