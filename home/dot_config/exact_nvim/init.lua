@@ -14,6 +14,9 @@ end
 
 require("lazy").setup({
   lockfile = vim.fs.joinpath(dotfiles.config_dir, ".lazy-lock.json"),
+  change_detection = {
+    enabled = false,
+  },
   spec = {
     { import = "plugins" },
     {
