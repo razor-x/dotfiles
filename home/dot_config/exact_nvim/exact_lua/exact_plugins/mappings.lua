@@ -197,8 +197,18 @@ M.spec = {
       vim.keymap.set("v", "<Leader>q", M.cmd("quitall"), { desc = "Exit Vim", silent = true })
       vim.keymap.set("n", "<Leader>Q", M.cmd("quitall!"), { desc = "Exit Vim without saving changes", silent = true })
       vim.keymap.set("v", "<Leader>Q", M.cmd("quitall!"), { desc = "Exit Vim without saving changes", silent = true })
-      vim.keymap.set("n", "<Leader><Leader>q", M.cmd("quitall!"), { desc = "Exit Vim without saving changes", silent = true })
-      vim.keymap.set("v", "<Leader><Leader>q", M.cmd("quitall!"), { desc = "Exit Vim without saving changes", silent = true })
+      vim.keymap.set(
+        "n",
+        "<Leader><Leader>q",
+        M.cmd("quitall!"),
+        { desc = "Exit Vim without saving changes", silent = true }
+      )
+      vim.keymap.set(
+        "v",
+        "<Leader><Leader>q",
+        M.cmd("quitall!"),
+        { desc = "Exit Vim without saving changes", silent = true }
+      )
 
       vim.keymap.set("n", "<Leader>=", ":<C-U>put =", { desc = "Put from expression register" })
 
