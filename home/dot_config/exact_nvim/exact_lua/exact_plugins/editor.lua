@@ -225,7 +225,7 @@ M.spec = {
   {
     "nvim-mini/mini.cmdline",
     opts = {
-      autocorrect = {
+      autocomplete = {
         enable = false,
       },
     },
