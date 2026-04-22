@@ -30,6 +30,7 @@ neovim stuff
 - crtl-h needs to be <BS> in picker / fzf
 - plugin to run rg on project and show hits in quickfix
 - project wide find/replace (or on all open files, or folder).
+- nvim cannot have any alt binds. snacks explorer has them by default but they need to be remapped. will need to check any plugins for alt binds and remap
 
 # mini.nvim
 
