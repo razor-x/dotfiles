@@ -195,6 +195,14 @@ M.spec = {
         desc = "Select next completion item or split line",
       })
 
+      MiniKeymap.map_multistep("i", "<C-N>", { "pmenu_next" }, {
+        desc = "Select next completion item or split line",
+      })
+
+      MiniKeymap.map_multistep("i", "<C-P>", { "pmenu_prev" }, {
+        desc = "Select next completion item or split line",
+      })
+
       MiniKeymap.map_multistep("i", "<C-K>", { "pmenu_prev", M.multistep_fallback("<CR><Up><C-O>$") }, {
         desc = "Select previous completion item or split line in place",
       })
@@ -268,6 +276,14 @@ M.spec = {
   },
   {
     "nvim-mini/mini.completion",
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "snacks_picker_input",
+        callback = function()
+          vim.b.minicompletion_disable = true
+        end,
+      })
+    end,
     opts = {},
   },
   {
