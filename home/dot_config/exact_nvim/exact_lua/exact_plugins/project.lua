@@ -21,7 +21,24 @@ M.spec = {
   {
     "folke/snacks.nvim",
     opts = {
-      picker = {},
+      picker = {
+        sources = {
+          explorer = {
+            win = {
+              input = {
+                keys = {
+                  ["<Esc>"] = false,
+                },
+              },
+              list = {
+                keys = {
+                  ["<Esc>"] = false,
+                },
+              },
+            },
+          },
+        },
+      },
       explorer = {},
     },
     keys = {
