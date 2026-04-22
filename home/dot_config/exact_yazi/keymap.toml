@@ -4,6 +4,21 @@ run  = "shell '$VISUAL \"$@\"' --block --confirm"
 desc = "Edit file in visual editor"
 
 [[mgr.prepend_keymap]]
+on   = [ "<Tab>" ]
+run  = [ "toggle", "arrow 1" ]
+desc = "Toggle the current selection state"
+
+[[mgr.prepend_keymap]]
+on   = [ "<C-Tab>" ]
+run  = "spot"
+desc = "Spot hovered file"
+
+[[spot.prepend_keymap]]
+on   = [ "<C-Tab>" ]
+run  = "close"
+desc = "Close the spot"
+
+[[mgr.prepend_keymap]]
 on   = [ "E" ]
 run  = "shell '$GUI_EDITOR \"$@\"'"
 desc = "Edit file in GUI editor"
