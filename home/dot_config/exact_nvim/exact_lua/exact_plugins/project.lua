@@ -16,7 +16,7 @@ M.spec = {
     keys = {
       -- Top Pickers & Explorer
       {
-        "<leader><space>",
+        "<leader>e",
         function()
           require("snacks").picker.smart()
         end,
@@ -51,7 +51,7 @@ M.spec = {
         desc = "Notification History",
       },
       {
-        "<leader>e",
+        "<leader>i",
         function()
           require("snacks").explorer()
         end,
