@@ -64,9 +64,21 @@ M.spec = {
       {
         "<leader>i",
         function()
-          require("snacks").explorer()
+          local explorer = require("snacks").explorer.reveal()
+          if explorer then
+            explorer:focus()
+          end
         end,
-        desc = "File Explorer",
+        desc = "Reveal In File Explorer",
+      },
+      {
+        "<leader>I",
+        function()
+          for _, picker in ipairs(require("snacks").picker.get({ source = "explorer" })) do
+            picker:close()
+          end
+        end,
+        desc = "Close File Explorer",
       },
       -- find
       {
