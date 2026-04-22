@@ -1,6 +1,7 @@
 {
   "catppuccin": { "branch": "main", "commit": "426dbebe06b5c69fd846ceb17b42e12f890aedf1" },
   "cutlass.nvim": { "branch": "main", "commit": "d01b5c1943050fcda8edf5c89d4419c41a65890e" },
+  "flash.nvim": { "branch": "main", "commit": "fcea7ff883235d9024dc41e638f164a450c14ca2" },
   "kitty-scrollback.nvim": { "branch": "main", "commit": "9342a0e0e5556ce0b7f9dc41c4bdd39ae9dc85dd" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lazydev.nvim": { "branch": "main", "commit": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d" },
@@ -11,7 +12,6 @@
   "mini.completion": { "branch": "main", "commit": "e934b46f6471a3bd0cd37fc06d0df198b9711882" },
   "mini.files": { "branch": "main", "commit": "e8db416c9f5dbce70f5501da28263d45c0a4df6b" },
   "mini.icons": { "branch": "main", "commit": "bac6317300e205335df425296570d84322730067" },
-  "mini.jump2d": { "branch": "main", "commit": "c0df3170873b712b61951781aeee9942a92ba1f1" },
   "mini.keymap": { "branch": "main", "commit": "dc3b688b26a810f519cdd0572a27587a138ced78" },
   "mini.pairs": { "branch": "main", "commit": "42387c7fe68fc0b6e95eaf37f1bb76e7bffaa0d9" },
   "mini.surround": { "branch": "main", "commit": "2715e04bea3ec9244f15b421dc5b18c0fe326210" },
