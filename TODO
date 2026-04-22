@@ -59,7 +59,8 @@ n = no can't or won't use
 - [ ] mini.files         Navigate and manipulate file system
 - [ ] mini.git           Git integration
 - [n] mini.jump          Jump to next/previous single character
-- [y] mini.jump2d        Jump within visible lines
+- [n] mini.jump2d        Jump within visible lines
+  - [ ] => use flash.nvim
 - [ ] mini.misc          Miscellaneous functions
 - [ ] mini.pick          Pick anything
 - [ ] mini.sessions      Session management
