@@ -15,9 +15,10 @@ if type --query nvim
     # UPSTREAM: Lazy.nvim will not support deterministic install.
     # https://github.com/folke/lazy.nvim/pull/2127
     # https://github.com/folke/lazy.nvim/issues/1279
-    cp {{ $lockfile }} /tmp/.lazy-lock.json
+    set --function tmp (mktemp --suffix '.json' 'lazy-lock.XXXXXX')
+    cp {{ $lockfile }} $tmp
     nvim --headless '+Lazy! sync' +qall
-    mv /tmp/.lazy-lock.json {{ $lockfile }}
+    mv $tmp {{ $lockfile }}
 
     nvim --headless '+Lazy! restore' +qall
     nvim --headless '+helptags {{ $dir }}' +qall
