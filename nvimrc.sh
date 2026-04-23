@@ -60,9 +60,15 @@ mv "$source_dir/init.lua" "$config_dir/init.lua"
 mv "$source_dir/exact_lua" "$config_dir/lua"
 mv "$config_dir/lua/exact_plugins" "$config_dir/lua/plugins"
 mv "$source_dir/doc" "$config_dir/doc"
-mv "$source_dir/.lazy-lock.json" "$config_dir/lazy-lock.json"
 
-nvim --headless '+Lazy! clean' '+Lazy! restore' +qall
+# UPSTREAM: Lazy.nvim will not support deterministic install.
+# https://github.com/folke/lazy.nvim/pull/2127
+# https://github.com/folke/lazy.nvim/issues/1279
+cp "$source_dir/.lazy-lock.json" "$config_dir/lazy-lock.json"
+nvim --headless '+Lazy! sync' +qall
+
+mv "$source_dir/.lazy-lock.json" "$config_dir/lazy-lock.json"
+nvim --headless '+Lazy! restore' +qall
 nvim --headless "+helptags $config_dir/doc" +qall
 
 printf 'Installed Neovim config to %s\n' "$config_dir"
