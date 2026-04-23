@@ -7,6 +7,9 @@ if type --query gh
     # Reset all aliases.
     gh alias delete --all
 
+    # Clone repo.
+    gh alias set --clobber clone 'repo clone'
+
     # Cut a new version via GitHub Actions.
     gh alias set --clobber ver \
         'workflow run version.yml --raw-field version="$1"'
