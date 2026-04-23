@@ -46,33 +46,34 @@ M.spec = {
       {
         "<leader>e",
         function()
+          -- TODO: Search hidden files?
           require("snacks").picker.smart()
         end,
         desc = "Smart Find Files",
       },
       {
-        "<leader>,",
+        "<leader>b",
         function()
           require("snacks").picker.buffers()
         end,
         desc = "Buffers",
       },
       {
-        "<leader>/",
+        "<leader>a",
         function()
           require("snacks").picker.grep()
         end,
         desc = "Grep",
       },
       {
-        "<leader>:",
+        "<leader>f:",
         function()
           require("snacks").picker.command_history()
         end,
         desc = "Command History",
       },
       {
-        "<leader>n",
+        "<leader>fn",
         function()
           require("snacks").picker.notifications()
         end,
