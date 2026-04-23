@@ -1,6 +1,8 @@
 #!/usr/bin/env fish
 
-{{ $hash := include (joinPath .chezmoi.sourceDir "dot_config" "exact_nvim" ".lazy-lock.json") | sha256sum -}}
+{{ $lockfile := joinPath .chezmoi.sourceDir "dot_config" "exact_nvim" ".lazy-lock.json" }}
+
+{{ $hash := include $lockfile | sha256sum -}}
 
 {{ $dir := joinPath .chezmoi.homeDir ".config" "nvim" "doc" -}}
 {{- range (glob (printf "%s/*.txt" $dir)) -}}
@@ -10,7 +12,14 @@
 # hash: {{ sha256sum $hash }}
 
 if type --query nvim
-    nvim --headless '+Lazy! clean' '+Lazy! restore' +qall
+    # UPSTREAM: Lazy.nvim will not support deterministic install.
+    # https://github.com/folke/lazy.nvim/pull/2127
+    # https://github.com/folke/lazy.nvim/issues/1279
+    cp {{ $lockfile }} /tmp/.lazy-lock.json
+    nvim --headless '+Lazy! sync' +qall
+    mv /tmp/.lazy-lock.json {{ $lockfile }}
+
+    nvim --headless '+Lazy! restore' +qall
     nvim --headless '+helptags {{ $dir }}' +qall
 else
     echo 'Cannot generate Neovim helptags or install plugins: nvim not found.'
