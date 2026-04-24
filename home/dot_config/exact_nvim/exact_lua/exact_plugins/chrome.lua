@@ -27,7 +27,7 @@ M.spec = {
     opts = {
       delay = 500,
     },
-    config = function (_, opts)
+    config = function(_, opts)
       WhichKey = require("which-key")
       WhichKey.setup(opts)
     end,

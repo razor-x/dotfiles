@@ -244,7 +244,7 @@ M.spec = {
         },
       },
     },
-    config = function (_, opts)
+    config = function(_, opts)
       Flash = require("flash")
       Flash.setup(opts)
     end,
@@ -356,7 +356,7 @@ M.spec = {
   {
     "gbprod/substitute.nvim",
     opts = {},
-    config = function (_, opts)
+    config = function(_, opts)
       Substitute = require("substitute")
       Substitute.setup(opts)
     end,
