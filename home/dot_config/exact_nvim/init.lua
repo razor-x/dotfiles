@@ -30,6 +30,8 @@ require("lazy").setup({
           { path = "mini.extra", words = { "MiniExtra" } },
           { path = "mini.keymap", words = { "MiniKeymap" } },
           { path = "snacks.nvim", words = { "Snacks" } },
+          { path = "substitute", words = { "Substitute" } },
+          { path = "which-key", words = { "WhichKey" } },
         },
         enabled = function(root_dir)
           return vim.fs.normalize(root_dir) == vim.fs.normalize(dotfiles.root_dir)

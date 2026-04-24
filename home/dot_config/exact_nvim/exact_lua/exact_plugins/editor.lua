@@ -356,17 +356,21 @@ M.spec = {
   {
     "gbprod/substitute.nvim",
     opts = {},
+    config = function (_, opts)
+      Substitute = require("substitute")
+      Substitute.setup(opts)
+    end,
     keys = {
       {
         ":",
         function()
-          require("substitute").operator()
+          Substitute.operator()
         end,
       },
       {
         "::",
         function()
-          require("substitute").line()
+          Substitute.line()
         end,
       },
     },

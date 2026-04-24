@@ -27,11 +27,15 @@ M.spec = {
     opts = {
       delay = 500,
     },
+    config = function (_, opts)
+      WhichKey = require("which-key")
+      WhichKey.setup(opts)
+    end,
     keys = {
       {
         "<leader>?",
         function()
-          require("which-key").show({ global = false })
+          WhichKey.show({ global = false })
         end,
         desc = "Buffer Local Keymaps (which-key)",
       },
