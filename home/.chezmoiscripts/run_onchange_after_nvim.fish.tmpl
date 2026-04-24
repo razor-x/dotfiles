@@ -1,14 +1,14 @@
 #!/usr/bin/env fish
 
-{{ $lockfile := joinPath .chezmoi.sourceDir "dot_config" "exact_nvim" ".lazy-lock.json" }}
-
-{{ $hash := include $lockfile | sha256sum -}}
-
-{{ $dir := joinPath .chezmoi.homeDir ".config" "nvim" "doc" -}}
-{{- range (glob (printf "%s/*.txt" $dir)) -}}
-  {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
-{{- end -}}
-
+# {{ $lockfile := joinPath .chezmoi.sourceDir "dot_config" "exact_nvim" ".lazy-lock.json" }}
+#
+# {{ $hash := include $lockfile | sha256sum -}}
+#
+# {{ $dir := joinPath .chezmoi.homeDir ".config" "nvim" "doc" -}}
+# {{- range (glob (printf "%s/*.txt" $dir)) -}}
+#   {{- $hash = printf "%s%s" $hash (include . | sha256sum) | sha256sum -}}
+# {{- end -}}
+#
 # hash: {{ sha256sum $hash }}
 
 if type --query nvim
@@ -16,9 +16,9 @@ if type --query nvim
     # https://github.com/folke/lazy.nvim/pull/2127
     # https://github.com/folke/lazy.nvim/issues/1279
     set --function tmp (mktemp --suffix '.json' 'lazy-lock.XXXXXX')
-    cp {{ $lockfile }} $tmp
+    cp '{{ $lockfile }}' $tmp
     nvim --headless '+Lazy! sync' +qall
-    mv $tmp {{ $lockfile }}
+    mv $tmp '{{ $lockfile }}'
 
     nvim --headless '+Lazy! restore' +qall
     nvim --headless '+helptags {{ $dir }}' +qall

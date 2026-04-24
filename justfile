@@ -34,6 +34,17 @@ format:
         --no-run-if-empty \
         --max-args 1 \
         fish --command 'format $argv[1]' --
+  fd \
+    --print0 \
+    --hidden \
+    --type file \
+    --glob '*.fish.tmpl' \
+    home/.chezmoiscripts/ \
+    | xargs \
+        --null \
+        --no-run-if-empty \
+        --max-args 1 \
+        fish --command 'format --extension fish $argv[1]' --
 
 watch:
   watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force
