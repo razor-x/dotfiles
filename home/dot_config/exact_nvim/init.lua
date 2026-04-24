@@ -24,6 +24,12 @@ require("lazy").setup({
       ---@module "lazydev"
       ---@type lazydev.Config
       opts = {
+        library = {
+          { path = "mini.bufremove", words = { "MiniBufremove" } },
+          { path = "mini.extra", words = { "MiniExtra" } },
+          { path = "mini.keymap", words = { "MiniKeymap" } },
+          { path = "snacks.nvim", words = { "Snacks" } },
+        },
         enabled = function(root_dir)
           return vim.fs.normalize(root_dir) == vim.fs.normalize(dotfiles.root_dir)
         end,

@@ -184,8 +184,7 @@ M.spec = {
     end,
     opts = {},
     config = function(_, opts)
-      local MiniKeymap = require("mini.keymap")
-      MiniKeymap.setup(opts)
+      require("mini.keymap").setup(opts)
 
       MiniKeymap.map_multistep("i", "<C-H>", { "minipairs_bs", M.multistep_fallback("<BS>") }, {
         desc = "Delete character before cursor",
@@ -223,8 +222,12 @@ M.spec = {
     dependencies = { "nvim-mini/mini.extra" },
     opts = function(_, opts)
       opts.custom_textobjects = opts.custom_textobjects or {}
-      opts.custom_textobjects.e = require("mini.extra").gen_ai_spec.buffer()
+      opts.custom_textobjects.e = MiniExtra.gen_ai_spec.buffer()
     end,
+  },
+  {
+    "nvim-mini/mini.extra",
+    opts = {},
   },
   {
     "nvim-mini/mini.pairs",
