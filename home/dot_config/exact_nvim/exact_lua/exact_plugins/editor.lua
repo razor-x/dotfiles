@@ -244,12 +244,16 @@ M.spec = {
         },
       },
     },
+    config = function (_, opts)
+      Flash = require("flash")
+      Flash.setup(opts)
+    end,
     keys = {
       {
         "S",
         mode = { "n", "x", "o" },
         function()
-          require("flash").jump()
+          Flash.jump()
         end,
         desc = "Flash",
       },
@@ -257,7 +261,7 @@ M.spec = {
         "R",
         mode = { "n", "x", "o" },
         function()
-          require("flash").treesitter()
+          Flash.treesitter()
         end,
         desc = "Flash Treesitter",
       },
@@ -265,7 +269,7 @@ M.spec = {
         "r",
         mode = "o",
         function()
-          require("flash").remote()
+          Flash.remote()
         end,
         desc = "Remote Flash",
       },
@@ -273,7 +277,7 @@ M.spec = {
         "R",
         mode = { "o", "x" },
         function()
-          require("flash").treesitter_search()
+          Flash.treesitter_search()
         end,
         desc = "Treesitter Search",
       },
@@ -281,7 +285,7 @@ M.spec = {
         "<c-s>",
         mode = { "c" },
         function()
-          require("flash").toggle()
+          Flash.toggle()
         end,
         desc = "Toggle Flash Search",
       },
