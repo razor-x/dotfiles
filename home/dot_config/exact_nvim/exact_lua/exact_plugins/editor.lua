@@ -220,7 +220,11 @@ M.spec = {
   },
   {
     "nvim-mini/mini.ai",
-    opts = {},
+    dependencies = { "nvim-mini/mini.extra" },
+    opts = function(_, opts)
+      opts.custom_textobjects = opts.custom_textobjects or {}
+      opts.custom_textobjects.e = require("mini.extra").gen_ai_spec.buffer()
+    end,
   },
   {
     "nvim-mini/mini.pairs",
