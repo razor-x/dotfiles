@@ -219,6 +219,10 @@ M.spec = {
     end,
   },
   {
+    "nvim-mini/mini.ai",
+    opts = {},
+  },
+  {
     "nvim-mini/mini.pairs",
     opts = {},
   },
