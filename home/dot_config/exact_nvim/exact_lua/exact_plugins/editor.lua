@@ -89,8 +89,8 @@ M.spec = {
 
       vim.keymap.set("i", "<CR>", "<Esc>", { desc = "Exit Insert mode" })
 
-      vim.keymap.set("n", "<C-CR>", ":", { desc = "Enter Command-line mode" })
-      vim.keymap.set("v", "<C-CR>", ":", { desc = "Enter Command-line mode" })
+      vim.keymap.set("n", "<CR>", ":", { desc = "Enter Command-line mode" })
+      vim.keymap.set("v", "<CR>", ":", { desc = "Enter Command-line mode" })
 
       -- Use enter normally in command-line and quickfix buffers instead of the remapping to escape.
       local cr_local_mappings = vim.api.nvim_create_augroup("cr-local-mappings", { clear = true })
