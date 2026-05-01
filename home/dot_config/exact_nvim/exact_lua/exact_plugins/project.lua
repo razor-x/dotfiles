@@ -222,28 +222,28 @@ M.spec = {
       },
       -- Grep
       {
-        "<leader>sb",
+        "<leader>cb",
         function()
           Snacks.picker.lines()
         end,
         desc = "Buffer Lines",
       },
       {
-        "<leader>sB",
+        "<leader>cB",
         function()
           Snacks.picker.grep_buffers()
         end,
         desc = "Grep Open Buffers",
       },
       {
-        "<leader>sg",
+        "<leader>cg",
         function()
           Snacks.picker.grep()
         end,
         desc = "Grep",
       },
       {
-        "<leader>sw",
+        "<leader>cw",
         function()
           Snacks.picker.grep_word()
         end,
@@ -252,140 +252,140 @@ M.spec = {
       },
       -- search
       {
-        '<leader>s"',
+        '<leader>c"',
         function()
           Snacks.picker.registers()
         end,
         desc = "Registers",
       },
       {
-        "<leader>s/",
+        "<leader>c/",
         function()
           Snacks.picker.search_history()
         end,
         desc = "Search History",
       },
       {
-        "<leader>sa",
+        "<leader>ca",
         function()
           Snacks.picker.autocmds()
         end,
         desc = "Autocmds",
       },
       {
-        "<leader>sb",
+        "<leader>cb",
         function()
           Snacks.picker.lines()
         end,
         desc = "Buffer Lines",
       },
       {
-        "<leader>sc",
+        "<leader>cc",
         function()
           Snacks.picker.command_history()
         end,
         desc = "Command History",
       },
       {
-        "<leader>sC",
+        "<leader>cC",
         function()
           Snacks.picker.commands()
         end,
         desc = "Commands",
       },
       {
-        "<leader>sd",
+        "<leader>cd",
         function()
           Snacks.picker.diagnostics()
         end,
         desc = "Diagnostics",
       },
       {
-        "<leader>sD",
+        "<leader>cD",
         function()
           Snacks.picker.diagnostics_buffer()
         end,
         desc = "Buffer Diagnostics",
       },
       {
-        "<leader>sh",
+        "<leader>ch",
         function()
           Snacks.picker.help()
         end,
         desc = "Help Pages",
       },
       {
-        "<leader>sH",
+        "<leader>cH",
         function()
           Snacks.picker.highlights()
         end,
         desc = "Highlights",
       },
       {
-        "<leader>si",
+        "<leader>ci",
         function()
           Snacks.picker.icons()
         end,
         desc = "Icons",
       },
       {
-        "<leader>sj",
+        "<leader>cj",
         function()
           Snacks.picker.jumps()
         end,
         desc = "Jumps",
       },
       {
-        "<leader>sk",
+        "<leader>ck",
         function()
           Snacks.picker.keymaps()
         end,
         desc = "Keymaps",
       },
       {
-        "<leader>sl",
+        "<leader>cl",
         function()
           Snacks.picker.loclist()
         end,
         desc = "Location List",
       },
       {
-        "<leader>sm",
+        "<leader>cm",
         function()
           Snacks.picker.marks()
         end,
         desc = "Marks",
       },
       {
-        "<leader>sM",
+        "<leader>cM",
         function()
           Snacks.picker.man()
         end,
         desc = "Man Pages",
       },
       {
-        "<leader>sp",
+        "<leader>cp",
         function()
           Snacks.picker.lazy()
         end,
         desc = "Search for Plugin Spec",
       },
       {
-        "<leader>sq",
+        "<leader>cq",
         function()
           Snacks.picker.qflist()
         end,
         desc = "Quickfix List",
       },
       {
-        "<leader>sR",
+        "<leader>cR",
         function()
           Snacks.picker.resume()
         end,
         desc = "Resume",
       },
       {
-        "<leader>su",
+        "<leader>cu",
         function()
           Snacks.picker.undo()
         end,
@@ -450,14 +450,14 @@ M.spec = {
         desc = "C[a]lls Outgoing",
       },
       {
-        "<leader>ss",
+        "<leader>cs",
         function()
           Snacks.picker.lsp_symbols()
         end,
         desc = "LSP Symbols",
       },
       {
-        "<leader>sS",
+        "<leader>cS",
         function()
           Snacks.picker.lsp_workspace_symbols()
         end,
