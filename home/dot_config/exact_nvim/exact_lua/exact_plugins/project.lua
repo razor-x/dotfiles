@@ -22,6 +22,27 @@ M.spec = {
     "folke/snacks.nvim",
     opts = {
       picker = {
+        win = {
+          input = {
+            keys = {
+              ["<Esc>"] = { "close", mode = { "n", "i" } },
+              ["<S-Esc>"] = { "stopinsert", mode = "i" },
+              ["<c-cr>"] = { "qflist", mode = { "i", "n" } },
+              ["<c-q>"] = false,
+              ["<c-p>"] = { "history_back", mode = { "i", "n" } },
+              ["<c-n>"] = { "history_forward", mode = { "i", "n" } },
+            },
+          },
+          list = {
+            keys = {
+              ["<Esc>"] = "close",
+              ["<c-cr>"] = "qflist",
+              ["<c-q>"] = false,
+              ["<c-p>"] = "history_back",
+              ["<c-n>"] = "history_forward",
+            },
+          },
+        },
         sources = {
           explorer = {
             win = {
