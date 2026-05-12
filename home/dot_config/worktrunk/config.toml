@@ -1,6 +1,7 @@
 worktree-path = ".worktrees/{{ branch | sanitize }}"
 
 [aliases]
+prune = "wt step prune"
 switch-or-create = "wt switch {{ args }} 2>/dev/null || wt switch --create {{ args }}"
 
 [post-start]
