@@ -25,7 +25,12 @@ M.spec = {
     dependencies = { "nvim-mini/mini.icons" },
     event = "VeryLazy",
     opts = {
-      delay = 500,
+      delay = function(ctx)
+        if ctx.keys == "z=" then
+          return 0
+        end
+        return ctx.plugin and 0 or 500
+      end
     },
     config = function(_, opts)
       WhichKey = require("which-key")
