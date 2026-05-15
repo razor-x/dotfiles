@@ -1,23 +1,6 @@
 {
-  "$schema": "https://opencode.ai/config.json",
+  "$schema": "https://opencode.ai/tui.json",
   "theme": "{{ template "theme" (merge (dict "app" "opencode") .) }}",
-  "autoupdate": false,
-  "permission": {
-    "external_directory": {
-      "*/opencode/tool-output/*": "allow"
-    }
-  },
-  "mcp": {
-    "github": {
-      "type": "remote",
-      "url": "https://api.githubcopilot.com/mcp/",
-      "oauth": {
-        "clientId": "Iv23liMsUdPFCRrDC3os",
-        "clientSecret": "{env:GITHUB_MCP_CLIENT_SECRET}"
-      },
-      "enabled": true
-    }
-  },
   "keybinds": {
     "leader": "ctrl+space",
 
