@@ -74,7 +74,7 @@ function fish_user_key_bindings \
 
     # Clear prompt.
     for mode in default insert visual
-        bind --mode $mode ctrl-c clear-commandline repaint-mode
+        bind --mode $mode ctrl-c cancel-commandlin
     end
 
     # Access clipboard.
