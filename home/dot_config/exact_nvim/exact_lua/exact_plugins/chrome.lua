@@ -30,7 +30,7 @@ M.spec = {
           return 0
         end
         return ctx.plugin and 0 or 500
-      end
+      end,
     },
     config = function(_, opts)
       WhichKey = require("which-key")
