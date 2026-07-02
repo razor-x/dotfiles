@@ -1,6 +1,9 @@
 #!/usr/bin/env fish
 
 if type --query gh
+    # Install dashboard extension.
+    gh extension install --pin v4.24.1 dlvhdr/gh-dash
+
     # Prefer SSH for git operations.
     gh config set git_protocol ssh
 
