@@ -380,11 +380,11 @@ M.spec = {
 ---@param register string The register to bind the mappings to
 ---@param quiet boolean Whether to show a notification
 function M.system_clipboard_mappings(register, quiet)
-  vim.keymap.set("n", "<Leader>y", '"' .. register .. "y", { desc = "Yank to system clipboard" })
-  vim.keymap.set("v", "<Leader>y", '"' .. register .. "y", { desc = "Yank to system clipboard" })
-  vim.keymap.set("n", "<Leader>Y", '"' .. register .. "Y", { desc = "Yank to end of line to system clipboard" })
-  vim.keymap.set("n", "<Leader><Leader>y", '"' .. register .. "Y", { desc = "Yank to end of line to system clipboard" })
-  vim.keymap.set("n", "<Leader>yy", '"' .. register .. "yy", { desc = "Yank line to system clipboard" })
+  vim.keymap.set("n", "<leader>c", '"' .. register .. "y", { desc = "Yank to system clipboard" })
+  vim.keymap.set("v", "<leader>c", '"' .. register .. "y", { desc = "Yank to system clipboard" })
+  vim.keymap.set("n", "<leader>c", '"' .. register .. "Y", { desc = "Yank to end of line to system clipboard" })
+  vim.keymap.set("n", "<Leader><leader>c", '"' .. register .. "Y", { desc = "Yank to end of line to system clipboard" })
+  vim.keymap.set("n", "<leader>cc", '"' .. register .. "yy", { desc = "Yank line to system clipboard" })
 
   vim.keymap.set("n", "<Leader>m", '"' .. register .. "d", { desc = "Delete to system clipboard" })
   vim.keymap.set("v", "<Leader>m", '"' .. register .. "d", { desc = "Delete to system clipboard" })
