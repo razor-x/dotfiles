@@ -3,11 +3,7 @@
   "theme": "{{ template "theme" (merge (dict "app" "opencode") .) }}",
   "keybinds": {
     "leader": "ctrl+space",
-
-    // UPSTREAM: Anything bound to <leader>q will not trigger.
-    // https://github.com/anomalyco/opencode/issues/3851
-    "app_exit": "<leader>q,ctrl+shift+q",
-
+    "app_exit": "<leader>q",
     "editor_open": "<leader>e,ctrl+o",
     "theme_list": "<leader>t",
     "sidebar_toggle": "<leader>;",
