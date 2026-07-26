@@ -131,7 +131,15 @@ M.spec = {
     "mikesmithgh/kitty-scrollback.nvim",
     ---@module "kitty-scrollback"
     ---@type KsbOpts
-    opts = {},
+    opts = {
+      {
+        callbacks = {
+          after_setup = function()
+            M.disable_mini_basics_terminal_insert()
+          end,
+        },
+      },
+    },
     cmd = {
       "KittyScrollbackGenerateKittens",
       "KittyScrollbackCheckHealth",
@@ -145,6 +153,22 @@ M.spec = {
 function M.cmd(command)
   return function()
     vim.cmd(command)
+  end
+end
+
+function M.disable_mini_basics_terminal_insert()
+  local ok, autocmds = pcall(vim.api.nvim_get_autocmds, {
+    group = "MiniBasicsAutocommands",
+    event = "TermOpen",
+    pattern = "term://*",
+  })
+
+  if not ok then
+    return
+  end
+
+  for _, autocmd in ipairs(autocmds) do
+    pcall(vim.api.nvim_del_autocmd, autocmd.id)
   end
 end
 
