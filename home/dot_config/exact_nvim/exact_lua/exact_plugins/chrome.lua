@@ -31,6 +31,13 @@ M.spec = {
         end
         return ctx.plugin and 0 or 500
       end,
+      spec = {
+        { "<c-g>", group = "picker", mode = { "n", "i" } },
+      },
+      triggers = {
+        { "<auto>", mode = "nixsotc" },
+        { "<c-g>", mode = { "n", "i" } },
+      },
     },
     config = function(_, opts)
       WhichKey = require("which-key")
