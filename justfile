@@ -28,6 +28,7 @@ format:
     --extension md \
     --extension py \
     --extension sh \
+    --extension ts \
     . \
     | xargs \
         --null \
