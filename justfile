@@ -20,6 +20,7 @@ format:
     --print0 \
     --hidden \
     --exclude .lazy-lock.json \
+    --exclude package-lock.json \
     --type file \
     --extension clj \
     --extension fish \
@@ -47,83 +48,58 @@ format:
         --max-args 1 \
         fish --command 'format --extension fish $argv[1]' --
 
-pi-local-extension-env-update:
+[working-directory: 'home/dot_config/pi/extensions/exact_local']
+pi-local-extension: && format
   #!/usr/bin/env bash
   set -euo pipefail
 
-  extension_dir="home/dot_config/pi/extensions/exact_local"
-  mkdir -p "$extension_dir"
-
-  pi_info="$(npm view \
+  pi_info="$(npm view --json \
     @earendil-works/pi-coding-agent@latest \
-    version \
-    devDependencies \
-    --json)"
+    dependencies devDependencies engines version)"
 
-  pi_version="$(jq --raw-output \
-    'if type == "array" then .[0].version else .version end' \
-    <<< "$pi_info")"
+  pi_version="$(jq --raw-output .[0].version <<< "$pi_info")"
 
   curl \
     --fail \
     --silent \
     --show-error \
     --location \
-    "https://raw.githubusercontent.com/earendil-works/pi/v$pi_version/tsconfig.base.json" \
-    --output "$extension_dir/tsconfig.base.json"
-  typescript_version="$(jq --raw-output \
-    'if type == "array" then .[0].devDependencies.typescript else .devDependencies.typescript end' \
-    <<< "$pi_info")"
-  node_types_version="$(jq --raw-output \
-    'if type == "array" then .[0].devDependencies["@types/node"] else .devDependencies["@types/node"] end' \
-    <<< "$pi_info")"
-  ai_version="$(npm view \
-    "@earendil-works/pi-ai@$pi_version" \
-    version \
-    --json \
-    | jq --raw-output 'if type == "array" then .[0] else . end')"
-  tui_version="$(npm view \
-    "@earendil-works/pi-tui@$pi_version" \
-    version \
-    --json \
-    | jq --raw-output 'if type == "array" then .[0] else . end')"
+    "https://raw.githubusercontent.com/earendil-works/pi/v${pi_version}/tsconfig.base.json" \
+    --output tsconfig.base.json
 
-  jq --null-input \
+  typescript_version="$(jq --raw-output '.[0].devDependencies.typescript' <<< "$pi_info")"
+  node_types_version="$(jq --raw-output '.[0].devDependencies["@types/node"]' <<< "$pi_info")"
+  ai_version="$(jq --raw-output '.[0].dependencies["@earendil-works/pi-ai"]' <<< "$pi_info")"
+  tui_version="$(jq --raw-output '.[0].dependencies["@earendil-works/pi-tui"]' <<< "$pi_info")"
+  engines="$(jq --compact-output '.[0].engines' <<< "$pi_info")"
+
+  package_json="$(mktemp package.json.XXXXXX)"
+  trap 'rm --force "$package_json"' EXIT
+
+  jq \
     --arg pi_version "$pi_version" \
     --arg ai_version "$ai_version" \
     --arg tui_version "$tui_version" \
     --arg node_types_version "$node_types_version" \
     --arg typescript_version "$typescript_version" \
-    '{
-      "name": "pi-local-extension",
-      "private": true,
-      "type": "module",
-      "scripts": {
-        "typecheck": "tsc -p tsconfig.json"
-      },
-      "devDependencies": {
-        "@earendil-works/pi-ai": $ai_version,
-        "@earendil-works/pi-coding-agent": $pi_version,
-        "@earendil-works/pi-tui": $tui_version,
-        "@types/node": $node_types_version,
-        "typescript": $typescript_version
-      }
-    }' \
-    > "$extension_dir/package.json"
+    --argjson engines "$engines" \
+    '
+      .name = "pi-local-extension"
+      | .engines = $engines
+      | .devDependencies["@earendil-works/pi-ai"] = $ai_version
+      | .devDependencies["@earendil-works/pi-coding-agent"] = $pi_version
+      | .devDependencies["@earendil-works/pi-tui"] = $tui_version
+      | .devDependencies["@types/node"] = $node_types_version
+      | .devDependencies.typescript = $typescript_version
+    ' \
+    package.json \
+    > "$package_json"
 
-  jq --null-input \
-    '{
-      "extends": "./tsconfig.base.json",
-      "compilerOptions": {
-        "noEmit": true
-      },
-      "include": ["**/*.ts"],
-      "exclude": ["node_modules"]
-    }' \
-    > "$extension_dir/tsconfig.json"
+  mv "$package_json" package.json
+  trap - EXIT
 
-  npm install --prefix "$extension_dir"
-  npm run --prefix "$extension_dir" typecheck
+  npm install
+  npm run typecheck
 
 watch:
   watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force
