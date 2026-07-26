@@ -1,0 +1,45 @@
+{
+  "extends": ["default", "nvim"],
+  "meta": {
+    "name": "claude",
+    "version": "1.0.0",
+    "description": "Anthropic Claude Code CLI agent.",
+    "author": "razor-x"
+  },
+  "groups": {
+    "include": [
+      { "name": "claude_code_linux", "when": "linux" },
+      { "name": "claude_cache_linux", "when": "linux" },
+      "node_runtime",
+      "rust_runtime",
+      "python_runtime",
+      { "name": "linux_sysfs_read", "when": "linux" },
+      "nix_runtime",
+      "git_config",
+      "unlink_protection"
+    ]
+  },
+  "filesystem": {
+    "read": ["/opt/claude-code/bin"],
+    "allow": [
+      "$XDG_CONFIG_HOME/claude",
+      "$XDG_STATE_HOME/claude",
+      "$XDG_CACHE_HOME/claude",
+      "/tmp/claude-$UID"
+    ]
+  },
+  "workdir": { "access": "readwrite" },
+  "open_urls": {
+    "allow_origins": [
+      "https://api.anthropic.com",
+      "https://claude.ai",
+      "https://claude.com",
+      "https://platform.claude.com"
+    ],
+    "allow_localhost": true
+  },
+  "undo": {
+    "exclude_patterns": ["node_modules", ".next", "__pycache__", "target"],
+    "exclude_globs": ["*.tmp.[0-9]*.[0-9]*"]
+  }
+}
