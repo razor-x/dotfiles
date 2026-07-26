@@ -5,7 +5,7 @@ import {
 } from '@earendil-works/pi-coding-agent'
 import { matchesKey, type KeyId } from '@earendil-works/pi-tui'
 
-const ACTION = 'local.editor.cursorDownOrNewLine'
+const cursorDownOrNewLineAction = 'local.editor.cursorDownOrNewLine'
 
 export default function cursorDownOrNewLine(pi: ExtensionAPI): void {
   pi.on('session_start', (_event, ctx) => {
@@ -53,7 +53,7 @@ class LocalEditor extends CustomEditor {
 }
 
 function getKeys(keybindings: KeybindingsManager): KeyId[] {
-  const binding = keybindings.getUserBindings()[ACTION]
+  const binding = keybindings.getUserBindings()[cursorDownOrNewLineAction]
   if (typeof binding === 'string') return [binding]
   return binding ?? []
 }
