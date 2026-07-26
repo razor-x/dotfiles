@@ -1,9 +1,10 @@
 {
-  "tui.editor.cursorUp": ["ctrl+p"],
+  "tui.editor.cursorUp": ["ctrl+k"],
   "tui.editor.cursorDown": ["ctrl+n"],
   "tui.editor.cursorLeft": ["backspace"],
   "tui.editor.cursorRight": ["ctrl+l"],
   "tui.editor.deleteCharBackward": ["ctrl+h"],
+  "tui.editor.deleteToLineEnd": [],
   "tui.input.newLine": ["shift+enter", "ctrl+j"],
   "tui.select.up": ["up", "ctrl+k"],
   "tui.select.down": ["down", "ctrl+j"],
