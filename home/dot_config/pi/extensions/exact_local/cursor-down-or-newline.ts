@@ -7,15 +7,19 @@ import { matchesKey, type KeyId } from '@earendil-works/pi-tui'
 
 const ACTION = 'local.editor.cursorDownOrNewLine'
 
+export default function cursorDownOrNewLine(pi: ExtensionAPI): void {
+  pi.on('session_start', (_event, ctx) => {
+    if (ctx.mode !== 'tui') return
+
+    ctx.ui.setEditorComponent(
+      (tui, theme, keybindings) => new LocalEditor(tui, theme, keybindings),
+    )
+  })
+}
+
 type EditorInternals = {
   isOnLastVisualLine: () => boolean
   moveCursor: (deltaLine: number, deltaCol: number) => void
-}
-
-function getKeys(keybindings: KeybindingsManager): KeyId[] {
-  const binding = keybindings.getUserBindings()[ACTION]
-  if (typeof binding === 'string') return [binding]
-  return binding ?? []
 }
 
 class LocalEditor extends CustomEditor {
@@ -48,12 +52,8 @@ class LocalEditor extends CustomEditor {
   }
 }
 
-export default function cursorDownOrNewLine(pi: ExtensionAPI): void {
-  pi.on('session_start', (_event, ctx) => {
-    if (ctx.mode !== 'tui') return
-
-    ctx.ui.setEditorComponent(
-      (tui, theme, keybindings) => new LocalEditor(tui, theme, keybindings),
-    )
-  })
+function getKeys(keybindings: KeybindingsManager): KeyId[] {
+  const binding = keybindings.getUserBindings()[ACTION]
+  if (typeof binding === 'string') return [binding]
+  return binding ?? []
 }
