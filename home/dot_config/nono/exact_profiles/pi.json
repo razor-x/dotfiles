@@ -1,9 +1,9 @@
 {
-  "extends": "default",
+  "extends": ["default", "nvim"],
   "meta": {
     "name": "pi",
     "version": "1.0.0",
-    "description": "Pi Coding Agent profile",
+    "description": "Pi Coding Agent profile. UPSTREAM: Allows /tmp for Pi external editor temp files pending nono TEMPDIR isolation. https://github.com/nolabs-ai/nono/issues/258",
     "author": "razor-x"
   },
   "groups": {
@@ -24,8 +24,7 @@
     "capability_elevation": false
   },
   "filesystem": {
-    "allow": ["$XDG_CONFIG_HOME/pi", "$NONO_CONFIG/profile-drafts"],
-    "read": ["$NONO_PACKAGES", "$NONO_CONFIG/profiles"]
+    "allow": ["$XDG_CONFIG_HOME/pi", "/tmp"]
   },
   "network": {
     "block": false,

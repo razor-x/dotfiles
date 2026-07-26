@@ -1,0 +1,13 @@
+{
+  "extends": "default",
+  "meta": {
+    "name": "nvim",
+    "version": "1.0.0",
+    "description": "Neovim profile for reading config and writing runtime state.",
+    "author": "razor-x"
+  },
+  "filesystem": {
+    "allow": ["$XDG_DATA_HOME/nvim", "$XDG_STATE_HOME/nvim"],
+    "read": ["$XDG_CONFIG_HOME/nvim"]
+  }
+}
