@@ -382,8 +382,7 @@ M.spec = {
 function M.system_clipboard_mappings(register, quiet)
   vim.keymap.set("n", "<leader>c", '"' .. register .. "y", { desc = "Yank to system clipboard" })
   vim.keymap.set("v", "<leader>c", '"' .. register .. "y", { desc = "Yank to system clipboard" })
-  vim.keymap.set("n", "<leader>c", '"' .. register .. "Y", { desc = "Yank to end of line to system clipboard" })
-  vim.keymap.set("n", "<Leader><leader>c", '"' .. register .. "Y", { desc = "Yank to end of line to system clipboard" })
+  vim.keymap.set("n", "<leader>C", '"' .. register .. "Y", { desc = "Yank to end of line to system clipboard" })
   vim.keymap.set("n", "<leader>cc", '"' .. register .. "yy", { desc = "Yank line to system clipboard" })
 
   vim.keymap.set("n", "<Leader>m", '"' .. register .. "d", { desc = "Delete to system clipboard" })
