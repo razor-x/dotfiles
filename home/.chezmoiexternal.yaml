@@ -107,6 +107,14 @@
   type: git-repo
   url: https://github.com/denisidoro/cheats.git
 
+# nono
+
+.config/pi/extensions/nono-sandbox.ts:
+  type: file
+  url: https://raw.githubusercontent.com/nolabs-ai/nono-packs/8a7f79249829775cd7d160e3f7f0165780495e97/pi/extensions/nono-sandbox.ts
+  checksum:
+    sha256: "3902bdae252a6624ab05389d6e6b564b8a5ecf5abb238f142c87e6d369c5e295"
+
 # Zellij
 
 .config/zellij/plugins/vim-zellij-navigator.wasm:
