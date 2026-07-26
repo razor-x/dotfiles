@@ -25,3 +25,11 @@
 {{ if not (has .chezmoi.hostname (list "minto" "anny")) -}}
 .config/environment.d/xsecurelock.conf
 {{ end -}}
+
+# Ignore local TypeScript environment for pi extension.
+.config/pi/extensions/local/package.json
+.config/pi/extensions/local/package-lock.json
+.config/pi/extensions/local/tsconfig.json
+.config/pi/extensions/local/tsconfig.base.json
+.config/pi/extensions/local/node_modules
+.config/pi/extensions/local/node_modules/**
