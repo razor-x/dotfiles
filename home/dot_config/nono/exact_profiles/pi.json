@@ -3,7 +3,7 @@
   "meta": {
     "name": "pi",
     "version": "1.0.0",
-    "description": "Pi Coding Agent profile. UPSTREAM: Allows /tmp for Pi external editor temp files pending nono TEMPDIR isolation. https://github.com/nolabs-ai/nono/issues/258",
+    "description": "Pi Coding Agent. UPSTREAM: Allows /tmp for Pi external editor temp files pending nono TEMPDIR isolation. https://github.com/nolabs-ai/nono/issues/258",
     "author": "razor-x"
   },
   "groups": {
@@ -11,7 +11,6 @@
       "node_runtime",
       "rust_runtime",
       "python_runtime",
-      { "name": "user_caches_macos", "when": "macos" },
       { "name": "user_caches_linux", "when": "linux" },
       { "name": "linux_sysfs_read", "when": "linux" },
       "nix_runtime",
@@ -33,50 +32,18 @@
     "open_port": [],
     "listen_port": [],
     "custom_credentials": {
-      "openai": {
-        "upstream": "https://api.openai.com/v1",
-        "credential_key": "OPENAI_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}",
-        "env_var": "OPENAI_API_KEY"
-      },
-      "anthropic": {
-        "upstream": "https://api.anthropic.com",
-        "credential_key": "ANTHROPIC_API_KEY",
-        "inject_header": "x-api-key",
-        "credential_format": "{}",
-        "env_var": "ANTHROPIC_API_KEY"
-      },
-      "gemini": {
-        "upstream": "https://generativelanguage.googleapis.com",
-        "credential_key": "GOOGLE_API_KEY",
-        "inject_header": "x-goog-api-key",
-        "credential_format": "{}",
-        "env_var": "GEMINI_API_KEY"
-      },
       "github": {
         "upstream": "https://api.github.com",
         "credential_key": "GITHUB_TOKEN",
         "inject_header": "Authorization",
         "credential_format": "token {}",
         "env_var": "GITHUB_TOKEN"
-      },
-      "gitlab": {
-        "upstream": "https://gitlab.com/api",
-        "credential_key": "GITLAB_TOKEN",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}",
-        "env_var": "GITLAB_TOKEN"
       }
     }
   },
   "workdir": { "access": "readwrite" },
   "open_urls": {
-    "allow_origins": [
-      "https://auth.openai.com",
-      "https://claude.ai",
-      "https://github.com"
-    ],
+    "allow_origins": ["https://auth.openai.com", "https://github.com"],
     "allow_localhost": true
   },
   "allow_launch_services": true,
