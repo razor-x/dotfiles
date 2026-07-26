@@ -25,6 +25,8 @@ M.spec = {
         win = {
           input = {
             keys = {
+              -- UPSTREAM: The default bind for C-c only closes from insert mode.
+              ["<C-c>"] = { "close", mode = { "n", "i" } },
               ["<C-CR>"] = { "qflist", mode = { "i", "n" } },
               ["<c-p>"] = { "history_back", mode = { "i", "n" } },
               ["<c-n>"] = { "history_forward", mode = { "i", "n" } },
