@@ -4,9 +4,7 @@ keybindings:
       name: open in Octo
       command: >
         sh -lc 'repo="$1"; pr="$2";
-        if [ -n "${KITTY_WINDOW_ID:-}" ] && command -v kitty >/dev/null 2>&1 &&
-          kitty @ launch --type=tab --cwd "$repo" nvim -c "Octo pr edit $pr" >/dev/null 2>&1;
-        then
-          exit 0;
+        if [ -n "${KITTY_WINDOW_ID:-}" ]; then
+          exec kitty @ launch --type=tab --cwd "$repo" nvim -c "Octo pr edit $pr";
         fi;
         cd "$repo" && exec nvim -c "Octo pr edit $pr"' sh "{{.RepoPath}}" "{{.PrNumber}}"
