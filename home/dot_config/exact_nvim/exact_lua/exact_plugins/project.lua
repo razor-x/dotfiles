@@ -25,21 +25,35 @@ M.spec = {
         win = {
           input = {
             keys = {
-              ["<Esc>"] = { "close", mode = { "n", "i" } },
-              ["<S-Esc>"] = { "stopinsert", mode = "i" },
-              ["<c-cr>"] = { "qflist", mode = { "i", "n" } },
-              ["<c-q>"] = false,
+              ["<C-CR>"] = { "qflist", mode = { "i", "n" } },
               ["<c-p>"] = { "history_back", mode = { "i", "n" } },
               ["<c-n>"] = { "history_forward", mode = { "i", "n" } },
+              ["<a-d>"] = false,
+              ["<a-f>"] = false,
+              ["<a-h>"] = false,
+              ["<a-i>"] = false,
+              ["<a-m>"] = false,
+              ["<a-p>"] = false,
+              ["<a-w>"] = false,
             },
           },
           list = {
             keys = {
-              ["<Esc>"] = "close",
-              ["<c-cr>"] = "qflist",
-              ["<c-q>"] = false,
+              ["<C-CR>"] = "qflist",
               ["<c-p>"] = "history_back",
               ["<c-n>"] = "history_forward",
+              ["<a-d>"] = false,
+              ["<a-f>"] = false,
+              ["<a-h>"] = false,
+              ["<a-i>"] = false,
+              ["<a-m>"] = false,
+              ["<a-p>"] = false,
+              ["<a-w>"] = false,
+            },
+          },
+          preview = {
+            keys = {
+              ["<a-w>"] = false,
             },
           },
         },
