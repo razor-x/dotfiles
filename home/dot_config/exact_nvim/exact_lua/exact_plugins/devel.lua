@@ -53,6 +53,20 @@ M.spec = {
       },
     },
   },
+  {
+    "pwntester/octo.nvim",
+    cmd = "Octo",
+    opts = {
+      picker = "snacks",
+      enable_builtin = true,
+    },
+    keys = {},
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "folke/snacks.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+  },
 }
 
 return M.spec
