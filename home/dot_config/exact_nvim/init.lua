@@ -28,6 +28,7 @@ require("lazy").setup({
           { path = "flash", words = { "Flash" } },
           { path = "mini.bufremove", words = { "MiniBufremove" } },
           { path = "mini.extra", words = { "MiniExtra" } },
+          { path = "mini.icons", words = { "MiniIcons" } },
           { path = "mini.keymap", words = { "MiniKeymap" } },
           { path = "snacks.nvim", words = { "Snacks" } },
           { path = "substitute", words = { "Substitute" } },

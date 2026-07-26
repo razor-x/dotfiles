@@ -16,8 +16,16 @@ M.spec = {
     end,
   },
   {
+    "nvim-mini/mini.icons",
+    opts = {},
+    config = function(_, opts)
+      require("mini.icons").setup(opts)
+      MiniIcons.mock_nvim_web_devicons()
+    end,
+  },
+  {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-mini/mini.icons" },
     opts = {},
   },
   {
