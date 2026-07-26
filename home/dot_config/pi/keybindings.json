@@ -7,5 +7,7 @@
   "tui.input.newLine": ["shift+enter", "ctrl+j"],
   "tui.select.up": ["up", "ctrl+k"],
   "tui.select.down": ["down", "ctrl+j"],
-  "app.model.select": ["ctrl+f"]
+  "app.model.select": ["ctrl+f"],
+  "app.editor.external": ["ctrl+o"],
+  "app.tools.expand": ["ctrl+g"]
 }
