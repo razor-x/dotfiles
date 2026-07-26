@@ -1,0 +1,6 @@
+keybindings:
+  prs:
+    - key: O
+      name: open in Octo
+      command: >
+        cd {{.RepoPath}} && nvim -c "Octo pr edit {{.PrNumber}}"
