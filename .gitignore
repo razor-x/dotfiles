@@ -1,2 +1,3 @@
-# Local TypeScript env for pi extension.
+# TypeScript env for pi extension.
+home/dot_config/pi/exact_npm/node_modules/
 home/dot_config/pi/extensions/exact_local/node_modules/

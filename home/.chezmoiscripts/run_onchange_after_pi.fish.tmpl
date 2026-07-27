@@ -1,0 +1,20 @@
+#!/usr/bin/env fish
+
+# hash: {{ include (joinPath .chezmoi.homeDir ".config" "pi" "npm" "package-lock.json") | sha256sum }}
+
+if type --query pi
+    cd $XDG_CONFIG_HOME/pi/npm
+    npm ci
+
+    # UPSTREAM: The pi AUR packages is a Bun complied binary
+    # and will not find the native module inside node_modules.
+    set keyring_dir "$XDG_CONFIG_HOME/pi/npm/node_modules/@napi-rs"
+    if test -e "$keyring_dir/keyring-linux-x64-gnu/keyring.linux-x64-gnu.node"
+        ln --symbolic --no-dereference --force \
+            ../keyring-linux-x64-gnu/keyring.linux-x64-gnu.node \
+            "$keyring_dir/keyring/keyring.linux-x64-gnu.node"
+    end
+else
+    echo 'Cannot install Pi packages: pi not installed.'
+    return 1
+end

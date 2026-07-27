@@ -26,7 +26,8 @@
 .config/environment.d/xsecurelock.conf
 {{ end -}}
 
-# Ignore local TypeScript environment for pi extension.
+# Ignore TypeScript environment for pi extensions.
+.config/pi/npm/node_modules
 .config/pi/extensions/local/package.json
 .config/pi/extensions/local/package-lock.json
 .config/pi/extensions/local/tsconfig.json
