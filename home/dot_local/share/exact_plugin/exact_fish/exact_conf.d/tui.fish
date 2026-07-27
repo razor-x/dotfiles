@@ -81,7 +81,7 @@ if status is-interactive
 
     abbr h xh
 
-    abbr gfup git fetch --no-tags upstream
+    abbr gfup git fetch --no-tags --no-prune-tags upstream
     abbr gfmk git -c fetch.prune=false -c fetch.pruneTags=false fetch --no-tags makenew
 
     if set --query ACONFMGR_CONFIG
