@@ -69,6 +69,7 @@ pi-local-extension: && format
 
   typescript_version="$(jq --raw-output '.[0].devDependencies.typescript' <<< "$pi_info")"
   node_types_version="$(jq --raw-output '.[0].devDependencies["@types/node"]' <<< "$pi_info")"
+  typebox_version="$(jq --raw-output '.[0].dependencies["typebox"]' <<< "$pi_info")"
   ai_version="$(jq --raw-output '.[0].dependencies["@earendil-works/pi-ai"]' <<< "$pi_info")"
   tui_version="$(jq --raw-output '.[0].dependencies["@earendil-works/pi-tui"]' <<< "$pi_info")"
   engines="$(jq --compact-output '.[0].engines' <<< "$pi_info")"
@@ -80,6 +81,7 @@ pi-local-extension: && format
     --arg pi_version "$pi_version" \
     --arg ai_version "$ai_version" \
     --arg tui_version "$tui_version" \
+    --arg typebox_version "$typebox_version" \
     --arg node_types_version "$node_types_version" \
     --arg typescript_version "$typescript_version" \
     --argjson engines "$engines" \
@@ -90,7 +92,8 @@ pi-local-extension: && format
       | .devDependencies["@earendil-works/pi-coding-agent"] = $pi_version
       | .devDependencies["@earendil-works/pi-tui"] = $tui_version
       | .devDependencies["@types/node"] = $node_types_version
-      | .devDependencies.typescript = $typescript_version
+      | .devDependencies["typebox"] = $typebox_version
+      | .devDependencies["typescript"] = $typescript_version
     ' \
     package.json \
     > "$package_json"
