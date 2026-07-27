@@ -7,8 +7,6 @@
     "author": "razor-x"
   },
   "filesystem": {
-    "read": [
-      "$XDG_CONFIG_HOME/gh"
-    ]
+    "read": ["$XDG_CONFIG_HOME/gh"]
   }
 }
