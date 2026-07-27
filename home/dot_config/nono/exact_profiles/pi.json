@@ -23,7 +23,7 @@
     "capability_elevation": false
   },
   "filesystem": {
-    "allow": ["$XDG_CONFIG_HOME/pi", "/tmp"]
+    "allow": ["$XDG_CONFIG_HOME/pi", "$XDG_CONFIG_HOME/mcp", "/tmp"]
   },
   "network": {
     "block": false,
