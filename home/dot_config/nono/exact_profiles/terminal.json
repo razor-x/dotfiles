@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "name": "terminal",
+    "version": "1.0.0",
+    "description": "Minimum read-only access to configuration required by general terminal tools.",
+    "author": "razor-x"
+  },
+  "filesystem": {
+    "read": [
+      "$XDG_CONFIG_HOME/fd",
+      "$XDG_CONFIG_HOME/git",
+      "$XDG_CONFIG_HOME/ripgrep",
+      "$XDG_CONFIG_HOME/tealdeer",
+      "$XDG_CONFIG_HOME/worktrunk",
+      "$XDG_DATA_HOME/theme"
+    ]
+  }
+}
