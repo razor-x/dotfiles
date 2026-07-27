@@ -3,23 +3,12 @@
   "meta": {
     "name": "devel",
     "version": "1.0.0",
-    "description": "General development tools and brokered credentials.",
+    "description": "GitHub CLI access using its existing configuration and credentials.",
     "author": "razor-x"
   },
   "filesystem": {
-    "read": ["$XDG_CONFIG_HOME/mise"],
-    "read_file": ["$XDG_CONFIG_HOME/gh/config.yml"]
-  },
-  "network": {
-    "credentials": ["github"],
-    "custom_credentials": {
-      "github": {
-        "upstream": "https://api.github.com",
-        "credential_key": "GITHUB_TOKEN",
-        "inject_header": "Authorization",
-        "credential_format": "token {}",
-        "env_var": "GITHUB_TOKEN"
-      }
-    }
+    "read": [
+      "$XDG_CONFIG_HOME/gh"
+    ]
   }
 }

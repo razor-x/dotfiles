@@ -8,21 +8,11 @@
   "filesystem": {
     "read": [
       "$XDG_CONFIG_HOME/fd",
-      "$XDG_CONFIG_HOME/fish",
       "$XDG_CONFIG_HOME/git",
       "$XDG_CONFIG_HOME/ripgrep",
       "$XDG_CONFIG_HOME/tealdeer",
       "$XDG_CONFIG_HOME/worktrunk",
-      "$XDG_CONFIG_HOME/zsh",
-      "$XDG_DATA_HOME/man",
-      "$XDG_DATA_HOME/plugin",
       "$XDG_DATA_HOME/theme"
-    ],
-    "read_file": ["$HOME/.bash_profile", "$HOME/.bashrc"],
-    "bypass_protection": [
-      "$HOME/.bash_profile",
-      "$HOME/.bashrc",
-      "$XDG_CONFIG_HOME/fish"
     ]
   }
 }
