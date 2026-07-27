@@ -1,5 +1,5 @@
 {
-  "extends": ["default", "nvim", "terminal"],
+  "extends": ["default", "nvim", "devel"],
   "meta": {
     "name": "pi",
     "version": "1.0.0",
@@ -28,18 +28,8 @@
   "network": {
     "block": false,
     "allow_domain": [],
-    "credentials": [],
     "open_port": [],
-    "listen_port": [],
-    "custom_credentials": {
-      "github": {
-        "upstream": "https://api.github.com",
-        "credential_key": "GITHUB_TOKEN",
-        "inject_header": "Authorization",
-        "credential_format": "token {}",
-        "env_var": "GITHUB_TOKEN"
-      }
-    }
+    "listen_port": []
   },
   "workdir": { "access": "readwrite" },
   "open_urls": {
