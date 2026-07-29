@@ -103,10 +103,9 @@ M.spec = {
       {
         "<leader>e",
         function()
-          -- TODO: Search hidden files?
-          Snacks.picker.smart()
+          Snacks.picker.git_files()
         end,
-        desc = "Smart Find Files",
+        desc = "Find Git Files",
       },
       {
         "<leader>b",
@@ -176,6 +175,13 @@ M.spec = {
           Snacks.picker.files()
         end,
         desc = "Find Files",
+      },
+      {
+        "<leader>fs",
+        function()
+          Snacks.picker.smart()
+        end,
+        desc = "Smart Find Files",
       },
       {
         "<leader>fg",
