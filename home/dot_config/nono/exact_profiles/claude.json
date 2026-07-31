@@ -1,5 +1,5 @@
 {
-  "extends": ["default", "nvim", "devel"],
+  "extends": ["default", "nvim", "termina", "devel"],
   "meta": {
     "name": "claude",
     "version": "1.0.0",
