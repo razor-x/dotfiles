@@ -4,5 +4,7 @@
     "version": "1.0.0",
     "description": "Eza configuration."
   },
-  "filesystem": { "read": ["$XDG_CONFIG_HOME/eza", "$XDG_DATA_HOME/theme/catppuccin/eza"] }
+  "filesystem": {
+    "read": ["$XDG_CONFIG_HOME/eza", "$XDG_DATA_HOME/theme/catppuccin/eza"]
+  }
 }
