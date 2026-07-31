@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "terminal-ripgrep",
+    "version": "1.0.0",
+    "description": "Ripgrep configuration."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/ripgrep"] }
+}

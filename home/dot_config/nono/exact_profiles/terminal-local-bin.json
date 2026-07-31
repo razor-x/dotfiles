@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "terminal-local-bin",
+    "version": "1.0.0",
+    "description": "User-local executables."
+  },
+  "filesystem": { "read": ["$HOME/.local/bin"] }
+}

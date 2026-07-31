@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "devel-seam",
+    "version": "1.0.0",
+    "description": "Seam configuration and cache."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/seam", "$XDG_CACHE_HOME/seam"] }
+}

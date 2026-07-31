@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "terminal-xh",
+    "version": "1.0.0",
+    "description": "Xh configuration."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/xh"] }
+}

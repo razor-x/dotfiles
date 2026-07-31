@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "devel-biome",
+    "version": "1.0.0",
+    "description": "Biome cache."
+  },
+  "filesystem": { "read": ["$XDG_CACHE_HOME/biome"] }
+}

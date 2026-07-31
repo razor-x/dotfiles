@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "devel-ruby",
+    "version": "1.0.0",
+    "description": "Ruby Bundler configuration."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/bundle"] }
+}

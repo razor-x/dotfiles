@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "devel-haskell",
+    "version": "1.0.0",
+    "description": "Haskell Cabal configuration."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/cabal"] }
+}

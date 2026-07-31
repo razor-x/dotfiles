@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "name": "terminal-fish",
+    "version": "1.0.0",
+    "description": "Fish configuration, cache, and data."
+  },
+  "filesystem": {
+    "read": [
+      "$XDG_CONFIG_HOME/fish",
+      "$XDG_CACHE_HOME/fish",
+      "$XDG_DATA_HOME/fish",
+      "$XDG_DATA_HOME/plugin"
+    ]
+  }
+}

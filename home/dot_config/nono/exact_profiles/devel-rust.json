@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "name": "devel-rust",
+    "version": "1.0.0",
+    "description": "Rust Cargo data."
+  },
+  "filesystem": {
+    "read": ["$XDG_DATA_HOME/cargo"]
+  }
+}

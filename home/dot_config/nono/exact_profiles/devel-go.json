@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "name": "devel-go",
+    "version": "1.0.0",
+    "description": "Go configuration, build caches, and data."
+  },
+  "filesystem": {
+    "read": [
+      "$XDG_CONFIG_HOME/go",
+      "$XDG_CACHE_HOME/go-build",
+      "$XDG_CACHE_HOME/goimports",
+      "$XDG_DATA_HOME/go"
+    ]
+  }
+}

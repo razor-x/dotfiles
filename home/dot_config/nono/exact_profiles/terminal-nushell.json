@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "terminal-nushell",
+    "version": "1.0.0",
+    "description": "Nushell configuration."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/nushell"] }
+}

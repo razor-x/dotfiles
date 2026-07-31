@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "terminal-bat",
+    "version": "1.0.0",
+    "description": "Bat configuration and cache."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/bat", "$XDG_CACHE_HOME/bat", "$XDG_DATA_HOME/theme/catppuccin/bat"] }
+}

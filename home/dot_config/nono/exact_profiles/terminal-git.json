@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "terminal-git",
+    "version": "1.0.0",
+    "description": "Git and delta configuration."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/git", "$XDG_DATA_HOME/delta", "$XDG_DATA_HOME/theme/catppuccin/delta"] }
+}

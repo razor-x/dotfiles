@@ -1,32 +1,23 @@
 {
+  "extends": [
+    "terminal-bat",
+    "terminal-fish",
+    "terminal-git",
+    "terminal-eza",
+    "terminal-fd",
+    "terminal-nushell",
+    "terminal-ripgrep",
+    "terminal-tealdeer",
+    "terminal-worktrunk",
+    "terminal-man",
+    "terminal-navi",
+    "terminal-local-bin",
+    "terminal-xh"
+  ],
   "meta": {
     "name": "terminal",
     "version": "1.0.0",
-    "description": "Minimum read-only access to configuration required by general terminal tools.",
+    "description": "Meta profile combining read-only access for general terminal tools.",
     "author": "razor-x"
-  },
-  "filesystem": {
-    "read": [
-      "$XDG_CONFIG_HOME/bat",
-      "$XDG_CONFIG_HOME/eza",
-      "$XDG_CONFIG_HOME/fd",
-      "$XDG_CONFIG_HOME/git",
-      "$XDG_CONFIG_HOME/ripgrep",
-      "$XDG_CONFIG_HOME/tealdeer",
-      "$XDG_CONFIG_HOME/worktrunk",
-      "$XDG_CONFIG_HOME/fish",
-      "$XDG_CONFIG_HOME/nushell",
-      "$XDG_CONFIG_HOME/xh",
-      "$XDG_DATA_HOME/theme",
-      "$XDG_CACHE_HOME/bat",
-      "$XDG_CACHE_HOME/fish",
-      "$XDG_CACHE_HOME/tealdeer",
-      "$XDG_DATA_HOME/delta",
-      "$XDG_DATA_HOME/fish",
-      "$XDG_DATA_HOME/man",
-      "$XDG_DATA_HOME/navi",
-      "$XDG_DATA_HOME/plugin",
-      "$HOME/.local/bin"
-    ]
   }
 }

@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "devel-typescript",
+    "version": "1.0.0",
+    "description": "TypeScript cache."
+  },
+  "filesystem": { "read": ["$XDG_CACHE_HOME/typescript"] }
+}

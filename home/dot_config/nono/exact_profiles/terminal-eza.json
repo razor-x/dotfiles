@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "terminal-eza",
+    "version": "1.0.0",
+    "description": "Eza configuration."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/eza", "$XDG_DATA_HOME/theme/catppuccin/eza"] }
+}

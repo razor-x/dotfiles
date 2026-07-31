@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "devel-gh",
+    "version": "1.0.0",
+    "description": "GitHub CLI configuration and data."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/gh", "$XDG_DATA_HOME/gh"] }
+}

@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "devel-python",
+    "version": "1.0.0",
+    "description": "Python tool cache."
+  },
+  "filesystem": { "read": ["$XDG_CACHE_HOME/python", "$XDG_CACHE_HOME/uv"] }
+}

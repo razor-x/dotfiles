@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "name": "devel-php",
+    "version": "1.0.0",
+    "description": "PHP Composer configuration, cache, and data."
+  },
+  "filesystem": {
+    "read": [
+      "$XDG_CONFIG_HOME/composer",
+      "$XDG_CACHE_HOME/composer",
+      "$XDG_DATA_HOME/composer",
+      "$XDG_DATA_HOME/php"
+    ]
+  }
+}

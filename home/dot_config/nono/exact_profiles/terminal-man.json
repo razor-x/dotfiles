@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "terminal-man",
+    "version": "1.0.0",
+    "description": "Local man pages."
+  },
+  "filesystem": { "read": ["$XDG_DATA_HOME/man"] }
+}

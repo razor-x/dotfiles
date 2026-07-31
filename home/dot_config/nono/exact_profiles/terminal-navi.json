@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "terminal-navi",
+    "version": "1.0.0",
+    "description": "Navi data."
+  },
+  "filesystem": { "read": ["$XDG_DATA_HOME/navi"] }
+}

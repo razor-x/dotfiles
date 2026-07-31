@@ -1,0 +1,9 @@
+{
+  "extends": "devel-java",
+  "meta": {
+    "name": "devel-clojure",
+    "version": "1.0.0",
+    "description": "Clojure Leiningen configuration and data."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/lein", "$XDG_DATA_HOME/lein"] }
+}

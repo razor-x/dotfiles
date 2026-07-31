@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "devel-bun",
+    "version": "1.0.0",
+    "description": "Bun cache."
+  },
+  "filesystem": { "read": ["$XDG_CACHE_HOME/bun"] }
+}
