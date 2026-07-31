@@ -9,9 +9,41 @@
   "filesystem": {
     "read": [
       "$XDG_CONFIG_HOME/gh",
-      "$HOME/.local/bin/mise",
       "$XDG_CONFIG_HOME/mise",
-      "$XDG_DATA_HOME/mise"
+      "$XDG_CONFIG_HOME/bundle",
+      "$XDG_CONFIG_HOME/go",
+      "$XDG_CONFIG_HOME/cabal",
+      "$XDG_CONFIG_HOME/composer",
+      "$XDG_CONFIG_HOME/lein",
+      "$XDG_CONFIG_HOME/npm",
+      "$XDG_CONFIG_HOME/seam",
+      "$XDG_DATA_HOME/mise",
+      "$XDG_CONFIG_HOME/mise",
+      "$XDG_CACHE_HOME/mise",
+      "$XDG_CACHE_HOME/biome",
+      "$XDG_CACHE_HOME/bun",
+      "$XDG_CACHE_HOME/composer",
+      "$XDG_CACHE_HOME/deno",
+      "$XDG_CACHE_HOME/bun",
+      "$XDG_CACHE_HOME/go-build",
+      "$XDG_CACHE_HOME/goimports",
+      "$XDG_CACHE_HOME/node-gyp",
+      "$XDG_CACHE_HOME/npm",
+      "$XDG_CACHE_HOME/pnpm",
+      "$XDG_CACHE_HOME/python",
+      "$XDG_CACHE_HOME/seam",
+      "$XDG_CACHE_HOME/typescript",
+      "$XDG_CACHE_HOME/uv",
+      "$XDG_CACHE_HOME/yarn",
+      "$XDG_DATA_HOME/cargo",
+      "$XDG_DATA_HOME/composer",
+      "$XDG_DATA_HOME/go",
+      "$XDG_DATA_HOME/gh",
+      "$XDG_DATA_HOME/lein",
+      "$XDG_DATA_HOME/node",
+      "$XDG_DATA_HOME/pnpn",
+      "$XDG_DATA_HOME/yarn",
+      "$XDG_DATA_HOME/php"
     ]
   }
 }

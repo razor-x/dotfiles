@@ -10,12 +10,7 @@
     "include": [
       { "name": "claude_code_linux", "when": "linux" },
       { "name": "claude_cache_linux", "when": "linux" },
-      "node_runtime",
-      "rust_runtime",
-      "python_runtime",
       { "name": "linux_sysfs_read", "when": "linux" },
-      "nix_runtime",
-      "git_config",
       "unlink_protection"
     ]
   },
