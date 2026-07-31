@@ -45,6 +45,35 @@ M.spec = {
       "PiSendSelection",
       "PiSessions",
     },
+    keys = {
+      {
+        "<leader>dd",
+        ":Pi<CR>",
+        mode = { "n", "v" },
+        desc = "Pi dialog",
+      },
+      {
+        "<leader>df",
+        ":PiSendFile<CR>",
+        desc = "Pi: send file",
+      },
+      {
+        "<leader>db",
+        ":PiSendBuffer<CR>",
+        desc = "Pi: send buffer",
+      },
+      {
+        "<leader>dv",
+        ":PiSendSelection<CR>",
+        mode = "v",
+        desc = "Pi: send selection",
+      },
+      {
+        "<leader>ds",
+        ":PiSessions<CR>",
+        desc = "Pi sessions",
+      },
+    },
     opts = {
       set_default_keymaps = false,
     },
@@ -58,13 +87,13 @@ M.spec = {
     keys = {
       {
         "<leader>D",
-        "<cmd>Trouble diagnostics toggle<cr>",
-        desc = "Diagnostics (Trouble)",
-      },
-      {
-        "<leader>d",
         "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
         desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>dD",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Workspace Diagnostics (Trouble)",
       },
     },
   },
