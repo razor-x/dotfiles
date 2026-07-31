@@ -35,6 +35,21 @@ M.spec = {
     end,
   },
   {
+    "carderne/pi-nvim",
+    cmd = {
+      "Pi",
+      "PiPing",
+      "PiSend",
+      "PiSendBuffer",
+      "PiSendFile",
+      "PiSendSelection",
+      "PiSessions",
+    },
+    opts = {
+      set_default_keymaps = false,
+    },
+  },
+  {
     "folke/trouble.nvim",
     ---@module "trouble"
     ---@type trouble.Config

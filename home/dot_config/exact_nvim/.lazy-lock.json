@@ -20,6 +20,7 @@
   "nvim-lspconfig": { "branch": "master", "commit": "d592c1e6ad9a0a01b3d5ed3f0345d68407167181" },
   "octo.nvim": { "branch": "master", "commit": "d05b852ad7eba6e34ffe38ee2db430f0fd6f6225" },
   "oil.nvim": { "branch": "master", "commit": "b73018b75affd13fa38e2fc94ef753b465f770d7" },
+  "pi-nvim": { "branch": "main", "commit": "fbc6f12652234f03d2fe729adbcc3ff61ca7d39a" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
   "smart-splits.nvim": { "branch": "master", "commit": "32f67888ac71942442fdab3819864a10449dfc41" },
   "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" },

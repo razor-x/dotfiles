@@ -6,7 +6,12 @@
     "author": "razor-x"
   },
   "filesystem": {
-    "allow": ["$XDG_DATA_HOME/nvim", "$XDG_STATE_HOME/nvim"],
+    "allow": [
+      "$XDG_DATA_HOME/nvim",
+      "$XDG_STATE_HOME/nvim",
+      "/tmp/pi-nvim-sockets",
+      "/tmp/pi-nvim-latest.sock"
+    ],
     "read": ["$XDG_CONFIG_HOME/nvim"]
   }
 }
