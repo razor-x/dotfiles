@@ -224,7 +224,6 @@ M.spec = {
       opts.n_lines = 4000
       opts.custom_textobjects = opts.custom_textobjects or {}
       opts.custom_textobjects.e = MiniExtra.gen_ai_spec.buffer()
-      opts.custom_textobjects.I = MiniExtra.gen_ai_spec.indent()
     end,
   },
   {
