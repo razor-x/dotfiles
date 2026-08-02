@@ -221,6 +221,7 @@ M.spec = {
     "nvim-mini/mini.ai",
     dependencies = { "nvim-mini/mini.extra" },
     opts = function(_, opts)
+      opts.n_lines = 4000
       opts.custom_textobjects = opts.custom_textobjects or {}
       opts.custom_textobjects.e = MiniExtra.gen_ai_spec.buffer()
     end,
