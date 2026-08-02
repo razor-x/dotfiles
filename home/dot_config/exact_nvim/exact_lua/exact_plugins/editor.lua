@@ -236,16 +236,23 @@ M.spec = {
       local indentscope = require("mini.indentscope")
       indentscope.setup(opts)
 
-      vim.keymap.set("n", "yoi", function()
-        local disabled = not vim.g.miniindentscope_disable
-        vim.g.miniindentscope_disable = disabled
-
-        if disabled then
+      local function refresh_indentscope()
+        if vim.g.miniindentscope_disable == true or vim.b.miniindentscope_disable == true then
           indentscope.undraw()
         else
           indentscope.draw()
         end
-      end, { desc = "Toggle indent scope indicator", silent = true })
+      end
+
+      vim.keymap.set("n", "yoi", function()
+        vim.g.miniindentscope_disable = not vim.g.miniindentscope_disable
+        refresh_indentscope()
+      end, { desc = "Toggle indent scope indicator globally", silent = true })
+
+      vim.keymap.set("n", [[\yoi]], function()
+        vim.b.miniindentscope_disable = not vim.b.miniindentscope_disable
+        refresh_indentscope()
+      end, { desc = "Toggle indent scope indicator for current buffer", silent = true })
     end,
   },
   {

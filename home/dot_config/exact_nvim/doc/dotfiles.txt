@@ -7,6 +7,9 @@ Mappings are nonrecursive unless otherwise noted.
 Shifted `<Leader>` mappings also have an unshifted alias using
 `<Leader><Leader>` plus the unshifted key when possible.
 
+Toggle mappings use `yo{key}` for global state. If a toggle supports
+buffer-local state, `\yo{key}` toggles it for the current buffer.
+
                                                         *yoP*
 yoP                     Toggle system clipboard mappings between the `+`
                         and `*` registers. See |quote| and |clipboard|.
@@ -14,6 +17,11 @@ yoP                     Toggle system clipboard mappings between the `+`
                                                         *yom*
 yom                     Toggle `colorcolumn` between `81` and disabled.
                         See |'colorcolumn'|.
+
+                                                        *yoi* *\yoi*
+yoi                     Toggle the indent scope indicator globally.
+\yoi                    Toggle the indent scope indicator for the current
+                        buffer.
 
                                                         *q*
 q                       Move backward to the end of the previous word

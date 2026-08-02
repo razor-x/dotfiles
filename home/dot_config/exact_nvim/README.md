@@ -25,3 +25,4 @@ curl -fsSL https://raw.githubusercontent.com/razor-x/dotfiles/main/nvimrc.sh | s
 1. Plugin-specific mappings should live on the corresponding plugin spec whenever possible.
    - Use `keys` for plugin entrypoint mappings when possible.
    - Use `config` for plugin-dependent mappings or setup.
+1. Toggles use `yo{key}` for global state. When a toggle supports buffer-local state, also map `\yo{key}` to its buffer-local form.
