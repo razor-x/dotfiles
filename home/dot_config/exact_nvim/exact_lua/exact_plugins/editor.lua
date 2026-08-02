@@ -228,7 +228,25 @@ M.spec = {
   },
   {
     "nvim-mini/mini.indentscope",
+    init = function()
+      vim.g.miniindentscope_disable = true
+    end,
     opts = {},
+    config = function(_, opts)
+      local indentscope = require("mini.indentscope")
+      indentscope.setup(opts)
+
+      vim.keymap.set("n", "yoi", function()
+        local disabled = not vim.g.miniindentscope_disable
+        vim.g.miniindentscope_disable = disabled
+
+        if disabled then
+          indentscope.undraw()
+        else
+          indentscope.draw()
+        end
+      end, { desc = "Toggle indent scope indicator", silent = true })
+    end,
   },
   {
     "nvim-mini/mini.comment",
@@ -253,6 +271,22 @@ M.spec = {
         line_up = "_",
       },
     },
+    config = function(_, opts)
+      local move = require("mini.move")
+      move.setup(opts)
+
+      local function map_repeatable_line_move(lhs, direction, desc)
+        local plug = "<Plug>(MiniMoveLine" .. direction:gsub("^%l", string.upper) .. ")"
+        vim.keymap.set("n", plug, function()
+          move.move_line(direction)
+          vim.fn["repeat#set"](plug, vim.v.count)
+        end, { desc = desc, silent = true })
+        vim.keymap.set("n", lhs, plug, { desc = desc, remap = true })
+      end
+
+      map_repeatable_line_move("+", "down", "Move line down")
+      map_repeatable_line_move("_", "up", "Move line up")
+    end,
   },
   {
     "Wansmer/treesj",
