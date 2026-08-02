@@ -35,6 +35,92 @@ M.spec = {
     end,
   },
   {
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate",
+    config = function()
+      local parsers = {
+        "bash",
+        "c",
+        "clojure",
+        "cpp",
+        "css",
+        "diff",
+        "fish",
+        "git_config",
+        "git_rebase",
+        "gitattributes",
+        "gitcommit",
+        "gitignore",
+        "go",
+        "gomod",
+        "gosum",
+        "gotmpl",
+        "gowork",
+        "html",
+        "javascript",
+        "jsdoc",
+        "json",
+        "lua",
+        "luadoc",
+        "luap",
+        "markdown",
+        "markdown_inline",
+        "nu",
+        "php",
+        "printf",
+        "python",
+        "query",
+        "regex",
+        "ruby",
+        "toml",
+        "tsx",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "xml",
+        "yaml",
+      }
+
+      require("nvim-treesitter").install(parsers)
+
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("treesitter", { clear = true }),
+        callback = function(event)
+          local filetype = vim.bo[event.buf].filetype
+          local language = vim.treesitter.language.get_lang(filetype) or filetype
+
+          if not vim.list_contains(parsers, language) then
+            return
+          end
+
+          local has_parser = pcall(vim.treesitter.get_parser, event.buf, language)
+          if not has_parser then
+            return
+          end
+
+          local function has_query(feature)
+            local ok, query = pcall(vim.treesitter.query.get, language, feature)
+            return ok and query ~= nil
+          end
+
+          if has_query("highlights") then
+            vim.treesitter.start(event.buf, language)
+          end
+
+          if has_query("folds") then
+            vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+            vim.wo[0][0].foldmethod = "expr"
+          end
+
+          if has_query("indents") then
+            vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+        end,
+      })
+    end,
+  },
+  {
     "carderne/pi-nvim",
     cmd = {
       "Pi",
