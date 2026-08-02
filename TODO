@@ -40,7 +40,7 @@ n = no can't or won't use
 
 - [y] mini.ai            Extend and create a/i textobjects
 - [y] mini.align         Align text interactively
-- [y] mini.comment       Comment lines
+- [x] mini.comment       Comment lines
 - [y] mini.completion    Completion and signature help
 - [y] mini.keymap        Special key mappings
 - [y] mini.move          Move any selection in any direction

@@ -226,6 +226,15 @@ M.spec = {
     end,
   },
   {
+    "nvim-mini/mini.comment",
+    opts = {},
+    config = function(_, opts)
+      require("mini.comment").setup(opts)
+      vim.keymap.set("n", [[\\]], "gcc", { desc = "Toggle comment on current line", remap = true })
+      vim.keymap.set("x", [[\\]], "gc", { desc = "Toggle comment on selection", remap = true })
+    end,
+  },
+  {
     "nvim-mini/mini.extra",
     opts = {},
   },
