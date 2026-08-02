@@ -4,10 +4,6 @@ local M = {}
 ---@type LazySpec
 M.spec = {
   {
-    "nvim-mini/mini.files",
-    opts = {},
-  },
-  {
     "stevearc/oil.nvim",
     ---@module 'oil'
     ---@type oil.SetupOpts
