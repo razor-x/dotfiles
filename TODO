@@ -47,7 +47,8 @@ n = no can't or won't use
 - [y] mini.operators     Text edit operators
 - [y] mini.pairs         Autopairs
 - [y] mini.snippets      Manage and expand snippets
-- [y] mini.splitjoin     Split and join arguments
+- [n] mini.splitjoin     Split and join arguments
+  - [x] => use Wansmer/treesj with `gS`
 - [y] mini.surround      Surround actions
 - [y] mini.basics        Common configuration presets
 - [y] mini.bracketed     Go forward/backward with square brackets
@@ -119,7 +120,7 @@ n = no can't or won't use
  │                      │ as : / ::, allowing it to replace gbprod/substitute.nvim while preserving  │
  │                      │ your current binds. Keep Snacks gr for LSP references.                     │
  ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
- │ mini.splitjoin       │ Keep gS; no current collision.                                             │
+ │ Wansmer/treesj       │ Replace mini.splitjoin and use gS to toggle split/join.                     │
  ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
  │ mini.surround        │ Switch from the currently active Mini defaults to legacy-compatible ys,    │
  │                      │ ds, and cs. Put extra Mini actions on <leader>zf, <leader>zF, and          │

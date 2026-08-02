@@ -250,6 +250,21 @@ M.spec = {
     },
   },
   {
+    "Wansmer/treesj",
+    keys = {
+      {
+        "gS",
+        function()
+          require("treesj").toggle()
+        end,
+        desc = "Toggle split/join",
+      },
+    },
+    opts = {
+      use_default_keymaps = false,
+    },
+  },
+  {
     "nvim-mini/mini.extra",
     opts = {},
   },
