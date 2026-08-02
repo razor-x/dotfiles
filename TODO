@@ -43,7 +43,7 @@ n = no can't or won't use
 - [x] mini.comment       Comment lines
 - [y] mini.completion    Completion and signature help
 - [y] mini.keymap        Special key mappings
-- [y] mini.move          Move any selection in any direction
+- [x] mini.move          Move any selection in any direction
 - [y] mini.operators     Text edit operators
 - [y] mini.pairs         Autopairs
 - [y] mini.snippets      Manage and expand snippets
