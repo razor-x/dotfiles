@@ -84,3 +84,56 @@ n = no can't or won't use
 - [n] mini.doc           Generate Neovim help files
 - [n] mini.fuzzy         Fuzzy matching
 - [n] mini.test          Test Neovim plugins
+
+ Proposed keybind plan
+
+ ┌──────────────────────┬────────────────────────────────────────────────────────────────────────────┐
+ │ Module               │ Proposed mappings / behavior                                               │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.ai              │ Keep a/i and existing ae/ie whole-buffer object. Change next/last to aN,   │
+ │                      │ iN, aL, iL so Neovim 0.12+ an/in remain available. Disable g[/g] edge      │
+ │                      │ mappings so built-in tag navigation is preserved.                          │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.align           │ Keep ga and gA. Move Snacks LSP calls from gai/gao to gLi/gLo; otherwise   │
+ │                      │ gaiw would invoke incoming calls instead of aligning iw. Preserve built-in │
+ │                      │ ga/:ascii as <leader>xa.                                                   │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.comment         │ Keep standard gc, gcc, and gc text object. Set comment_line and            │
+ │                      │ comment_visual to \\, preserving nvimrc/plugin/mappings/commentary.vim     │
+ │                      │ exactly.                                                                   │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.completion      │ Keep <C-Space>, <C-f>, and <C-b>. Disable default <A-Space> because TODO   │
+ │                      │ prohibits Alt mappings.                                                    │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.keymap /        │ Integrate rather than letting snippets overwrite your current insert       │
+ │ mini.snippets /      │ mappings: <C-j> completion-next → snippet-expand → pair-aware newline;     │
+ │ mini.pairs           │ <C-k> completion-prev → snippet-prev → current split-line fallback; <C-l>  │
+ │                      │ accept completion → snippet-next → cursor-right; <C-h> remains pair-aware  │
+ │                      │ backspace; <C-c> stops a snippet session.                                  │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.move            │ No Alt mappings. Visual H/J/K/L move the selection. Normal <C--> moves the │
+ │                      │ line down and <C-=> moves it up, preserving your old unimpaired mappings.  │
+ │                      │ Disable normal horizontal line movement initially.                         │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.operators       │ Use g= evaluate, gx exchange, gm multiply, and gs sort. Configure replace  │
+ │                      │ as : / ::, allowing it to replace gbprod/substitute.nvim while preserving  │
+ │                      │ your current binds. Keep Snacks gr for LSP references.                     │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.splitjoin       │ Keep gS; no current collision.                                             │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.surround        │ Switch from the currently active Mini defaults to legacy-compatible ys,    │
+ │                      │ ds, and cs. Put extra Mini actions on <leader>zf, <leader>zF, and          │
+ │                      │ <leader>zh. Keep visual S for Flash, so visual surround would use ys       │
+ │                      │ rather than the old S.                                                     │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.bracketed       │ Keep defaults except disable indent and undo. [i/]i belong to              │
+ │                      │ mini.indentscope; the undo target would interfere with your swapped        │
+ │                      │ U/<C-r> mappings.                                                          │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.indentscope     │ Keep ii, ai, [i, and ]i.                                                   │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.bufremove       │ Keep <leader>w and <leader>W, matching the old vim-bbye mappings.          │
+ ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
+ │ mini.sessions        │ Use <leader>xs to select/read                                              │
+ └──────────────────────┴────────────────────────────────────────────────────────────────────────────┘
+
