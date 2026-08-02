@@ -74,7 +74,7 @@ n = no can't or won't use
 - [n] mini.hipatterns    Highlight patterns in text
 - [n] mini.hues          Generate configurable color scheme
 - [y] mini.icons         Icon provider
-- [y] mini.indentscope   Visualize and work with indent scope
+- [x] mini.indentscope   Visualize and work with indent scope
 - [n] mini.map           Window with buffer text overview
 - [n] mini.notify        Show notifications
 - [?] mini.starter       Start screen

@@ -227,6 +227,10 @@ M.spec = {
     end,
   },
   {
+    "nvim-mini/mini.indentscope",
+    opts = {},
+  },
+  {
     "nvim-mini/mini.comment",
     opts = {},
     config = function(_, opts)
