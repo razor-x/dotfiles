@@ -1,6 +1,5 @@
 {
   "tui.editor.cursorUp": ["ctrl+k"],
-  "tui.editor.cursorDown": ["ctrl+n"],
   "tui.editor.cursorLeft": ["backspace"],
   "tui.editor.cursorRight": ["ctrl+l"],
   "tui.editor.deleteCharBackward": ["ctrl+h"],
@@ -11,5 +10,6 @@
   "tui.select.down": ["down", "ctrl+j"],
   "app.model.select": ["ctrl+f"],
   "app.editor.external": ["ctrl+o"],
+  "app.model.cycleBackward": ["ctrl+n"],
   "app.tools.expand": ["ctrl+g"]
 }
