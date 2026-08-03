@@ -6,6 +6,7 @@
     "devel-biome",
     "devel-clojure",
     "devel-deno",
+    "devel-doppler",
     "devel-go",
     "devel-haskell",
     "devel-java",

@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "devel-doppler",
+    "version": "1.0.0",
+    "description": "Doppler configuration."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/doppler"] }
+}
