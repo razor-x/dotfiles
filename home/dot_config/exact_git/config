@@ -57,3 +57,5 @@
 	path = delta
 [include]
 	path = user
+[includeIf "gitdir:~/seam/"]
+	path = user-seam

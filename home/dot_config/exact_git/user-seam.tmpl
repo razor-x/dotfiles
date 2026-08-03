@@ -1,0 +1,10 @@
+{{- $gpgOut := output "gpg" "--list-secret-keys" "--keyid-format" "short" "--with-colons" -}}
+{{- $uid := $gpgOut | regexFind "(?m)^uid:.*<[^>]+@getseam\\.com>.*" -}}
+{{- $email := index ($uid | split ":") "_9" | regexFind "<[^>]+>" | trimAll "<>" -}}
+
+{{ if $email -}}
+[user]
+	email = {{ $email | quote }}
+{{ else -}}
+# Seam user config requires a private GPG key UID with a getseam.com email.
+{{ end -}}
