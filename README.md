@@ -91,7 +91,7 @@ which will allow chezmoi to populate it into `~/.ssh/authorized_keys`.
 Login to GitHub which will open a web browser and then prompt you to add the new SSH key to your account.
 
 ```sh
-gh auth login --insecure-storage
+gh auth login --insecure-storage --git-protocol ssh --skip-ssh-key
 ```
 
 #### Option B: Use a trusted device
