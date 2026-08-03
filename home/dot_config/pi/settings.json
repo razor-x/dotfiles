@@ -1,4 +1,4 @@
 {
   "theme": "dark",
-  "packages": ["pi-mcp-adapter", "npm:pi-nvim"]
+  "packages": ["npm:pi-mcp-adapter", "npm:pi-nvim"]
 }
