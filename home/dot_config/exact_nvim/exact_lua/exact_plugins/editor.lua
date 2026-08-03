@@ -163,6 +163,7 @@ M.spec = {
       vim.keymap.set("n", "<Leader><Leader>s", M.cmd("write!"), { desc = "Write current file", silent = true })
 
       vim.keymap.set("n", "<Leader>=", ":<C-U>put =", { desc = "Put from expression register" })
+      vim.keymap.set("n", "<Leader>z", "z=", { desc = "Suggest spelling corrections" })
 
       -- TODO: This is only mapped since M is needed for a plugin.
       vim.keymap.set("n", "<C-G>", "M", { desc = "To Middle line of window" })
