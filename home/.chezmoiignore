@@ -21,6 +21,7 @@
 
 # Ignore private environment variables.
 .config/environment.d/99-private.conf
+.config/environment.d/99-private-*.conf
 
 {{ if not (has .chezmoi.hostname (list "minto" "anny")) -}}
 .config/environment.d/xsecurelock.conf
