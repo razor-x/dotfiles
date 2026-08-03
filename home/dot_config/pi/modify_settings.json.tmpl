@@ -1,6 +1,9 @@
 #!/usr/bin/env -S fish --no-config
 
-set packages '["npm:pi-mcp-adapter", "npm:pi-nvim"]'
+{{ $pkg := include "dot_config/pi/exact_npm/package.json" | fromJson }}
+{{ $deps := keys $pkg.dependencies | sortAlpha }}
+set packages '[{{ range $i, $name := $deps }}{{ if $i }},{{ end }}{{ printf "npm:%s" $name | toJson }}{{ end }}]'
+
 set input (mktemp)
 
 function cleanup --on-event fish_exit
