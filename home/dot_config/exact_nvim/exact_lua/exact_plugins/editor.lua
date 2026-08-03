@@ -470,16 +470,6 @@ function M.system_clipboard_mappings(register, quiet)
   vim.keymap.set("n", "<leader>Y", '"' .. register .. "Y", { desc = "Yank to end of line to system clipboard" })
   vim.keymap.set("n", "<leader>yy", '"' .. register .. "yy", { desc = "Yank line to system clipboard" })
 
-  vim.keymap.set("n", "<Leader>m", '"' .. register .. "d", { desc = "Delete to system clipboard" })
-  vim.keymap.set("v", "<Leader>m", '"' .. register .. "d", { desc = "Delete to system clipboard" })
-  vim.keymap.set("n", "<Leader>M", '"' .. register .. "D", { desc = "Delete to end of line to system clipboard" })
-  vim.keymap.set(
-    "n",
-    "<Leader><Leader>m",
-    '"' .. register .. "D",
-    { desc = "Delete to end of line to system clipboard" }
-  )
-  vim.keymap.set("n", "<Leader>mm", '"' .. register .. "dd", { desc = "Delete line to system clipboard" })
 
   vim.keymap.set("n", "<Leader>p", '"' .. register .. "p", { desc = "Put after from system clipboard" })
   vim.keymap.set("n", "<Leader>P", '"' .. register .. "P", { desc = "Put before from system clipboard" })

@@ -193,16 +193,6 @@ U                       Redo. Equivalent to |CTRL-R|.
 <Leader>yy              Yank the current line to the mapped system clipboard
                         register. See |quote| and |clipboard|.
 
-                                        *<Leader>m* *<Leader>M*
-                                        *<Leader><Leader>m*
-                                        *<Leader>mm*
-<Leader>m{motion}       Delete to the mapped system clipboard register.
-                        See |quote| and |clipboard|.
-<Leader>M               Delete to end of line to the mapped system clipboard
-                        register. See |quote| and |clipboard|.
-<Leader>mm              Delete the current line to the mapped system clipboard
-                        register. See |quote| and |clipboard|.
-
                                         *<Leader>p* *<Leader>P*
                                         *<Leader><Leader>p*
 <Leader>{pP}            Paste from the mapped system clipboard register.
