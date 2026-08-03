@@ -87,6 +87,9 @@ M.spec = {
         silent = true,
       })
 
+      vim.keymap.set({ "n", "x", "o" }, "<F7>", "[", { desc = "Bracket previous prefix", remap = true })
+      vim.keymap.set({ "n", "x", "o" }, "<F8>", "]", { desc = "Bracket next prefix", remap = true })
+
       vim.keymap.set("i", "<CR>", "<Esc>", { desc = "Exit Insert mode" })
 
       vim.keymap.set("n", "<CR>", ":", { desc = "Enter Command-line mode" })
@@ -470,7 +473,6 @@ function M.system_clipboard_mappings(register, quiet)
   vim.keymap.set("v", "<leader>y", '"' .. register .. "y", { desc = "Yank to system clipboard" })
   vim.keymap.set("n", "<leader>Y", '"' .. register .. "Y", { desc = "Yank to end of line to system clipboard" })
   vim.keymap.set("n", "<leader>yy", '"' .. register .. "yy", { desc = "Yank line to system clipboard" })
-
 
   vim.keymap.set("n", "<Leader>p", '"' .. register .. "p", { desc = "Put after from system clipboard" })
   vim.keymap.set("n", "<Leader>P", '"' .. register .. "P", { desc = "Put before from system clipboard" })
