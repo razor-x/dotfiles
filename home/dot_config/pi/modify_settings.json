@@ -1,0 +1,21 @@
+#!/usr/bin/env -S fish --no-config
+
+set packages '["npm:pi-mcp-adapter", "npm:pi-nvim"]'
+set input (mktemp)
+
+function cleanup --on-event fish_exit
+    rm -f $input
+end
+
+cat >$input
+
+if not test -s $input
+    printf '{}\n' >$input
+end
+
+jq --argjson packages $packages '
+  def uniq_preserve:
+    reduce .[] as $item ([]; if index($item) then . else . + [$item] end);
+
+  .packages = (((.packages // []) + $packages) | uniq_preserve)
+' $input
