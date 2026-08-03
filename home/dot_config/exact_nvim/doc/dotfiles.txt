@@ -183,14 +183,14 @@ U                       Redo. Equivalent to |CTRL-R|.
 <Leader>=               Start `:put =` from the expression register.
                         See |:put| and |quote=|.
 
-                                        *<Leader>c* *<Leader>C*
-                                        *<Leader><Leader>c*
-                                        *<Leader>cc*
-<Leader>c{motion}       Yank to the mapped system clipboard register.
+                                        *<Leader>y* *<Leader>Y*
+                                        *<Leader><Leader>y*
+                                        *<Leader>yy*
+<Leader>y{motion}       Yank to the mapped system clipboard register.
                         See |quote| and |clipboard|.
-<Leader>C               Yank to end of line to the mapped system clipboard
+<Leader>Y               Yank to end of line to the mapped system clipboard
                         register. See |quote| and |clipboard|.
-<Leader>cc              Yank the current line to the mapped system clipboard
+<Leader>yy              Yank the current line to the mapped system clipboard
                         register. See |quote| and |clipboard|.
 
                                         *<Leader>m* *<Leader>M*
