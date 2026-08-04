@@ -9,9 +9,9 @@
     "allow": [
       "$XDG_DATA_HOME/nvim",
       "$XDG_STATE_HOME/nvim",
-      "/tmp/pi-nvim-sockets",
-      "/tmp/pi-nvim-latest.sock"
+      "/tmp/pi-nvim-sockets"
     ],
+    "allow_file": ["/tmp/pi-nvim-latest.sock"],
     "read": ["$XDG_CONFIG_HOME/nvim"]
   }
 }
