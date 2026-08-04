@@ -1,13 +1,18 @@
-# Set Zsh history variables.
-if [[ -n "$XDG_CONFIG_HOME" ]]; then
+if [[ -n "$XDG_CACHE_HOME" ]]; then
+  cache_dir="$XDG_CACHE_HOME/zsh"
+  mkdir --parents "$cache_dir"
+
+  # Set Zsh history variables.
+  export HISTDUP=erase
+  export HISTSIZE=10000
+  export SAVEHIST=$HISTSIZE
   export HISTFILE="$XDG_CACHE_HOME/zsh/history"
-  cache_dir=$(dirname "$HISTFILE")
-  mkdir -p $cache_dir
   touch "$HISTFILE"
+
+  # Enable programmable completion.
+  autoload -Uz compinit
+  compinit -d "$zsh_cache_dir/zcompdump"
 fi
-export HISTDUP=erase
-export HISTSIZE=10000
-export SAVEHIST=$HISTSIZE
 
 # Configure pinentry to use the correct TTY.
 # This must be done separately for each shell.
