@@ -1,0 +1,16 @@
+---
+projects:
+  archrc:
+    url: git@github.com:rxrc/archrc.git
+
+  archrc-next:
+    url: git@github.com:razor-x/archrc.git
+
+  dotfiles:
+    url: git@github.com:razor-x/dotfiles.git
+    worktrees:
+      - path: .worktrees/delve-tools
+        branch: delve-tools
+
+  dotfiles-rxrc:
+    url: git@github.com:rxrc/dotfiles.git
