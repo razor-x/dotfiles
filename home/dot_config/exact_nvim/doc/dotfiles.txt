@@ -8,19 +8,51 @@ Shifted `<Leader>` mappings also have an unshifted alias using
 `<Leader><Leader>` plus the unshifted key when possible.
 
 Toggle mappings use `yo{key}` for global state. If a toggle supports
-buffer-local state, `\yo{key}` toggles it for the current buffer.
+buffer- or window-local state, replace `y` with `\`: `\o{key}`.
+
+                                        *yob* *yoh* *yoI*
+yob                     Toggle the background globally.
+yoh                     Toggle search highlighting globally.
+yoI                     Toggle case-insensitive searching globally.
+
+                                        *yoc* *\oc* *yoC* *\oC*
+yoc                     Toggle `cursorline` globally.
+\oc                     Toggle `cursorline` for the current window.
+yoC                     Toggle `cursorcolumn` globally.
+\oC                     Toggle `cursorcolumn` for the current window.
+
+                                                        *yod* *\od*
+yod                     Toggle diagnostics globally.
+\od                     Toggle diagnostics for the current buffer.
+
+                                        *yol* *\ol* *yon* *\on*
+yol                     Toggle `list` globally.
+\ol                     Toggle `list` for the current window.
+yon                     Toggle `number` globally.
+\on                     Toggle `number` for the current window.
+
+                                        *yor* *\or* *yos* *\os*
+yor                     Toggle `relativenumber` globally.
+\or                     Toggle `relativenumber` for the current window.
+yos                     Toggle `spell` globally.
+\os                     Toggle `spell` for the current window.
+
+                                                        *yow* *\ow*
+yow                     Toggle `wrap` globally.
+\ow                     Toggle `wrap` for the current window.
 
                                                         *yoP*
 yoP                     Toggle system clipboard mappings between the `+`
                         and `*` registers. See |quote| and |clipboard|.
 
-                                                        *yom*
-yom                     Toggle `colorcolumn` between `81` and disabled.
-                        See |'colorcolumn'|.
+                                                        *yom* *\om*
+yom                     Toggle `colorcolumn` globally between `81` and
+                        disabled. See |'colorcolumn'|.
+\om                     Toggle `colorcolumn` for the current window.
 
-                                                        *yoi* *\yoi*
+                                                        *yoi* *\oi*
 yoi                     Toggle the indent scope indicator globally.
-\yoi                    Toggle the indent scope indicator for the current
+\oi                     Toggle the indent scope indicator for the current
                         buffer.
 
                                                         *q*
