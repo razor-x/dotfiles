@@ -119,6 +119,8 @@ if status is-interactive
 
     abbr unfaillock faillock --user $USER --reset
 
+    abbr chmodx chmod u+x
+
     alias srv serve
 
     abbr o opencode
