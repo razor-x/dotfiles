@@ -1,7 +1,7 @@
 function run \
     --description 'Run a file or stdin with an appropriate interpreter'
 
-    argparse 'e/extension=' -- $argv
+    argparse --ignore-unknown 'e/extension=' -- $argv
     or return
 
     set --function arg_count (count $argv)
@@ -26,10 +26,11 @@ function run \
         end
     end
 
-    if test $arg_count -gt 1
-        echo 'usage: run [(-e | --extension) EXT] FILE'
-        echo '       COMMAND | run (-e | --extension) EXT'
-        return 1
+    if test $arg_count -eq 0
+        set --function script_args
+    else
+        set --function file $argv[1]
+        set --function script_args $argv[2..-1]
     end
 
     if $use_stdin; and isatty stdin
@@ -43,9 +44,7 @@ function run \
         return 1
     end
 
-    if test $arg_count -eq 1
-        set --function file $argv[1]
-
+    if test $arg_count -ge 1
         if not test -f "$file"
             echo "run: no file exists named $file"
             return 1
@@ -126,5 +125,5 @@ function run \
             return 2
     end
 
-    $cmd
+    $cmd $script_args
 end
