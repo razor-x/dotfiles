@@ -173,6 +173,13 @@ M.spec = {
         desc = "Find Files",
       },
       {
+        "<leader>f;",
+        function()
+          Snacks.picker.git_status()
+        end,
+        desc = "Find Git Status Files",
+      },
+      {
         "<leader>fs",
         function()
           Snacks.picker.smart()
