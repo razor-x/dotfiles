@@ -10,6 +10,11 @@ if type --query gh
     # Reset all aliases.
     gh alias delete --all
 
+    # Merge pull requests and delete the source branch.
+    gh alias set --clobber m 'pr merge --merge --delete-branch'
+    gh alias set --clobber ms 'pr merge --squash --delete-branch'
+    gh alias set --clobber mr 'pr merge --rebase --delete-branch'
+
     # Clone repo.
     gh alias set --clobber clone 'repo clone'
 
