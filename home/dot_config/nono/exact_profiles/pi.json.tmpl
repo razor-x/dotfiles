@@ -1,3 +1,4 @@
+{{- $extensionSource := joinPath .chezmoi.sourceDir "dot_config" "pi" "extensions" "exact_local" -}}
 {
   "extends": ["default", "nvim", "terminal", "devel"],
   "meta": {
@@ -21,7 +22,7 @@
     "allow": [
       "$XDG_CONFIG_HOME/pi",
       "$XDG_CONFIG_HOME/mcp",
-      "$HOME/config/dotfiles/home/dot_config/pi/extensions/exact_local",
+      {{ $extensionSource | toJson }},
       "/tmp"
     ]
   },

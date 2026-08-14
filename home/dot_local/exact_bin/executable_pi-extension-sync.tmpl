@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
+{{ $extensionSource := joinPath .chezmoi.sourceDir "dot_config" "pi" "extensions" "exact_local" }}
+{{ $extensionTarget := joinPath .chezmoi.homeDir ".config" "pi" "extensions" "local" }}
 
 set -euo pipefail
 
-source_dir="$HOME/config/dotfiles/home/dot_config/pi/extensions/exact_local"
-target_dir="$XDG_CONFIG_HOME/.config/pi/extensions/local"
+source_dir={{ $extensionSource | toJson }}
+target_dir={{ $extensionTarget | toJson }}
 
 if [[ ! -d "$source_dir" ]]; then
   printf 'Pi extension source directory does not exist: %s\n' "$source_dir" >&2
