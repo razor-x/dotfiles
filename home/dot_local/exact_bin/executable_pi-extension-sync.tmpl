@@ -7,20 +7,45 @@ set -euo pipefail
 source_dir={{ $extensionSource | toJson }}
 target_dir={{ $extensionTarget | toJson }}
 
+if [[ "$source_dir" != /* || "$target_dir" != /* ]]; then
+  printf 'Pi extension paths must be absolute.\n' >&2
+  exit 1
+fi
+
 if [[ ! -d "$source_dir" ]]; then
   printf 'Pi extension source directory does not exist: %s\n' "$source_dir" >&2
   exit 1
 fi
 
-mkdir --parents "$target_dir"
+# Never allow a bad template value or a symlink to turn the cleanup below into
+# a recursive delete of the source tree or some unrelated directory.
+source_real=$(realpath --canonicalize-existing -- "$source_dir")
+target_real=$(realpath --canonicalize-missing -- "$target_dir")
+if [[ "$source_real" == / || "$target_real" == / ||
+      "$source_real" == "$target_real" ||
+      "$source_real" == "$target_real/"* ||
+      "$target_real" == "$source_real/"* ]]; then
+  printf 'Refusing to sync overlapping Pi extension paths:\n  source: %s\n  target: %s\n' \
+    "$source_real" "$target_real" >&2
+  exit 1
+fi
 
-exec rsync \
-  --archive \
-  --delete \
-  --exclude '/node_modules/' \
-  --exclude '/package.json' \
-  --exclude '/package-lock.json' \
-  --exclude '/tsconfig.json' \
-  --exclude '/tsconfig.base.json' \
-  "$source_dir/" \
-  "$target_dir/"
+if [[ -L "$target_dir" || ( -e "$target_dir" && ! -d "$target_dir" ) ]]; then
+  printf 'Refusing to replace non-directory Pi extension target: %s\n' "$target_dir" >&2
+  exit 1
+fi
+
+mkdir --parents -- "$target_dir"
+
+# Replace only generated TypeScript files. Other files in the target are left
+# alone, and node_modules is never copied from the source tree.
+find "$target_dir" \
+  \( -type f -o -type l \) -name '*.ts' -delete
+
+(
+  cd -- "$source_dir"
+  find . \
+    -type d -name node_modules -prune -o \
+    \( -type f -o -type l \) -name '*.ts' \
+    -exec cp -a --parents --target-directory="$target_dir" -- {} +
+)
