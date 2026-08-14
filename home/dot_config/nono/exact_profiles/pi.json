@@ -18,7 +18,12 @@
     "capability_elevation": false
   },
   "filesystem": {
-    "allow": ["$XDG_CONFIG_HOME/pi", "$XDG_CONFIG_HOME/mcp", "/tmp"]
+    "allow": [
+      "$XDG_CONFIG_HOME/pi",
+      "$XDG_CONFIG_HOME/mcp",
+      "$HOME/config/dotfiles/home/dot_config/pi/extensions/exact_local",
+      "/tmp"
+    ]
   },
   "network": {
     "block": false,

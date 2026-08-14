@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source_dir="$HOME/config/dotfiles/home/dot_config/pi/extensions/exact_local"
+target_dir="$XDG_CONFIG_HOME/.config/pi/extensions/local"
+
+if [[ ! -d "$source_dir" ]]; then
+  printf 'Pi extension source directory does not exist: %s\n' "$source_dir" >&2
+  exit 1
+fi
+
+mkdir --parents "$target_dir"
+
+exec rsync \
+  --archive \
+  --delete \
+  --exclude '/node_modules/' \
+  --exclude '/package.json' \
+  --exclude '/package-lock.json' \
+  --exclude '/tsconfig.json' \
+  --exclude '/tsconfig.base.json' \
+  "$source_dir/" \
+  "$target_dir/"

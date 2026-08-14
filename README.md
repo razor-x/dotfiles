@@ -51,6 +51,18 @@ dotfiles
 just apply
 ```
 
+#### Modify Pi's local extension
+
+Pi edits the source extension at
+`home/dot_config/pi/extensions/exact_local`. Sync it to the installed runtime
+copy with:
+
+```sh
+just pi-sync
+```
+
+The same sync is available as `pi-extension-sync` from any working directory.
+
 #### Watch for and apply changes
 
 ```sh
