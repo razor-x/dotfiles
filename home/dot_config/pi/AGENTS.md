@@ -2,16 +2,6 @@
 
 Use the local CLI tools when they are a good fit. Prefer:
 
-## Pi self-maintenance
-
-When modifying Pi's local extension, edit the source tree at
-`$HOME/config/dotfiles/home/dot_config/pi/extensions/exact_local`.
-
-The installed runtime copy is `$XDG_CONFIG_HOME/pi/extensions/local`; do not
-edit it directly. After changing the source extension, run
-`pi-extension-sync` to update.
-the runtime copy, then restart Pi.
-
 ## Files and text
 
 - `fd` instead of `find` for locating files.
@@ -49,3 +39,15 @@ the runtime copy, then restart Pi.
 - Use `dust` or `dua` instead of `du` for disk-usage exploration.
 - Use `procs` instead of `ps` for readable process inspection.
 - Use `lsof` to determine which processes have files or sockets open.
+
+## Pi self-modification
+
+Docs are installed at `/usr/share/doc/pi` on Arch Linux.
+
+When modifying Pi's local extensions, edit the source tree at
+`$HOME/config/dotfiles/home/dot_config/pi/extensions/exact_local`.
+
+The installed runtime copy is `$XDG_CONFIG_HOME/pi/extensions/local`; do not
+edit it directly. After changing the source extension, run
+`pi-extension-sync` to update.
+the runtime copy, then restart Pi.
