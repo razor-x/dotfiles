@@ -34,27 +34,28 @@ neovim stuff
 
 # mini.nvim
 
-x = done and fully setup
+* = done and fully setup
++ = added and partially setup
 y = yes, will use
 n = no can't or won't use
 
-- [y] mini.ai            Extend and create a/i textobjects
+- [*] mini.ai            Extend and create a/i textobjects
 - [y] mini.align         Align text interactively
-- [x] mini.comment       Comment lines
+- [*] mini.comment       Comment lines
 - [y] mini.completion    Completion and signature help
 - [y] mini.keymap        Special key mappings
-- [x] mini.move          Move any selection in any direction
+- [*] mini.move          Move any selection in any direction
 - [y] mini.operators     Text edit operators
 - [y] mini.pairs         Autopairs
 - [y] mini.snippets      Manage and expand snippets
 - [n] mini.splitjoin     Split and join arguments
-  - [x] => use Wansmer/treesj with `gS`
+  - [*] => use Wansmer/treesj with `gS`
 - [y] mini.surround      Surround actions
-- [y] mini.basics        Common configuration presets
+- [+] mini.basics        Common configuration presets
 - [y] mini.bracketed     Go forward/backward with square brackets
-- [y] mini.bufremove     Remove buffers
+- [+] mini.bufremove     Remove buffers
 - [n] mini.clue          Show next key clues
-- [y] mini.cmdline       Command line tweaks
+- [+] mini.cmdline       Command line tweaks
 - [n] mini.deps          Plugin manager
 - [?] mini.diff          Work with diff hunks
 - [y] mini.extra         Extra ‘mini.nvim’ functionality
@@ -74,7 +75,7 @@ n = no can't or won't use
 - [n] mini.hipatterns    Highlight patterns in text
 - [n] mini.hues          Generate configurable color scheme
 - [y] mini.icons         Icon provider
-- [x] mini.indentscope   Visualize and work with indent scope
+- [*] mini.indentscope   Visualize and work with indent scope
 - [n] mini.map           Window with buffer text overview
 - [n] mini.notify        Show notifications
 - [?] mini.starter       Start screen
