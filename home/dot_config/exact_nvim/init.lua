@@ -25,6 +25,7 @@ require("lazy").setup({
       ---@type lazydev.Config
       opts = {
         library = {
+          { path = "conform.nvim", words = { "conform" } },
           { path = "flash", words = { "Flash" } },
           { path = "mini.bufremove", words = { "MiniBufremove" } },
           { path = "mini.extra", words = { "MiniExtra" } },
