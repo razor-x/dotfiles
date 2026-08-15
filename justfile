@@ -16,37 +16,13 @@ reset:
   chezmoi apply --init
 
 format:
-  fd \
-    --print0 \
-    --hidden \
-    --exclude .lazy-lock.json \
-    --exclude package-lock.json \
-    --type file \
-    --extension clj \
-    --extension fish \
-    --extension json \
-    --extension lua \
-    --extension md \
-    --extension py \
-    --extension sh \
-    --extension ts \
-    . \
-    | xargs \
-        --null \
-        --no-run-if-empty \
-        --max-args 1 \
-        fish --command 'format $argv[1]' --
-  fd \
-    --print0 \
-    --hidden \
-    --type file \
-    --glob '*.fish.tmpl' \
-    home/.chezmoiscripts/ \
-    | xargs \
-        --null \
-        --no-run-if-empty \
-        --max-args 1 \
-        fish --command 'format --extension fish $argv[1]' --
+  cljfmt fix $(git ls-files '*.clj')
+  biome format --write .
+  fish_indent --write $(git ls-files '*.fish' 'home/.chezmoiscripts/*.fish.tmpl')
+  stylua .
+  mdformat $(git ls-files '*.md')
+  ruff format .
+  shfmt --write $(git ls-files '*.sh')
 
 [working-directory: 'home/dot_config/pi/extensions/exact_local']
 pi-local-extension: && format
