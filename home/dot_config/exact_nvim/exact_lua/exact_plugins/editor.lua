@@ -422,19 +422,33 @@ M.spec = {
     "nvim-mini/mini.cmdline",
     init = function()
       local map_multistep = require("mini.keymap").map_multistep
-      local close_command_line_window = {
-        condition = function()
-          return vim.fn.getcmdwintype() ~= ""
-        end,
-        action = function()
-          return M.cmd("q")
-        end,
-      }
       local function map_command_line_window(lhs, open_keys, desc)
-        map_multistep({ "n", "v" }, lhs, { close_command_line_window, M.multistep_fallback(open_keys) }, {
-          desc = desc,
-          silent = true,
-        })
+        local command_line_type = open_keys:sub(2)
+        local close_command_line_window = {
+          condition = function()
+            return vim.fn.getcmdwintype() == command_line_type
+          end,
+          action = function()
+            return M.cmd("q")
+          end,
+        }
+        local switch_command_line_window = {
+          condition = function()
+            return vim.fn.getcmdwintype() ~= ""
+          end,
+          action = function()
+            return "<Cmd>q<CR>" .. open_keys
+          end,
+        }
+        map_multistep(
+          { "n", "v" },
+          lhs,
+          { close_command_line_window, switch_command_line_window, M.multistep_fallback(open_keys) },
+          {
+            desc = desc,
+            silent = true,
+          }
+        )
       end
 
       -- TODO: Consider better bind for S-Esc.
