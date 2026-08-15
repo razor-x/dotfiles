@@ -48,9 +48,6 @@ format:
         --max-args 1 \
         fish --command 'format --extension fish $argv[1]' --
 
-pi-sync:
-  pi-extension-sync
-
 [working-directory: 'home/dot_config/pi/extensions/exact_local']
 pi-local-extension: && format
   #!/usr/bin/env bash
