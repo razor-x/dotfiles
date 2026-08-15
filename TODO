@@ -42,23 +42,23 @@ n = no can't or won't use
 - [*] mini.ai            Extend and create a/i textobjects
 - [y] mini.align         Align text interactively
 - [*] mini.comment       Comment lines
-- [y] mini.completion    Completion and signature help
-- [y] mini.keymap        Special key mappings
+- [+] mini.completion    Completion and signature help
+- [+] mini.keymap        Special key mappings
 - [*] mini.move          Move any selection in any direction
 - [y] mini.operators     Text edit operators
-- [y] mini.pairs         Autopairs
+- [+] mini.pairs         Autopairs
 - [y] mini.snippets      Manage and expand snippets
 - [n] mini.splitjoin     Split and join arguments
   - [*] => use Wansmer/treesj with `gS`
-- [y] mini.surround      Surround actions
-- [+] mini.basics        Common configuration presets
+- [+] mini.surround      Surround actions
+- [*] mini.basics        Common configuration presets
 - [y] mini.bracketed     Go forward/backward with square brackets
-- [+] mini.bufremove     Remove buffers
+- [*] mini.bufremove     Remove buffers
 - [n] mini.clue          Show next key clues
-- [+] mini.cmdline       Command line tweaks
+- [*] mini.cmdline       Command line tweaks
 - [n] mini.deps          Plugin manager
 - [?] mini.diff          Work with diff hunks
-- [y] mini.extra         Extra ‘mini.nvim’ functionality
+- [+] mini.extra         Extra ‘mini.nvim’ functionality
 - [n] mini.files         Navigate and manipulate file system
 - [?] mini.git           Git integration
 - [n] mini.jump          Jump to next/previous single character
@@ -74,7 +74,7 @@ n = no can't or won't use
 - [n] mini.cursorword    Autohighlight word under cursor
 - [n] mini.hipatterns    Highlight patterns in text
 - [n] mini.hues          Generate configurable color scheme
-- [y] mini.icons         Icon provider
+- [+] mini.icons         Icon provider
 - [*] mini.indentscope   Visualize and work with indent scope
 - [n] mini.map           Window with buffer text overview
 - [n] mini.notify        Show notifications
