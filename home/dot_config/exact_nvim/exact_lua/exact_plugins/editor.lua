@@ -421,36 +421,29 @@ M.spec = {
   {
     "nvim-mini/mini.cmdline",
     init = function()
-      -- TODO: Consider better bind for S-Esc.
-      vim.keymap.set("n", "<S-Esc>", "q:", { desc = "Open command-line window" })
-      local command_line_local_mappings = vim.api.nvim_create_augroup("command-line-local-mappings", { clear = true })
-      vim.api.nvim_create_autocmd("CmdwinEnter", {
-        group = command_line_local_mappings,
-        pattern = "*",
-        callback = function()
-          vim.keymap.set("n", "<S-Esc>", M.cmd("q"), { desc = "Quit the current window", silent = true })
-          vim.keymap.set("v", "<S-Esc>", M.cmd("q"), { desc = "Quit the current window", silent = true })
+      local map_multistep = require("mini.keymap").map_multistep
+      local close_command_line_window = {
+        condition = function()
+          return vim.fn.getcmdwintype() ~= ""
         end,
-      })
-      vim.api.nvim_create_autocmd("CmdwinLeave", {
-        group = command_line_local_mappings,
-        pattern = "*",
-        callback = function()
-          vim.keymap.set("n", "<S-Esc>", "q:", { desc = "Open command-line window" })
-          vim.keymap.set("v", "<S-Esc>", "q:", { desc = "Open command-line window" })
+        action = function()
+          return M.cmd("q")
         end,
-      })
+      }
+      local function map_command_line_window(lhs, open_keys, desc)
+        map_multistep({ "n", "v" }, lhs, { close_command_line_window, M.multistep_fallback(open_keys) }, {
+          desc = desc,
+          silent = true,
+        })
+      end
 
-      vim.keymap.set("n", "<Leader>:", "q:", { desc = "Open command-line window" })
-      vim.keymap.set("v", "<Leader>:", "q:", { desc = "Open command-line window" })
-      vim.keymap.set("n", "<Leader><Leader>;", "q:", { desc = "Open command-line window" })
-      vim.keymap.set("v", "<Leader><Leader>;", "q:", { desc = "Open command-line window" })
-      vim.keymap.set("n", "<Leader>/", "q/", { desc = "Open search command-line window" })
-      vim.keymap.set("v", "<Leader>/", "q/", { desc = "Open search command-line window" })
-      vim.keymap.set("n", "<Leader>?", "q?", { desc = "Open backward search command-line window" })
-      vim.keymap.set("v", "<Leader>?", "q?", { desc = "Open backward search command-line window" })
-      vim.keymap.set("n", "<Leader><Leader>/", "q?", { desc = "Open backward search command-line window" })
-      vim.keymap.set("v", "<Leader><Leader>/", "q?", { desc = "Open backward search command-line window" })
+      -- TODO: Consider better bind for S-Esc.
+      map_command_line_window("<S-Esc>", "q:", "Toggle command-line window")
+      map_command_line_window("<Leader>:", "q:", "Toggle command-line window")
+      map_command_line_window("<Leader><Leader>;", "q:", "Toggle command-line window")
+      map_command_line_window("<Leader>/", "q/", "Toggle search command-line window")
+      map_command_line_window("<Leader>?", "q?", "Toggle backward search command-line window")
+      map_command_line_window("<Leader><Leader>/", "q?", "Toggle backward search command-line window")
     end,
     opts = {
       autocomplete = {

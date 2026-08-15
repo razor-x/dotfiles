@@ -171,12 +171,12 @@ U                       Redo. Equivalent to |CTRL-R|.
 
                                         *<Leader>:* *<Leader>/* *<Leader>?*
                                         *<Leader><Leader>/*
-<Leader>:               Open the command-line history window.
-                        Equivalent to |q:|.
-<Leader>/               Open the search history window for `/`.
-                        Equivalent to |q/|.
-<Leader>?               Open the search history window for `?`.
-                        Equivalent to |q?|.
+<Leader>:               Toggle the command-line history window.
+                        Opens with |q:|.
+<Leader>/               Toggle the search history window for `/`.
+                        Opens with |q/|.
+<Leader>?               Toggle the search history window for `?`.
+                        Opens with |q?|.
 
                                                         *<Leader>xz*
 <Leader>xz              Close the preview window. Equivalent to |:pclose|.
