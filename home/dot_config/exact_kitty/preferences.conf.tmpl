@@ -29,4 +29,8 @@ wayland_enable_ime no
 scrollback_pager less -r --chop-long-lines +INPUT_LINE_NUMBER
 
 # Set default layout and the enabled layouts.
+{{ if eq .chezmoi.hostname "Gungnir" -}}
+enabled_layouts splits,tall,fat,horizontal,vertical,stack
+{{ else -}}
 enabled_layouts fat,horizontal,vertical,stack,splits,tall
+{{ end -}}
