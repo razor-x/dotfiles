@@ -26,7 +26,13 @@ M.spec = {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-mini/mini.icons" },
-    opts = {},
+    opts = {
+      options = {
+        theme = "catppuccin-nvim",
+        component_separators = "",
+        section_separators = { left = "", right = "" },
+      },
+    },
   },
   {
     "folke/which-key.nvim",
