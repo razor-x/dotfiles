@@ -35,6 +35,24 @@ M.spec = {
     end,
   },
   {
+    "lewis6991/gitsigns.nvim",
+    opts = {},
+  },
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "esmuellert/codediff.nvim",
+      "folke/snacks.nvim",
+      "m00qek/baleia.nvim",
+    },
+    opts = {
+      integrations = {
+        snacks = true,
+      },
+    },
+    cmd = "Neogit",
+  },
+  {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },

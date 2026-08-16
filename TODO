@@ -88,8 +88,7 @@ n = no can't or won't use
 - [?] mini.starter       Start screen
 - [n] mini.statusline    Statusline
   - [*] => use nvim-lualine/lualine.nvim
-- [n] mini.tabline       Tabline
-  - [ ] => barbar.nvim
+- [y] mini.tabline       Tabline
 - [y] mini.trailspace    Trailspace (highlight and remove)
 - [n] mini.doc           Generate Neovim help files
 - [n] mini.fuzzy         Fuzzy matching
