@@ -29,10 +29,6 @@ M.spec = {
     event = "BufReadPre",
   },
   {
-    "nvim-mini/mini.starter",
-    opts = {},
-  },
-  {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-mini/mini.icons" },
     opts = {

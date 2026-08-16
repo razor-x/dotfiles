@@ -74,8 +74,7 @@ n = no can't or won't use
   - [*] => not needed
 - [n] mini.pick          Pick anything
   - [*] => use Snacks picker
-- [n] mini.sessions      Session management
-  - [*] => use auto-session
+- [y] mini.sessions      Session management
 - [?] mini.visits        Track and reuse file system visits
 - [n] mini.animate       Animate common Neovim actions
   - [*] => use kitty or neovide
@@ -85,7 +84,7 @@ n = no can't or won't use
 - [n] mini.cursorword    Autohighlight word under cursor
   - [*] => not wanted
 - [n] mini.hipatterns    Highlight patterns in text
-  - [*] => catgoose/nvim-colorizer.lua
+  - [y] => catgoose/nvim-colorizer.lua
 - [n] mini.hues          Generate configurable color scheme
   - [*] => use catppuccin/nvim
 - [*] mini.icons         Icon provider
