@@ -59,6 +59,21 @@ M.spec = {
       },
     },
     cmd = "Neogit",
+    keys = {
+      {
+        "<leader>ga",
+        function()
+          vim.cmd.update()
+          local result = vim.system({ "git", "add", "--", vim.api.nvim_buf_get_name(0) }, { text = true }):wait()
+          if result.code == 0 then
+            vim.notify("Staged current file")
+          else
+            vim.notify(vim.trim(result.stderr), vim.log.levels.ERROR)
+          end
+        end,
+        desc = "Git Stage Current File",
+      },
+    },
   },
   {
     "stevearc/conform.nvim",
