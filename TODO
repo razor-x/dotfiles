@@ -85,7 +85,7 @@ n = no can't or won't use
 - [n] mini.cursorword    Autohighlight word under cursor
   - [*] => not wanted
 - [n] mini.hipatterns    Highlight patterns in text
-  - [y] => catgoose/nvim-colorizer.lua
+  - [*] => catgoose/nvim-colorizer.lua
 - [n] mini.hues          Generate configurable color scheme
   - [*] => use catppuccin/nvim
 - [*] mini.icons         Icon provider
