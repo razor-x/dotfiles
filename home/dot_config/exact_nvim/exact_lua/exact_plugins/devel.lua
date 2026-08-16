@@ -35,6 +35,15 @@ M.spec = {
     end,
   },
   {
+    "esmuellert/codediff.nvim",
+    cmd = "CodeDiff",
+    opts = {
+      highlights = {
+        char_brightness = 1.1,
+      },
+    },
+  },
+  {
     "lewis6991/gitsigns.nvim",
     opts = {},
   },
@@ -43,7 +52,6 @@ M.spec = {
     dependencies = {
       "esmuellert/codediff.nvim",
       "folke/snacks.nvim",
-      "m00qek/baleia.nvim",
     },
     opts = {
       integrations = {
