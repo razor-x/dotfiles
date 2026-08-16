@@ -10,6 +10,18 @@ M.spec = {
       git_use_branch_name = false,
       purge_after_minutes = 60 * 48,
     },
+    keys = {
+      {
+        "<leader>N",
+        function()
+          local auto_session = require("auto-session")
+          auto_session.delete_session()
+          auto_session.disable_auto_save()
+          vim.cmd("restart")
+        end,
+        desc = "Reset Session",
+      },
+    },
   },
   {
     "stevearc/oil.nvim",
