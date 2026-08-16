@@ -59,30 +59,38 @@ n = no can't or won't use
 - [*] mini.cmdline       Command line tweaks
 - [n] mini.deps          Plugin manager
   - [*] => use folke/lazy.nvim
-- [?] mini.diff          Work with diff hunks
+- [n] mini.diff          Work with diff hunks
+  - [*] => use lewis6991/gitsigns.nvim
 - [*] mini.extra         Extra ‘mini.nvim’ functionality
 - [n] mini.files         Navigate and manipulate file system
   - [*] => use stevearc/oil.nvim and Snacks explorer
-- [?] mini.git           Git integration
+- [n] mini.git           Git integration
+  - [*] => use https://github.com/neogitorg/neogit
 - [n] mini.jump          Jump to next/previous single character
   - [*] => use built-in `f`/`F`/`t`/`T`
 - [n] mini.jump2d        Jump within visible lines
   - [*] => use folke/flash.nvim
 - [n] mini.misc          Miscellaneous functions
+  - [*] => not needed
 - [n] mini.pick          Pick anything
   - [*] => use Snacks picker
 - [y] mini.sessions      Session management
 - [?] mini.visits        Track and reuse file system visits
 - [n] mini.animate       Animate common Neovim actions
+  - [*] => use kitty or neovide
 - [?] mini.base16        Base16 colorscheme creation
 - [n] mini.colors        Tweak and save any color scheme
+  - [*] => not needed
 - [n] mini.cursorword    Autohighlight word under cursor
+  - [*] => not wanted
 - [n] mini.hipatterns    Highlight patterns in text
+  - [y] => catgoose/nvim-colorizer.lua
 - [n] mini.hues          Generate configurable color scheme
   - [*] => use catppuccin/nvim
 - [*] mini.icons         Icon provider
 - [*] mini.indentscope   Visualize and work with indent scope
 - [n] mini.map           Window with buffer text overview
+  - [*] => not wanted
 - [n] mini.notify        Show notifications
   - [*] => use built-in `vim.notify`
 - [?] mini.starter       Start screen
@@ -91,9 +99,11 @@ n = no can't or won't use
 - [y] mini.tabline       Tabline
 - [y] mini.trailspace    Trailspace (highlight and remove)
 - [n] mini.doc           Generate Neovim help files
+  - [*] => not needed
 - [n] mini.fuzzy         Fuzzy matching
   - [*] => use Snacks picker’s matcher
 - [n] mini.test          Test Neovim plugins
+  - [*] => not needed
 
  Proposed keybind plan
 
