@@ -23,9 +23,12 @@ M.spec = {
       vim.opt.expandtab = true
       vim.opt.autoindent = true
 
-      -- Set folding preferences.
-      vim.opt.foldmethod = "syntax"
-      vim.opt.foldenable = false
+      -- Use Tree-sitter folds, but start with all folds open.
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.opt.foldlevel = 99
+      vim.opt.foldlevelstart = 99
+      vim.opt.foldenable = true
 
       -- Enable EditorConfig.
       vim.g.editorconfig = true
