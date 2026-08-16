@@ -24,6 +24,11 @@ M.spec = {
     end,
   },
   {
+    "catgoose/nvim-colorizer.lua",
+    opts = {},
+    event = "BufReadPre",
+  },
+  {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-mini/mini.icons" },
     opts = {
