@@ -25,7 +25,10 @@ M.spec = {
   },
   {
     "catgoose/nvim-colorizer.lua",
-    opts = {},
+    ---@module "colorizer.config"
+    ---@type colorizer.SetupOptions
+    opts = { ---@diagnostic disable-line:missing-fields
+    },
     event = "BufReadPre",
   },
   {

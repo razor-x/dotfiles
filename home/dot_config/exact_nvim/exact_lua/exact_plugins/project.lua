@@ -6,6 +6,8 @@ M.spec = {
   {
     "rmagatti/auto-session",
     lazy = false,
+    ---@module "auto-session.config"
+    ---@type AutoSession.Config
     opts = {
       git_use_branch_name = false,
       purge_after_minutes = 60 * 48,
