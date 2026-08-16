@@ -79,13 +79,59 @@ M.spec = {
     opts = {
       format_on_save = function(bufnr)
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+          vim.b[bufnr].conform_format_tick_before = nil
           return
         end
+        vim.b[bufnr].conform_format_tick_before = vim.api.nvim_buf_get_changedtick(bufnr)
         return { timeout_ms = 500, lsp_format = "fallback" }
       end,
     },
     init = function()
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+      local undo_format_group = vim.api.nvim_create_augroup("conform_disable_after_undo", { clear = true })
+
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        group = undo_format_group,
+        callback = function(args)
+          local tick_before = vim.b[args.buf].conform_format_tick_before
+          local tick_after = vim.api.nvim_buf_get_changedtick(args.buf)
+          vim.b[args.buf].conform_format_tick_before = nil
+
+          if tick_before and tick_after ~= tick_before then
+            vim.b[args.buf].conform_format_undo_seq = vim.fn.undotree().seq_cur
+            vim.b[args.buf].conform_format_tick_after = tick_after
+          else
+            vim.b[args.buf].conform_format_undo_seq = nil
+            vim.b[args.buf].conform_format_tick_after = nil
+          end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+        group = undo_format_group,
+        callback = function(args)
+          local format_seq = vim.b[args.buf].conform_format_undo_seq
+          if not format_seq then
+            return
+          end
+
+          local changedtick = vim.api.nvim_buf_get_changedtick(args.buf)
+          if changedtick == vim.b[args.buf].conform_format_tick_after then
+            return
+          end
+
+          if vim.fn.undotree().seq_cur < format_seq then
+            vim.b[args.buf].disable_autoformat = true
+            vim.schedule(function()
+              vim.notify("Autoformat disabled for this buffer after undo", vim.log.levels.INFO)
+            end)
+          end
+
+          vim.b[args.buf].conform_format_undo_seq = nil
+          vim.b[args.buf].conform_format_tick_after = nil
+        end,
+      })
 
       vim.api.nvim_create_user_command("FormatDisable", function(args)
         if args.bang then
