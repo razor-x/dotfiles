@@ -4,6 +4,14 @@ local M = {}
 ---@type LazySpec
 M.spec = {
   {
+    "rmagatti/auto-session",
+    lazy = false,
+    opts = {
+      git_use_branch_name = false,
+      purge_after_minutes = 60 * 48,
+    },
+  },
+  {
     "stevearc/oil.nvim",
     ---@module 'oil'
     ---@type oil.SetupOpts
