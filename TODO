@@ -74,7 +74,8 @@ n = no can't or won't use
   - [*] => not needed
 - [n] mini.pick          Pick anything
   - [*] => use Snacks picker
-- [y] mini.sessions      Session management
+- [n] mini.sessions      Session management
+  - [*] => use auto-session
 - [?] mini.visits        Track and reuse file system visits
 - [n] mini.animate       Animate common Neovim actions
   - [*] => use kitty or neovide
@@ -96,7 +97,8 @@ n = no can't or won't use
 - [?] mini.starter       Start screen
 - [n] mini.statusline    Statusline
   - [*] => use nvim-lualine/lualine.nvim
-- [y] mini.tabline       Tabline
+- [n] mini.tabline       Tabline
+  - [*] => use native
 - [y] mini.trailspace    Trailspace (highlight and remove)
 - [n] mini.doc           Generate Neovim help files
   - [*] => not needed
