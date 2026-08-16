@@ -1,4 +1,5 @@
 local M = {}
+local toggles = require("config.toggles")
 
 ---@module "lazy.types"
 ---@type LazySpec
@@ -177,15 +178,15 @@ M.spec = {
 
       M.system_clipboard_mappings("+", true)
 
-      M.map_toggle("b", {
+      toggles.map_toggle("b", {
         desc = "background",
         global = function()
           vim.o.background = vim.o.background == "dark" and "light" or "dark"
         end,
       })
-      M.map_toggle("c", M.window_option_toggle("cursorline"))
-      M.map_toggle("C", M.window_option_toggle("cursorcolumn"))
-      M.map_toggle("d", {
+      toggles.map_toggle("c", toggles.window_option_toggle("cursorline"))
+      toggles.map_toggle("C", toggles.window_option_toggle("cursorcolumn"))
+      toggles.map_toggle("d", {
         desc = "diagnostics",
         global = function()
           vim.diagnostic.enable(not vim.diagnostic.is_enabled())
@@ -196,25 +197,25 @@ M.spec = {
           vim.diagnostic.enable(not vim.diagnostic.is_enabled(filter), filter)
         end,
       })
-      M.map_toggle("h", {
+      toggles.map_toggle("h", {
         desc = "search highlighting",
         global = function()
           vim.v.hlsearch = vim.v.hlsearch == 0 and 1 or 0
         end,
       })
-      M.map_toggle("I", {
+      toggles.map_toggle("I", {
         desc = "ignore case",
         global = function()
           vim.o.ignorecase = not vim.o.ignorecase
         end,
       })
-      M.map_toggle("l", M.window_option_toggle("list"))
-      M.map_toggle("n", M.window_option_toggle("number"))
-      M.map_toggle("r", M.window_option_toggle("relativenumber"))
-      M.map_toggle("s", M.window_option_toggle("spell"))
-      M.map_toggle("w", M.window_option_toggle("wrap"))
+      toggles.map_toggle("l", toggles.window_option_toggle("list"))
+      toggles.map_toggle("n", toggles.window_option_toggle("number"))
+      toggles.map_toggle("r", toggles.window_option_toggle("relativenumber"))
+      toggles.map_toggle("s", toggles.window_option_toggle("spell"))
+      toggles.map_toggle("w", toggles.window_option_toggle("wrap"))
 
-      M.map_toggle("P", {
+      toggles.map_toggle("P", {
         desc = "system clipboard register",
         global = function()
           local register = vim.g.mapped_system_clipboard == "+" and "*" or "+"
@@ -222,7 +223,7 @@ M.spec = {
         end,
       })
 
-      M.map_toggle("m", M.window_option_toggle("colorcolumn", "81", ""))
+      toggles.map_toggle("m", toggles.window_option_toggle("colorcolumn", "81", ""))
     end,
     opts = {},
     config = function(_, opts)
@@ -319,64 +320,6 @@ M.spec = {
     opts = {},
   },
 }
-
----@class ToggleMapping
----@field desc string
----@field global function
----@field local_scope? "buffer"|"window"
----@field local_toggle? function
-
----@param key string
----@param toggle ToggleMapping
-function M.map_toggle(key, toggle)
-  vim.keymap.set("n", "yo" .. key, toggle.global, {
-    desc = "Toggle " .. toggle.desc .. " globally",
-    silent = true,
-  })
-
-  if toggle.local_toggle then
-    vim.keymap.set("n", [[\o]] .. key, toggle.local_toggle, {
-      desc = "Toggle " .. toggle.desc .. " for current " .. toggle.local_scope,
-      silent = true,
-    })
-  end
-end
-
----@param option string
----@param enabled_value? any
----@param disabled_value? any
----@return ToggleMapping
-function M.window_option_toggle(option, enabled_value, disabled_value)
-  if enabled_value == nil then
-    enabled_value = true
-  end
-  if disabled_value == nil then
-    disabled_value = false
-  end
-
-  local function toggled_value(window)
-    local value = vim.api.nvim_get_option_value(option, { scope = "local", win = window })
-    if value == enabled_value then
-      return disabled_value
-    end
-    return enabled_value
-  end
-
-  return {
-    desc = option,
-    global = function()
-      local value = toggled_value(0)
-      vim.api.nvim_set_option_value(option, value, { scope = "global" })
-      for _, window in ipairs(vim.api.nvim_list_wins()) do
-        vim.api.nvim_set_option_value(option, value, { scope = "local", win = window })
-      end
-    end,
-    local_scope = "window",
-    local_toggle = function()
-      vim.api.nvim_set_option_value(option, toggled_value(0), { scope = "local", win = 0 })
-    end,
-  }
-end
 
 ---@param register string The register to bind the mappings to
 ---@param quiet boolean Whether to show a notification

@@ -1,4 +1,5 @@
 local M = {}
+local toggles = require("config.toggles")
 
 M.spec = {
   {
@@ -28,7 +29,7 @@ M.spec = {
         end
       end
 
-      M.map_toggle("i", {
+      toggles.map_toggle("i", {
         desc = "indent scope indicator",
         global = function()
           vim.g.miniindentscope_disable = not vim.g.miniindentscope_disable
