@@ -73,6 +73,18 @@ M.spec = {
         end,
         desc = "Git Stage Current File",
       },
+      {
+        "<leader>gu",
+        function()
+          local result = vim.system({ "git", "reset", "--", vim.api.nvim_buf_get_name(0) }, { text = true }):wait()
+          if result.code == 0 then
+            vim.notify("Unstaged current file")
+          else
+            vim.notify(vim.trim(result.stderr), vim.log.levels.ERROR)
+          end
+        end,
+        desc = "Git Unstage Current File",
+      },
     },
   },
   {
