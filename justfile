@@ -9,7 +9,15 @@ apply:
 update:
   chezmoi update --apply --init
 
-externals:
+upgrade: && upgrade-externals upgrade-neovim upgrade-pi upgrade-yazi
+
+upgrade-neovim:
+  nvim --headless '+Lazy! update' +qall
+
+upgrade-yazi:
+  ya pkg upgrade
+
+upgrade-externals:
   #!/usr/bin/env bash
   set -o errexit
   set -o nounset
@@ -208,7 +216,7 @@ format:
   shfmt --write $(git ls-files '*.sh')
 
 [working-directory: 'home/dot_config/pi/extensions/exact_local']
-pi: && format
+upgrade-pi: && format
   #!/usr/bin/env bash
   set -euo pipefail
 
@@ -262,6 +270,7 @@ pi: && format
 
   npm install
   npm run typecheck
+  npm --prefix ../../exact_npm update
 
 watch:
   watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force
