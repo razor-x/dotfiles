@@ -7,11 +7,11 @@
   },
   "files": {
     "includes": [
-      "!!**/.worktrees",
       "**/*.json",
       "**/*.ts",
       "!**/.lazy-lock.json",
-      "!**/package-lock.json"
+      "!**/package-lock.json",
+      "!!.worktrees"
     ],
     "ignoreUnknown": true
   },
