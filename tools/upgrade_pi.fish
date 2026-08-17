@@ -3,13 +3,18 @@
 cd home/dot_config/pi/extensions/exact_local
 or exit
 
-set --function pi_info (npm view --json \
+set --function pi_info (mktemp)
+or exit
+set --function package_json (mktemp package.json.XXXXXX)
+or exit
+trap "rm --force $pi_info $package_json" EXIT
+
+npm view --json \
     @earendil-works/pi-coding-agent@latest \
-    dependencies devDependencies engines version | string collect)
-test $pipestatus[1] -eq 0
+    dependencies devDependencies engines version >"$pi_info"
 or exit
 
-set --function pi_version (printf '%s\n' "$pi_info" | jq --raw-output '.[0].version')
+set --function pi_version (jq --raw-output '.[0].version' "$pi_info")
 or exit
 
 curl \
@@ -21,22 +26,18 @@ curl \
     --output tsconfig.base.json
 or exit
 
-set --function typescript_version (printf '%s\n' "$pi_info" | jq --raw-output '.[0].devDependencies.typescript')
+set --function typescript_version (jq --raw-output '.[0].devDependencies.typescript' "$pi_info")
 or exit
-set --function node_types_version (printf '%s\n' "$pi_info" | jq --raw-output '.[0].devDependencies["@types/node"]')
+set --function node_types_version (jq --raw-output '.[0].devDependencies["@types/node"]' "$pi_info")
 or exit
-set --function typebox_version (printf '%s\n' "$pi_info" | jq --raw-output '.[0].dependencies["typebox"]')
+set --function typebox_version (jq --raw-output '.[0].dependencies["typebox"]' "$pi_info")
 or exit
-set --function ai_version (printf '%s\n' "$pi_info" | jq --raw-output '.[0].dependencies["@earendil-works/pi-ai"]')
+set --function ai_version (jq --raw-output '.[0].dependencies["@earendil-works/pi-ai"]' "$pi_info")
 or exit
-set --function tui_version (printf '%s\n' "$pi_info" | jq --raw-output '.[0].dependencies["@earendil-works/pi-tui"]')
+set --function tui_version (jq --raw-output '.[0].dependencies["@earendil-works/pi-tui"]' "$pi_info")
 or exit
-set --function engines (printf '%s\n' "$pi_info" | jq --compact-output '.[0].engines')
+set --function engines (jq --compact-output '.[0].engines' "$pi_info")
 or exit
-
-set --function package_json (mktemp package.json.XXXXXX)
-or exit
-trap (string join ' ' -- rm --force (string escape -- "$package_json")) EXIT
 
 jq \
     --arg pi_version "$pi_version" \
@@ -61,7 +62,6 @@ or exit
 
 mv "$package_json" package.json
 or exit
-trap - EXIT
 
 npm install
 or exit

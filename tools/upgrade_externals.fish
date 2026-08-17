@@ -5,7 +5,7 @@ set --function download (mktemp)
 or exit
 set --function entries (mktemp)
 or exit
-trap (string join ' ' -- rm --force (string escape -- "$download" "$entries")) EXIT
+trap "rm --force $download $entries" EXIT
 
 function update_external --argument-names externals target old_url new_url old_sha256 new_sha256
     set --function contents (string collect --no-trim-newlines <"$externals")
