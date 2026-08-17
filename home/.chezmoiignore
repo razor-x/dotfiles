@@ -32,6 +32,9 @@
 .config/pi/extensions/local/package.json
 .config/pi/extensions/local/package-lock.json
 .config/pi/extensions/local/tsconfig.json
-.config/pi/extensions/local/tsconfig.base.json
+.config/pi/extensions/local/tsconfig.*.json
+.config/pi/extensions/local/vitest.config.ts
+.config/pi/extensions/local/test/
+.config/pi/extensions/local/test/**
 .config/pi/extensions/local/node_modules
 .config/pi/extensions/local/node_modules/**

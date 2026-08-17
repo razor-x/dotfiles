@@ -8,7 +8,8 @@
     "posttest": "biome format",
     "watch": "vitest",
     "format": "biome format --write",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "posttypecheck": "tsc --project tsconfig.test.json"
   },
   "engines": {
     "node": ">=22.19.0"

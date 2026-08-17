@@ -9,8 +9,8 @@ import {
 } from '@earendil-works/pi-coding-agent'
 import type { EditorTheme, KeyId, TUI } from '@earendil-works/pi-tui'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import cursorDownOrNewLine, { LocalEditor } from '../cursor-down-or-newline.ts'
-import { stub } from './stub.ts'
+import cursorDownOrNewLine, { LocalEditor } from '@/cursor-down-or-newline.ts'
+import { stub } from 'test/stub.ts'
 
 describe('cursorDownOrNewLine', () => {
   it('installs the editor in TUI mode', () => {

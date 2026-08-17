@@ -2,7 +2,7 @@ import type {
   ExtensionAPI,
   ExtensionFactory,
 } from '@earendil-works/pi-coding-agent'
-import { default as cursorDownOrNewLine } from './cursor-down-or-newline.ts'
+import { default as cursorDownOrNewLine } from './src/cursor-down-or-newline.ts'
 
 const extensions: ExtensionFactory[] = [cursorDownOrNewLine]
 
