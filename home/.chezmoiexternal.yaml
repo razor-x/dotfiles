@@ -115,6 +115,16 @@
   checksum:
     sha256: "3902bdae252a6624ab05389d6e6b564b8a5ecf5abb238f142c87e6d369c5e295"
 
+# pi
+.config/pi/skills/mattpocock:
+  type: archive
+  url: https://github.com/mattpocock/skills/archive/refs/tags/v1.2.3.tar.gz
+  stripComponents: 1
+  include:
+    - '*/skills/**'
+  checksum:
+    sha256: "238fac54d0f53d3e2d0501c1b38c9c0e4e9bc26f6b057b53a7328ea15d43b66f"
+
 # Zellij
 
 .config/zellij/plugins/vim-zellij-navigator.wasm:
