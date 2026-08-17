@@ -470,7 +470,7 @@ Runtime state is local state and must not be committed to the dotfiles
 repository.
 
 ```text
-${XDG_STATE_HOME:-~/.local/state}/agents/
+${XDG_STATE_HOME:-~/.local/state}/pi-agents/
   agents/
     <agent-uuid>.json
   observations/
@@ -1219,7 +1219,7 @@ Configuration remains a local TypeScript object:
 
 ```ts
 export const agentsConfig = {
-  stateRoot: "~/.local/state/agents",
+  stateRoot: "~/.local/state/pi-agents",
   kitty: {
     templatePath: "<dotfiles>/kitty/sessions/agent.kitty-session.template",
     managedVar: "pi_managed_agent",

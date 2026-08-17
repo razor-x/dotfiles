@@ -9,5 +9,5 @@ export function defaultAgentsStateRoot(
   const stateHome = configured
     ? resolve(configured)
     : join(home, '.local', 'state')
-  return join(stateHome, 'agents')
+  return join(stateHome, 'pi-agents')
 }

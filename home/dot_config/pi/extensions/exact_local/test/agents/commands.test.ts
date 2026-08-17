@@ -19,7 +19,7 @@ describe('/agents', () => {
   it('routes the selected creation action through the application service', async () => {
     const beginPromotion = vi.fn(async () => ({
       id,
-      stateFile: `/state/agents/agents/${id}.json`,
+      stateFile: `/state/pi-agents/agents/${id}.json`,
       lifecycle: 'provisioning' as const,
     }))
     const service = stub<AgentsService>({ beginPromotion })
@@ -46,7 +46,7 @@ describe('/agents', () => {
       name: 'api-cache',
     })
     expect(notify).toHaveBeenCalledWith(
-      expect.stringContaining(`State: /state/agents/agents/${id}.json`),
+      expect.stringContaining(`State: /state/pi-agents/agents/${id}.json`),
       'info',
     )
     expect(notify).toHaveBeenCalledWith(

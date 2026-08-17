@@ -10,7 +10,7 @@ describe('AgentsApplication.beginPromotion', () => {
   it('persists provisioning intent without accepting resource-effect adapters', async () => {
     const create = vi.fn(
       async (_record: ManagedAgentRecordV1) =>
-        `/state/agents/agents/${id}.json`,
+        `/state/pi-agents/agents/${id}.json`,
     )
     const agents: AgentStore = {
       create,
@@ -54,7 +54,7 @@ describe('AgentsApplication.beginPromotion', () => {
     })
     expect(result).toEqual({
       id,
-      stateFile: `/state/agents/agents/${id}.json`,
+      stateFile: `/state/pi-agents/agents/${id}.json`,
       lifecycle: 'provisioning',
     })
   })

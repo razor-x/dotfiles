@@ -195,7 +195,7 @@ destructive discard.
 ## 8. Archive storage
 
 ```text
-${XDG_STATE_HOME:-~/.local/state}/agents/
+${XDG_STATE_HOME:-~/.local/state}/pi-agents/
   archives/
     <agent-uuid>/
       archive.json
