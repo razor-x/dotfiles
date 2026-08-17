@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -eu
+
+if git_common_dir=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null); then
+  exec nono run --allow-cwd --allow "$git_common_dir" --profile pi -- pi "$@"
+fi
+
+exec nono run --allow-cwd --profile pi -- pi "$@"

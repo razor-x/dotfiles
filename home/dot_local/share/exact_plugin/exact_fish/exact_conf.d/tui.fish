@@ -87,7 +87,8 @@ if status is-interactive
         abbr archrc cd "$ACONFMGR_CONFIG/.."
     end
 
-    abbr pi 'nono run --allow-cwd --profile pi -- pi'
+    abbr pi pi-nono
+    complete --command pi-nono --wraps pi
 
     abbr dotfiles cd "(chezmoi source-path)"
     alias dotupg 'chezmoi update --apply --init'
