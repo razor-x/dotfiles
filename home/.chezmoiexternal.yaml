@@ -3,13 +3,13 @@
 
 .local/share/theme/catppuccin/atuin:
   type: archive
-  url: https://github.com/catppuccin/atuin/archive/abfab12de743aa73cf20ac3fa61e450c4d96380c.tar.gz
+  url: https://github.com/catppuccin/atuin/archive/68aa64b77573c235044b614e752a781701af4eec.tar.gz
   exact: true
   stripComponents: 1
   include:
     - '*/themes/**'
   checksum:
-    sha256: "566e6c20f62be92ee9817f395c50e33fc230724e014a00ee60858e881d8d4dd0"
+    sha256: "f5d0083641c5d99cee3e76c2ef47b0905139c82bb99ae1d01e2792a164cfd36f"
 
 .local/share/theme/catppuccin/bat:
   type: archive
@@ -23,13 +23,13 @@
 
 .local/share/theme/catppuccin/delta:
   type: archive
-  url: https://github.com/catppuccin/delta/archive/74b47a345638a2f19b3e5bdb9d7e4984066f9ac7.tar.gz
+  url: https://github.com/catppuccin/delta/archive/011516f5d14f66b771b3e716f29c77231e008c74.tar.gz
   exact: true
   stripComponents: 1
   include:
     - '*/catppuccin.gitconfig'
   checksum:
-    sha256: "c4650ffaf593f7250d3c5987fab6493b252b2f9f142cb74593e7803f6307fac7"
+    sha256: "47a4ed43bd7b46cea46f88359e9caf7b75f9ff271efd0a88deeb2f7db78f9e00"
 
 .local/share/theme/catppuccin/eza:
   type: archive
