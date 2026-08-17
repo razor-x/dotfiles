@@ -208,7 +208,7 @@ format:
   shfmt --write $(git ls-files '*.sh')
 
 [working-directory: 'home/dot_config/pi/extensions/exact_local']
-pi-local-extension: && format
+pi: && format
   #!/usr/bin/env bash
   set -euo pipefail
 
