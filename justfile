@@ -18,7 +18,7 @@ upgrade-yazi:
   ya pkg upgrade
 
 upgrade-externals:
-  ./tools/upgrade_externals.sh
+  ./tools/upgrade_externals.fish
 
 reset:
   chezmoi state delete-bucket --bucket=scriptState;
@@ -36,7 +36,7 @@ format:
   shfmt --write $(git ls-files '*.sh')
 
 upgrade-pi: && format
-  ./tools/upgrade_pi.sh
+  ./tools/upgrade_pi.fish
 
 watch:
   watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force
