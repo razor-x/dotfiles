@@ -9,8 +9,8 @@ Local extension path: `local/agents`
 ## 1. Document suite
 
 This document defines the initial implementation. Three additive feature
-specifications deliberately remain outside the MVP, and two companion documents
-define shared implementation strategy:
+specifications deliberately remain outside the MVP, and three companion
+documents define shared implementation strategy:
 
 - [Archive lifecycle](agents-archive.md): retain a Pi session and
   metadata snapshot while removing the agent's operational resources.
@@ -23,6 +23,10 @@ define shared implementation strategy:
 - [Testing strategy](agents-testing-strategy.md): use Vitest, a
   functional core, fake adapters, narrow persistence contracts, and manual
   external-system acceptance checks.
+- [Kitty remote-control security boundary](agents-kitty-security.md): preserve
+  nono confinement through a narrow, default-deny Kitty gateway; this blocking
+  companion supersedes direct remote-control and executable restoration-file
+  examples in this document.
 - [Runtime dependency policy](agents-dependency-policy.md): use Pi-provided
   APIs and Node primitives while keeping the MVP free of additional runtime npm
   dependencies.
@@ -770,6 +774,14 @@ Ignored-file copying, dependency installation, dev servers, and project setup
 remain Worktrunk hook/configuration concerns.
 
 ## 15. Kitty integration
+
+> **Blocking security constraint:**
+> [Kitty remote-control security boundary](agents-kitty-security.md) supersedes
+> direct standard remote-control calls, bare Pi launch, and executable Kitty
+> restoration files described below. The trusted host launcher is `pi-nono` in
+> these dotfiles; nono remains an outer compatibility layer rather than an
+> extension responsibility. Treat the remainder of this section as product
+> intent until it is amended during the secure-gateway implementation.
 
 ### 15.1 Status and identity
 

@@ -30,6 +30,7 @@ The central testing strategy is:
 This document is normative for:
 
 - [MVP design](agents-design.md);
+- [Kitty remote-control security boundary](agents-kitty-security.md);
 - [archive lifecycle](agents-archive.md);
 - [dirty/non-default promotion](agents-transactional-promotion.md);
 - [multi-repository control](agents-multi-repo-control.md).

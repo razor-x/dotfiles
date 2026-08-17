@@ -16,19 +16,24 @@ dependencies. Vitest remains an allowed development dependency. The extension
 still integrates with the installed `pi`, `wt`, `git`, `kitty`/`kitten`, and
 `gh` programs.
 
+`pi-nono` is a host Pi launcher supplied by these dotfiles, not an extension
+runtime dependency or an implementation detail the extension recreates. The
+trusted Kitty gateway selects it through the
+[launcher compatibility contract](agents-kitty-security.md).
+
 ## Implementation primitives
 
-| Need                                   | Primitive                                                                                                                        |
-| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Execute external commands              | `pi.exec(command, args, { cwd, signal, timeout })` behind a fakeable `CommandRunner`                                             |
-| Validate tool input and persisted JSON | Pi-provided `typebox`; validate only the external-output fields consumed                                                         |
-| Direct interaction                     | `pi.registerCommand`, `ctx.ui.select`, `confirm`, `input`, `notify`, `setStatus`, and `setTitle`                                 |
-| Model interaction                      | `pi.registerTool` with TypeBox parameter schemas                                                                                 |
-| Pi-session discovery and transfer      | `ctx.sessionManager`, `SessionManager.list`/`listAll`/`forkFrom`, `ctx.switchSession`, `pi.setSessionName`, and `pi.appendEntry` |
-| Resume in a new Kitty tab              | Launch `pi --session <exact-path>` through the Kitty adapter                                                                     |
-| IDs, paths, time, and JSON             | `node:crypto`, `node:path`, an injected `Clock`, and native JSON APIs                                                            |
-| Durable files                          | `node:fs/promises`; write a restrictive temporary sibling, flush/close it, then rename it over the destination                   |
-| State transitions                      | Pure TypeScript functions, discriminated unions, exhaustive `switch`, and `assertNever`                                          |
+| Need                                   | Primitive                                                                                                                                                                                |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Execute external commands              | `pi.exec(command, args, { cwd, signal, timeout })` behind a fakeable `CommandRunner`                                                                                                     |
+| Validate tool input and persisted JSON | Pi-provided `typebox`; validate only the external-output fields consumed                                                                                                                 |
+| Direct interaction                     | `pi.registerCommand`, `ctx.ui.select`, `confirm`, `input`, `notify`, `setStatus`, and `setTitle`                                                                                         |
+| Model interaction                      | `pi.registerTool` with TypeBox parameter schemas                                                                                                                                         |
+| Pi-session discovery and transfer      | `ctx.sessionManager`, `SessionManager.list`/`listAll`/`forkFrom`, `ctx.switchSession`, `pi.setSessionName`, and `pi.appendEntry`                                                         |
+| Resume in a new Kitty tab              | Submit a typed ensure-present request to the [secure Kitty gateway](agents-kitty-security.md), which invokes the trusted host Pi launcher (`pi-nono` here) with `--session <exact-path>` |
+| IDs, paths, time, and JSON             | `node:crypto`, `node:path`, an injected `Clock`, and native JSON APIs                                                                                                                    |
+| Durable files                          | `node:fs/promises`; write a restrictive temporary sibling, flush/close it, then rename it over the destination                                                                           |
+| State transitions                      | Pure TypeScript functions, discriminated unions, exhaustive `switch`, and `assertNever`                                                                                                  |
 
 `pi.exec` shall receive executable and argument arrays, never a constructed
 shell command. Adapters shall normalize command results into domain types and
