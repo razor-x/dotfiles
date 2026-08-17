@@ -54,7 +54,7 @@ jq \
       | .devDependencies["@earendil-works/pi-coding-agent"] = $pi_version
       | .devDependencies["@earendil-works/pi-tui"] = $tui_version
       | .devDependencies["@types/node"] = $node_types_version
-      | .devDependencies["typebox"] = $typebox_version
+      | .dependencies["typebox"] = $typebox_version
       | .devDependencies["typescript"] = $typescript_version
     ' \
     package.json >"$package_json"

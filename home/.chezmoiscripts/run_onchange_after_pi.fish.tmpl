@@ -1,8 +1,14 @@
 #!/usr/bin/env fish
 
-# hash: {{ include (joinPath .chezmoi.homeDir ".config" "pi" "npm" "package-lock.json") | sha256sum }}
+# {{ $hash := include (joinPath .chezmoi.homeDir ".config" "pi" "npm" "package-lock.json") | sha256sum -}}
+# {{- $hash = printf "%s%s" $hash (include (joinPath .chezmoi.homeDir ".config" "pi" "extensions" "local" "package-lock.json") | sha256sum) | sha256sum -}}
+#
+# hash: {{ sha256sum $hash }}
 
 if type --query pi
+    cd $XDG_CONFIG_HOME/pi/extensions/local
+    npm ci
+
     cd $XDG_CONFIG_HOME/pi/npm
     npm ci
 
