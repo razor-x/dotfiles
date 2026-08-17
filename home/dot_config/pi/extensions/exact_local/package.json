@@ -5,7 +5,9 @@
   "scripts": {
     "test": "vitest run",
     "pretest": "biome lint",
+    "posttest": "biome format",
     "watch": "vitest",
+    "format": "biome format --write",
     "typecheck": "tsc"
   },
   "engines": {
