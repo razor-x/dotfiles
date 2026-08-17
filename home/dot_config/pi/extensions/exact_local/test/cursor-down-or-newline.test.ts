@@ -8,9 +8,9 @@ import {
   type SessionStartEvent,
 } from '@earendil-works/pi-coding-agent'
 import type { EditorTheme, KeyId, TUI } from '@earendil-works/pi-tui'
+import { fromPartial } from '@total-typescript/shoehorn'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import cursorDownOrNewLine, { LocalEditor } from '@/cursor-down-or-newline.ts'
-import { stub } from 'test/stub.ts'
 
 describe('cursorDownOrNewLine', () => {
   it('installs the editor in TUI mode', () => {
@@ -18,10 +18,10 @@ describe('cursorDownOrNewLine', () => {
     const handler = registerExtension()
 
     handler(
-      stub<SessionStartEvent>({}),
-      stub<ExtensionContext>({
+      fromPartial<SessionStartEvent>({}),
+      fromPartial<ExtensionContext>({
         mode: 'tui',
-        ui: stub<ExtensionUIContext>({ setEditorComponent }),
+        ui: fromPartial<ExtensionUIContext>({ setEditorComponent }),
       }),
     )
 
@@ -34,10 +34,10 @@ describe('cursorDownOrNewLine', () => {
     const handler = registerExtension()
 
     handler(
-      stub<SessionStartEvent>({}),
-      stub<ExtensionContext>({
+      fromPartial<SessionStartEvent>({}),
+      fromPartial<ExtensionContext>({
         mode: 'rpc',
-        ui: stub<ExtensionUIContext>({ setEditorComponent }),
+        ui: fromPartial<ExtensionUIContext>({ setEditorComponent }),
       }),
     )
 
@@ -121,10 +121,10 @@ describe('LocalEditor', () => {
 
 function registerExtension(): ExtensionHandler<SessionStartEvent> {
   const on = vi.fn()
-  cursorDownOrNewLine(stub<ExtensionAPI>({ on }))
+  cursorDownOrNewLine(fromPartial<ExtensionAPI>({ on }))
   expect(on).toHaveBeenCalledOnce()
   expect(on).toHaveBeenCalledWith('session_start', expect.any(Function))
-  return stub<ExtensionHandler<SessionStartEvent>>(on.mock.calls[0]?.[1])
+  return fromPartial<ExtensionHandler<SessionStartEvent>>(on.mock.calls[0]?.[1])
 }
 
 function createEditor(binding: KeyId | KeyId[] | undefined) {
@@ -134,12 +134,12 @@ function createEditor(binding: KeyId | KeyId[] | undefined) {
   const userBindings = binding
     ? { 'local.editor.cursorDownOrNewLine': binding }
     : {}
-  const keybindings = stub<KeybindingsManager>({
+  const keybindings = fromPartial<KeybindingsManager>({
     getUserBindings: () => userBindings,
   })
   const editor = new LocalEditor(
-    stub<TUI>({ requestRender }),
-    stub<EditorTheme>({ borderColor: (text) => text }),
+    fromPartial<TUI>({ requestRender }),
+    fromPartial<EditorTheme>({ borderColor: (text: string) => text }),
     keybindings,
   )
 
