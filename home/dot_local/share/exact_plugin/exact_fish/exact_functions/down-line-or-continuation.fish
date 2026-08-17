@@ -1,9 +1,9 @@
 function down-line-or-continuation \
     --description 'Move down if there is a line below, otherwise add line continuation'
 
-    set --local cursor (commandline --cursor)
-    set --local buffer (commandline --current-buffer | string collect)
-    set --local len (string length -- $buffer)
+    set --function cursor (commandline --cursor)
+    set --function buffer (commandline --current-buffer | string collect)
+    set --function local len (string length -- $buffer)
 
     if test $cursor -lt $len
         commandline --function down-line
