@@ -18,6 +18,9 @@
     "enabled": true,
     "useEditorconfig": true
   },
+  "linter": {
+    "enabled": true
+  },
   "javascript": {
     "formatter": {
       "jsxQuoteStyle": "single",

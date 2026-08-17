@@ -3,7 +3,7 @@ import {
   type ExtensionAPI,
   type KeybindingsManager,
 } from '@earendil-works/pi-coding-agent'
-import { matchesKey, type KeyId } from '@earendil-works/pi-tui'
+import { type KeyId, matchesKey } from '@earendil-works/pi-tui'
 
 const cursorDownOrNewLineAction = 'local.editor.cursorDownOrNewLine'
 
@@ -22,7 +22,7 @@ type EditorInternals = {
   moveCursor: (deltaLine: number, deltaCol: number) => void
 }
 
-class LocalEditor extends CustomEditor {
+export class LocalEditor extends CustomEditor {
   private readonly cursorDownOrNewLineKeys: KeyId[]
 
   constructor(...args: ConstructorParameters<typeof CustomEditor>) {
