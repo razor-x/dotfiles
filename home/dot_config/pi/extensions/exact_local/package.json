@@ -3,13 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "check": "npm run typecheck",
+    "precheck": "npm run test",
+    "postcheck": "npm run lint",
     "test": "vitest run",
-    "pretest": "biome lint",
-    "posttest": "biome format",
-    "watch": "vitest",
-    "format": "biome format --write",
     "typecheck": "tsc",
-    "posttypecheck": "tsc --project tsconfig.test.json"
+    "posttypecheck": "tsc --project tsconfig.test.json",
+    "lint": "biome lint",
+    "postlint": "biome format",
+    "watch": "vitest",
+    "format": "biome format --write"
   },
   "engines": {
     "node": ">=22.19.0"
