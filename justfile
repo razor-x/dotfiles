@@ -30,9 +30,9 @@ format:
   cljfmt fix $(git ls-files '*.clj')
   biome format --write .
   fish_indent --write $(git ls-files '*.fish' 'home/.chezmoiscripts/*.fish.tmpl')
-  stylua .
+  stylua $(git ls-files '*.lua')
   mdformat $(git ls-files '*.md')
-  ruff format .
+  ruff format $(git ls-files '*.py' '*.pyi' '*.ipynb')
   shfmt --write $(git ls-files '*.sh')
 
 upgrade-pi: && format
