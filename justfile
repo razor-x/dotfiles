@@ -4,7 +4,7 @@ init:
   chezmoi init --apply --source ~/config/dotfiles razor-x
 
 apply:
-  chezmoi apply --init
+  chezmoi apply --init --source {{ justfile_directory() }}
 
 update:
   chezmoi update --apply --init
@@ -39,7 +39,7 @@ upgrade-pi: && format
   ./tools/upgrade_pi.fish
 
 watch:
-  watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force
+  watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force --source {{ justfile_directory() }}
 
 generate:
   chezmoi generate install.sh > bootstrap.sh
