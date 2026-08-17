@@ -14,6 +14,9 @@ M.spec = {
       -- Wrap long lines.
       vim.opt.wrap = true
 
+      -- Highlight misspelled words using Neovim's built-in spell checker.
+      vim.opt.spell = true
+
       -- Set nonzero scrolloff.
       vim.opt.scrolloff = 5
 
