@@ -10,6 +10,7 @@ if type --query ya; and type --query yazi
         "$state_path/yazi/plugins" \
         "$config_path/plugins" \
         "$config_path/flavors"
+    or exit
     ya pkg install
 else
     echo 'Cannot install Yazi packages: yazi or ya not installed.'

@@ -4,7 +4,9 @@
 
 if type --query pi
     cd $XDG_CONFIG_HOME/pi/npm
+    or exit
     npm ci
+    or exit
 
     # UPSTREAM: The pi AUR packages is a Bun complied binary
     # and will not find the native module inside node_modules.

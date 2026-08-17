@@ -3,24 +3,32 @@
 if type --query gh
     # Install dashboard extension.
     gh extension install --pin v4.24.1 dlvhdr/gh-dash
+    or exit
 
     # Prefer SSH for git operations.
     gh config set git_protocol ssh
+    or exit
 
     # Reset all aliases.
     gh alias delete --all
+    or exit
 
     # Merge pull requests and delete the source branch.
     gh alias set --clobber m 'pr merge --merge --delete-branch'
+    or exit
     gh alias set --clobber ms 'pr merge --squash --delete-branch'
+    or exit
     gh alias set --clobber mr 'pr merge --rebase --delete-branch'
+    or exit
 
     # Clone repo.
     gh alias set --clobber clone 'repo clone'
+    or exit
 
     # Cut a new version via GitHub Actions.
     gh alias set --clobber ver \
         'workflow run version.yml --raw-field version="$1"'
+    or exit
 
     # Manage git remotes and keep upstream (or origin) as gh default repo.
     gh alias set --clobber remote '!f() {

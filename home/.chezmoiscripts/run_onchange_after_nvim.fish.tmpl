@@ -16,11 +16,16 @@ if type --query nvim
     # https://github.com/folke/lazy.nvim/pull/2127
     # https://github.com/folke/lazy.nvim/issues/1279
     set --function tmp (mktemp --suffix '.json' 'lazy-lock.XXXXXX')
+    or exit
     cp '{{ $lockfile }}' $tmp
+    or exit
     nvim --headless '+Lazy! sync' +qall
+    or exit
     mv $tmp '{{ $lockfile }}'
+    or exit
 
     nvim --headless '+Lazy! restore' +qall
+    or exit
     nvim --headless '+helptags {{ $dir }}' +qall
 else
     echo 'Cannot generate Neovim helptags or install plugins: nvim not found.'

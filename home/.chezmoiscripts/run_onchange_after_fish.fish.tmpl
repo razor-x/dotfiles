@@ -16,12 +16,15 @@
 
 # Clear Fish greeting.
 set --universal fish_greeting
+or exit
 
 # Set fifc fifc_binding.
 set --universal fifc_keybinding ctrl-tab
+or exit
 
 if type --query fish_config
     fish_config theme choose '{{ template "theme" (merge (dict "app" "fish") .) }}'
+    or exit
 else
     echo 'Cannot update fish theme: fish_config not found.'
     return 1
@@ -29,6 +32,7 @@ end
 
 if type --query fisher
     fisher update
+    or exit
 else
     echo 'Cannot update fish plugins: fisher is not installed.'
     return 1
