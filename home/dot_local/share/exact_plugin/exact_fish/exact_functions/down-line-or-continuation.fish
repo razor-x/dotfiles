@@ -3,7 +3,7 @@ function down-line-or-continuation \
 
     set --function cursor (commandline --cursor)
     set --function buffer (commandline --current-buffer | string collect)
-    set --function local len (string length -- $buffer)
+    set --function len (string length -- $buffer)
 
     if test $cursor -lt $len
         commandline --function down-line
