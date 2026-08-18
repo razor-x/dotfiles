@@ -10,6 +10,6 @@
       "$XDG_DATA_HOME/delta",
       "$XDG_DATA_HOME/theme/catppuccin/delta"
     ],
-    "write": ["$XDG_CONFIG_HOME/gnupg"]
+    "allow": ["$XDG_CONFIG_HOME/gnupg"]
   }
 }
