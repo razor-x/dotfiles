@@ -4,10 +4,21 @@ local toggles = require("config.toggles")
 M.spec = {
   {
     "nvim-mini/mini.ai",
-    dependencies = { "nvim-mini/mini.extra" },
+    dependencies = {
+      "nvim-mini/mini.extra",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
     opts = function(_, opts)
+      local MiniAi = require("mini.ai")
+
       opts.n_lines = 4000
       opts.custom_textobjects = opts.custom_textobjects or {}
+      opts.custom_textobjects.F = MiniAi.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" })
+      opts.custom_textobjects.c = MiniAi.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" })
+      opts.custom_textobjects.o = MiniAi.gen_spec.treesitter({
+        a = { "@conditional.outer", "@loop.outer" },
+        i = { "@conditional.inner", "@loop.inner" },
+      })
       opts.custom_textobjects.e = MiniExtra.gen_ai_spec.buffer()
     end,
   },
