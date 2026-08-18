@@ -16,11 +16,12 @@ several repositories and apply the same model across them:
 
 > “Clean up agents with PRs merged more than a week ago across all of them.”
 
-This is a scope and orchestration extension, not a new kind of agent. Every
-active managed agent still owns one Pi session, one non-primary Worktrunk
-worktree and branch, and at most one live Kitty tab; provisioning records may
-be incomplete. Resource reconciliation remains per-agent and repository
-mutation remains per-repository.
+This is a scope and lifecycle-coordination extension, not a new kind of agent.
+Every active managed agent still owns one Pi session, exactly one canonical
+non-primary Worktrunk worktree, plural explicit branch/PR resources, and at most
+one live Kitty tab; exactly one branch is checked out as observed state.
+Provisioning records may be incomplete. Resource reconciliation remains
+per-agent and repository mutation remains per-repository.
 
 ## 2. Simple extension path
 
@@ -41,13 +42,17 @@ It does not require:
 - a daemon;
 - a database migration;
 - a workspace aggregate;
-- a persistent controller entity;
+- turning a controller into a managed agent or resource owner;
+- durable orchestration grouping merely to resolve a directory scope;
 - a distributed transaction across repositories;
 - scanning or indexing arbitrary unmanaged Pi sessions.
 
 The parent-directory Pi session remains ordinary and unmanaged while acting in
-a controller role. It is not automatically registered, owned, restored, or
-made the parent of agents it controls.
+a controller role. Lifecycle management does not register, own, restore, or
+make it a delegation parent, and communication does not mint a `ControllerId`
+or `lineageId`. Agents it creates directly are top-level agents with
+`parentAgentId: null`. A locally authorized operator ingress may deliver
+assignments without adding a controller node or workspace aggregate.
 
 Scope membership comes only from durable agent records. Cached repository or
 resource observations can improve initial display but can never add an agent
@@ -85,7 +90,10 @@ contains unrelated repositories.
 ### 3.5 Controller Pi session
 
 The current Pi session while it invokes management operations. “Controller” is
-a role, not a registry record or special agent type.
+a role, not a managed-agent type or stored identity. It has no `ControllerId`,
+`parentAgentId`, Pi-session resource, repository, worktree, branch, PR, or tab.
+Communication from that session is operator-origin delivery, not an agent
+sender inserted into the delegation forest.
 
 ## 4. Scope resolution
 
@@ -177,25 +185,28 @@ The feature must support:
 1. Preserving per-agent resource ownership and idempotence.
 1. Reporting partial batch outcomes without implying cross-repository
    rollback.
-1. Optionally creating child agents in a repository different from the parent,
-   while preserving global UUID parentage.
+1. Creating supporting agents in a repository different from their managed
+   parent while preserving global `agentId`/`parentAgentId` ancestry; an
+   unmanaged controller may instead create a top-level agent.
 
 ## 8. Non-goals
 
 This feature does not:
 
-- turn the parent-directory Pi session into a managed agent;
-- give that Pi session a synthetic worktree or repository;
-- make controlled agents its children automatically;
+- turn the parent-directory Pi session into a managed agent or invent an
+  internal controller identity for it;
+- give that Pi session a synthetic worktree, repository, or resource list;
+- infer delegation children merely from directory scope or lifecycle control;
 - make one agent own several repositories or worktrees;
 - create a multi-repository workspace object;
 - provide atomic commit/rollback across repositories;
 - discover all Git repositories or unmanaged Pi sessions on the machine;
-- synchronize changes, commits, branches, or PRs between repositories;
+- synchronize changes, commits, branches, or PRs between repositories, or
+  infer Git topology from delegation ancestry;
 - infer a monorepo or dependency graph;
 - coordinate merges or releases across repositories;
-- preserve or restore the parent-directory controller Pi session through the
-  extension;
+- preserve or restore the parent-directory controller Pi session as an agent
+  resource;
 - promote a Pi session outside a repository without first selecting a target
   repository and a separately specified continuation behavior.
 
@@ -207,7 +218,7 @@ This feature does not:
 | MR-02 | The active per-user registry shall be globally enumerable and every agent shall carry canonical repository common-dir and primary-worktree identity.                                       |
 | MR-03 | A directory scope shall select repositories by canonical primary-worktree containment under the resolved directory root.                                                                   |
 | MR-04 | Worktrunk worktrees sharing a Git common directory shall be deduplicated as one repository.                                                                                                |
-| MR-05 | The current parent-directory Pi session shall remain unmanaged unless separately promoted from within a specific repository under supported promotion rules.                               |
+| MR-05 | The current parent-directory Pi session shall remain unmanaged unless separately promoted; it shall receive no controller record or stable controller ID, and agents it creates directly shall have `parentAgentId: null`. |
 | MR-06 | A scope shall be resolved to immutable repository IDs before a destructive plan is presented.                                                                                              |
 | MR-07 | Multi-repository deletion and cleanup shall produce one plan grouped by repository and agent with exact resource-level actions.                                                            |
 | MR-08 | Plan execution shall revalidate and lock each repository independently immediately before its mutations.                                                                                   |
@@ -216,16 +227,19 @@ This feature does not:
 | MR-11 | Unknown or moved repository paths shall be reported as broken bindings and shall not be guessed from matching remote names.                                                                |
 | MR-12 | Model-supplied arbitrary directory paths shall not flow directly into destructive scope selection. Scope roots shall originate from cwd, configuration, or explicit UI selection.          |
 | MR-13 | Git, Worktrunk, Kitty, and `gh` subprocess concurrency shall be bounded and observable.                                                                                                    |
-| MR-14 | Output shall group same-named agents and branches by repository and shall use UUIDs for mutation.                                                                                          |
+| MR-14 | Output shall group same-named agents and plural branch/PR resources by repository, show current checkout as observation, and use UUIDs plus exact resource identities for mutation.          |
 | MR-15 | Restore, stop, delete, and archive semantics shall remain idempotent per agent across a multi-repository batch.                                                                            |
 | MR-16 | Promotion while cwd is in a repository's primary worktree shall retain the MVP/advanced-promotion semantics unchanged.                                                                     |
 | MR-17 | An agent-creation flow entered through `/agents` from a directory controller shall require an explicit target repository before it creates durable intent or invokes a repository adapter. |
-| MR-18 | Cross-repository parentage, when enabled, shall link globally unique agent IDs and shall never imply shared Git bases or resource ownership.                                               |
+| MR-18 | Cross-repository delegation shall link globally unique `agentId` and manager-assigned `parentAgentId` values and shall never imply shared Git bases, topology, or resource ownership.       |
 | MR-19 | Directory listing shall be able to render durable records and valid per-agent observation caches before external refresh completes.                                                        |
 | MR-20 | Cross-repository refresh shall observe Kitty once globally, Worktrunk once per repository, and other sources with bounded concurrency, then merge observations by source timestamp.        |
 | MR-21 | Scope membership and destructive eligibility shall use durable records and fresh observations, never cached derived status.                                                                |
 | MR-22 | A future background process shall be able to reuse the same observer, cache merge, and UI-update contracts without changing agent semantics.                                               |
 | MR-23 | Optional Worktrunk hooks shall request full repository refresh only and shall not write cross-repository event deltas.                                                                     |
+| MR-24 | A directory controller shall remain outside the delegation forest; any operator-origin communication authority shall come from its registered local connection or capability, not a controller ID or message-body claim. |
+| MR-25 | Cross-repository delegation shall never cascade deletion or archive; every supporting agent remains an independent candidate and relationship edges must be resolved before a parent vanishes. |
+| MR-26 | Cross-repository creation shall preserve one-worktree-per-agent cardinality; simultaneous checkout of parallel branches shall use separate related agents.                                    |
 
 ## 10. User-facing behavior
 
@@ -391,40 +405,58 @@ during a long batch.
 A Pi session outside any repository cannot use MVP promotion because it has no
 source repository, primary worktree, branch, or Git state.
 
-The creation flow entered through `/agents` may create a top-level managed
-agent after the user selects:
+The creation flow entered through `/agents` may create a managed agent after
+the user selects:
 
 - target repository;
-- new branch;
+- new initial branch;
 - target-repository base revision;
-- name and initial prompt.
+- name.
 
-The extension then uses ordinary child/fresh-agent provisioning without a
-`parentId`. The directory controller remains in place and unmanaged.
+There is no lifecycle-level assignment prompt or model-selected
+`parentAgentId`. Ordinary fresh-agent provisioning from this unmanaged session
+creates a top-level agent with `parentAgentId: null`. An authenticated operator
+channel may deliver its assignment after registration, but does not make the
+controller a parent or resource owner.
 
 An optional later operation could fork the controller's Pi-session history into
-a chosen repository agent. That changes continuation and parentage semantics
-and is not part of this feature.
+a chosen repository agent. That changes continuation semantics and is not part
+of this feature.
 
-## 14. Cross-repository child agents
+## 14. Cross-repository supporting agents
 
-Global UUIDs make cross-repository parentage structurally possible without a
-schema migration. This feature may allow a managed parent in repository A to
-spawn a child in repository B when the target is explicit.
+Global agent UUIDs and `parentAgentId` make cross-repository delegation
+structurally possible without a workspace aggregate. A managed agent in
+repository A may spawn a supporting child in repository B when the target is
+explicit. An unmanaged root controller may create a top-level agent in any
+explicitly selected repository.
 
 Differences from same-repository spawn:
 
 - base revision is resolved in repository B and never defaults to repository
   A's HEAD;
-- the child owns only repository B resources;
-- parent deletion/archive constraints still follow the global UUID link;
-- list views within repository B may show an out-of-scope parent as a labeled
-  reference rather than silently omitting the relationship;
+- the child owns exactly one repository B worktree and only its own repository B
+  branches, PRs, Pi session, and tab;
+- the relationship is delegation provenance/coordination, not Git or resource
+  ownership;
+- parent deletion/archive never selects the child implicitly; a remaining edge
+  blocks disappearance until the child is independently deleted, reparented,
+  or detached;
+- list views within repository B may show an out-of-scope managed-agent parent
+  as a labeled UUID reference rather than silently omitting the relationship;
 - no Git ancestry, branch relationship, filesystem sharing, or PR relationship
-  is inferred from parentage.
+  is inferred from parentage. The child may intentionally work on a structurally
+  sibling branch or PR.
 
-The directory controller itself does not become the parent. Agents it creates
-are top-level unless the user explicitly supplies a managed parent agent.
+A directory controller never becomes the delegation parent. Agents created
+from directory scope are top-level unless a managed agent is the authenticated
+creator.
+
+When a child asks its parent to authorize another agent, manager code chooses
+between two safe placements: child of the requester when the requester will
+manage it, or another child of the authorizing parent for parallel work
+coordinated there. The request body cannot name an arbitrary
+`parentAgentId`.
 
 ## 15. Promotion behavior
 
@@ -468,8 +500,8 @@ path substitution.
 - Symlinks cannot expand a selected scope silently.
 - Destructive commands receive resolved agent resources, never directory-scan
   results or model-generated paths.
-- GitHub requests are deduplicated per repository/branch and concurrency
-  limited.
+- GitHub requests are deduplicated per exact repository/PR identity and
+  concurrency limited; current checkout does not select a single implicit PR.
 - Cache reads do not spawn subprocesses and may supply the entire first render.
 - Worktrunk list calls are one per reconciled repository, not one per agent.
 - Kitty topology is fetched once per cross-repository operation.
@@ -538,7 +570,8 @@ the current Pi process; a future updater can enable the same cache contract.
 1. Add explicit target-repository fresh-agent creation.
 1. Add sequential restore/stop across selected repositories.
 1. Add multi-repository delete/cleanup plans using existing per-agent execution.
-1. Add cross-repository child creation.
+1. Add cross-repository supporting-agent creation with manager-derived
+   `parentAgentId`.
 1. Consider optional bounded repository discovery only after registry-first
    workflows are satisfactory.
 
@@ -550,8 +583,8 @@ the current Pi process; a future updater can enable the same cache contract.
    repository.
 1. A managed worktree outside the directory is still included when its primary
    repository is beneath the directory.
-1. Duplicate agent and branch names in different repositories remain
-   unambiguous by UUID and repository context.
+1. Duplicate agent, branch, and PR display names in different repositories
+   remain unambiguous by UUID, exact resource identity, and repository context.
 1. Directory listing requires no filesystem scan when all agents are already
    registered.
 1. Restore and stop across repositories preserve ordinary per-agent
@@ -562,11 +595,16 @@ the current Pi process; a future updater can enable the same cache contract.
    agents in another.
 1. Interruption halfway through cleanup yields completed and resumable
    per-agent outcomes, not an atomicity claim.
-1. A parent-directory Pi session remains unmanaged and absent from `/agents`.
+1. A parent-directory Pi session remains unmanaged, has no controller record,
+   and is absent from `/agents`.
 1. Creating from the directory controller requires an explicit target
-   repository.
-1. Cross-repository child creation resolves its base in the child's repository
-   and creates no shared resource ownership.
+   repository and produces `parentAgentId: null`.
+1. Cross-repository supporting-agent creation resolves its base in the child's
+   repository, gives the child exactly one worktree, and creates no shared
+   resource ownership or inferred Git relationship.
+1. Selecting a cross-repository parent for cleanup never selects its child; an
+   unresolved `parentAgentId` edge blocks disappearance until explicit delete,
+   reparent, or detach.
 1. Moving a repository results in an explicit broken binding rather than
    remote-name guessing.
 1. No operation introduces a multi-repository workspace or daemon.
@@ -597,6 +635,7 @@ Multi-repository behavior follows the shared
 - [MVP design](agents-design.md)
 - [Testing strategy](agents-testing-strategy.md)
 - [Archive lifecycle](agents-archive.md)
+- [Delegation and communication security](agents-delegation-communication.md)
 - [Dirty/non-default promotion](agents-transactional-promotion.md)
 - [Git worktrees](https://git-scm.com/docs/git-worktree)
 - [Worktrunk worktree listing](https://worktrunk.dev/list/)

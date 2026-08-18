@@ -13,8 +13,9 @@ expensive, stateful, interactive, authenticated, or visually obvious:
 - Pi sessions and extension UI;
 - Worktrunk and Git worktrees;
 - Kitty tabs and remote control;
-- Git and remote branches;
-- GitHub PRs and checks.
+- Git, current checkout, and plural local/remote branches;
+- plural GitHub PRs and checks;
+- delegation identities and any authenticated inter-agent transport.
 
 The automated suite should not recreate those systems. Its highest-value job is
 to prove that the extension makes the correct decisions and updates durable and
@@ -33,7 +34,8 @@ This document is normative for:
 - [Kitty remote-control security boundary](agents-kitty-security.md);
 - [archive lifecycle](agents-archive.md);
 - [dirty/non-default promotion](agents-transactional-promotion.md);
-- [multi-repository control](agents-multi-repo-control.md).
+- [multi-repository control](agents-multi-repo-control.md);
+- [delegation and communication security](agents-delegation-communication.md).
 
 ## 2. Settled testing decisions
 
@@ -136,7 +138,8 @@ domain/
   plans.ts
   resource-order.ts
   operation-transition.ts
-  hierarchy.ts
+  delegation.ts
+  communication-authorization.ts
   scope.ts
   schemas.ts
 ```
@@ -225,6 +228,13 @@ services.
 | TS-22 | The first `/agents` creation-flow increment shall prove that it writes an empty revision-zero `provisioning` record and invokes no Worktrunk, Pi-session, Kitty, observation-cache, or GitHub adapter/store.                        |
 | TS-23 | `/agents` subcommand tests shall treat verbs as UI routes: they shall verify scope/eligibility filtering, picker delegation, UUID resolution, cancellation, and unknown-subcommand help without duplicating domain-operation tests. |
 | TS-24 | Multi-select command-flow tests shall prove stable selection ordering, independent per-agent outcomes, and no effect for an empty or canceled selection.                                                                            |
+| TS-25 | Cardinality tests shall prove one canonical worktree, one-or-more explicit local branches, plural remote branch/PR resources, and exactly one observed current checkout per active agent.                                                                  |
+| TS-26 | Branch-switch tests shall prove clean/no-operation/topology preflight, exact argument arrays, unchanged agent/worktree identity, and post-switch observation.                                                                            |
+| TS-27 | Discovery, inspection, PR-head references, and checkout shall be tested not to confer branch/PR ownership or association.                                                                                                                 |
+| TS-28 | Delegation tests shall prove that parent selection never adds a child to delete/archive candidates and that dangling edges require independent delete, reparent, or detach.                                                              |
+| TS-29 | Communication authorization tests shall derive sender from a registered connection/capability, reject sender fields in bodies, allow only ancestor/descendant routes, and deny unrelated trees and siblings by default.                 |
+| TS-30 | Identity tests shall prove models cannot select or mutate `parentAgentId`, and that reparent/detach updates affected parent links and rotates capabilities atomically.                                                                                     |
+| TS-31 | Root-controller tests shall prove the controller remains unmanaged with no controller record or stable controller ID, while any operator ingress is bound to its registered local connection/capability.                                                        |
 
 ## 6. Test layers
 
@@ -251,7 +261,10 @@ Use table-driven `it.each` cases for combinations such as:
 - zero/one/multiple Kitty tabs;
 - working/waiting lifecycle signal;
 - Git clean/dirty/conflicted/unobservable;
-- PR none/open/closed/merged/unobservable;
+- zero/one/many explicit PRs with independently open/closed/merged/unobservable
+  states;
+- zero/one/many branch resources, one current checkout, and mismatched or
+  multiply checked-out topology;
 - durable record revision matching/mismatching cache;
 - source observations fresh/stale/error.
 
@@ -271,10 +284,12 @@ Planning tests assert exact typed decisions:
 - restore becomes focus when one tab already exists;
 - duplicate tabs refuse;
 - stop is idempotent when no tab exists;
-- explicit delete includes exact PR/branch/resource actions;
+- explicit delete includes exact independent actions/dispositions for every
+  PR and branch resource, with worktree removal ordered last;
 - associated resources require adopt-on-confirmation;
 - old-merged cleanup uses the injected clock and fresh `mergedAt`;
-- parent deletion orders descendants first or refuses;
+- parent deletion never selects descendants and refuses until each child edge
+  is independently deleted, reparented, or detached;
 - archive retains only Pi session and archive record;
 - multi-repository plans group agents by canonical repository identity.
 
@@ -305,14 +320,17 @@ The reducer must distinguish “definitely did not happen” from “may have
 happened.” An uncertain external effect produces re-observation or an
 idempotent retry, never an assumed rollback.
 
-### 7.4 Hierarchy and scope
+### 7.4 Delegation and scope
 
 Pure tests cover:
 
-- descendant-first order;
-- parent blocking;
-- explicit reparenting;
-- cross-repository parent IDs;
+- independent child selection and child-before-parent ordering only when both
+  were separately selected;
+- parent blocking without cascade;
+- explicit reparenting and detachment;
+- manager-assigned `parentAgentId` changes and capability-rotation decisions;
+- cross-repository managed-agent parent IDs;
+- ancestor/descendant authorization, sibling denial, and unrelated-tree denial;
 - canonical path containment;
 - Worktrunk common-dir deduplication;
 - moved/broken repository identity;
@@ -458,9 +476,13 @@ Actual tab rendering, focus behavior, and interactive prompts remain manual.
 
 Test:
 
-- porcelain/branch/topology fixture parsing;
-- dirty, conflict, operation-in-progress, unpushed, and detached states;
-- `gh` JSON normalization for none/open/draft/closed/merged/check/review states;
+- porcelain/current-checkout/plural-branch/topology fixture parsing;
+- dirty, conflict, operation-in-progress, unpushed, detached, and target-checked-
+  out-elsewhere states;
+- exact `git switch -- <validated-branch>` argument construction with no shell,
+  force, guess, or model-supplied arbitrary ref;
+- `gh` JSON normalization for zero/one/many exact PR resources across
+  open/draft/closed/merged/check/review states;
 - authentication/network/malformed-output errors;
 - exact repository and PR-number targeting;
 - PR close terminology and command construction;
@@ -579,7 +601,8 @@ for (const phase of operationPhases) {
 Cover:
 
 - promotion provisioning;
-- child provisioning;
+- supporting-agent provisioning and manager-assigned relationship registration;
+- branch association/switch around effect/observation uncertainty;
 - stop/restore around tab uncertainty;
 - resource-by-resource deletion;
 - archive snapshot/copy/teardown/publication;
@@ -676,9 +699,10 @@ Automate:
 - durable restart/list behavior before any resource exists;
 - reconciliation matrix;
 - clean promotion decisions and phase transitions;
-- child provisioning;
+- supporting-agent provisioning without assignment delivery;
 - stop/restore/focus idempotence;
-- PR normalization and ownership/adoption;
+- plural branch/PR normalization and per-resource ownership/adoption;
+- safe sequential branch switching with unchanged worktree identity;
 - explicit delete and old-merged cleanup;
 - resource ordering, interruption, and recovery;
 - cache-first list and destructive cache bypass.
@@ -691,7 +715,7 @@ Automate:
 - immutable snapshot construction;
 - retained resource set;
 - Pi-session checksum/copy publication;
-- descendants/reparenting;
+- non-cascading child selection, reparenting, and detachment;
 - teardown and archive-cleanup interruption;
 - active cache removal and non-retention.
 
@@ -719,9 +743,30 @@ Automate:
 - bounded refresh scheduling;
 - one Worktrunk observation per repository and one Kitty observation globally;
 - per-repository errors and partial batch outcomes;
-- cross-repository parentage;
+- cross-repository managed-agent delegation and top-level controller-created
+  agents;
 - moved repository refusal;
 - fresh destructive revalidation independent of cache.
+
+### 15.5 Delegation and communication security
+
+Automate:
+
+- manager-only `parentAgentId` assignment and mutation;
+- authenticated-connection/capability sender derivation;
+- rejection of sender claims and unknown envelope fields;
+- ancestor/descendant allow, sibling deny, and unrelated-tree deny matrices;
+- an unmanaged root controller with no controller identity, plus separately
+  authorized operator-origin delivery;
+- requester-managed versus authorizing-parent-managed supporting-agent
+  placement;
+- reparent/detach subtree updates and capability rotation;
+- replay, stale capability, disconnected principal, forged UUID/name/path, and
+  broker-address knowledge cases;
+- delivery into a fake `pi.sendUserMessage` sink only after authorization.
+
+The normal suite uses an in-memory transport and fake registered connections.
+It never opens a real cross-agent socket or relies on prompts for authorization.
 
 ## 16. Manual acceptance suite
 
@@ -744,15 +789,23 @@ every edit.
 1. After clean promotion is complete, confirm the same Kitty tab continues
    with the new cwd and Pi session.
 1. Confirm Worktrunk and Kitty activity markers update while working/waiting.
-1. Spawn, stop, focus, and restore a child agent.
+1. Spawn, stop, focus, and restore a supporting agent; verify manager-assigned
+   `parentAgentId` and no lifecycle-delivered assignment prompt.
+1. Associate two branches, switch between them sequentially, and verify current
+   checkout changes while agent UUID and canonical worktree remain fixed.
+1. Verify a dirty worktree and a target checked out elsewhere each refuse
+   switching before mutation.
 1. Stop two disposable agents, enter a configured resume/restore subcommand,
    verify its picker excludes ineligible agents, select both, and inspect the
    independent per-agent outcomes.
 1. Restart Kitty and restore the exact Pi session through the configured
    restoration recipe.
-1. Observe a real PR and verify normalized status.
-1. In a disposable repository, confirm an explicit delete plan closes the
-   selected open PR and removes only confirmed resources.
+1. Observe two real PRs and verify independently normalized status.
+1. In a disposable repository, confirm an explicit delete plan resolves every
+   selected branch/PR independently, closes only confirmed open PRs, and removes
+   the worktree last.
+1. Verify parent deletion does not select a child and remains blocked until the
+   child is independently deleted, reparented, or detached.
 1. Confirm a failed or refused Worktrunk hook is surfaced and subsequent full
    observation reconstructs status.
 1. Confirm cache-first `/agents` display is visibly replaced by fresh status.
@@ -763,7 +816,11 @@ every edit.
   snapshot.
 - Promote staged, unstaged, and untracked changes and compare target state.
 - Run Pi above several disposable repositories and exercise grouped list,
-  refresh, restore, and cleanup planning.
+  refresh, restore, cross-repository supporting-agent creation, and cleanup
+  planning.
+- With disposable sandbox profiles, verify ancestor/descendant communication,
+  sibling denial, unrelated-tree denial, and root-controller communication
+  without managed resources.
 
 Manual steps must identify disposable targets explicitly. They never run
 against the primary dotfiles worktree or valuable branches by default.
@@ -823,17 +880,21 @@ only for code whose contract genuinely is timer scheduling.
       observation-cache.test.ts
       plans.test.ts
       operation-transition.test.ts
-      hierarchy.test.ts
+      delegation.test.ts
+      communication-authorization.test.ts
+      branch-cardinality.test.ts
       scope.test.ts
     operations/
       promote.test.ts
       spawn.test.ts
+      associate-switch-branch.test.ts
       restore-stop.test.ts
       delete.test.ts
       cleanup.test.ts
       archive.test.ts
       transactional-promotion.test.ts
       multi-repo.test.ts
+      communication.test.ts
     adapters/
       worktrunk.test.ts
       kitty.test.ts
@@ -889,7 +950,9 @@ Builders produce valid defaults and explicit overrides:
 ```ts
 const agent = agentBuilder()
   .named("api-cache")
-  .withParent(parentId)
+  .withParentAgentId(parentAgentId)
+  .withCanonicalWorktree("/repos/api/.worktrees/api-cache")
+  .withBranches(["api-cache", "api-cache-followup"])
   .stopped()
   .build();
 
@@ -998,9 +1061,12 @@ behavior.
    cache-first rendering, lifecycle reporting, and duplicate-tab cases.
 1. **Stop and restore.** Add idempotence, restoration-definition contracts,
    duplicate-tab refusal, and fresh-service reboot tests.
-1. **Create children.** Reuse the provisioning harness with `parentId` and add
-   hierarchy ordering and descendant-safety cases.
-1. **Delete safely.** Add GitHub normalization, fresh destructive planning,
+1. **Create supporting agents.** Reuse the provisioning harness with a
+   manager-assigned `parentAgentId`, prove lifecycle launch carries no
+   assignment, and add non-cascading relationship-integrity cases.
+1. **Switch branches.** Add explicit association, plural branch/PR resources,
+   `git switch` preflight/contract tests, and unchanged agent/worktree identity.
+1. **Delete safely.** Add plural GitHub normalization, fresh destructive planning,
    fault-injected resource journals, and interruption after every action.
 
 Each step ends with both a short manual Pi demonstration and a focused Vitest
@@ -1029,6 +1095,10 @@ selection; the selected UUIDs enter the already-tested application operation.
 1. Adapter tests prove safe command construction without running the command.
 1. Pi UI tests remain small and actual UI behavior has an explicit manual
    checklist.
+1. Branch/PR plurality never weakens one-worktree cardinality or per-resource
+   cleanup evidence.
+1. Delegation tests prove no cascading resource ownership/deletion and no
+   unauthorized sibling or unrelated-tree communication.
 1. No automated test reads user home/XDG/Pi/Kitty/GitHub state.
 1. The suite remains fast enough to run continuously during extension
    development.
@@ -1042,3 +1112,4 @@ selection; the selected UUIDs enter the already-tested application operation.
 - [Archive lifecycle](agents-archive.md)
 - [Dirty/non-default promotion](agents-transactional-promotion.md)
 - [Multi-repository control](agents-multi-repo-control.md)
+- [Delegation and communication security](agents-delegation-communication.md)

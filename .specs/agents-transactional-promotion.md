@@ -52,7 +52,7 @@ It does not change:
 - Pi session continuation;
 - Kitty adoption;
 - restoration;
-- child hierarchy;
+- delegation ancestry;
 - GitHub status or cleanup.
 
 The core should expose promotion internally as:
@@ -71,10 +71,13 @@ interface PromotionStrategy {
 The MVP implements `CleanDefaultBranchPromotion`. This feature adds
 `TransactionalPromotion` without rewriting agent activation.
 
-The strategy returns a verified target worktree, branch, and any recovery
-artifacts. Normal activation then appends the worktree and branch references to
-the agent's flat resource list. Stashes and preservation manifests remain
-operation-journal resources and are not a separate workspace object.
+The strategy returns a verified target worktree, initial branch, and any
+recovery artifacts. Normal activation then appends the canonical worktree and
+owned initial-branch references independently to the agent's flat resource
+list. The branch is the first checkout, not durable agent or worktree identity;
+later switching leaves the worktree binding unchanged. Stashes and preservation
+manifests remain operation-journal resources and are not a separate workspace
+object.
 
 Promotion uses fresh preflight observations, not the source agent's cached
 status. When activation changes the durable resource list, it increments the
@@ -97,7 +100,7 @@ post-activation observation.
 | TP-10 | Failure or verification mismatch shall preserve the stash, target worktree, and operation record rather than force-cleaning either worktree.                      |
 | TP-11 | The existing clean/default MVP promotion path shall remain available and shall not incur stash/manifest complexity when unnecessary.                              |
 | TP-12 | Transactional promotion shall reuse the MVP registry, Pi continuation, Kitty adoption, and Worktrunk adapters rather than introduce a second managed-agent model. |
-| TP-13 | Transactional promotion shall populate the same flat agent-resource list as MVP promotion and shall not introduce a workspace aggregate.                          |
+| TP-13 | Transactional promotion shall populate separate canonical-worktree and initial-branch resources, shall not make branch currentness durable identity, and shall not introduce a workspace aggregate. |
 | TP-14 | Preflight and target verification shall use fresh adapter observations and shall never accept cached cleanliness or topology as safety evidence.                  |
 | TP-15 | Successful activation shall invalidate observations tied to the prior agent revision/resource fingerprint and shall refresh the activated agent.                  |
 

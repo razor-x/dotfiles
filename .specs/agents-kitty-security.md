@@ -297,6 +297,7 @@ compatibility.
 | KR-36 | A deployment that relies on an outer confinement layer shall use a launcher profile that preserves that layer. A plain-Pi launcher is compatible only when host policy explicitly declares that no outer confinement must be preserved.                  |
 | KR-37 | If a launcher profile uses Kitty session syntax, only the gateway may render it into a Kitty-owned path using closed typed placeholders and context-correct escaping; Pi shall control neither template bytes, output bytes, nor template/output paths.  |
 | KR-38 | Launcher, authorizer, gateway, and template paths shall resolve to installed runtime artifacts outside Pi write grants, never to a dotfiles source path or repository worktree.                                                                          |
+| KR-39 | Bootstrap launch requests shall contain no task prompt, sender claim, or model-selected `parentAgentId`; delegation and assignment are handled after registration by the authenticated communication layer.                                                  |
 
 ## 6. Socket and password confinement
 
@@ -503,7 +504,7 @@ for example:
 ```ts
 type HostPiLauncherProfileV1 = {
   schemaVersion: 1;
-  id: string;
+  launcherProfileId: string;
   launch:
     | {
         kind: "argv";
@@ -519,7 +520,7 @@ type HostPiLauncherProfileV1 = {
 
 type AuthorizedRepositoryV1 = {
   schemaVersion: 1;
-  id: string;
+  authorizedRepositoryId: string;
   primaryWorktree: string;
   gitCommonDir: string;
   worktreeRoots: readonly string[];
@@ -635,12 +636,13 @@ outer-layer policy before confinement is applied.
 
 ### 9.3 Bootstrap and resume
 
-A bootstrap launch receives a validated UUID, display name, parent UUID if any,
-and bounded initial prompt as typed data. The adapter uses Pi's documented
-argument separation so a prompt beginning with `-` cannot become an option. The
-host launcher applies its configured outer layer, starts Pi, and the new Pi
-process creates and reports its session through the normal agents lifecycle.
-For these dotfiles that sequence is `pi-nono` to nono to Pi.
+A bootstrap launch receives only a validated managed-agent UUID and bounded
+display name as dynamic agent data. It receives no task prompt,
+`parentAgentId`, or asserted sender. The host launcher applies its configured outer
+layer, starts interactive Pi, and the new Pi process creates and reports its
+session through the normal agents lifecycle. After registration, the separate
+authenticated communication layer may deliver an assignment through Pi's
+message API. For these dotfiles the launch sequence is `pi-nono` to nono to Pi.
 
 A resume launch receives an exact existing Pi-session path validated against
 host policy. The gateway passes Pi's documented `--session <exact-path>` form
@@ -741,9 +743,10 @@ Hostile tables include:
 - extra payload keys, unexpected protocol flags, streams, and `no_response`;
 - malformed/base64 bombs, oversized JSON, duplicate keys, and unsupported
   versions;
-- UUID, title, prompt, and path terminal controls, line breaks, bidirectional
+- UUID, title/name, and path terminal controls, line breaks, bidirectional
   controls, zero-width spoofing characters, and invalid Unicode;
-- option-looking prompts and names;
+- rejected bootstrap keys for prompts, `parentAgentId`, sender claims, and
+  option-looking names;
 - `..`, symlinks, hard links where relevant, path-prefix confusion, alternate
   separators, deleted/recreated paths, and worktrees linked to another common
   directory;
@@ -954,6 +957,7 @@ change:
   - recognize the Kitty authorization/gateway modules as local trusted code,
     not npm runtime dependencies.
 - `agents-testing-strategy.md`
+- `agents-delegation-communication.md`
   - make `KittyGateway.execute` the production/fake seam;
   - add authorizer, gateway validation, launch-construction, policy-store, and
     adversarial installed-policy tests; and
