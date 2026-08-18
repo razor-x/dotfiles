@@ -2,9 +2,10 @@ import type {
   ExtensionAPI,
   ExtensionFactory,
 } from '@earendil-works/pi-coding-agent'
+import { default as continueCommand } from './src/continue.ts'
 import { default as cursorDownOrNewLine } from './src/cursor-down-or-newline.ts'
 
-const extensions: ExtensionFactory[] = [cursorDownOrNewLine]
+const extensions: ExtensionFactory[] = [continueCommand, cursorDownOrNewLine]
 
 export default async function exactLocal(pi: ExtensionAPI): Promise<void> {
   for (const extension of extensions) await extension(pi)
