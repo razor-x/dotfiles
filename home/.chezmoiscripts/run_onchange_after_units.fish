@@ -11,15 +11,20 @@ set --local units_to_disable
 
 if type --query systemctl
     systemctl --user daemon-reload
+    or exit
 
     for unit in $units_to_enable
         systemctl --user enable $unit
+        or exit
         systemctl --user restart $unit
+        or exit
     end
 
     for unit in $units_to_disable
         systemctl --user stop $unit
+        or exit
         systemctl --user disable $unit
+        or exit
     end
 else
     echo 'Cannot setup systemd user units: systemctl not found.'
