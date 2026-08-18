@@ -14,7 +14,7 @@ M.spec = {
       opts.n_lines = 4000
       opts.custom_textobjects = opts.custom_textobjects or {}
       opts.custom_textobjects.F = MiniAi.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" })
-      opts.custom_textobjects.c = MiniAi.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" })
+      opts.custom_textobjects.C = MiniAi.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" })
       opts.custom_textobjects.o = MiniAi.gen_spec.treesitter({
         a = { "@conditional.outer", "@loop.outer" },
         i = { "@conditional.inner", "@loop.inner" },
