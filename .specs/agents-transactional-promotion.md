@@ -86,23 +86,23 @@ post-activation observation.
 
 ### 2.1 Normative feature requirements
 
-| ID    | Requirement                                                                                                                                                       |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TP-01 | Transactional promotion shall preserve source HEAD, Git index state, working-tree state, and untracked file bytes in the target worktree.                         |
-| TP-02 | Transactional promotion shall support dirty default-branch sources, clean existing-feature sources, and dirty existing-feature sources.                           |
-| TP-03 | Existing-feature promotion shall leave that branch checked out in exactly one worktree and shall return the primary worktree to its default branch.               |
-| TP-04 | The extension shall capture a durable recovery artifact and manifest before it releases a branch or removes changes from the source worktree.                     |
-| TP-05 | The extension shall verify target state independently before it switches the Pi session or adopts the Kitty tab.                                                  |
-| TP-06 | A promotion interrupted after its first mutation shall be discoverable and resumable or manually recoverable from its operation record.                           |
-| TP-07 | Ignored files shall not be transferred unless a separately specified policy explicitly enables them.                                                              |
-| TP-08 | Merge/rebase/conflict, detached-HEAD, unsupported submodule, and ambiguous branch-topology cases shall refuse before mutation.                                    |
-| TP-09 | A captured stash shall not be dropped until the target is verified and the managed agent's Pi session is active.                                                  |
-| TP-10 | Failure or verification mismatch shall preserve the stash, target worktree, and operation record rather than force-cleaning either worktree.                      |
-| TP-11 | The existing clean/default MVP promotion path shall remain available and shall not incur stash/manifest complexity when unnecessary.                              |
-| TP-12 | Transactional promotion shall reuse the MVP registry, Pi continuation, Kitty adoption, and Worktrunk adapters rather than introduce a second managed-agent model. |
+| ID    | Requirement                                                                                                                                                                                         |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TP-01 | Transactional promotion shall preserve source HEAD, Git index state, working-tree state, and untracked file bytes in the target worktree.                                                           |
+| TP-02 | Transactional promotion shall support dirty default-branch sources, clean existing-feature sources, and dirty existing-feature sources.                                                             |
+| TP-03 | Existing-feature promotion shall leave that branch checked out in exactly one worktree and shall return the primary worktree to its default branch.                                                 |
+| TP-04 | The extension shall capture a durable recovery artifact and manifest before it releases a branch or removes changes from the source worktree.                                                       |
+| TP-05 | The extension shall verify target state independently before it switches the Pi session or adopts the Kitty tab.                                                                                    |
+| TP-06 | A promotion interrupted after its first mutation shall be discoverable and resumable or manually recoverable from its operation record.                                                             |
+| TP-07 | Ignored files shall not be transferred unless a separately specified policy explicitly enables them.                                                                                                |
+| TP-08 | Merge/rebase/conflict, detached-HEAD, unsupported submodule, and ambiguous branch-topology cases shall refuse before mutation.                                                                      |
+| TP-09 | A captured stash shall not be dropped until the target is verified and the managed agent's Pi session is active.                                                                                    |
+| TP-10 | Failure or verification mismatch shall preserve the stash, target worktree, and operation record rather than force-cleaning either worktree.                                                        |
+| TP-11 | The existing clean/default MVP promotion path shall remain available and shall not incur stash/manifest complexity when unnecessary.                                                                |
+| TP-12 | Transactional promotion shall reuse the MVP registry, Pi continuation, Kitty adoption, and Worktrunk adapters rather than introduce a second managed-agent model.                                   |
 | TP-13 | Transactional promotion shall populate separate canonical-worktree and initial-branch resources, shall not make branch currentness durable identity, and shall not introduce a workspace aggregate. |
-| TP-14 | Preflight and target verification shall use fresh adapter observations and shall never accept cached cleanliness or topology as safety evidence.                  |
-| TP-15 | Successful activation shall invalidate observations tied to the prior agent revision/resource fingerprint and shall refresh the activated agent.                  |
+| TP-14 | Preflight and target verification shall use fresh adapter observations and shall never accept cached cleanliness or topology as safety evidence.                                                    |
+| TP-15 | Successful activation shall invalidate observations tied to the prior agent revision/resource fingerprint and shall refresh the activated agent.                                                    |
 
 ## 3. Requirements
 

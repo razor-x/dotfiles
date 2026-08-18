@@ -212,34 +212,34 @@ This feature does not:
 
 ## 9. Normative requirements
 
-| ID    | Requirement                                                                                                                                                                                |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| MR-01 | Multi-repository control shall reuse the MVP managed-agent and flat-resource schemas without introducing a new agent kind.                                                                 |
-| MR-02 | The active per-user registry shall be globally enumerable and every agent shall carry canonical repository common-dir and primary-worktree identity.                                       |
-| MR-03 | A directory scope shall select repositories by canonical primary-worktree containment under the resolved directory root.                                                                   |
-| MR-04 | Worktrunk worktrees sharing a Git common directory shall be deduplicated as one repository.                                                                                                |
+| ID    | Requirement                                                                                                                                                                                                                |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| MR-01 | Multi-repository control shall reuse the MVP managed-agent and flat-resource schemas without introducing a new agent kind.                                                                                                 |
+| MR-02 | The active per-user registry shall be globally enumerable and every agent shall carry canonical repository common-dir and primary-worktree identity.                                                                       |
+| MR-03 | A directory scope shall select repositories by canonical primary-worktree containment under the resolved directory root.                                                                                                   |
+| MR-04 | Worktrunk worktrees sharing a Git common directory shall be deduplicated as one repository.                                                                                                                                |
 | MR-05 | The current parent-directory Pi session shall remain unmanaged unless separately promoted; it shall receive no controller record or stable controller ID, and agents it creates directly shall have `parentAgentId: null`. |
-| MR-06 | A scope shall be resolved to immutable repository IDs before a destructive plan is presented.                                                                                              |
-| MR-07 | Multi-repository deletion and cleanup shall produce one plan grouped by repository and agent with exact resource-level actions.                                                            |
-| MR-08 | Plan execution shall revalidate and lock each repository independently immediately before its mutations.                                                                                   |
-| MR-09 | A failure in one repository shall not roll back successful actions in another and shall not prevent accurate per-agent outcomes.                                                           |
-| MR-10 | Existing-agent listing and cleanup shall be registry-first and shall not recursively scan the filesystem.                                                                                  |
-| MR-11 | Unknown or moved repository paths shall be reported as broken bindings and shall not be guessed from matching remote names.                                                                |
-| MR-12 | Model-supplied arbitrary directory paths shall not flow directly into destructive scope selection. Scope roots shall originate from cwd, configuration, or explicit UI selection.          |
-| MR-13 | Git, Worktrunk, Kitty, and `gh` subprocess concurrency shall be bounded and observable.                                                                                                    |
-| MR-14 | Output shall group same-named agents and plural branch/PR resources by repository, show current checkout as observation, and use UUIDs plus exact resource identities for mutation.          |
-| MR-15 | Restore, stop, delete, and archive semantics shall remain idempotent per agent across a multi-repository batch.                                                                            |
-| MR-16 | Promotion while cwd is in a repository's primary worktree shall retain the MVP/advanced-promotion semantics unchanged.                                                                     |
-| MR-17 | An agent-creation flow entered through `/agents` from a directory controller shall require an explicit target repository before it creates durable intent or invokes a repository adapter. |
-| MR-18 | Cross-repository delegation shall link globally unique `agentId` and manager-assigned `parentAgentId` values and shall never imply shared Git bases, topology, or resource ownership.       |
-| MR-19 | Directory listing shall be able to render durable records and valid per-agent observation caches before external refresh completes.                                                        |
-| MR-20 | Cross-repository refresh shall observe Kitty once globally, Worktrunk once per repository, and other sources with bounded concurrency, then merge observations by source timestamp.        |
-| MR-21 | Scope membership and destructive eligibility shall use durable records and fresh observations, never cached derived status.                                                                |
-| MR-22 | A future background process shall be able to reuse the same observer, cache merge, and UI-update contracts without changing agent semantics.                                               |
-| MR-23 | Optional Worktrunk hooks shall request full repository refresh only and shall not write cross-repository event deltas.                                                                     |
-| MR-24 | A directory controller shall remain outside the delegation forest; any operator-origin communication authority shall come from its registered local connection or capability, not a controller ID or message-body claim. |
-| MR-25 | Cross-repository delegation shall never cascade deletion or archive; every supporting agent remains an independent candidate and relationship edges must be resolved before a parent vanishes. |
-| MR-26 | Cross-repository creation shall preserve one-worktree-per-agent cardinality; simultaneous checkout of parallel branches shall use separate related agents.                                    |
+| MR-06 | A scope shall be resolved to immutable repository IDs before a destructive plan is presented.                                                                                                                              |
+| MR-07 | Multi-repository deletion and cleanup shall produce one plan grouped by repository and agent with exact resource-level actions.                                                                                            |
+| MR-08 | Plan execution shall revalidate and lock each repository independently immediately before its mutations.                                                                                                                   |
+| MR-09 | A failure in one repository shall not roll back successful actions in another and shall not prevent accurate per-agent outcomes.                                                                                           |
+| MR-10 | Existing-agent listing and cleanup shall be registry-first and shall not recursively scan the filesystem.                                                                                                                  |
+| MR-11 | Unknown or moved repository paths shall be reported as broken bindings and shall not be guessed from matching remote names.                                                                                                |
+| MR-12 | Model-supplied arbitrary directory paths shall not flow directly into destructive scope selection. Scope roots shall originate from cwd, configuration, or explicit UI selection.                                          |
+| MR-13 | Git, Worktrunk, Kitty, and `gh` subprocess concurrency shall be bounded and observable.                                                                                                                                    |
+| MR-14 | Output shall group same-named agents and plural branch/PR resources by repository, show current checkout as observation, and use UUIDs plus exact resource identities for mutation.                                        |
+| MR-15 | Restore, stop, delete, and archive semantics shall remain idempotent per agent across a multi-repository batch.                                                                                                            |
+| MR-16 | Promotion while cwd is in a repository's primary worktree shall retain the MVP/advanced-promotion semantics unchanged.                                                                                                     |
+| MR-17 | An agent-creation flow entered through `/agents` from a directory controller shall require an explicit target repository before it creates durable intent or invokes a repository adapter.                                 |
+| MR-18 | Cross-repository delegation shall link globally unique `agentId` and manager-assigned `parentAgentId` values and shall never imply shared Git bases, topology, or resource ownership.                                      |
+| MR-19 | Directory listing shall be able to render durable records and valid per-agent observation caches before external refresh completes.                                                                                        |
+| MR-20 | Cross-repository refresh shall observe Kitty once globally, Worktrunk once per repository, and other sources with bounded concurrency, then merge observations by source timestamp.                                        |
+| MR-21 | Scope membership and destructive eligibility shall use durable records and fresh observations, never cached derived status.                                                                                                |
+| MR-22 | A future background process shall be able to reuse the same observer, cache merge, and UI-update contracts without changing agent semantics.                                                                               |
+| MR-23 | Optional Worktrunk hooks shall request full repository refresh only and shall not write cross-repository event deltas.                                                                                                     |
+| MR-24 | A directory controller shall remain outside the delegation forest; any operator-origin communication authority shall come from its registered local connection or capability, not a controller ID or message-body claim.   |
+| MR-25 | Cross-repository delegation shall never cascade deletion or archive; every supporting agent remains an independent candidate and relationship edges must be resolved before a parent vanishes.                             |
+| MR-26 | Cross-repository creation shall preserve one-worktree-per-agent cardinality; simultaneous checkout of parallel branches shall use separate related agents.                                                                 |
 
 ## 10. User-facing behavior
 

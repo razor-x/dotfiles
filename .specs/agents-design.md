@@ -8,7 +8,7 @@ Local extension path: `local/agents`
 
 ## 1. Document suite
 
-This document defines the initial implementation. Four additive feature
+This document defines the initial implementation. Six additive feature
 specifications deliberately remain outside the MVP, and three companion
 documents define shared implementation strategy:
 
@@ -23,6 +23,11 @@ documents define shared implementation strategy:
 - [Delegation and communication security](agents-delegation-communication.md):
   coordinate managed agents across repositories without allowing unrelated
   delegation trees to communicate or inventing managed controller identities.
+- [External contexts](agents-external-contexts.md): associate agents with
+  stable provider-native issues, threads, and other external objects without
+  transferring lifecycle ownership.
+- [Topics](agents-topics.md): add one optional informal grouping label per
+  agent without creating another hierarchy or resource owner.
 - [Testing strategy](agents-testing-strategy.md): use Vitest, a
   functional core, fake adapters, narrow persistence contracts, and manual
   external-system acceptance checks.
@@ -354,58 +359,58 @@ The MVP does not:
 
 ### 7.1 Functional requirements
 
-| ID    | Requirement                                                                                                                                                                                                                                                         |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| FR-01 | The extension shall load globally so a Pi process in any configured repository can manage that repository's agents without project-local installation.                                                                                                              |
-| FR-02 | The extension shall never register a repository's primary worktree as an agent-owned resource.                                                                                                                                                                      |
+| ID    | Requirement                                                                                                                                                                                                                                                           |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| FR-01 | The extension shall load globally so a Pi process in any configured repository can manage that repository's agents without project-local installation.                                                                                                                |
+| FR-02 | The extension shall never register a repository's primary worktree as an agent-owned resource.                                                                                                                                                                        |
 | FR-03 | An active managed agent shall bind one stable UUID, one persisted Pi session, exactly one canonical non-primary Worktrunk worktree, one or more explicit branch resources, zero or more PR resources, and at most one live Kitty tab; provisioning may be incomplete. |
-| FR-04 | Agent-owned and agent-associated artifacts shall be represented as a flat list of typed resource references, with ownership or association decided independently for every branch and PR.                                                                          |
-| FR-05 | The current Pi session shall be promotable when it is persisted, interactive, in the primary worktree, clean, and on the default branch.                                                                                                                            |
-| FR-06 | Promotion shall derive a destination Pi session in the target cwd, retain the source Pi session, switch the current runtime, and continue in the same Kitty tab.                                                                                                    |
-| FR-07 | A managed agent shall be able to spawn a supporting managed agent with independent resources and a manager-assigned `parentAgentId: AgentId`; an unmanaged controller shall create a top-level agent with `parentAgentId: null`.                                |
-| FR-08 | The extension shall expose typed model-callable operations and a direct `/agents` Pi command namespace; `/agents` with no arguments shall open the overview, while recognized subcommands shall deep-link into context-filtered interactive flows.                  |
-| FR-09 | Status shall be derived from a complete observation snapshot of Worktrunk, Kitty, Pi-session existence, Git including current checkout, and optionally every registered GitHub PR; cached observations are display hints only.                                      |
-| FR-10 | Working/waiting state shall appear in the Kitty tab title and Worktrunk marker while an agent is live.                                                                                                                                                              |
-| FR-11 | Stop shall remove the live Kitty tab while retaining the Pi session, worktree, branches, registry record, and restoration definition.                                                                                                                               |
-| FR-12 | Restore shall recreate a tab from user-managed Kitty configuration and resume the exact registered Pi session.                                                                                                                                                      |
-| FR-13 | Restore, focus, stop, and mutation operations shall use stable agent UUIDs after selection, never guessed titles or branch substrings.                                                                                                                              |
-| FR-14 | GitHub state for each explicit PR resource shall be queried through structured `gh` output and normalized independently of display text or the currently checked-out branch.                                                                                       |
-| FR-15 | Delete and cleanup shall use plan/confirm/execute with an opaque expiring plan token.                                                                                                                                                                               |
-| FR-16 | Every delete plan shall enumerate each PR and local/remote branch effect independently, including closure, removal, or explicit retention when applicable.                                                                                                          |
-| FR-17 | “Merged older than N days” shall use fresh `mergedAt` for every relevant PR and an extension-computed cutoff; one old merged PR shall not hide another unresolved PR.                                                                                                |
-| FR-18 | Deletion shall be resumable and idempotent after any completed resource action.                                                                                                                                                                                     |
-| FR-19 | The agent record shall be removed only after all confirmed resources reach their desired absent state.                                                                                                                                                              |
-| FR-20 | Deleting a parent shall never add descendants as implicit candidates; before the parent record disappears, every remaining child's `parentAgentId` shall be resolved by independent deletion, reparenting, or detachment.                                      |
-| FR-21 | Durable agent records shall contain `agentId`, manager-assigned `parentAgentId`, repository identity, resource references, ownership, lifecycle intent, revision, and timestamps but no authoritative observed status.                                             |
-| FR-22 | Each agent may have a separate disposable observation-cache record tied to the current agent revision and resource fingerprint.                                                                                                                                     |
-| FR-23 | Missing, malformed, unknown-schema, revision-mismatched, or fingerprint-mismatched observation caches shall be ignored and rebuilt by observation.                                                                                                                  |
-| FR-24 | Every destructive plan and execute operation shall obtain fresh observations after acquiring its required locks and shall never rely on cached safety conclusions.                                                                                                  |
-| FR-25 | Worktrunk hooks, if configured, shall only request full repository reconciliation; they shall not directly mutate agent resources or apply lifecycle deltas.                                                                                                        |
-| FR-26 | The agent-creation flow shall atomically persist a revision-zero `provisioning` agent record with an empty resource list before its first external resource mutation, and creation shall be resumable from that durable intent.                                     |
-| FR-27 | `/agents` subcommands shall be UI routes rather than mutation authority: each route shall derive eligible agents from the current scope, resolve selections to stable UUIDs, and invoke the same typed application operations used by the model-callable interface. |
-| FR-28 | Batch-appropriate `/agents` flows shall be able to use interactive multi-selection and shall report independent per-agent outcomes; destructive flows shall still use their required plan/confirm/execute protocol.                                                 |
+| FR-04 | Agent-owned and agent-associated artifacts shall be represented as a flat list of typed resource references, with ownership or association decided independently for every branch and PR.                                                                             |
+| FR-05 | The current Pi session shall be promotable when it is persisted, interactive, in the primary worktree, clean, and on the default branch.                                                                                                                              |
+| FR-06 | Promotion shall derive a destination Pi session in the target cwd, retain the source Pi session, switch the current runtime, and continue in the same Kitty tab.                                                                                                      |
+| FR-07 | A managed agent shall be able to spawn a supporting managed agent with independent resources and a manager-assigned `parentAgentId: AgentId`; an unmanaged controller shall create a top-level agent with `parentAgentId: null`.                                      |
+| FR-08 | The extension shall expose typed model-callable operations and a direct `/agents` Pi command namespace; `/agents` with no arguments shall open the overview, while recognized subcommands shall deep-link into context-filtered interactive flows.                    |
+| FR-09 | Status shall be derived from a complete observation snapshot of Worktrunk, Kitty, Pi-session existence, Git including current checkout, and optionally every registered GitHub PR; cached observations are display hints only.                                        |
+| FR-10 | Working/waiting state shall appear in the Kitty tab title and Worktrunk marker while an agent is live.                                                                                                                                                                |
+| FR-11 | Stop shall remove the live Kitty tab while retaining the Pi session, worktree, branches, registry record, and restoration definition.                                                                                                                                 |
+| FR-12 | Restore shall recreate a tab from user-managed Kitty configuration and resume the exact registered Pi session.                                                                                                                                                        |
+| FR-13 | Restore, focus, stop, and mutation operations shall use stable agent UUIDs after selection, never guessed titles or branch substrings.                                                                                                                                |
+| FR-14 | GitHub state for each explicit PR resource shall be queried through structured `gh` output and normalized independently of display text or the currently checked-out branch.                                                                                          |
+| FR-15 | Delete and cleanup shall use plan/confirm/execute with an opaque expiring plan token.                                                                                                                                                                                 |
+| FR-16 | Every delete plan shall enumerate each PR and local/remote branch effect independently, including closure, removal, or explicit retention when applicable.                                                                                                            |
+| FR-17 | “Merged older than N days” shall use fresh `mergedAt` for every relevant PR and an extension-computed cutoff; one old merged PR shall not hide another unresolved PR.                                                                                                 |
+| FR-18 | Deletion shall be resumable and idempotent after any completed resource action.                                                                                                                                                                                       |
+| FR-19 | The agent record shall be removed only after all confirmed resources reach their desired absent state.                                                                                                                                                                |
+| FR-20 | Deleting a parent shall never add descendants as implicit candidates; before the parent record disappears, every remaining child's `parentAgentId` shall be resolved by independent deletion, reparenting, or detachment.                                             |
+| FR-21 | Durable agent records shall contain `agentId`, manager-assigned `parentAgentId`, repository identity, resource references, ownership, lifecycle intent, revision, and timestamps but no authoritative observed status.                                                |
+| FR-22 | Each agent may have a separate disposable observation-cache record tied to the current agent revision and resource fingerprint.                                                                                                                                       |
+| FR-23 | Missing, malformed, unknown-schema, revision-mismatched, or fingerprint-mismatched observation caches shall be ignored and rebuilt by observation.                                                                                                                    |
+| FR-24 | Every destructive plan and execute operation shall obtain fresh observations after acquiring its required locks and shall never rely on cached safety conclusions.                                                                                                    |
+| FR-25 | Worktrunk hooks, if configured, shall only request full repository reconciliation; they shall not directly mutate agent resources or apply lifecycle deltas.                                                                                                          |
+| FR-26 | The agent-creation flow shall atomically persist a revision-zero `provisioning` agent record with an empty resource list before its first external resource mutation, and creation shall be resumable from that durable intent.                                       |
+| FR-27 | `/agents` subcommands shall be UI routes rather than mutation authority: each route shall derive eligible agents from the current scope, resolve selections to stable UUIDs, and invoke the same typed application operations used by the model-callable interface.   |
+| FR-28 | Batch-appropriate `/agents` flows shall be able to use interactive multi-selection and shall report independent per-agent outcomes; destructive flows shall still use their required plan/confirm/execute protocol.                                                   |
 | FR-29 | The canonical worktree path shall identify an agent's one durable worktree binding; neither the initial branch nor the currently checked-out branch shall form durable agent identity.                                                                                |
-| FR-30 | Exactly one branch may be checked out in an active agent worktree at a time, and that current branch shall be observed rather than stored as authoritative record state.                                                                                                 |
-| FR-31 | Branch switching shall use an exact argument-array `git switch` adapter only after fresh clean-worktree, no-in-progress-operation, target-ref, and cross-worktree-topology checks under the repository lock.                                                            |
-| FR-32 | Inspecting, discovering, or checking out a branch or PR shall not by itself create ownership; association or adoption shall be an explicit durable decision.                                                                                                              |
-| FR-33 | Cleanup shall resolve every owned/associated branch and PR independently and shall remove the worktree only after those resources have a confirmed terminal disposition.                                                                                                 |
+| FR-30 | Exactly one branch may be checked out in an active agent worktree at a time, and that current branch shall be observed rather than stored as authoritative record state.                                                                                              |
+| FR-31 | Branch switching shall use an exact argument-array `git switch` adapter only after fresh clean-worktree, no-in-progress-operation, target-ref, and cross-worktree-topology checks under the repository lock.                                                          |
+| FR-32 | Inspecting, discovering, or checking out a branch or PR shall not by itself create ownership; association or adoption shall be an explicit durable decision.                                                                                                          |
+| FR-33 | Cleanup shall resolve every owned/associated branch and PR independently and shall remove the worktree only after those resources have a confirmed terminal disposition.                                                                                              |
 | FR-34 | `parentAgentId` shall be assigned and changed only by manager code from authenticated creation context; model-callable creation inputs shall not accept an arbitrary parent agent ID.                                                                                 |
-| FR-35 | The `agents` extension shall expose lifecycle, identity, delegation, resource/status query, resume, stop, and delete operations while leaving assignment and conversational message delivery to the separate orchestration/communication layer.                          |
+| FR-35 | The `agents` extension shall expose lifecycle, identity, delegation, resource/status query, resume, stop, and delete operations while leaving assignment and conversational message delivery to the separate orchestration/communication layer.                       |
 
 ### 7.2 Safety requirements
 
-| ID    | Requirement                                                                                                                                                                                     |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SR-01 | The extension shall never invoke Worktrunk or Git force-removal options.                                                                                                                        |
-| SR-02 | Model-provided paths, titles, names, branch strings, or shell fragments shall never flow directly into destructive commands.                                                                    |
-| SR-03 | Destructive operations shall revalidate topology, ownership, cleanliness, liveness, and plan freshness after acquiring locks.                                                                   |
-| SR-04 | A dirty, live, current, primary, ambiguous, broken, unknown-schema, or unpushed agent shall be ineligible for automated cleanup.                                                                |
-| SR-05 | A branch or PR that is merely discovered, inspected, or checked out shall not be modified as an owned resource without an explicit association/adoption decision and disclosed plan action.                                                                  |
-| SR-06 | A GitHub PR record shall never be described as deleted; an open PR may only be closed. Historical merged/closed PRs remain on GitHub.                                                           |
-| SR-07 | Missing resources count as idempotent success only when a confirmed operation previously established the exact identity and intended removal. Pre-existing unexplained absence is broken state. |
-| SR-08 | The current Pi process shall never delete the agent it is actively running as.                                                                                                                  |
-| SR-09 | Delegation relationships shall never cause implicit cascading deletion, archive, branch mutation, PR mutation, or worktree removal.                                                                 |
-| SR-10 | Knowing an agent UUID, name, session path, worktree path, branch, tab, or transport address shall grant no communication or lifecycle authority; unmanaged controller authority is not represented by a forgeable controller ID.                              |
+| ID    | Requirement                                                                                                                                                                                                                      |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SR-01 | The extension shall never invoke Worktrunk or Git force-removal options.                                                                                                                                                         |
+| SR-02 | Model-provided paths, titles, names, branch strings, or shell fragments shall never flow directly into destructive commands.                                                                                                     |
+| SR-03 | Destructive operations shall revalidate topology, ownership, cleanliness, liveness, and plan freshness after acquiring locks.                                                                                                    |
+| SR-04 | A dirty, live, current, primary, ambiguous, broken, unknown-schema, or unpushed agent shall be ineligible for automated cleanup.                                                                                                 |
+| SR-05 | A branch or PR that is merely discovered, inspected, or checked out shall not be modified as an owned resource without an explicit association/adoption decision and disclosed plan action.                                      |
+| SR-06 | A GitHub PR record shall never be described as deleted; an open PR may only be closed. Historical merged/closed PRs remain on GitHub.                                                                                            |
+| SR-07 | Missing resources count as idempotent success only when a confirmed operation previously established the exact identity and intended removal. Pre-existing unexplained absence is broken state.                                  |
+| SR-08 | The current Pi process shall never delete the agent it is actively running as.                                                                                                                                                   |
+| SR-09 | Delegation relationships shall never cause implicit cascading deletion, archive, branch mutation, PR mutation, or worktree removal.                                                                                              |
+| SR-10 | Knowing an agent UUID, name, session path, worktree path, branch, tab, or transport address shall grant no communication or lifecycle authority; unmanaged controller authority is not represented by a forgeable controller ID. |
 
 ### 7.3 Non-functional requirements
 
@@ -421,18 +426,18 @@ The MVP does not:
 
 ## 8. Ownership and sources of truth
 
-| Concern                              | Authority                         | Extension responsibility                                              |
-| ------------------------------------ | --------------------------------- | --------------------------------------------------------------------- |
-| Pi session and model history         | Pi JSONL                          | Record the exact file and resume it                                   |
-| Worktree identity/topology           | Git + Worktrunk                   | Bind one canonical path, invoke Worktrunk, validate, never force       |
-| Current branch checkout              | Git                               | Observe it and switch safely; never use it as durable agent identity   |
-| Local and remote branches            | Git / Git remote                  | Record each association/ownership and delete only when planned         |
-| Live terminal topology               | Kitty                             | Discover, tag, create, focus, title, and close tabs                   |
-| Pull requests                        | GitHub                            | Query each explicit PR; close only through a confirmed owned action    |
-| Managed identity and delegation      | Agent manager                     | Persist `agentId` and manager-assigned `parentAgentId`                  |
+| Concern                              | Authority                          | Extension responsibility                                                |
+| ------------------------------------ | ---------------------------------- | ----------------------------------------------------------------------- |
+| Pi session and model history         | Pi JSONL                           | Record the exact file and resume it                                     |
+| Worktree identity/topology           | Git + Worktrunk                    | Bind one canonical path, invoke Worktrunk, validate, never force        |
+| Current branch checkout              | Git                                | Observe it and switch safely; never use it as durable agent identity    |
+| Local and remote branches            | Git / Git remote                   | Record each association/ownership and delete only when planned          |
+| Live terminal topology               | Kitty                              | Discover, tag, create, focus, title, and close tabs                     |
+| Pull requests                        | GitHub                             | Query each explicit PR; close only through a confirmed owned action     |
+| Managed identity and delegation      | Agent manager                      | Persist `agentId` and manager-assigned `parentAgentId`                  |
 | Communication sender/route authority | Authenticated transport capability | Derive sender and enforce ancestry; never trust message-body assertions |
-| Working/waiting signal               | Pi lifecycle events               | Report to Kitty and Worktrunk; cache the latest observation            |
-| Last observed external state         | Disposable observation cache      | Render quickly, track freshness/errors, and rebuild at any time        |
+| Working/waiting signal               | Pi lifecycle events                | Report to Kitty and Worktrunk; cache the latest observation             |
+| Last observed external state         | Disposable observation cache       | Render quickly, track freshness/errors, and rebuild at any time         |
 
 The registry binds unrelated identifiers; it does not replace any underlying
 authority.
@@ -1030,7 +1035,7 @@ recipe rather than terminal resurrection.
 
 Fresh supporting-agent startup may use a separate template because its
 Pi-session path is unknown until Pi starts. It carries identity and display data
-only, not parent/lineage or assignment data. Once registered, the durable
+only, not `parentAgentId` or assignment data. Once registered, the durable
 restoration definition is rendered with the exact Pi-session path.
 
 ## 16. GitHub integration

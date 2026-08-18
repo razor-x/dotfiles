@@ -35,7 +35,9 @@ This document is normative for:
 - [archive lifecycle](agents-archive.md);
 - [dirty/non-default promotion](agents-transactional-promotion.md);
 - [multi-repository control](agents-multi-repo-control.md);
-- [delegation and communication security](agents-delegation-communication.md).
+- [delegation and communication security](agents-delegation-communication.md);
+- [external contexts](agents-external-contexts.md); and
+- [topics](agents-topics.md).
 
 ## 2. Settled testing decisions
 
@@ -228,13 +230,13 @@ services.
 | TS-22 | The first `/agents` creation-flow increment shall prove that it writes an empty revision-zero `provisioning` record and invokes no Worktrunk, Pi-session, Kitty, observation-cache, or GitHub adapter/store.                        |
 | TS-23 | `/agents` subcommand tests shall treat verbs as UI routes: they shall verify scope/eligibility filtering, picker delegation, UUID resolution, cancellation, and unknown-subcommand help without duplicating domain-operation tests. |
 | TS-24 | Multi-select command-flow tests shall prove stable selection ordering, independent per-agent outcomes, and no effect for an empty or canceled selection.                                                                            |
-| TS-25 | Cardinality tests shall prove one canonical worktree, one-or-more explicit local branches, plural remote branch/PR resources, and exactly one observed current checkout per active agent.                                                                  |
-| TS-26 | Branch-switch tests shall prove clean/no-operation/topology preflight, exact argument arrays, unchanged agent/worktree identity, and post-switch observation.                                                                            |
-| TS-27 | Discovery, inspection, PR-head references, and checkout shall be tested not to confer branch/PR ownership or association.                                                                                                                 |
-| TS-28 | Delegation tests shall prove that parent selection never adds a child to delete/archive candidates and that dangling edges require independent delete, reparent, or detach.                                                              |
-| TS-29 | Communication authorization tests shall derive sender from a registered connection/capability, reject sender fields in bodies, allow only ancestor/descendant routes, and deny unrelated trees and siblings by default.                 |
-| TS-30 | Identity tests shall prove models cannot select or mutate `parentAgentId`, and that reparent/detach updates affected parent links and rotates capabilities atomically.                                                                                     |
-| TS-31 | Root-controller tests shall prove the controller remains unmanaged with no controller record or stable controller ID, while any operator ingress is bound to its registered local connection/capability.                                                        |
+| TS-25 | Cardinality tests shall prove one canonical worktree, one-or-more explicit local branches, plural remote branch/PR resources, and exactly one observed current checkout per active agent.                                           |
+| TS-26 | Branch-switch tests shall prove clean/no-operation/topology preflight, exact argument arrays, unchanged agent/worktree identity, and post-switch observation.                                                                       |
+| TS-27 | Discovery, inspection, PR-head references, and checkout shall be tested not to confer branch/PR ownership or association.                                                                                                           |
+| TS-28 | Delegation tests shall prove that parent selection never adds a child to delete/archive candidates and that dangling edges require independent delete, reparent, or detach.                                                         |
+| TS-29 | Communication authorization tests shall derive sender from a registered connection/capability, reject sender fields in bodies, allow only ancestor/descendant routes, and deny unrelated trees and siblings by default.             |
+| TS-30 | Identity tests shall prove models cannot select or mutate `parentAgentId`, and that reparent/detach updates affected parent links and rotates capabilities atomically.                                                              |
+| TS-31 | Root-controller tests shall prove the controller remains unmanaged with no controller record or stable controller ID, while any operator ingress is bound to its registered local connection/capability.                            |
 
 ## 6. Test layers
 
@@ -1113,3 +1115,5 @@ selection; the selected UUIDs enter the already-tested application operation.
 - [Dirty/non-default promotion](agents-transactional-promotion.md)
 - [Multi-repository control](agents-multi-repo-control.md)
 - [Delegation and communication security](agents-delegation-communication.md)
+- [External contexts](agents-external-contexts.md)
+- [Topics](agents-topics.md)

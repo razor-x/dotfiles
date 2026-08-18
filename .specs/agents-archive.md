@@ -122,30 +122,30 @@ implied by retaining a Pi session.
 
 ## 6. Normative requirements
 
-| ID    | Requirement                                                                                                                                   |
-| ----- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| AR-01 | Archive shall retain exactly one byte-verified Pi session and one immutable archive record for each successfully archived agent.              |
-| AR-02 | Archive shall remove every confirmed operational resource from the active agent's flat resource list.                                         |
-| AR-03 | Archive shall require the agent to be stopped before the first destructive mutation.                                                          |
-| AR-04 | Archive shall require a clean worktree and no in-progress Git operation.                                                                      |
-| AR-05 | Automated archive policy shall require every commit uniquely reachable from any branch scheduled for deletion to be durably reachable from a retained ref. |
-| AR-06 | Any explicit archive that discards unmerged or uniquely reachable commits from any branch shall identify each loss separately and require confirmation. |
-| AR-07 | The archive snapshot and verified Pi-session copy shall be prepared before any worktree or branch removal.                                    |
-| AR-08 | A Pi session stored within the worktree shall be copied into archive storage and verified before Worktrunk removal.                           |
-| AR-09 | Each open PR shall be closed only when its own resource is owned or explicitly adopted on confirmation.                                       |
-| AR-10 | Archive shall preserve merged and closed PR history and shall never claim to delete a GitHub PR.                                              |
-| AR-11 | Every resource action shall be independently idempotent and journaled before the next action.                                                 |
-| AR-12 | The active agent record shall remain until all teardown actions succeed and the archive record is durable.                                    |
+| ID    | Requirement                                                                                                                                                                                           |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AR-01 | Archive shall retain exactly one byte-verified Pi session and one immutable archive record for each successfully archived agent.                                                                      |
+| AR-02 | Archive shall remove every confirmed operational resource from the active agent's flat resource list.                                                                                                 |
+| AR-03 | Archive shall require the agent to be stopped before the first destructive mutation.                                                                                                                  |
+| AR-04 | Archive shall require a clean worktree and no in-progress Git operation.                                                                                                                              |
+| AR-05 | Automated archive policy shall require every commit uniquely reachable from any branch scheduled for deletion to be durably reachable from a retained ref.                                            |
+| AR-06 | Any explicit archive that discards unmerged or uniquely reachable commits from any branch shall identify each loss separately and require confirmation.                                               |
+| AR-07 | The archive snapshot and verified Pi-session copy shall be prepared before any worktree or branch removal.                                                                                            |
+| AR-08 | A Pi session stored within the worktree shall be copied into archive storage and verified before Worktrunk removal.                                                                                   |
+| AR-09 | Each open PR shall be closed only when its own resource is owned or explicitly adopted on confirmation.                                                                                               |
+| AR-10 | Archive shall preserve merged and closed PR history and shall never claim to delete a GitHub PR.                                                                                                      |
+| AR-11 | Every resource action shall be independently idempotent and journaled before the next action.                                                                                                         |
+| AR-12 | The active agent record shall remain until all teardown actions succeed and the archive record is durable.                                                                                            |
 | AR-13 | Archiving a parent shall never make children implicit candidates; each remaining child edge shall be resolved by independent archive/delete, reparenting, or detachment before the parent disappears. |
-| AR-14 | Archive cleanup shall delete only the archived Pi session and archive record named in a confirmed, expiring plan.                             |
-| AR-15 | Retention age shall be computed from `archivedAt`, not inferred from filesystem timestamps.                                                   |
-| AR-16 | Archive and cleanup retries shall converge after interruption without repeating unsafe external effects.                                      |
-| AR-17 | Unknown archive schemas shall be read-only and ineligible for cleanup.                                                                        |
-| AR-18 | Archive metadata shall remove credentials and other secret material from stored remote URLs and operation diagnostics.                        |
-| AR-19 | Archive planning and execution shall freshly observe every safety-relevant source and shall not rely on the active agent's observation cache. |
-| AR-20 | Successful archive shall remove the active observation cache; the cache shall never be copied into archive storage.                           |
-| AR-21 | Every branch and PR shall have an independently recorded ownership decision and terminal disposition before the one worktree is removed.       |
-| AR-22 | Current branch shall be captured as observed state only and shall not be treated as archived agent identity.                                   |
+| AR-14 | Archive cleanup shall delete only the archived Pi session and archive record named in a confirmed, expiring plan.                                                                                     |
+| AR-15 | Retention age shall be computed from `archivedAt`, not inferred from filesystem timestamps.                                                                                                           |
+| AR-16 | Archive and cleanup retries shall converge after interruption without repeating unsafe external effects.                                                                                              |
+| AR-17 | Unknown archive schemas shall be read-only and ineligible for cleanup.                                                                                                                                |
+| AR-18 | Archive metadata shall remove credentials and other secret material from stored remote URLs and operation diagnostics.                                                                                |
+| AR-19 | Archive planning and execution shall freshly observe every safety-relevant source and shall not rely on the active agent's observation cache.                                                         |
+| AR-20 | Successful archive shall remove the active observation cache; the cache shall never be copied into archive storage.                                                                                   |
+| AR-21 | Every branch and PR shall have an independently recorded ownership decision and terminal disposition before the one worktree is removed.                                                              |
+| AR-22 | Current branch shall be captured as observed state only and shall not be treated as archived agent identity.                                                                                          |
 
 ## 7. Eligibility and safety
 
@@ -199,7 +199,7 @@ safe PR does not make another safe:
 | PR merged                     | Preserve GitHub record; resolve its referenced branch independently      |
 | PR closed, unmerged           | Preserve GitHub record; verify commit reachability before branch removal |
 | PR open and owned             | Plan explicit PR close, then independent branch disposition              |
-| PR open and merely associated | Retain, or require disclosed adopt-on-confirmation                        |
+| PR open and merely associated | Retain, or require disclosed adopt-on-confirmation                       |
 | No registered PR              | Apply commit-reachability and branch-ownership rules directly            |
 
 A PR's head-branch reference supplies cleanup ordering only. It does not contain

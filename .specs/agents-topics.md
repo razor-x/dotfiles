@@ -1,7 +1,7 @@
 # Agents: Topics Feature Specification
 
-Status: deferred additive feature  
-Depends on: `agents-design.md` MVP  
+Status: deferred additive feature\
+Depends on: `agents-design.md` MVP\
 Implementation home: `razor-x/dotfiles/local/agents`
 
 ## 1. Purpose
@@ -16,13 +16,13 @@ workspaces.
 ## 2. Settled decisions
 
 1. Every agent has `topic: string | null`.
-2. An agent has at most one topic; there is no tag collection.
-3. A topic is plain user-facing text, not a separate persisted entity.
-4. Known topics are derived from current agent records.
-5. A topic does not own agents or resources and has no lifecycle behavior.
-6. Topic assignment is independent of `parentId`, repository, lifecycle, and
-   external-context associations.
-7. The agents extension owns the durable field. Controllers and orchestration
+1. An agent has at most one topic; there is no tag collection.
+1. A topic is plain user-facing text, not a separate persisted entity.
+1. Known topics are derived from current agent records.
+1. A topic does not own agents or resources and has no lifecycle behavior.
+1. Topic assignment is independent of `parentAgentId`, repository, lifecycle,
+   and external-context associations.
+1. The agents extension owns the durable field. Controllers and orchestration
    extensions may set it only through typed agents operations.
 
 ## 3. Data model
@@ -74,7 +74,7 @@ Topic: Authentication cleanup
 An ungrouped agent remains fully manageable. No custom TUI is required; initial
 flows use Pi dialogs and the existing agent selector.
 
-## 5. Lifecycle and hierarchy
+## 5. Lifecycle and delegation
 
 Stop, restore, and resource reconciliation preserve the topic unchanged.
 Deleting an agent removes its topic value as part of deleting the record and
@@ -97,10 +97,10 @@ grouping. Store tests prove the field survives restart and schema migration.
 Acceptance requires:
 
 1. Three independent agents can receive one topic and render together.
-2. One agent cannot accumulate several topics.
-3. Setting or clearing a topic never mutates external resources.
-4. Topic state survives Pi and machine restarts.
-5. Agents without a topic remain visible and manageable.
+1. One agent cannot accumulate several topics.
+1. Setting or clearing a topic never mutates external resources.
+1. Topic state survives Pi and machine restarts.
+1. Agents without a topic remain visible and manageable.
 
 ## 7. References
 
@@ -108,4 +108,3 @@ Acceptance requires:
 - [Testing strategy](agents-testing-strategy.md)
 - [Archive lifecycle](agents-archive.md)
 - [Multi-repository control](agents-multi-repo-control.md)
-

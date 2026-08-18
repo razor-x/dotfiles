@@ -1,7 +1,7 @@
 # Agents: External Contexts Feature Specification
 
-Status: deferred additive feature  
-Depends on: `agents-design.md` MVP  
+Status: deferred additive feature\
+Depends on: `agents-design.md` MVP\
 Implementation home: `razor-x/dotfiles/local/agents`
 
 ## 1. Purpose
@@ -22,23 +22,23 @@ lifecycle.
 
 1. An agent may reference any number of external contexts, and one external
    context may be referenced by any number of agents.
-2. Context identity uses stable provider-native identity, not display text.
-3. Fetched labels, issue keys, status, and other presentation metadata are
+1. Context identity uses stable provider-native identity, not display text.
+1. Fetched labels, issue keys, status, and other presentation metadata are
    disposable observations.
-4. External contexts are associations, not agent-owned resources. Agent
+1. External contexts are associations, not agent-owned resources. Agent
    deletion must never modify the referenced external object.
-5. The agents extension persists generic context records and associations so
+1. The agents extension persists generic context records and associations so
    they remain available after restart and without the orchestration layer.
-6. Orchestration and communication extensions may resolve, attach, detach, and
+1. Orchestration and communication extensions may resolve, attach, detach, and
    query contexts only through typed agents operations.
-7. Provider adapters own URL recognition, canonical identity resolution, and
+1. Provider adapters own URL recognition, canonical identity resolution, and
    observation. They do not own agent lifecycle.
-8. Pi session content does not substitute for this metadata: it is
+1. Pi session content does not substitute for this metadata: it is
    unstructured, may be compacted, and is not queryable across agents.
-9. Provider failure must not block listing, stopping, restoring, archiving, or
+1. Provider failure must not block listing, stopping, restoring, archiving, or
    deleting agents.
-10. Context associations do not affect `parentId`, topics, resource ownership,
-    or cleanup eligibility.
+1. Context associations do not affect `parentAgentId`, topics, resource
+   ownership, or cleanup eligibility.
 
 ## 3. Data model
 
@@ -56,7 +56,7 @@ External contexts are globally enumerable records:
 ```ts
 type ExternalContextRecordV1 = {
   schemaVersion: 1;
-  id: ContextId;
+  contextId: ContextId;
   revision: number;
 
   provider: string;   // "linear", "slack", "github", ...
@@ -193,23 +193,23 @@ Follow `agents-testing-strategy.md`:
 
 1. Add generic context records and attach/detach/query operations using
    manually supplied provider identity.
-2. Add the first provider resolvers, likely Linear issues and Slack threads.
-3. Allow orchestration to launch agents with contexts and answer cross-agent
+1. Add the first provider resolvers, likely Linear issues and Slack threads.
+1. Allow orchestration to launch agents with contexts and answer cross-agent
    context queries.
-4. Add provider observation caches for richer presentation.
-5. Extend archive snapshots and multi-repository presentation when those
+1. Add provider observation caches for richer presentation.
+1. Extend archive snapshots and multi-repository presentation when those
    features are implemented.
 
 ## 10. Acceptance criteria
 
 1. Equivalent references to one Linear issue produce one external context.
-2. A controller can report associated agents and their lifecycle states for a
+1. A controller can report associated agents and their lifecycle states for a
    Linear issue or Slack thread.
-3. Associations persist across Pi and machine restarts.
-4. Provider failure leaves all core agent lifecycle operations functional.
-5. Deleting an agent never mutates a referenced external object.
-6. One agent may reference multiple contexts.
-7. One context may associate agents from multiple repositories.
+1. Associations persist across Pi and machine restarts.
+1. Provider failure leaves all core agent lifecycle operations functional.
+1. Deleting an agent never mutates a referenced external object.
+1. One agent may reference multiple contexts.
+1. One context may associate agents from multiple repositories.
 
 ## 11. References
 
@@ -219,4 +219,3 @@ Follow `agents-testing-strategy.md`:
 - [Multi-repository control](agents-multi-repo-control.md)
 - [Topics](agents-topics.md)
 - [Runtime dependency policy](agents-dependency-policy.md)
-

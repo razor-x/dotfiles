@@ -297,7 +297,7 @@ compatibility.
 | KR-36 | A deployment that relies on an outer confinement layer shall use a launcher profile that preserves that layer. A plain-Pi launcher is compatible only when host policy explicitly declares that no outer confinement must be preserved.                  |
 | KR-37 | If a launcher profile uses Kitty session syntax, only the gateway may render it into a Kitty-owned path using closed typed placeholders and context-correct escaping; Pi shall control neither template bytes, output bytes, nor template/output paths.  |
 | KR-38 | Launcher, authorizer, gateway, and template paths shall resolve to installed runtime artifacts outside Pi write grants, never to a dotfiles source path or repository worktree.                                                                          |
-| KR-39 | Bootstrap launch requests shall contain no task prompt, sender claim, or model-selected `parentAgentId`; delegation and assignment are handled after registration by the authenticated communication layer.                                                  |
+| KR-39 | Bootstrap launch requests shall contain no task prompt, sender claim, or model-selected `parentAgentId`; delegation and assignment are handled after registration by the authenticated communication layer.                                              |
 
 ## 6. Socket and password confinement
 
