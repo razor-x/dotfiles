@@ -266,7 +266,7 @@ M.spec = {
   {
     "nvim-mini/mini.cmdline",
     init = function()
-      local map_multistep = require("mini.keymap").map_multistep
+      local MiniKeymap = require("mini.keymap")
       local function map_command_line_window(lhs, open_keys, desc)
         local command_line_type = open_keys:sub(2)
         local close_command_line_window = {
@@ -285,7 +285,7 @@ M.spec = {
             return "<Cmd>q<CR>" .. open_keys
           end,
         }
-        map_multistep(
+        MiniKeymap.map_multistep(
           { "n", "v" },
           lhs,
           { close_command_line_window, switch_command_line_window, M.multistep_fallback(open_keys) },

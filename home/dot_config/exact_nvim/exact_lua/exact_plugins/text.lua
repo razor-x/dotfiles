@@ -18,14 +18,14 @@ M.spec = {
     end,
     opts = {},
     config = function(_, opts)
-      local indentscope = require("mini.indentscope")
-      indentscope.setup(opts)
+      local MiniIndentscope = require("mini.indentscope")
+      MiniIndentscope.setup(opts)
 
       local function refresh_indentscope()
         if vim.g.miniindentscope_disable == true or vim.b.miniindentscope_disable == true then
-          indentscope.undraw()
+          MiniIndentscope.undraw()
         else
-          indentscope.draw()
+          MiniIndentscope.draw()
         end
       end
 
@@ -67,13 +67,13 @@ M.spec = {
       },
     },
     config = function(_, opts)
-      local move = require("mini.move")
-      move.setup(opts)
+      local MiniMove = require("mini.move")
+      MiniMove.setup(opts)
 
       local function map_repeatable_line_move(lhs, direction, desc)
         local plug = "<Plug>(MiniMoveLine" .. direction:gsub("^%l", string.upper) .. ")"
         vim.keymap.set("n", plug, function()
-          move.move_line(direction)
+          MiniMove.move_line(direction)
           vim.fn["repeat#set"](plug, vim.v.count)
         end, { desc = desc, silent = true })
         vim.keymap.set("n", lhs, plug, { desc = desc, remap = true })
