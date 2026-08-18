@@ -6,6 +6,7 @@
   },
   "filesystem": {
     "read": [
+      "$XDG_CONFIG_HOME/gnupg",
       "$XDG_CONFIG_HOME/git",
       "$XDG_DATA_HOME/delta",
       "$XDG_DATA_HOME/theme/catppuccin/delta"
