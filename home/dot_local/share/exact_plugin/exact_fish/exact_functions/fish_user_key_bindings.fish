@@ -51,6 +51,8 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-r backward-word-or-atuin
     bind --mode insert ctrl-shift-f forward-token
     bind --mode insert ctrl-shift-r backward-token
+    bind --mode insert ctrl-i backward-path-component
+    bind --mode insert ctrl-o forward-path-component
     bind --mode insert ctrl-a beginning-of-line-or-history-pager
     bind --mode insert ctrl-e end-of-line accept-autosuggestion
 
@@ -118,15 +120,15 @@ function fish_user_key_bindings \
     end
 
     # Show Git status.
-    bind --mode insert ctrl-i \
+    bind --mode insert ctrl-shift-i \
         'commandline " git status"; commandline --function execute'
 
     # Reset all staged changes with Git.
-    bind --mode insert ctrl-shift-i \
+    bind --mode insert ctrl-shift-\; \
         'commandline " git reset ."; commandline --function execute'
 
     # Interactively stage changes with Git.
-    bind --mode insert ctrl-o \
+    bind --mode insert ctrl-shift-p \
         'commandline " git add --patch"; execute-in-stack'
 
     # Open GitUI in a new stack
@@ -142,9 +144,7 @@ function fish_user_key_bindings \
         'commandline " git pr-diff"; execute-in-stack'
 
     # TODO: Bind open keys.
-    # bind --mode insert ctrl-shift-\;
     # bind --mode insert ctrl-shift-o
-    # bind --mode insert ctrl-shift-i
     # bind --mode insert ctrl-b
     # bind --mode insert ctrl-shift-b
 end
