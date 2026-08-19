@@ -16,14 +16,17 @@ if type --query gh
     gh alias set --clobber mrb 'pr merge --rebase --delete-branch'
 
     # Push the current branch and create a pull request.
-    gh alias set --clobber prc '!git push --quiet && gh pr create --fill "$@"'
-    gh alias set --clobber prcd '!git push --quiet && gh pr create --fill --draft "$@"'
-    gh alias set --clobber prv 'pr view'
-    gh alias set --clobber pro 'pr view --web'
-    gh alias set --clobber prd 'pr diff'
-    gh alias set --clobber prr 'pr ready'
-    gh alias set --clobber prw 'pr checks --watch'
-    gh alias set --clobber prx '!gh pr close "$(git branch --show-current)" "$@"'
+    gh alias set --clobber c '!git push --quiet && gh pr create --fill "$@"'
+    gh alias set --clobber cd '!git push --quiet && gh pr create --fill --draft "$@"'
+
+    gh alias set --clobber v 'pr view'
+    gh alias set --clobber x 'pr view --web'
+    gh alias set --clobber r 'pr ready'
+    gh alias set --clobber w 'pr checks --watch'
+    gh alias set --clobber diff 'pr diff'
+    gh alias set --clobber close '!gh pr close "$(git branch --show-current)" "$@"'
+
+    gh alias set --clobber d 'dash'
 
     # Clone repo.
     gh alias set --clobber clone 'repo clone'
