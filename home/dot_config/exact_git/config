@@ -30,6 +30,7 @@
 	root = rev-parse --show-toplevel
 	pr-diff = "!git diff --ignore-all-space $(git merge-base main HEAD)"
 	switch-or-create = "!f() { git switch \"$@\" 2>/dev/null || git switch --create \"$@\"; }; f"
+	tidy = "!git fetch --prune && git branch --merged=main --format='%(refname:short)' | grep -vx main | xargs -r git branch -d"
 
 	# Git Commands to audit a project.
 	# https://piechowski.io/post/git-commands-before-reading-code/
