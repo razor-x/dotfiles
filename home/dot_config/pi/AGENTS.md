@@ -45,10 +45,9 @@ Use the local CLI tools when they are a good fit. Prefer:
 
 Docs are installed at `/usr/share/doc/pi` on Arch Linux.
 
-When modifying Pi's local extensions, edit the source tree at
+When modifying Pi's global instructions or local extension, edit
+`$HOME/config/dotfiles/home/dot_config/pi/AGENTS.md` or
 `$HOME/config/dotfiles/home/dot_config/pi/extensions/exact_local`.
 
-The installed runtime copy is `$XDG_CONFIG_HOME/pi/extensions/local`; do not
-edit it directly. After changing the source extension, run
-`pi-extension-sync` to update.
-the runtime copy, then restart Pi.
+Their installed runtime copies are under `$XDG_CONFIG_HOME/pi`; do not edit
+them directly. After changing either source, run `pi-sync-dotfiles`, then reload Pi.

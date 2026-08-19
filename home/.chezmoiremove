@@ -1,3 +1,4 @@
+# Bad actors
 .bash_history
 .bash_logout
 .cargo
@@ -6,3 +7,6 @@
 .terminfo
 .wget-hsts
 .yarn
+
+# Migrations
+.local/bin/pi-extension-sync
