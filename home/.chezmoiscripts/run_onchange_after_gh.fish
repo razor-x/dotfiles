@@ -13,7 +13,11 @@ if type --query gh
     # Merge pull requests and delete the source branch.
     gh alias set --clobber m 'pr merge --merge --delete-branch'
     gh alias set --clobber ms 'pr merge --squash --delete-branch'
-    gh alias set --clobber mr 'pr merge --rebase --delete-branch'
+    gh alias set --clobber mrb 'pr merge --rebase --delete-branch'
+
+    # Push the current branch and create a pull request.
+    gh alias set --clobber prc '!git push --quiet && gh pr create --fill "$@"'
+    gh alias set --clobber prcd '!git push --quiet && gh pr create --fill --draft "$@"'
 
     # Clone repo.
     gh alias set --clobber clone 'repo clone'
