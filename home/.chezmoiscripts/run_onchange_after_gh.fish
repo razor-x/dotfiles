@@ -4,8 +4,8 @@ if type --query gh
     # Install dashboard extension.
     gh extension install --pin v4.24.1 dlvhdr/gh-dash
 
-    # Prefer HTTPS for git operations.
-    gh config set git_protocol https
+    # Prefer SSH for git operations.
+    gh config set git_protocol ssh
 
     # Reset all aliases.
     gh alias delete --all

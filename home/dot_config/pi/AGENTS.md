@@ -24,7 +24,11 @@ Use the local CLI tools when they are a good fit. Prefer:
 - Use `just` recipes when a suitable repository task exists.
 - Use `git` for scripted or precise repository operations.
 - Use `gh` for GitHub issues, pull requests, and repository operations.
-  - Treat global Git and GitHub authentication config as read-only; never run `gh auth setup-git` or modify it.
+  - Use GitHub over HTTPS but never change a remote url in a repo from ssh to https.
+  - Do not try to clone repos: ask the user to do this.
+  - For authenticated Git commands, leave the global config and remotes unchanged and supply the `gh` credential helper per command:
+    `git -c credential.https://github.com.helper= -c credential.https://github.com.helper='!gh auth git-credential' …`.
+- Treat global Git and GitHub authentication config as read-only; never run `gh auth setup-git` or modify it.
 - Use `worktrunk` for Git worktree management when working with parallel branches or agents.
 
 ## Archives, files, and network
