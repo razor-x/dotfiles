@@ -35,7 +35,7 @@ function fish_user_key_bindings \
 
     # Edit command buffer in editor.
     bind --mode default vv edit_command_buffer
-    bind --mode insert ctrl-m edit_command_buffer
+    bind --mode insert ctrl-b edit_command_buffer
 
     # Navigate history.
     bind --mode insert ctrl-p up-or-search
@@ -144,7 +144,8 @@ function fish_user_key_bindings \
         'commandline " git pr-diff"; execute-in-stack'
 
     # TODO: Bind open keys.
+    # bind --mode insert ctrl-m
+    # bind --mode insert ctrl-shift-m
     # bind --mode insert ctrl-shift-o
-    # bind --mode insert ctrl-b
     # bind --mode insert ctrl-shift-b
 end
