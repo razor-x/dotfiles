@@ -10,8 +10,9 @@ if [[ -n "$XDG_CACHE_HOME" ]]; then
   touch "$HISTFILE"
 
   # Enable programmable completion.
-  autoload -Uz compinit
-  compinit -d "$zsh_cache_dir/zcompdump"
+  autoload -Uz compinit promptinit
+  promptinit
+  compinit -d "$cache_dir/zcompdump"
 fi
 
 # Configure pinentry to use the correct TTY.
