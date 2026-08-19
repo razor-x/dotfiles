@@ -23,7 +23,7 @@ if type --query gh
     gh alias set --clobber prd 'pr diff'
     gh alias set --clobber prr 'pr ready'
     gh alias set --clobber prw 'pr checks --watch'
-    gh alias set --clobber prx 'pr close'
+    gh alias set --clobber prx '!gh pr close "$(git branch --show-current)" "$@"'
 
     # Clone repo.
     gh alias set --clobber clone 'repo clone'
