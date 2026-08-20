@@ -1,4 +1,4 @@
-default: watch
+default: apply
 
 init:
   chezmoi init --apply --source ~/config/dotfiles razor-x
