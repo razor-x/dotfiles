@@ -1,0 +1,2 @@
+# UPSTREAM: Some Pi extension maintainers declare Pi-provided packages as required peers.
+legacy-peer-deps=true

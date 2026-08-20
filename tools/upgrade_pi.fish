@@ -67,4 +67,5 @@ npm install
 or exit
 npm run typecheck
 or exit
-npm --prefix ../../exact_npm update
+# UPSTREAM: Some Pi extension maintainers declare Pi-provided packages as required peers.
+npm --prefix ../../exact_npm update --legacy-peer-deps
