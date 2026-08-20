@@ -31,7 +31,7 @@ format:
   biome format --write .
   fish_indent --write $(git ls-files '*.fish' 'home/.chezmoiscripts/*.fish.tmpl')
   stylua $(git ls-files '*.lua')
-  mdformat $(git ls-files '*.md')
+  mdformat --exclude '**/skills/**' $(git ls-files '*.md')
   ruff format $(git ls-files '*.py' '*.pyi' '*.ipynb')
   shfmt --write $(git ls-files '*.sh')
 
@@ -40,7 +40,7 @@ check:
   biome format .
   fish_indent --check $(git ls-files '*.fish' 'home/.chezmoiscripts/*.fish.tmpl')
   stylua --check $(git ls-files '*.lua')
-  mdformat --check $(git ls-files '*.md')
+  mdformat --exclude '**/skills/**' --check $(git ls-files '*.md')
   ruff format --check $(git ls-files '*.py' '*.pyi' '*.ipynb')
   shfmt --diff $(git ls-files '*.sh')
   npm --prefix home/dot_config/pi/extensions/exact_local run check
