@@ -42,6 +42,9 @@ if status is-interactive
     # MultipleX
     abbr mx zellij
 
+    # tldr
+    abbr t tldr
+
     # monitor
     abbr mon zenith
 
