@@ -28,6 +28,7 @@
 {{ end -}}
 
 # Ignore TypeScript environment for pi extensions.
+.config/pi/npm/.gitignore
 .config/pi/npm/node_modules
 .config/pi/extensions/local/tsconfig.json
 .config/pi/extensions/local/tsconfig.*.json
