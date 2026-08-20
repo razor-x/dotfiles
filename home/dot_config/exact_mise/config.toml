@@ -3,12 +3,20 @@
 # color_theme = '{{ template "theme" (merge (dict "app" "mise") .) }}'
 
 idiomatic_version_file_enable_tools = [
+  'bun',
   'dotnet',
+  'go',
+  'golangci-lint',
+  'goreleaser',
+  'java',
   'node',
   'npm',
+  'opentofu',
   'pnpm',
   'python',
   'ruby',
+  'ruff',
+  'rust',
   'yarn'
 ]
 
