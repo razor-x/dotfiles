@@ -2,6 +2,14 @@
 # UPSTREAM: color_theme is not released yet.
 # color_theme = '{{ template "theme" (merge (dict "app" "mise") .) }}'
 
-idiomatic_version_file_enable_tools = ['node', 'yarn', 'npm', 'pnpm', 'ruby', 'python']
+idiomatic_version_file_enable_tools = [
+  'dotnet',
+  'node',
+  'npm',
+  'pnpm',
+  'python',
+  'ruby',
+  'yarn'
+]
 
 ruby.compile=false
