@@ -55,6 +55,15 @@ M.spec = {
     end,
   },
   {
+    "nvim-mini/mini.trailspace",
+    opts = {},
+    config = function(_, opts)
+      local MiniTrailspace = require("mini.trailspace")
+      MiniTrailspace.setup(opts)
+      vim.api.nvim_create_user_command("TrimWhitespace", MiniTrailspace.trim, { desc = "Trim trailing whitespace" })
+    end,
+  },
+  {
     "nvim-mini/mini.comment",
     opts = {},
     config = function(_, opts)

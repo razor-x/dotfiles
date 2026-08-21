@@ -76,10 +76,12 @@ n = no can't or won't use
   - [*] => use Snacks picker
 - [n] mini.sessions      Session management
   - [*] => use auto-session
-- [?] mini.visits        Track and reuse file system visits
+- [n] mini.visits        Track and reuse file system visits
+  - [*] => handled by snacks
 - [n] mini.animate       Animate common Neovim actions
   - [*] => use kitty or neovide
-- [?] mini.base16        Base16 colorscheme creation
+- [n] mini.base16        Base16 colorscheme creation
+  - [*] => not needed with current theme
 - [n] mini.colors        Tweak and save any color scheme
   - [*] => not needed
 - [n] mini.cursorword    Autohighlight word under cursor
@@ -94,12 +96,13 @@ n = no can't or won't use
   - [*] => not wanted
 - [n] mini.notify        Show notifications
   - [*] => use built-in `vim.notify`
-- [?] mini.starter       Start screen
+- [n] mini.starter       Start screen
+  - [*] => start screens are awkward
 - [n] mini.statusline    Statusline
   - [*] => use nvim-lualine/lualine.nvim
 - [n] mini.tabline       Tabline
   - [*] => use native
-- [y] mini.trailspace    Trailspace (highlight and remove)
+- [*] mini.trailspace    Trailspace (highlight and remove)
 - [n] mini.doc           Generate Neovim help files
   - [*] => not needed
 - [n] mini.fuzzy         Fuzzy matching
