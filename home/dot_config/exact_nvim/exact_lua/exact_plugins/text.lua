@@ -237,9 +237,11 @@ M.spec = {
   },
   {
     "gbprod/substitute.nvim",
+    dependencies = { "gbprod/yanky.nvim" },
     opts = {},
     config = function(_, opts)
       Substitute = require("substitute")
+      opts.on_substitute = require("yanky.integration").substitute()
       Substitute.setup(opts)
     end,
     keys = {
