@@ -45,7 +45,9 @@ M.spec = {
   },
   {
     "lewis6991/gitsigns.nvim",
-    opts = {},
+    ---@module "gitsigns"
+    ---@type Gitsigns.Config
+    opts = {}, ---@diagnostic disable-line: missing-fields
   },
   {
     "NeogitOrg/neogit",
@@ -53,6 +55,8 @@ M.spec = {
       "esmuellert/codediff.nvim",
       "folke/snacks.nvim",
     },
+    ---@module "neogit"
+    ---@type NeogitConfig
     opts = {
       integrations = {
         snacks = true,
@@ -275,6 +279,8 @@ M.spec = {
         desc = "Pi sessions",
       },
     },
+    ---@module "pi-nvim"
+    ---@type pi_nvim.Config
     opts = {
       set_default_keymaps = false,
     },
@@ -301,7 +307,9 @@ M.spec = {
   {
     "pwntester/octo.nvim",
     cmd = "Octo",
-    opts = {
+    ---@module "octo"
+    ---@type OctoConfig
+    opts = { ---@diagnostic disable-line: missing-fields
       picker = "snacks",
       enable_builtin = true,
     },

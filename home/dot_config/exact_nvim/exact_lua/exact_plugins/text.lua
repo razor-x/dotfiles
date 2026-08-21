@@ -1,6 +1,8 @@
 local M = {}
 local toggles = require("config.toggles")
 
+---@module "lazy.types"
+---@type LazySpec
 M.spec = {
   {
     "nvim-mini/mini.ai",
@@ -145,6 +147,7 @@ M.spec = {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
+    ---@module "flash"
     ---@type Flash.Config
     opts = {
       modes = {

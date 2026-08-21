@@ -7,6 +7,8 @@ M.spec = {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
+    ---@module "catppuccin"
+    ---@type CatppuccinOptions
     opts = {
       auto_integrations = true,
     },
@@ -46,6 +48,8 @@ M.spec = {
     "folke/which-key.nvim",
     dependencies = { "nvim-mini/mini.icons" },
     event = "VeryLazy",
+    ---@module "which-key"
+    ---@type wk.Opts
     opts = {
       delay = function(ctx)
         if ctx.keys == "z=" then
