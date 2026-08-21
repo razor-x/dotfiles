@@ -15,9 +15,21 @@ ctrl-enter -> open action menu, e.g., like ctrl-enter in opencode
 
 neovim keys to consider remapping
 
+s - Flash; default `s` is redundant with `cl`; restore default `S`
+
 Z - backspace in normal mode - almost always use something else to delete stuff in normal mode
 
 H & L - top / bottom of screen - rarely useful, prime home row keys
+
+X - delete backward is redundant with `dh`
+
+C & D - change/delete to end of line are redundant with `c$`/`d$`, but convenient
+
+`-` - previous line at first nonblank is rarely useful
+
+~ - single-character case toggle is less useful than the `g~` operator
+
+| - exact-column motion is mainly useful in macros and fixed-width text
 
 : - will remap to register-replace
 
@@ -46,7 +58,8 @@ n = no can't or won't use
 - [+] mini.completion    Completion and signature help
 - [*] mini.keymap        Special key mappings
 - [*] mini.move          Move any selection in any direction
-- [y] mini.operators     Text edit operators
+- [n] mini.operators     Text edit operators
+  - [*] => use substitute.nvim exchange and native operators
 - [*] mini.pairs         Autopairs
 - [y] mini.snippets      Manage and expand snippets
 - [n] mini.splitjoin     Split and join arguments
@@ -137,15 +150,11 @@ n = no can't or won't use
  │                      │ line down and <C-=> moves it up, preserving your old unimpaired mappings.  │
  │                      │ Disable normal horizontal line movement initially.                         │
  ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
- │ mini.operators       │ Use g= evaluate, gx exchange, gm multiply, and gs sort. Configure replace  │
- │                      │ as : / ::, allowing it to replace gbprod/substitute.nvim while preserving  │
- │                      │ your current binds. Keep Snacks gr for LSP references.                     │
- ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
  │ Wansmer/treesj       │ Replace mini.splitjoin and use gS to toggle split/join.                     │
  ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
  │ mini.surround        │ Switch from the currently active Mini defaults to legacy-compatible ys,    │
  │                      │ ds, and cs. Put extra Mini actions on <leader>zf, <leader>zF, and          │
- │                      │ <leader>zh. Keep visual S for Flash, so visual surround would use ys       │
+ │                      │ <leader>zh. Keep visual s for Flash, so visual surround would use ys       │
  │                      │ rather than the old S.                                                     │
  ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
  │ mini.bracketed       │ Keep defaults except disable indent and undo. [i/]i belong to              │

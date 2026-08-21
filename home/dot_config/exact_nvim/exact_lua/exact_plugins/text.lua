@@ -143,7 +143,7 @@ M.spec = {
     end,
     keys = {
       {
-        "S",
+        "s",
         mode = { "n", "x", "o" },
         function()
           Flash.jump()
