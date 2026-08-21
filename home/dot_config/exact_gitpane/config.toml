@@ -1,0 +1,4 @@
+root_dirs = ["~/config", "~/dev", "~/seam"]
+
+[open]
+command = "kitten @ launch --type=tab {path}"
