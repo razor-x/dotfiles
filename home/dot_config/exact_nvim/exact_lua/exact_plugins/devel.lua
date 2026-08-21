@@ -61,6 +61,11 @@ M.spec = {
     cmd = "Neogit",
     keys = {
       {
+        "<leader>gc",
+        "<cmd>Neogit commit<cr>",
+        desc = "Git Commit",
+      },
+      {
         "<leader>ga",
         function()
           vim.cmd.update()
