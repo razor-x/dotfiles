@@ -124,7 +124,7 @@ function fish_user_key_bindings \
         'commandline " git status"; commandline --function execute'
 
     # Show diff of changes in the index.
-    bind --mode insert ctrl-shift-\; \
+    bind --mode insert ctrl-shift-o \
         'commandline " git diff --cached"; commandline --function execute'
 
     # Reset all staged changes with Git.
