@@ -37,7 +37,9 @@ m & M - will remap to "move"
 
 ctrl-space in insert mode
 
-- need to find an alt bind for setting marks
+- need to find an alt bind for setting marks (vim-signature replacement?)
+- Unicode name/glyph completion.
+- Rainbow/nested-delimiter coloring.
 
 neovim stuff
 
