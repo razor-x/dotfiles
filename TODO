@@ -21,7 +21,7 @@ Z - backspace in normal mode - almost always use something else to delete stuff 
 
 H & L - top / bottom of screen - rarely useful, prime home row keys
 
-X - delete backward is redundant with `dh`
+X - exchange operator; default delete backward is redundant with `dh`
 
 C & D - change/delete to end of line are redundant with `c$`/`d$`, but convenient
 

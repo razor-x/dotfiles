@@ -203,6 +203,28 @@ M.spec = {
     end,
     keys = {
       {
+        "X",
+        function()
+          require("substitute.exchange").operator()
+        end,
+        desc = "Exchange using motion",
+      },
+      {
+        "XX",
+        function()
+          require("substitute.exchange").line()
+        end,
+        desc = "Exchange line",
+      },
+      {
+        "X",
+        mode = "x",
+        function()
+          require("substitute.exchange").visual()
+        end,
+        desc = "Exchange selection",
+      },
+      {
         ":",
         function()
           Substitute.operator()
