@@ -322,6 +322,13 @@ M.spec = {
     end,
     opts = {},
   },
+  {
+    "mbbill/undotree",
+    keys = {
+      { "<Leader>u", "<Cmd>UndotreeShow<Bar>UndotreeFocus<CR>", desc = "Open or focus undo tree" },
+      { "<Leader>U", "<Cmd>UndotreeToggle<CR>", desc = "Toggle undo tree" },
+    },
+  },
 }
 
 ---@param register string The register to bind the mappings to
