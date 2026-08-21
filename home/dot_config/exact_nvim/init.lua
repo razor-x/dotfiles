@@ -57,3 +57,7 @@ require("lazy").setup({
 })
 
 vim.cmd.colorscheme(dotfiles.colorscheme)
+
+if vim.g.neovide then
+  require("neovide").setup()
+end
