@@ -123,6 +123,10 @@ function fish_user_key_bindings \
     bind --mode insert ctrl-shift-i \
         'commandline " git status"; commandline --function execute'
 
+    # Show diff of changes in the index.
+    bind --mode insert ctrl-shift-\; \
+        'commandline " git diff --cached"; commandline --function execute'
+
     # Reset all staged changes with Git.
     bind --mode insert ctrl-shift-\; \
         'commandline " git reset ."; commandline --function execute'
@@ -146,6 +150,5 @@ function fish_user_key_bindings \
     # TODO: Bind open keys.
     # bind --mode insert ctrl-m
     # bind --mode insert ctrl-shift-m
-    # bind --mode insert ctrl-shift-o
     # bind --mode insert ctrl-shift-b
 end
