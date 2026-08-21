@@ -44,6 +44,11 @@ neovim stuff
 - project wide find/replace (or on all open files, or folder).
 - nvim cannot have any alt binds. snacks explorer has them by default but they need to be remapped. will need to check any plugins for alt binds and remap
 
+# plugin gaps
+
+yoink
+undo tree
+
 # mini.nvim
 
 * = done and fully setup
@@ -66,7 +71,7 @@ n = no can't or won't use
   - [*] => use Wansmer/treesj with `gS`
 - [*] mini.surround      Surround actions
 - [*] mini.basics        Common configuration presets
-- [y] mini.bracketed     Go forward/backward with square brackets
+- [*] mini.bracketed     Go forward/backward with square brackets
 - [*] mini.bufremove     Remove buffers
 - [n] mini.clue          Show next key clues
   - [*] => use folke/which-key.nvim
@@ -157,9 +162,9 @@ n = no can't or won't use
  │                      │ <leader>zh. Keep visual s for Flash, so visual surround would use ys       │
  │                      │ rather than the old S.                                                     │
  ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
- │ mini.bracketed       │ Keep defaults except disable indent and undo. [i/]i belong to              │
- │                      │ mini.indentscope; the undo target would interfere with your swapped        │
- │                      │ U/<C-r> mappings.                                                          │
+ │ mini.bracketed       │ Enable buffer b, conflict x, diagnostic d, jump j, location l, quickfix q, │
+ │                      │ and Tree-sitter node n. Comments use [\ / ]\ and [| / ]|. Disable file,   │
+ │                      │ indent, oldfile, undo, window, and yank targets.                            │
  ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
  │ mini.indentscope     │ Keep ii, ai, [i, and ]i.                                                   │
  ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤

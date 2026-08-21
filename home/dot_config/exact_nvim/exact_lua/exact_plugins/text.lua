@@ -64,6 +64,38 @@ M.spec = {
     end,
   },
   {
+    "nvim-mini/mini.bracketed",
+    opts = {
+      buffer = { suffix = "b" },
+      comment = { suffix = "\\" },
+      conflict = { suffix = "x" },
+      diagnostic = { suffix = "d" },
+      file = { suffix = "" },
+      indent = { suffix = "" },
+      jump = { suffix = "j" },
+      location = { suffix = "l" },
+      oldfile = { suffix = "" },
+      quickfix = { suffix = "q" },
+      treesitter = { suffix = "n" },
+      undo = { suffix = "" },
+      window = { suffix = "" },
+      yank = { suffix = "" },
+    },
+    config = function(_, opts)
+      local MiniBracketed = require("mini.bracketed")
+      MiniBracketed.setup(opts)
+
+      vim.keymap.set({ "n", "x" }, "[|", function()
+        MiniBracketed.comment("first")
+      end, { desc = "Comment first" })
+      vim.keymap.set("o", "[|", "V<Cmd>lua MiniBracketed.comment('first')<CR>", { desc = "Comment first" })
+      vim.keymap.set({ "n", "x" }, "]|", function()
+        MiniBracketed.comment("last")
+      end, { desc = "Comment last" })
+      vim.keymap.set("o", "]|", "V<Cmd>lua MiniBracketed.comment('last')<CR>", { desc = "Comment last" })
+    end,
+  },
+  {
     "nvim-mini/mini.comment",
     opts = {},
     config = function(_, opts)
