@@ -151,7 +151,7 @@ M.spec = {
         desc = "Flash",
       },
       {
-        "R",
+        "S",
         mode = { "n", "x", "o" },
         function()
           Flash.treesitter()
