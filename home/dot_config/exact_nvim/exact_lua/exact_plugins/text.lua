@@ -159,7 +159,7 @@ M.spec = {
         desc = "Treesitter Search",
       },
       {
-        "<c-s>",
+        "<c-g>",
         mode = { "c" },
         function()
           Flash.toggle()
