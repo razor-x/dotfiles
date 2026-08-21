@@ -65,7 +65,7 @@ n = no can't or won't use
 - [n] mini.operators     Text edit operators
   - [*] => use substitute.nvim exchange and native operators
 - [*] mini.pairs         Autopairs
-- [y] mini.snippets      Manage and expand snippets
+- [*] mini.snippets      Manage and expand snippets
 - [n] mini.splitjoin     Split and join arguments
   - [*] => use Wansmer/treesj with `gS`
 - [*] mini.surround      Surround actions

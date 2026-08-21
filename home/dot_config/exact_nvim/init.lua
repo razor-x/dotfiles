@@ -40,6 +40,7 @@ require("lazy").setup({
           { path = "mini.keymap", words = { "MiniKeymap" } },
           { path = "mini.move", words = { "MiniMove" } },
           { path = "mini.pairs", words = { "MiniPairs" } },
+          { path = "mini.snippets", words = { "MiniSnippets" } },
           { path = "mini.surround", words = { "MiniSurround" } },
           { path = "mini.trailspace", words = { "MiniTrailspace" } },
           { path = "snacks.nvim", words = { "Snacks" } },

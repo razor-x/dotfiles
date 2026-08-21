@@ -236,8 +236,8 @@ M.spec = {
         desc = "Delete character before cursor",
       })
 
-      MiniKeymap.map_multistep("i", "<C-J>", { "pmenu_next" }, {
-        desc = "Select next completion item or split line",
+      MiniKeymap.map_multistep("i", "<C-J>", { "pmenu_next", "minisnippets_expand" }, {
+        desc = "Select next completion item, expand snippet, or split line",
       })
 
       MiniKeymap.map_multistep("i", "<C-N>", { "pmenu_next" }, {
@@ -248,15 +248,21 @@ M.spec = {
         desc = "Select next completion item or split line",
       })
 
-      MiniKeymap.map_multistep("i", "<C-K>", { "pmenu_prev", M.multistep_fallback("<CR><Up><C-O>$") }, {
-        desc = "Select previous completion item or split line in place",
-      })
+      MiniKeymap.map_multistep(
+        "i",
+        "<C-K>",
+        { "pmenu_prev", "minisnippets_prev", M.multistep_fallback("<CR><Up><C-O>$") },
+        {
+          desc = "Select previous completion item, jump to previous tabstop, or split line in place",
+        }
+      )
       MiniKeymap.map_multistep("i", "<C-L>", {
         "pmenu_accept",
         M.multistep_pmenu_accept_first,
+        "minisnippets_next",
         M.multistep_fallback("<Right>"),
       }, {
-        desc = "Accept completion item or move cursor right",
+        desc = "Accept completion item, jump to next tabstop, or move cursor right",
       })
       MiniKeymap.map_multistep("i", "<Esc>", { M.multiste_pmenu_cancel }, {
         desc = "Cancel completion and exit Insert mode",
@@ -309,6 +315,27 @@ M.spec = {
         enable = false,
       },
     },
+  },
+  {
+    "nvim-mini/mini.snippets",
+    dependencies = { "rafamadriz/friendly-snippets" },
+    ---@module "mini.snippets"
+    opts = function()
+      local MiniSnippets = require("mini.snippets")
+      return {
+        snippets = { MiniSnippets.gen_loader.from_lang() },
+        mappings = {
+          expand = "",
+          jump_next = "",
+          jump_prev = "",
+        },
+      }
+    end,
+    config = function(_, opts)
+      local MiniSnippets = require("mini.snippets")
+      MiniSnippets.setup(opts)
+      MiniSnippets.start_lsp_server()
+    end,
   },
   {
     "nvim-mini/mini.completion",
