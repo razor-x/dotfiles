@@ -4,9 +4,11 @@ import {
   type KeybindingsManager,
 } from '@earendil-works/pi-coding-agent'
 import { type KeyId, matchesKey } from '@earendil-works/pi-tui'
+import { copyPrompt } from './copy-prompt.ts'
 import { selectThinkingLevel } from './cycle-thinking.ts'
 
 const cursorDownOrNewLineAction = 'local.editor.cursorDownOrNewLine'
+const copyPromptAction = 'local.editor.copyPrompt'
 const thinkingLowerAction = 'local.editor.thinkingLower'
 const thinkingHigherAction = 'local.editor.thinkingHigher'
 
@@ -16,8 +18,12 @@ export default function cursorDownOrNewLine(pi: ExtensionAPI): void {
 
     ctx.ui.setEditorComponent(
       (tui, theme, keybindings) =>
-        new LocalEditor(tui, theme, keybindings, (offset) =>
-          selectThinkingLevel(pi, ctx, offset),
+        new LocalEditor(
+          tui,
+          theme,
+          keybindings,
+          (offset) => selectThinkingLevel(pi, ctx, offset),
+          (text) => void copyPrompt(text, ctx.ui),
         ),
     )
   })
@@ -30,27 +36,36 @@ type EditorInternals = {
 
 export class LocalEditor extends CustomEditor {
   private readonly cursorDownOrNewLineKeys: KeyId[]
+  private readonly copyPromptKeys: KeyId[]
   private readonly thinkingLowerKeys: KeyId[]
   private readonly thinkingHigherKeys: KeyId[]
   private readonly selectThinkingLevel: (offset: -1 | 1) => void
+  private readonly copyPrompt: (text: string) => void
 
   constructor(
     tui: ConstructorParameters<typeof CustomEditor>[0],
     theme: ConstructorParameters<typeof CustomEditor>[1],
     keybindings: ConstructorParameters<typeof CustomEditor>[2],
     selectThinkingLevel: (offset: -1 | 1) => void = () => undefined,
+    copyPrompt: (text: string) => void = () => undefined,
   ) {
     super(tui, theme, keybindings)
     this.selectThinkingLevel = selectThinkingLevel
+    this.copyPrompt = copyPrompt
     this.cursorDownOrNewLineKeys = getKeys(
       keybindings,
       cursorDownOrNewLineAction,
     )
+    this.copyPromptKeys = getKeys(keybindings, copyPromptAction)
     this.thinkingLowerKeys = getKeys(keybindings, thinkingLowerAction)
     this.thinkingHigherKeys = getKeys(keybindings, thinkingHigherAction)
   }
 
   override handleInput(data: string): void {
+    if (this.copyPromptKeys.some((key) => matchesKey(data, key))) {
+      this.copyPrompt(this.getText())
+      return
+    }
     if (this.thinkingLowerKeys.some((key) => matchesKey(data, key))) {
       this.selectThinkingLevel(-1)
       return
