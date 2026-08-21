@@ -40,6 +40,7 @@ ctrl-space in insert mode
 - need to find an alt bind for setting marks (vim-signature replacement?)
 - Unicode name/glyph completion.
 - Rainbow/nested-delimiter coloring.
+- quicker.nvim maybe, really i just want the edit feature but the ui is not as nice as native
 
 neovim stuff
 
