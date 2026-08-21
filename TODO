@@ -40,7 +40,8 @@ y = yes, will use
 n = no can't or won't use
 
 - [*] mini.ai            Extend and create a/i textobjects
-- [y] mini.align         Align text interactively
+- [n] mini.align         Align text interactively
+  - [*] => not useful enough to justify a mapping
 - [*] mini.comment       Comment lines
 - [+] mini.completion    Completion and signature help
 - [*] mini.keymap        Special key mappings
@@ -118,10 +119,6 @@ n = no can't or won't use
  │ mini.ai              │ Keep a/i and existing ae/ie whole-buffer object. Change next/last to aN,   │
  │                      │ iN, aL, iL so Neovim 0.12+ an/in remain available. Disable g[/g] edge      │
  │                      │ mappings so built-in tag navigation is preserved.                          │
- ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
- │ mini.align           │ Keep ga and gA. Move Snacks LSP calls from gai/gao to gLi/gLo; otherwise   │
- │                      │ gaiw would invoke incoming calls instead of aligning iw. Preserve built-in │
- │                      │ ga/:ascii as <leader>xa.                                                   │
  ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
  │ mini.comment         │ Keep standard gc, gcc, and gc text object. Set comment_line and            │
  │                      │ comment_visual to \\, preserving nvimrc/plugin/mappings/commentary.vim     │
