@@ -117,6 +117,24 @@ describe('LocalEditor', () => {
     expect(requestRender).toHaveBeenCalledOnce()
     expect(parentHandleInput).not.toHaveBeenCalled()
   })
+
+  it.each([
+    ['local.editor.thinkingLower', 'down', -1],
+    ['local.editor.thinkingHigher', 'up', 1],
+  ] as const)('handles the configured %s action', (action, key, offset) => {
+    const selectThinkingLevel = vi.fn()
+    const { editor } = createEditor(
+      undefined,
+      { [action]: key },
+      selectThinkingLevel,
+    )
+    const parentHandleInput = mockParentHandleInput()
+
+    editor.handleInput(key === 'down' ? '\x1b[B' : '\x1b[A')
+
+    expect(selectThinkingLevel).toHaveBeenCalledWith(offset)
+    expect(parentHandleInput).not.toHaveBeenCalled()
+  })
 })
 
 function registerExtension(): ExtensionHandler<SessionStartEvent> {
@@ -127,13 +145,18 @@ function registerExtension(): ExtensionHandler<SessionStartEvent> {
   return fromPartial<ExtensionHandler<SessionStartEvent>>(on.mock.calls[0]?.[1])
 }
 
-function createEditor(binding: KeyId | KeyId[] | undefined) {
+function createEditor(
+  binding: KeyId | KeyId[] | undefined,
+  otherBindings: Record<string, KeyId> = {},
+  selectThinkingLevel: (offset: -1 | 1) => void = () => undefined,
+) {
   const requestRender = vi.fn()
   const moveCursor = vi.fn()
   const isOnLastVisualLine = vi.fn(() => false)
-  const userBindings = binding
-    ? { 'local.editor.cursorDownOrNewLine': binding }
-    : {}
+  const userBindings = {
+    ...otherBindings,
+    ...(binding ? { 'local.editor.cursorDownOrNewLine': binding } : {}),
+  }
   const keybindings = fromPartial<KeybindingsManager>({
     getUserBindings: () => userBindings,
   })
@@ -141,6 +164,7 @@ function createEditor(binding: KeyId | KeyId[] | undefined) {
     fromPartial<TUI>({ requestRender }),
     fromPartial<EditorTheme>({ borderColor: (text: string) => text }),
     keybindings,
+    selectThinkingLevel,
   )
 
   Object.assign(editor, { isOnLastVisualLine, moveCursor })

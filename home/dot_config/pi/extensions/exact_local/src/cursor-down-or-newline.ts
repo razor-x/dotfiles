@@ -4,15 +4,21 @@ import {
   type KeybindingsManager,
 } from '@earendil-works/pi-coding-agent'
 import { type KeyId, matchesKey } from '@earendil-works/pi-tui'
+import { selectThinkingLevel } from './cycle-thinking.ts'
 
 const cursorDownOrNewLineAction = 'local.editor.cursorDownOrNewLine'
+const thinkingLowerAction = 'local.editor.thinkingLower'
+const thinkingHigherAction = 'local.editor.thinkingHigher'
 
 export default function cursorDownOrNewLine(pi: ExtensionAPI): void {
   pi.on('session_start', (_event, ctx) => {
     if (ctx.mode !== 'tui') return
 
     ctx.ui.setEditorComponent(
-      (tui, theme, keybindings) => new LocalEditor(tui, theme, keybindings),
+      (tui, theme, keybindings) =>
+        new LocalEditor(tui, theme, keybindings, (offset) =>
+          selectThinkingLevel(pi, ctx, offset),
+        ),
     )
   })
 }
@@ -24,13 +30,35 @@ type EditorInternals = {
 
 export class LocalEditor extends CustomEditor {
   private readonly cursorDownOrNewLineKeys: KeyId[]
+  private readonly thinkingLowerKeys: KeyId[]
+  private readonly thinkingHigherKeys: KeyId[]
+  private readonly selectThinkingLevel: (offset: -1 | 1) => void
 
-  constructor(...args: ConstructorParameters<typeof CustomEditor>) {
-    super(...args)
-    this.cursorDownOrNewLineKeys = getKeys(args[2])
+  constructor(
+    tui: ConstructorParameters<typeof CustomEditor>[0],
+    theme: ConstructorParameters<typeof CustomEditor>[1],
+    keybindings: ConstructorParameters<typeof CustomEditor>[2],
+    selectThinkingLevel: (offset: -1 | 1) => void = () => undefined,
+  ) {
+    super(tui, theme, keybindings)
+    this.selectThinkingLevel = selectThinkingLevel
+    this.cursorDownOrNewLineKeys = getKeys(
+      keybindings,
+      cursorDownOrNewLineAction,
+    )
+    this.thinkingLowerKeys = getKeys(keybindings, thinkingLowerAction)
+    this.thinkingHigherKeys = getKeys(keybindings, thinkingHigherAction)
   }
 
   override handleInput(data: string): void {
+    if (this.thinkingLowerKeys.some((key) => matchesKey(data, key))) {
+      this.selectThinkingLevel(-1)
+      return
+    }
+    if (this.thinkingHigherKeys.some((key) => matchesKey(data, key))) {
+      this.selectThinkingLevel(1)
+      return
+    }
     if (!this.cursorDownOrNewLineKeys.some((key) => matchesKey(data, key))) {
       super.handleInput(data)
       return
@@ -52,8 +80,8 @@ export class LocalEditor extends CustomEditor {
   }
 }
 
-function getKeys(keybindings: KeybindingsManager): KeyId[] {
-  const binding = keybindings.getUserBindings()[cursorDownOrNewLineAction]
+function getKeys(keybindings: KeybindingsManager, action: string): KeyId[] {
+  const binding = keybindings.getUserBindings()[action]
   if (typeof binding === 'string') return [binding]
   return binding ?? []
 }
