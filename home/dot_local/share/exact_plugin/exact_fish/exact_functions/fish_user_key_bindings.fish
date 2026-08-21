@@ -120,11 +120,11 @@ function fish_user_key_bindings \
     end
 
     # Show Git status.
-    bind --mode insert ctrl-shift-i \
+    bind --mode insert ctrl-shift-o \
         'commandline " git status"; commandline --function execute'
 
     # Show diff of changes in the index.
-    bind --mode insert ctrl-shift-p \
+    bind --mode insert ctrl-shift-u \
         'commandline " git diff --cached"; commandline --function execute'
 
     # Reset all staged changes with Git.
@@ -132,23 +132,20 @@ function fish_user_key_bindings \
         'commandline " git reset ."; commandline --function execute'
 
     # Interactively stage changes with Git.
-    bind --mode insert ctrl-shift-o \
+    bind --mode insert ctrl-shift-p \
         'commandline " git add --patch"; execute-in-stack'
 
     # Open GitUI in a new stack
     bind --mode insert ctrl-shift-g \
         'commandline " gitui"; execute-in-stack'
 
-    # Show stacked diff of staged changes with Git.
-    bind --mode insert ctrl-u \
-        'commandline " git diff --cached"; execute-in-stack'
-
     # Show stacked diff of proposed changes with Git.
-    bind --mode insert ctrl-shift-u \
+    bind --mode insert ctrl-shift-m \
         'commandline " git pr-diff"; execute-in-stack'
 
     # TODO: Bind open keys.
     # bind --mode insert ctrl-m
+    # bind --mode insert ctrl-u
     # bind --mode insert ctrl-shift-m
     # bind --mode insert ctrl-shift-b
 end
