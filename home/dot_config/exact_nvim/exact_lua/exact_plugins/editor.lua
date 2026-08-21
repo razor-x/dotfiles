@@ -320,7 +320,11 @@ M.spec = {
         end,
       })
     end,
-    opts = {},
+    opts = {
+      mappings = {
+        force_twostep = "<C-E>",
+      },
+    },
   },
   {
     "mbbill/undotree",
