@@ -82,26 +82,10 @@ M.spec = {
         up = "_",
         line_left = "<<",
         line_right = ">>",
-        line_down = "+",
-        line_up = "_",
+        line_down = "<C-->",
+        line_up = "<C-=>",
       },
     },
-    config = function(_, opts)
-      local MiniMove = require("mini.move")
-      MiniMove.setup(opts)
-
-      local function map_repeatable_line_move(lhs, direction, desc)
-        local plug = "<Plug>(MiniMoveLine" .. direction:gsub("^%l", string.upper) .. ")"
-        vim.keymap.set("n", plug, function()
-          MiniMove.move_line(direction)
-          vim.fn["repeat#set"](plug, vim.v.count)
-        end, { desc = desc, silent = true })
-        vim.keymap.set("n", lhs, plug, { desc = desc, remap = true })
-      end
-
-      map_repeatable_line_move("+", "down", "Move line down")
-      map_repeatable_line_move("_", "up", "Move line up")
-    end,
   },
   {
     "Wansmer/treesj",
