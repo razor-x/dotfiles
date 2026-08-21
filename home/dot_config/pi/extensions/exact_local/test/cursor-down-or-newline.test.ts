@@ -1,49 +1,12 @@
 import {
   CustomEditor,
-  type ExtensionAPI,
-  type ExtensionContext,
-  type ExtensionHandler,
-  type ExtensionUIContext,
   type KeybindingsManager,
-  type SessionStartEvent,
 } from '@earendil-works/pi-coding-agent'
 import type { EditorTheme, KeyId, TUI } from '@earendil-works/pi-tui'
 import { fromPartial } from '@total-typescript/shoehorn'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import cursorDownOrNewLine, { LocalEditor } from '@/cursor-down-or-newline.ts'
-
-describe('cursorDownOrNewLine', () => {
-  it('installs the editor in TUI mode', () => {
-    const setEditorComponent = vi.fn()
-    const handler = registerExtension()
-
-    handler(
-      fromPartial<SessionStartEvent>({}),
-      fromPartial<ExtensionContext>({
-        mode: 'tui',
-        ui: fromPartial<ExtensionUIContext>({ setEditorComponent }),
-      }),
-    )
-
-    expect(setEditorComponent).toHaveBeenCalledOnce()
-    expect(setEditorComponent).toHaveBeenCalledWith(expect.any(Function))
-  })
-
-  it('does not install the editor outside TUI mode', () => {
-    const setEditorComponent = vi.fn()
-    const handler = registerExtension()
-
-    handler(
-      fromPartial<SessionStartEvent>({}),
-      fromPartial<ExtensionContext>({
-        mode: 'rpc',
-        ui: fromPartial<ExtensionUIContext>({ setEditorComponent }),
-      }),
-    )
-
-    expect(setEditorComponent).not.toHaveBeenCalled()
-  })
-})
+import { cursorDownOrNewLineInputHandler } from '@/cursor-down-or-newline.ts'
+import { LocalEditor } from '@/local-editor.ts'
 
 describe('LocalEditor', () => {
   afterEach(() => {
@@ -119,14 +82,6 @@ describe('LocalEditor', () => {
   })
 })
 
-function registerExtension(): ExtensionHandler<SessionStartEvent> {
-  const on = vi.fn()
-  cursorDownOrNewLine(fromPartial<ExtensionAPI>({ on }))
-  expect(on).toHaveBeenCalledOnce()
-  expect(on).toHaveBeenCalledWith('session_start', expect.any(Function))
-  return fromPartial<ExtensionHandler<SessionStartEvent>>(on.mock.calls[0]?.[1])
-}
-
 function createEditor(binding: KeyId | KeyId[] | undefined) {
   const requestRender = vi.fn()
   const moveCursor = vi.fn()
@@ -141,6 +96,7 @@ function createEditor(binding: KeyId | KeyId[] | undefined) {
     fromPartial<TUI>({ requestRender }),
     fromPartial<EditorTheme>({ borderColor: (text: string) => text }),
     keybindings,
+    [cursorDownOrNewLineInputHandler(keybindings)],
   )
 
   Object.assign(editor, { isOnLastVisualLine, moveCursor })

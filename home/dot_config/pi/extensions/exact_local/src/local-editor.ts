@@ -1,0 +1,69 @@
+import {
+  CustomEditor,
+  type ExtensionAPI,
+} from '@earendil-works/pi-coding-agent'
+import { copyPromptInputHandler } from './copy-prompt.ts'
+import { cursorDownOrNewLineInputHandler } from './cursor-down-or-newline.ts'
+import { thinkingInputHandler } from './cycle-thinking.ts'
+
+export type EditorInputHandler = (editor: LocalEditor, data: string) => boolean
+
+type EditorInternals = {
+  isOnLastVisualLine: () => boolean
+  moveCursor: (deltaLine: number, deltaCol: number) => void
+}
+
+export default function localEditor(pi: ExtensionAPI): void {
+  pi.on('session_start', (_event, ctx) => {
+    if (ctx.mode !== 'tui') return
+
+    ctx.ui.setEditorComponent(
+      (tui, theme, keybindings) =>
+        new LocalEditor(tui, theme, keybindings, [
+          copyPromptInputHandler(keybindings, ctx.ui),
+          thinkingInputHandler(keybindings, pi, ctx),
+          cursorDownOrNewLineInputHandler(keybindings),
+        ]),
+    )
+  })
+}
+
+export class LocalEditor extends CustomEditor {
+  private readonly inputHandlers: EditorInputHandler[]
+
+  constructor(
+    tui: ConstructorParameters<typeof CustomEditor>[0],
+    theme: ConstructorParameters<typeof CustomEditor>[1],
+    keybindings: ConstructorParameters<typeof CustomEditor>[2],
+    inputHandlers: EditorInputHandler[] = [],
+  ) {
+    super(tui, theme, keybindings)
+    this.inputHandlers = inputHandlers
+  }
+
+  override handleInput(data: string): void {
+    if (this.inputHandlers.some((handler) => handler(this, data))) return
+    super.handleInput(data)
+  }
+
+  handleDefaultInput(data: string): void {
+    super.handleInput(data)
+  }
+
+  isAutocompleteVisible(): boolean {
+    return this.isShowingAutocomplete()
+  }
+
+  isOnLastVisualLineLocal(): boolean {
+    return (this as unknown as EditorInternals).isOnLastVisualLine()
+  }
+
+  moveCursorBy(deltaLine: number, deltaCol: number): void {
+    const editor = this as unknown as EditorInternals
+    editor.moveCursor(deltaLine, deltaCol)
+  }
+
+  requestRender(): void {
+    this.tui.requestRender()
+  }
+}
