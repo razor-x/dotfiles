@@ -211,6 +211,28 @@ M.spec = {
     },
   },
   {
+    "gbprod/yanky.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    opts = {},
+    cmd = { "YankyRingHistory", "YankyClearHistory" },
+    keys = {
+      {
+        "<leader>cy",
+        function()
+          Snacks.picker.yanky()
+        end,
+        mode = { "n", "x" },
+        desc = "Yank History",
+      },
+      { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },
+      { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } },
+      { "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" } },
+      { "gP", "<Plug>(YankyGPutBefore)", mode = { "n", "x" } },
+      { "<C-N>", "<Plug>(YankyPreviousEntry)", desc = "Use previous yank for paste" },
+      { "<C-P>", "<Plug>(YankyNextEntry)", desc = "Use next yank for paste" },
+    },
+  },
+  {
     "gbprod/substitute.nvim",
     opts = {},
     config = function(_, opts)

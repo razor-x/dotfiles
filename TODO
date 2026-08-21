@@ -44,11 +44,6 @@ neovim stuff
 - project wide find/replace (or on all open files, or folder).
 - nvim cannot have any alt binds. snacks explorer has them by default but they need to be remapped. will need to check any plugins for alt binds and remap
 
-# plugin gaps
-
-yoink
-undo tree
-
 # mini.nvim
 
 * = done and fully setup
