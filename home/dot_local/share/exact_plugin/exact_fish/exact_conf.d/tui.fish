@@ -77,6 +77,8 @@ if status is-interactive
 
     abbr md glow --tui
 
+    abbr rec t-rec
+
     abbr m mise
     abbr j just
     abbr jj z
