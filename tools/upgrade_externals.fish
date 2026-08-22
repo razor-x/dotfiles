@@ -1,13 +1,15 @@
 #!/usr/bin/env fish
 
-set --function externals home/.chezmoiexternal.yaml
-set --function download (mktemp)
+set --local externals home/.chezmoiexternal.yaml
+set --local download (mktemp)
 or exit
-set --function entries (mktemp)
+set --local entries (mktemp)
 or exit
 trap "rm --force $download $entries" EXIT
 
-function update_external --argument-names externals target old_url new_url old_sha256 new_sha256
+function update_external \
+    --argument-names externals target old_url new_url old_sha256 new_sha256
+
     set --function contents (string collect --no-trim-newlines <"$externals")
     or return 1
     set --function lines (string split \n -- "$contents")
