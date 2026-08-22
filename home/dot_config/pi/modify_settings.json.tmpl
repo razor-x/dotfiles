@@ -7,7 +7,7 @@ set packages '[{{ range $i, $name := $deps }}{{ if $i }},{{ end }}{{ printf "npm
 set input (mktemp)
 
 function cleanup --on-event fish_exit
-    rm -f $input
+    rm --force "$input"
 end
 
 cat >$input
