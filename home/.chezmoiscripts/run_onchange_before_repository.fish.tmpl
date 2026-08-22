@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-{{ range .repos -}}
+# {{ range .repos }}
 set --local repo {{ joinPath $.chezmoi.homeDir $.repoRoot .path | quote }}
 set --local repo_name (path basename "$repo")
 
@@ -17,37 +17,37 @@ git -C "$repo" config --local --replace-all remote.origin.fetch \
     "+refs/heads/*:refs/remotes/origin/*"
 or exit
 
-{{ if hasKey . "remotes" -}}
-{{ range .remotes -}}
+# {{ if hasKey . "remotes" }}
+# {{ range .remotes }}
 git -C "$repo" config --local --replace-all remote.{{ .name }}.url {{ .url | quote }}
 or exit
 
 git -C "$repo" config --local --replace-all remote.{{ .name }}.fetch \
     {{ printf "+refs/heads/*:refs/remotes/%s/*" .name | quote }}
 or exit
-{{ end -}}
-{{ end -}}
+# {{ end }}
+# {{ end }}
 
 git -C "$repo" config --local --unset-all remote.origin.gh-resolved >/dev/null 2>&1
 
-{{ if hasKey . "remotes" -}}
-{{ range .remotes -}}
+# {{ if hasKey . "remotes" }}
+# {{ range .remotes }}
 git -C "$repo" config --local --unset-all remote.{{ .name }}.gh-resolved >/dev/null 2>&1
-{{ end -}}
-{{ end -}}
+# {{ end }}
+# {{ end }}
 
-{{ if hasKey . "base" -}}
-{{ if contains "/" .base -}}
+# {{ if hasKey . "base" }}
+# {{ if contains "/" .base }}
 git -C "$repo" config --local --replace-all remote.origin.gh-resolved {{ .base | quote }}
-{{ else -}}
+# {{ else }}
 git -C "$repo" config --local --replace-all remote.{{ .base }}.gh-resolved base
-{{ end -}}
-{{ else -}}
+# {{ end }}
+# {{ else }}
 git -C "$repo" config --local --replace-all remote.origin.gh-resolved base
-{{ end -}}
+# {{ end }}
 or exit
 
-{{ end -}}
+# {{ end }}
 
 if type --query gita
     set --local gita_groups
@@ -80,11 +80,11 @@ if type --query gita
     gita add{{ range $.repos }} {{ joinPath $.chezmoi.homeDir $.repoRoot .path | quote }}{{ end }}
     or exit
 
-{{ range $.repos -}}
+# {{ range $.repos }}
     set --local repo {{ joinPath $.chezmoi.homeDir $.repoRoot .path | quote }}
     set --local repo_name (path basename "$repo")
-{{ if hasKey . "groups" -}}
-{{ range .groups -}}
+# {{ if hasKey . "groups" }}
+# {{ range .groups }}
     if not contains -- {{ . | quote }} $gita_groups
         set --append gita_groups {{ . | quote }}
         set --append gita_group_paths (path dirname "$repo")
@@ -92,9 +92,9 @@ if type --query gita
     set --local group_index (contains --index -- {{ . | quote }} $gita_groups)
     gita group add --name {{ . | quote }} --path "$gita_group_paths[$group_index]" "$repo_name"
     or exit
-{{ end -}}
-{{ end -}}
-{{ end -}}
+# {{ end }}
+# {{ end }}
+# {{ end }}
 
     gita context auto
     or exit
