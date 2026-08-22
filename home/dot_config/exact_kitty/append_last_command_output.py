@@ -1,7 +1,7 @@
+from kittens.tui.handler import result_handler
 from kitty.boss import Boss
 from kitty.clipboard import get_clipboard_string, set_clipboard_string
 from kitty.window import CommandOutput
-from kittens.tui.handler import result_handler
 
 
 def main(args: list[str]) -> None:

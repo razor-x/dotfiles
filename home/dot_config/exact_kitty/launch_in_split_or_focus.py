@@ -1,8 +1,8 @@
 import os
 import shutil
 
-from kitty.boss import Boss, Window
 from kittens.tui.handler import result_handler
+from kitty.boss import Boss, Window
 
 
 def main(args: list[str]) -> str | None:

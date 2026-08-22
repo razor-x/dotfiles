@@ -33,6 +33,7 @@ format:
   stylua $(git ls-files '*.lua')
   mdformat --exclude '**/skills/**' $(git ls-files '*.md')
   ruff format $(git ls-files '*.py' '*.pyi' '*.ipynb')
+  ruff check --fix $(git ls-files '*.py' '*.pyi' '*.ipynb')
   shfmt --write $(git ls-files '*.sh')
 
 check:
