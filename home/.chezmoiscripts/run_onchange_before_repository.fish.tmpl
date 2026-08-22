@@ -1,0 +1,101 @@
+#!/usr/bin/env fish
+
+{{ range .repos -}}
+set --local repo {{ joinPath $.chezmoi.homeDir $.repoRoot .path | quote }}
+set --local repo_name (path basename "$repo")
+
+mkdir --parents (path dirname "$repo")
+or exit
+
+git -C "$repo" rev-parse --git-dir >/dev/null 2>&1; or git clone {{ .url | quote }} "$repo"
+or exit
+
+git -C "$repo" config --local --replace-all remote.origin.url {{ .url | quote }}
+or exit
+
+git -C "$repo" config --local --replace-all remote.origin.fetch \
+    "+refs/heads/*:refs/remotes/origin/*"
+or exit
+
+{{ if hasKey . "remotes" -}}
+{{ range .remotes -}}
+git -C "$repo" config --local --replace-all remote.{{ .name }}.url {{ .url | quote }}
+or exit
+
+git -C "$repo" config --local --replace-all remote.{{ .name }}.fetch \
+    {{ printf "+refs/heads/*:refs/remotes/%s/*" .name | quote }}
+or exit
+{{ end -}}
+{{ end -}}
+
+git -C "$repo" config --local --unset-all remote.origin.gh-resolved >/dev/null 2>&1
+
+{{ if hasKey . "remotes" -}}
+{{ range .remotes -}}
+git -C "$repo" config --local --unset-all remote.{{ .name }}.gh-resolved >/dev/null 2>&1
+{{ end -}}
+{{ end -}}
+
+{{ if hasKey . "base" -}}
+{{ if contains "/" .base -}}
+git -C "$repo" config --local --replace-all remote.origin.gh-resolved {{ .base | quote }}
+{{ else -}}
+git -C "$repo" config --local --replace-all remote.{{ .base }}.gh-resolved base
+{{ end -}}
+{{ else -}}
+git -C "$repo" config --local --replace-all remote.origin.gh-resolved base
+{{ end -}}
+or exit
+
+{{ end -}}
+
+if type --query gita
+    set --local gita_groups
+    set --local gita_repos
+
+    for group in (gita group ls | string split ' ')
+        for prefix in{{ range $.repoGroupPrefixes }} {{ . | quote }}{{ end }}
+            if string match --quiet -- "$prefix*" "$group"
+                set --append gita_groups "$group"
+                for line in (gita group ll "$group" | string match -- '- *')
+                    set --local fields (string split --no-empty ' ' (string trim "$line"))
+                    if not contains -- "$fields[2]" $gita_repos
+                        set --append gita_repos "$fields[2]"
+                    end
+                end
+                break
+            end
+        end
+    end
+
+    if test (count $gita_repos) -gt 0
+        gita rm $gita_repos
+        or exit
+    end
+    if test (count $gita_groups) -gt 0
+        gita group rm $gita_groups
+        or exit
+    end
+
+    gita add{{ range $.repos }} {{ joinPath $.chezmoi.homeDir $.repoRoot .path | quote }}{{ end }}
+    or exit
+
+{{ range $.repos -}}
+    set --local repo {{ joinPath $.chezmoi.homeDir $.repoRoot .path | quote }}
+    set --local repo_name (path basename "$repo")
+{{ if hasKey . "groups" -}}
+{{ range .groups -}}
+    if not contains -- {{ . | quote }} $gita_groups
+        set --append gita_groups {{ . | quote }}
+        set --append gita_group_paths (path dirname "$repo")
+    end
+    set --local group_index (contains --index -- {{ . | quote }} $gita_groups)
+    gita group add --name {{ . | quote }} --path "$gita_group_paths[$group_index]" "$repo_name"
+    or exit
+{{ end -}}
+{{ end -}}
+{{ end -}}
+
+    gita context auto
+    or exit
+end

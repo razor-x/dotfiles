@@ -1,0 +1,64 @@
+---
+repoRoot: '.'
+repoGroupPrefixes: [config, dev, makenew]
+repos:
+  - path: config/archrc-next
+    groups: [config]
+    url: git@github.com:razor-x/archrc.git
+  - path: config/archrc
+    groups: [config]
+    url: git@github.com:rxrc/archrc.git
+  - path: config/dotfiles
+    groups: [config]
+    url: git@github.com:razor-x/dotfiles.git
+  - path: dev/blobpack
+    groups: [dev]
+    url: git@github.com:razor-x/blobpack.git
+  - path: dev/evansosenko.com
+    groups: [dev]
+    url: git@github.com:evansosenko/evansosenko.com.git
+  - path: dev/eve-overview
+    groups: [dev]
+    url: git@github.com:razor-x/eve-overview.git
+  - path: dev/landlubber
+    groups: [dev]
+    url: git@github.com:razor-x/landlubber.git
+    remotes:
+      - name: makenew
+        url: git@github.com:makenew/tsmodule.git
+  - path: makenew/benthos-plugin
+    groups: [makenew]
+    url: git@github.com:makenew/benthos-plugin.git
+  - path: makenew/gomodule
+    groups: [makenew]
+    url: git@github.com:makenew/gomodule.git
+  - path: makenew/jsmodule
+    groups: [makenew]
+    url: git@github.com:makenew/jsmodule.git
+  - path: makenew/latex-project
+    groups: [makenew]
+    url: git@github.com:makenew/latex-project.git
+  - path: makenew/nodets-server
+    groups: [makenew]
+    url: git@github.com:makenew/nodets-server.git
+  - path: makenew/pypackage
+    groups: [makenew]
+    url: git@github.com:makenew/pypackage.git
+  - path: makenew/python-app
+    groups: [makenew]
+    url: git@github.com:makenew/python-app.git
+  - path: makenew/rbgem
+    groups: [makenew]
+    url: git@github.com:makenew/rbgem.git
+  - path: makenew/serverless-benthos
+    groups: [makenew]
+    url: git@github.com:makenew/serverless-benthos.git
+  - path: makenew/serverless-nodejs
+    groups: [makenew]
+    url: git@github.com:makenew/serverless-nodejs.git
+  - path: makenew/serverless-python
+    groups: [makenew]
+    url: git@github.com:makenew/serverless-python.git
+  - path: makenew/tsmodule
+    groups: [makenew]
+    url: git@github.com:makenew/tsmodule.git
