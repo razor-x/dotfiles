@@ -37,6 +37,11 @@ M.spec = {
       -- Enable EditorConfig.
       vim.g.editorconfig = true
 
+      vim.api.nvim_create_user_command("CopyMessages", function()
+        vim.fn.setreg("+", vim.fn.execute("messages"))
+        vim.notify("Copied message history to clipboard")
+      end, { desc = "Copy message history to clipboard" })
+
       -- Set default tex flavor.
       vim.g.tex_flavor = "latex"
 
