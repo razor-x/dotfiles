@@ -236,8 +236,8 @@ M.spec = {
         desc = "Delete character before cursor",
       })
 
-      MiniKeymap.map_multistep("i", "<C-J>", { "pmenu_next", "minisnippets_expand" }, {
-        desc = "Select next completion item, expand snippet, or split line",
+      MiniKeymap.map_multistep("i", "<C-J>", { "pmenu_next", "minisnippets_next" }, {
+        desc = "Select next completion item, jump to next snippet tabstop, or split line",
       })
 
       MiniKeymap.map_multistep("i", "<C-N>", { "pmenu_next" }, {
