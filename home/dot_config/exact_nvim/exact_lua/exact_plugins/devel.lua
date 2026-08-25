@@ -252,6 +252,23 @@ M.spec = {
     },
     keys = {
       {
+        "<C-Space>",
+        function()
+          local line = vim.api.nvim_win_get_cursor(0)[1]
+          require("pi-nvim.ui").open({
+            selection = {
+              text = vim.api.nvim_get_current_line(),
+              file = vim.fn.expand("%:."),
+              start_line = line,
+              end_line = line,
+              ft = vim.bo.filetype,
+            },
+          })
+        end,
+        mode = "n",
+        desc = "Pi: send line",
+      },
+      {
         "<leader>dd",
         ":Pi<CR>",
         mode = { "n", "v" },
