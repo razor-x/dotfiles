@@ -9,7 +9,12 @@ apply:
 update:
   chezmoi update --apply --init
 
-upgrade: && upgrade-externals upgrade-neovim upgrade-pi upgrade-yazi
+upgrade: && \
+    upgrade-externals \
+    upgrade-neovim \
+    upgrade-pi-extensions \
+    upgrade-pi-local \
+    upgrade-yazi
 
 upgrade-neovim:
   nvim --headless '+Lazy! update' +qall
@@ -46,8 +51,13 @@ check:
   shfmt --diff $(git ls-files '*.sh')
   npm --prefix home/dot_config/pi/extensions/exact_local run check
 
-upgrade-pi: && format
-  ./tools/upgrade_pi.fish
+upgrade-pi-local: && format
+  ./tools/upgrade_pi_local.fish
+
+[working-directory: './home/dot_config/pi/exact_npm']
+upgrade-pi-extensions:
+  npx --package npm-check-updates@23.1.0 ncu --minimal --upgrade
+  npm update
 
 watch:
   watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force --source {{ justfile_directory() }}
