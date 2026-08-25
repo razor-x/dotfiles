@@ -269,6 +269,12 @@ M.spec = {
         desc = "Pi: send line",
       },
       {
+        "<C-Space>",
+        ":Pi<CR>",
+        mode = "v",
+        desc = "Pi: send selection",
+      },
+      {
         "<leader>dd",
         ":Pi<CR>",
         mode = { "n", "v" },
