@@ -248,6 +248,8 @@ M.spec = {
         desc = "Select next completion item or split line",
       })
 
+      vim.keymap.set("i", "<C-F>", "<C-X><C-F>", { desc = "Complete file path" })
+
       MiniKeymap.map_multistep(
         "i",
         "<C-K>",
@@ -350,6 +352,8 @@ M.spec = {
     opts = {
       mappings = {
         force_twostep = "<C-E>",
+        scroll_down = "<C-d>",
+        scroll_up = "<C-u>",
       },
     },
   },

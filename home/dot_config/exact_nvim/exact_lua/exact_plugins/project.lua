@@ -123,6 +123,26 @@ M.spec = {
       explorer = {},
     },
     keys = {
+      {
+        "<C-g>f",
+        function()
+          local buf = vim.api.nvim_get_current_buf()
+          local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+          Snacks.picker.files({
+            confirm = function(picker, item)
+              picker:close()
+              vim.schedule(function()
+                if item then
+                  vim.api.nvim_buf_set_text(buf, row - 1, col, row - 1, col, { vim.fn.fnamemodify(item.file, ":.") })
+                end
+                vim.cmd.startinsert()
+              end)
+            end,
+          })
+        end,
+        mode = "i",
+        desc = "Insert File Path",
+      },
       -- Top Pickers & Explorer
       {
         "<leader>e",
