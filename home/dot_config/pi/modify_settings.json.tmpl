@@ -17,8 +17,9 @@ if not test -s $input
 end
 
 jq --argjson packages $packages '
-  def uniq_preserve:
-    reduce .[] as $item ([]; if index($item) then . else . + [$item] end);
-
-  .packages = (((.packages // []) + $packages) | uniq_preserve)
+  .packages = (
+    (.packages // [])
+    | map(select(. as $entry | any($packages[]; . as $name | ($entry == "npm:" + $name or ($entry | startswith("npm:" + $name + "@")))) | not))
+    + $packages
+  )
 ' $input
