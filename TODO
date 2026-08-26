@@ -173,3 +173,139 @@ n = no can't or won't use
  │ mini.sessions        │ Use <leader>xs to select/read                                              │
  └──────────────────────┴────────────────────────────────────────────────────────────────────────────┘
 
+# Neovim migration TODO
+
+## Active work
+
+### Formatting and linting
+
+- [ ] Add project-aware formatter/linter detection.
+  - The idea is to inject via chezmoi repo data what auto formatters to enable into nvim data dir
+  - Only autoformat if in a .git repo in the allow list
+  - Always autoformat using normal detection if not in a git repo
+
+### Navigation parity
+
+- [ ] Audit `vim-unimpaired` behavior against `mini.bracketed`, `mini.move`, and custom toggles.
+  - Check argument, buffer, file, tag, quickfix, location, conflict, and jump navigation.
+  - Check blank-line insertion and line-moving operations.
+  - Check option toggles.
+  - Restore only operations still used.
+
+- [ ] Restore quickfix/location-list toggles.
+  - Old behavior: `<Leader>xx` toggled quickfix; `<Leader>xl` toggled location list.
+  - New pickers inspect lists but do not toggle native list windows.
+  - Implement directly with built-in `copen`/`cclose` and `lopen`/`lclose` if still wanted.
+
+### Editor behavior
+
+- [ ] Make trailing-whitespace handling follow EditorConfig.
+  - Verify native EditorConfig support for `trim_trailing_whitespace`.
+  - Do not restore unconditional trim-on-save.
+  - Keep `mini.trailspace` for visualization/manual trimming.
+
+- [ ] Restore project-local spellfiles.
+  - Detect `.spellfile.utf-8.add` beside the current file.
+  - Restore `:Mklocalspell`.
+  - Preserve the old `$VIM_LANG` override for `spelllang` if it is still used.
+  - Keep spell disabled in terminal buffers.
+
+- [ ] Verify Markdown frontmatter highlighting.
+  - Test YAML frontmatter with Tree-sitter Markdown.
+  - Add a minimal override only if highlighting is broken.
+
+- [ ] Restore Unicode name/glyph completion.
+  - Support finding a character by Unicode name and inserting the glyph.
+  - Preserve the old name/glyph display toggle if it remains useful.
+
+### Marks and symbols
+
+- [ ] Decide on a marks workflow.
+  - Keep Snacks as the marks picker.
+  - Determine whether sign-column mark visualization is still wanted.
+  - If needed, compare `marks.nvim` with retaining `vim-signature`.
+  - Provide a current-line mark toggle and mark deletion workflow.
+
+- [ ] Decide whether a persistent symbol sidebar is needed.
+  - First evaluate Snacks LSP symbols.
+  - Check whether ctags-based symbols are still needed when no LSP is active.
+  - If a sidebar is genuinely useful, evaluate Aerial as the Tagbar replacement.
+  - Do not add another plugin solely for duplicate symbol search.
+
+### Visual structure
+
+- [ ] Add rainbow delimiters.
+  - Evaluate `rainbow-delimiters.nvim`.
+  - Preserve a global/buffer toggle consistent with existing `yo…`/`\o…` conventions.
+
+- [ ] Validate the Tree-sitter folding workflow.
+  - Test fold accuracy, performance, persistence, and fold text.
+  - Restore a convenient fold-toggle mapping.
+  - Keep native Tree-sitter folds unless a concrete gap justifies `nvim-ufo`.
+
+### Language support
+
+- [ ] Restore Clojure workflows not covered by `clojure_lsp`.
+  - Restore Fireplace and Salve for REPL/project integration.
+  - Restore structural sexp editing and its regular-people mappings.
+  - Verify whether clojure-lsp already covers formatting and diagnostics.
+  - Restore cljfmt, Eastwood, or async omni only where LSP does not replace them.
+
+- [ ] Restore modern Haskell tooling.
+  - Prefer Tree-sitter and Haskell Language Server over the old hdevtools/neco-ghc setup.
+  - Add formatting or test integration only if needed.
+
+- [ ] Restore VimTeX.
+
+- [ ] Restore Hugo template and MJML filetype detection.
+  - Detect Hugo templates in HTML and Markdown files.
+  - Treat `*.mjml` as HTML unless dedicated MJML support is added.
+
+## Decide later
+
+- [ ] Decide whether an in-editor test runner is still useful.
+  - Old workflow used `vim-test`, Neoterm, and `<Leader>r…` mappings.
+  - Choose a modern runner only after identifying the tests that should run inside Neovim.
+
+- [ ] Explore a picker-based replacement for Projectionist alternate-file navigation.
+  - Prefer a Snacks/FZF picker source over restoring Projectionist.
+
+- [ ] Consider restoring thesaurus lookup.
+- [ ] Consider Ruby `ri` documentation lookup.
+- [ ] Add Ruby Bundler integration only if needed.
+- [ ] Add JavaScript/CSS Emmet expansion and automatic tag closing only if needed.
+- [ ] Add Python Simpylfold only if needed.
+- [ ] Restore PHP four-space filetype indentation only if needed.
+- [ ] Consider Terraform tooling and completion.
+- [ ] Consider API Blueprint, GraphQL, and Riot-specific support when those filetypes are used again.
+- [ ] Decide whether to restore `vim-abolish` functionality.
+  - Word coercions such as camelCase/snake_case transformations are not replaced by `substitute.nvim`.
+  - Also check whether abbreviation and enhanced substitution commands were used.
+- [ ] Decide whether to restore searching for the current visual selection with `*`/`#`.
+  - The old config provided this through `vim-visual-star-search`; Neovim does not provide equivalent visual mappings by default.
+- [ ] Decide whether a unified documentation lookup should replace `investigate.vim`.
+  - Existing LSP, help, and man-page pickers cover parts of the workflow but not one combined lookup command.
+- [ ] Review insert-mode fuzzy completion parity.
+  - Old FZF mappings completed lines, paths, and dictionary words.
+  - The new config has native path completion but no explicit fuzzy line or dictionary completion.
+- [ ] Decide whether to restore the old LaTeX `$…$` pair rules.
+  - `mini.pairs` replaces general Lexima behavior, but the old config added filetype-specific dollar-pair insertion, escape, and deletion.
+- [ ] Decide whether `mini.pairs` needs a buffer-local enable/disable toggle.
+  - The old `yoe` mapping toggled Lexima per buffer and Lexima was disabled for Clojure.
+- [ ] Review Fugitive-only workflows before removing it permanently.
+  - Main Git status, diff, log, commit, stage, and unstage workflows are covered.
+  - Check whether Git-aware move, remove, edit, and blame commands still matter.
+
+## Intentionally omitted / no action
+
+- [x] Vim-repeat: rely on modern plugin repeat support.
+- [x] Airline tabline: intentionally omitted.
+- [x] Promptline/tmuxline: intentionally omitted.
+- [x] Old clipboard mappings: intentional workflow changes.
+- [x] Mason/LSP provisioning: tools are managed externally.
+- [x] General Neoterm runner: intentionally omitted.
+- [x] Node local-bin/NVM, pyenv, and rbenv PATH management: obsolete; manage these outside Neovim.
+- [x] Changelog macro: obsolete.
+- [x] Old terminal-mode escape/navigation mappings: no longer needed.
+- [x] Old `'`/`` ` `` mark-jump swap: obsolete.
+
