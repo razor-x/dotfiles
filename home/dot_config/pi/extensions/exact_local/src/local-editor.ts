@@ -2,6 +2,7 @@ import {
   CustomEditor,
   type ExtensionAPI,
 } from '@earendil-works/pi-coding-agent'
+import { Editor, matchesKey } from '@earendil-works/pi-tui'
 import { copyPromptInputHandler } from './copy-prompt.ts'
 import { cursorDownOrNewLineInputHandler } from './cursor-down-or-newline.ts'
 import { thinkingInputHandler } from './cycle-thinking.ts'
@@ -30,6 +31,9 @@ export default function localEditor(pi: ExtensionAPI): void {
 
 export class LocalEditor extends CustomEditor {
   private readonly inputHandlers: EditorInputHandler[]
+  private readonly localKeybindings: ConstructorParameters<
+    typeof CustomEditor
+  >[2]
 
   constructor(
     tui: ConstructorParameters<typeof CustomEditor>[0],
@@ -38,12 +42,45 @@ export class LocalEditor extends CustomEditor {
     inputHandlers: EditorInputHandler[] = [],
   ) {
     super(tui, theme, keybindings)
+    this.localKeybindings = keybindings
     this.inputHandlers = inputHandlers
   }
 
   override handleInput(data: string): void {
+    if (this.handleUpstreamTabInput(data)) return
     if (this.inputHandlers.some((handler) => handler(this, data))) return
     super.handleInput(data)
+  }
+
+  // UPSTREAM: Pi sends Tab to Ctrl-I instead of the configured editor action.
+  private handleUpstreamTabInput(data: string): boolean {
+    const tabKeys = this.localKeybindings.getKeys?.('tui.input.tab') ?? ['tab']
+    if (!tabKeys.some((key) => matchesKey(data, key))) return false
+
+    const hasCustomTabBinding = () => {
+      const bindings = Object.entries(this.localKeybindings.getUserBindings())
+      type Binding = (typeof bindings)[number]
+
+      const isLocalEditorAction = ([action]: Binding) =>
+        action.startsWith('local.editor.')
+      const includesTab = ([, binding]: Binding) =>
+        (typeof binding === 'string' ? [binding] : (binding ?? [])).some(
+          (key) => key.toLowerCase() === 'tab',
+        )
+
+      return bindings.some(
+        (binding) => isLocalEditorAction(binding) && includesTab(binding),
+      )
+    }
+
+    if (
+      hasCustomTabBinding() &&
+      this.inputHandlers.some((handler) => handler(this, data))
+    )
+      return true
+
+    Editor.prototype.handleInput.call(this, data)
+    return true
   }
 
   handleDefaultInput(data: string): void {
