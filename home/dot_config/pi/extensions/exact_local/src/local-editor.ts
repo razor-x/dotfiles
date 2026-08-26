@@ -10,6 +10,7 @@ import { thinkingInputHandler } from './cycle-thinking.ts'
 export type EditorInputHandler = (editor: LocalEditor, data: string) => boolean
 
 type EditorInternals = {
+  autocompleteList?: { getSelectedItem: () => { label: string } | undefined }
   isOnLastVisualLine: () => boolean
   moveCursor: (deltaLine: number, deltaCol: number) => void
 }
@@ -47,16 +48,26 @@ export class LocalEditor extends CustomEditor {
   }
 
   override handleInput(data: string): void {
-    if (
-      this.isAutocompleteVisible() &&
-      this.localKeybindings.matches(data, 'tui.editor.cursorRight')
-    ) {
-      Editor.prototype.handleInput.call(this, '\t')
-      return
-    }
+    if (this.handleCursorRightAutocomplete(data)) return
     if (this.handleUpstreamTabInput(data)) return
     if (this.inputHandlers.some((handler) => handler(this, data))) return
     super.handleInput(data)
+  }
+
+  private handleCursorRightAutocomplete(data: string): boolean {
+    if (
+      !this.isAutocompleteVisible() ||
+      !this.localKeybindings.matches(data, 'tui.editor.cursorRight')
+    )
+      return false
+
+    const selected = (
+      this as unknown as EditorInternals
+    ).autocompleteList?.getSelectedItem()
+    Editor.prototype.handleInput.call(this, '\t')
+    if (selected?.label.endsWith('/'))
+      Editor.prototype.handleInput.call(this, '\t')
+    return true
   }
 
   // UPSTREAM: Pi sends Tab to Ctrl-I instead of the configured editor action.

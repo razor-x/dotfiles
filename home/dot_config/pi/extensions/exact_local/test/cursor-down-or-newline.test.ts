@@ -39,6 +39,32 @@ describe('LocalEditor', () => {
     expect(handleInput).toHaveBeenCalledWith('\t')
   })
 
+  it('reopens path autocomplete after accepting a directory with cursor right', () => {
+    const keybindings = fromPartial<KeybindingsManager>({
+      getKeys: () => ['tab'],
+      matches: (data: string, action: string) =>
+        data === '\f' && action === 'tui.editor.cursorRight',
+    })
+    const editor = new LocalEditor(
+      fromPartial<TUI>({ requestRender: vi.fn() }),
+      fromPartial<EditorTheme>({ borderColor: (text: string) => text }),
+      keybindings,
+    )
+    vi.spyOn(editor, 'isShowingAutocomplete').mockReturnValue(true)
+    Object.assign(editor, {
+      autocompleteList: { getSelectedItem: () => ({ label: 'directory/' }) },
+    })
+    const handleInput = vi
+      .spyOn(Editor.prototype, 'handleInput')
+      .mockImplementation(() => undefined)
+
+    editor.handleInput('\f')
+
+    expect(handleInput).toHaveBeenCalledTimes(2)
+    expect(handleInput).toHaveBeenNthCalledWith(1, '\t')
+    expect(handleInput).toHaveBeenNthCalledWith(2, '\t')
+  })
+
   it('moves the cursor down when it is not on the last visual line', () => {
     const { editor, moveCursor, requestRender } = createEditor('down')
     const parentHandleInput = mockParentHandleInput()
