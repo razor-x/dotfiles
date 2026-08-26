@@ -17,7 +17,9 @@ type EditorInternals = {
 
 export default function localEditor(pi: ExtensionAPI): void {
   pi.on('session_start', (_event, ctx) => {
-    if (ctx.mode !== 'tui') return
+    if (ctx.mode !== 'tui') {
+      return
+    }
 
     ctx.ui.setEditorComponent(
       (tui, theme, keybindings) =>
@@ -48,9 +50,15 @@ export class LocalEditor extends CustomEditor {
   }
 
   override handleInput(data: string): void {
-    if (this.handleCursorRightAutocomplete(data)) return
-    if (this.handleUpstreamTabInput(data)) return
-    if (this.inputHandlers.some((handler) => handler(this, data))) return
+    if (this.handleCursorRightAutocomplete(data)) {
+      return
+    }
+    if (this.handleUpstreamTabInput(data)) {
+      return
+    }
+    if (this.inputHandlers.some((handler) => handler(this, data))) {
+      return
+    }
     super.handleInput(data)
   }
 
@@ -58,22 +66,26 @@ export class LocalEditor extends CustomEditor {
     if (
       !this.isAutocompleteVisible() ||
       !this.localKeybindings.matches(data, 'tui.editor.cursorRight')
-    )
+    ) {
       return false
+    }
 
     const selected = (
       this as unknown as EditorInternals
     ).autocompleteList?.getSelectedItem()
     Editor.prototype.handleInput.call(this, '\t')
-    if (selected?.label.endsWith('/'))
+    if (selected?.label.endsWith('/')) {
       Editor.prototype.handleInput.call(this, '\t')
+    }
     return true
   }
 
   // UPSTREAM: Pi sends Tab to Ctrl-I instead of the configured editor action.
   private handleUpstreamTabInput(data: string): boolean {
     const tabKeys = this.localKeybindings.getKeys?.('tui.input.tab') ?? ['tab']
-    if (!tabKeys.some((key) => matchesKey(data, key))) return false
+    if (!tabKeys.some((key) => matchesKey(data, key))) {
+      return false
+    }
 
     const hasCustomTabBinding = () => {
       const bindings = Object.entries(this.localKeybindings.getUserBindings())
@@ -94,8 +106,9 @@ export class LocalEditor extends CustomEditor {
     if (
       hasCustomTabBinding() &&
       this.inputHandlers.some((handler) => handler(this, data))
-    )
+    ) {
       return true
+    }
 
     Editor.prototype.handleInput.call(this, data)
     return true

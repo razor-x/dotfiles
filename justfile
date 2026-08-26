@@ -33,7 +33,7 @@ reset:
 
 format:
   cljfmt fix $(git ls-files '*.clj')
-  biome format --write .
+  biome check --write --unsafe .
   fish_indent --write $(git ls-files '*.fish' 'home/.chezmoiscripts/*.fish.tmpl')
   stylua $(git ls-files '*.lua')
   mdformat --exclude '**/skills/**' $(git ls-files '*.md')
@@ -43,7 +43,7 @@ format:
 
 check:
   cljfmt check $(git ls-files '*.clj')
-  biome format .
+  biome check .
   fish_indent --check $(git ls-files '*.fish' 'home/.chezmoiscripts/*.fish.tmpl')
   stylua --check $(git ls-files '*.lua')
   mdformat --exclude '**/skills/**' --check $(git ls-files '*.md')

@@ -9,5 +9,7 @@ import { default as localEditor } from './src/local-editor.ts'
 const extensions: ExtensionFactory[] = [continueCommand, kitty, localEditor]
 
 export default async function exactLocal(pi: ExtensionAPI): Promise<void> {
-  for (const extension of extensions) await extension(pi)
+  for (const extension of extensions) {
+    await extension(pi)
+  }
 }

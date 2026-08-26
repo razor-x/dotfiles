@@ -8,7 +8,9 @@ export function cursorDownOrNewLineInputHandler(
   keybindings: KeybindingsManager,
 ): EditorInputHandler {
   return (editor, data) => {
-    if (!matchesBinding(data, keybindings, action)) return false
+    if (!matchesBinding(data, keybindings, action)) {
+      return false
+    }
 
     if (editor.isAutocompleteVisible()) {
       editor.handleDefaultInput(data)

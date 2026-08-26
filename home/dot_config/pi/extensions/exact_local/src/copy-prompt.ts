@@ -13,7 +13,9 @@ export function copyPromptInputHandler(
   ui: ExtensionUIContext,
 ): EditorInputHandler {
   return (editor, data) => {
-    if (!matchesBinding(data, keybindings, action)) return false
+    if (!matchesBinding(data, keybindings, action)) {
+      return false
+    }
     void copyPrompt(editor.getText(), ui)
     return true
   }

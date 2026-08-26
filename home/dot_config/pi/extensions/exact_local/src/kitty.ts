@@ -5,9 +5,13 @@ const clearPi = '\x1b]1337;SetUserVar=IS_PI\x07'
 
 export default function kitty(pi: ExtensionAPI): void {
   pi.on('session_start', (_event, ctx) => {
-    if (ctx.mode === 'tui') process.stdout.write(setPi)
+    if (ctx.mode === 'tui') {
+      process.stdout.write(setPi)
+    }
   })
   pi.on('session_shutdown', (_event, ctx) => {
-    if (ctx.mode === 'tui') process.stdout.write(clearPi)
+    if (ctx.mode === 'tui') {
+      process.stdout.write(clearPi)
+    }
   })
 }

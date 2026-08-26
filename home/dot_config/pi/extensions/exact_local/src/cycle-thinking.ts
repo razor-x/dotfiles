@@ -33,7 +33,9 @@ export function selectThinkingLevel(
   ctx: ExtensionContext,
   offset: -1 | 1,
 ): void {
-  if (ctx.model == null) return
+  if (ctx.model == null) {
+    return
+  }
   const levels = getSupportedThinkingLevels(ctx.model)
   const index = levels.indexOf(pi.getThinkingLevel())
   pi.setThinkingLevel(levels[(index + offset + levels.length) % levels.length])
