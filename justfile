@@ -56,7 +56,7 @@ upgrade-pi-local: && format
 
 [working-directory: './home/dot_config/pi/exact_npm']
 upgrade-pi-extensions:
-  npx --package npm-check-updates@23.1.0 ncu --minimal --upgrade
+  npx --yes --package npm-check-updates@23.1.0 -- ncu --minimal --upgrade
   npm update
 
 watch:
