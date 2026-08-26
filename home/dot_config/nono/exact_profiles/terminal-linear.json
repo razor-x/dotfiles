@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "terminal-linear",
+    "version": "1.0.0",
+    "description": "Linear configuration."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/linear"] }
+}

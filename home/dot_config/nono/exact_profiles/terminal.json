@@ -12,7 +12,8 @@
     "terminal-man",
     "terminal-navi",
     "terminal-local-bin",
-    "terminal-xh"
+    "terminal-xh",
+    "terminal-linear"
   ],
   "meta": {
     "name": "terminal",
