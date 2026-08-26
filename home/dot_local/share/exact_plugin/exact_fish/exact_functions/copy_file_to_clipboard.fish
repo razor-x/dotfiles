@@ -6,6 +6,7 @@ function copy_file_to_clipboard \
     if test -z "$target"
         set target .
     end
+    set target (path resolve $target)
 
     if path is -d $target
         set --function files \
@@ -20,5 +21,6 @@ function copy_file_to_clipboard \
     cat -- $files \
         | string collect \
         | fish_clipboard_copy
+    and history append (string join ' ' 'cat --' (string escape -- $files) '|' fish_clipboard_copy)
     and commandline --replace ''
 end
