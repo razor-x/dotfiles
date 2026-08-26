@@ -47,6 +47,13 @@ export class LocalEditor extends CustomEditor {
   }
 
   override handleInput(data: string): void {
+    if (
+      this.isAutocompleteVisible() &&
+      this.localKeybindings.matches(data, 'tui.editor.cursorRight')
+    ) {
+      Editor.prototype.handleInput.call(this, '\t')
+      return
+    }
     if (this.handleUpstreamTabInput(data)) return
     if (this.inputHandlers.some((handler) => handler(this, data))) return
     super.handleInput(data)

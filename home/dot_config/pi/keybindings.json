@@ -17,6 +17,7 @@
   "tui.editor.yankPop": [],
   "tui.editor.undo": ["ctrl+z"],
   "tui.input.newLine": ["shift+enter"],
+  "tui.input.tab": ["tab"],
   "local.editor.cursorDownOrNewLine": ["ctrl+j"],
   "local.editor.copyPrompt": ["ctrl+y"],
   "local.editor.thinkingLower": ["ctrl+i"],

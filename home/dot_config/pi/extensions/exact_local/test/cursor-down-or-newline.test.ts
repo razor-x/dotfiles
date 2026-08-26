@@ -2,7 +2,12 @@ import {
   CustomEditor,
   type KeybindingsManager,
 } from '@earendil-works/pi-coding-agent'
-import type { EditorTheme, KeyId, TUI } from '@earendil-works/pi-tui'
+import {
+  Editor,
+  type EditorTheme,
+  type KeyId,
+  type TUI,
+} from '@earendil-works/pi-tui'
 import { fromPartial } from '@total-typescript/shoehorn'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { cursorDownOrNewLineInputHandler } from '@/cursor-down-or-newline.ts'
@@ -11,6 +16,27 @@ import { LocalEditor } from '@/local-editor.ts'
 describe('LocalEditor', () => {
   afterEach(() => {
     vi.restoreAllMocks()
+  })
+
+  it('treats the cursor-right binding as autocomplete accept', () => {
+    const keybindings = fromPartial<KeybindingsManager>({
+      getKeys: () => ['tab'],
+      matches: (data: string, action: string) =>
+        data === '\f' && action === 'tui.editor.cursorRight',
+    })
+    const editor = new LocalEditor(
+      fromPartial<TUI>({ requestRender: vi.fn() }),
+      fromPartial<EditorTheme>({ borderColor: (text: string) => text }),
+      keybindings,
+    )
+    vi.spyOn(editor, 'isShowingAutocomplete').mockReturnValue(true)
+    const handleInput = vi
+      .spyOn(Editor.prototype, 'handleInput')
+      .mockImplementation(() => undefined)
+
+    editor.handleInput('\f')
+
+    expect(handleInput).toHaveBeenCalledWith('\t')
   })
 
   it('moves the cursor down when it is not on the last visual line', () => {
@@ -91,6 +117,7 @@ function createEditor(binding: KeyId | KeyId[] | undefined) {
     : {}
   const keybindings = fromPartial<KeybindingsManager>({
     getUserBindings: () => userBindings,
+    matches: () => false,
   })
   const editor = new LocalEditor(
     fromPartial<TUI>({ requestRender }),
