@@ -119,8 +119,9 @@
 .config/pi/skills/mattpocock:
   type: archive
   url: https://github.com/mattpocock/skills/archive/refs/tags/v1.2.3.tar.gz
-  stripComponents: 1
+  stripComponents: 2
   include:
+    - '*/skills/misc'
     - '*/skills/misc/migrate-to-shoehorn/**'
     - '*/skills/productivity/**'
     - '*/skills/engineering/**'
