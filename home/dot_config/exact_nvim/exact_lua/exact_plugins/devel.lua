@@ -35,13 +35,15 @@ M.spec = {
     end,
   },
   {
-    "esmuellert/codediff.nvim",
-    cmd = "CodeDiff",
-    opts = {
-      highlights = {
-        char_brightness = 1.1,
-      },
+    "dlyongemallo/diffview-plus.nvim",
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewToggle",
+      "DiffviewFileHistory",
+      "DiffviewDiffFiles",
+      "DiffviewLog",
     },
+    opts = {},
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -52,15 +54,17 @@ M.spec = {
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "esmuellert/codediff.nvim",
+      "dlyongemallo/diffview-plus.nvim",
       "folke/snacks.nvim",
     },
     ---@module "neogit"
     ---@type NeogitConfig
     opts = {
       integrations = {
+        diffview = true,
         snacks = true,
       },
+      diff_viewer = "diffview",
     },
     cmd = "Neogit",
     keys = {
