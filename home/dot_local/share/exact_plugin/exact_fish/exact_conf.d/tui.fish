@@ -73,10 +73,8 @@ if status is-interactive
 
     alias d yazi_change_cwd
 
-    abbr nr npm run
-    abbr n npm
-    abbr np pnpm
-    abbr npr pnpm run
+    abbr npr npm run
+    abbr pnr npm pnpm run
 
     abbr md glow --tui
 
