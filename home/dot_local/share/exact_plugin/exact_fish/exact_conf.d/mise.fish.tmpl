@@ -1,2 +1,3 @@
-# Activate mise.
-{{ output "mise" "activate" "fish" }}
+# Activate mise without caching the PATH from chezmoi apply.
+{{- $activation := output "mise" "activate" "fish" -}}
+{{ regexReplaceAll "(?m)^set -gx PATH .*\n" $activation "" }}
