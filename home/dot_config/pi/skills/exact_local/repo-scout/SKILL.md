@@ -19,7 +19,7 @@ Use HTTPS and a unique temporary directory so the current working tree stays cle
 ```bash
 repo=OWNER/REPO
 url=$(gh repo view "$repo" --json url --jq .url)
-root=$(mktemp -d /tmp/pi-repo-context.XXXXXX)
+root=$(mktemp -d /tmp/pi-repo-scout.XXXXXX)
 gh repo clone "$url" "$root/repo" --no-upstream -- --depth=1
 printf '%s\n' "$root"
 ```
@@ -31,7 +31,7 @@ Record the printed path because shell variables do not persist across tool calls
 Search and read only what bears on the question. Report relevant repository-relative paths and commits when applicable, then remove the exact printed temporary path:
 
 ```bash
-rm -rf -- /tmp/pi-repo-context.PRINTED_SUFFIX
+rm -rf -- /tmp/pi-repo-scout.PRINTED_SUFFIX
 ```
 
 The investigation is complete when the task's question is answered and the temporary clone is removed.

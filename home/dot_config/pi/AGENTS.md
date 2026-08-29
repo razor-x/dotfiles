@@ -49,9 +49,11 @@ Use the local CLI tools when they are a good fit. Prefer:
 
 Docs are installed at `/usr/share/doc/pi` on Arch Linux.
 
-When modifying Pi's global instructions or local extension, edit
-`$HOME/config/dotfiles/home/dot_config/pi/AGENTS.md` or
-`$HOME/config/dotfiles/home/dot_config/pi/extensions/exact_local`.
+When modifying Pi's global instructions, local extension, or skills, edit
+`$HOME/config/dotfiles/home/dot_config/pi/AGENTS.md`,
+`$HOME/config/dotfiles/home/dot_config/pi/extensions/exact_local`, or
+`$HOME/config/dotfiles/home/dot_config/pi/skills/exact_local`.
 
 Their installed runtime copies are under `$XDG_CONFIG_HOME/pi`; do not edit
-them directly. After changing either source, run `pi-sync-dotfiles`, then reload Pi.
+them directly. After changing any source, run `pi-sync-dotfiles`, then ask the
+user to run `/reload`.

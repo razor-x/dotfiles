@@ -3,6 +3,8 @@
 {{ $agentsTarget := joinPath .chezmoi.homeDir ".config" "pi" "AGENTS.md" }}
 {{ $extensionSource := joinPath .chezmoi.sourceDir "dot_config" "pi" "extensions" "exact_local" }}
 {{ $extensionTarget := joinPath .chezmoi.homeDir ".config" "pi" "extensions" "local" }}
+{{ $skillsSource := joinPath .chezmoi.sourceDir "dot_config" "pi" "skills" "exact_local" }}
+{{ $skillsTarget := joinPath .chezmoi.homeDir ".config" "pi" "skills" "local" }}
 
 set -euo pipefail
 
@@ -10,9 +12,12 @@ agents_source={{ $agentsSource | toJson }}
 agents_target={{ $agentsTarget | toJson }}
 source_dir={{ $extensionSource | toJson }}
 target_dir={{ $extensionTarget | toJson }}
+skills_source={{ $skillsSource | toJson }}
+skills_target={{ $skillsTarget | toJson }}
 
 if [[ "$agents_source" != /* || "$agents_target" != /* ||
-      "$source_dir" != /* || "$target_dir" != /* ]]; then
+      "$source_dir" != /* || "$target_dir" != /* ||
+      "$skills_source" != /* || "$skills_target" != /* ]]; then
   printf 'Pi dotfile paths must be absolute.\n' >&2
   exit 1
 fi
@@ -27,6 +32,11 @@ if [[ ! -d "$source_dir" ]]; then
   exit 1
 fi
 
+if [[ ! -d "$skills_source" ]]; then
+  printf 'Pi skills source directory does not exist: %s\n' "$skills_source" >&2
+  exit 1
+fi
+
 if [[ -L "$agents_target" || ( -e "$agents_target" && ! -f "$agents_target" ) ]]; then
   printf 'Refusing to replace non-file Pi AGENTS.md target: %s\n' "$agents_target" >&2
   exit 1
@@ -36,6 +46,8 @@ fi
 # a recursive delete of the source tree or some unrelated directory.
 source_real=$(realpath --canonicalize-existing -- "$source_dir")
 target_real=$(realpath --canonicalize-missing -- "$target_dir")
+skills_source_real=$(realpath --canonicalize-existing -- "$skills_source")
+skills_target_real=$(realpath --canonicalize-missing -- "$skills_target")
 if [[ "$source_real" == / || "$target_real" == / ||
       "$source_real" == "$target_real" ||
       "$source_real" == "$target_real/"* ||
@@ -44,13 +56,25 @@ if [[ "$source_real" == / || "$target_real" == / ||
     "$source_real" "$target_real" >&2
   exit 1
 fi
+if [[ "$skills_source_real" == / || "$skills_target_real" == / ||
+      "$skills_source_real" == "$skills_target_real" ||
+      "$skills_source_real" == "$skills_target_real/"* ||
+      "$skills_target_real" == "$skills_source_real/"* ]]; then
+  printf 'Refusing to sync overlapping Pi skills paths:\n  source: %s\n  target: %s\n' \
+    "$skills_source_real" "$skills_target_real" >&2
+  exit 1
+fi
 
 if [[ -L "$target_dir" || ( -e "$target_dir" && ! -d "$target_dir" ) ]]; then
   printf 'Refusing to replace non-directory Pi extension target: %s\n' "$target_dir" >&2
   exit 1
 fi
+if [[ -L "$skills_target" || ( -e "$skills_target" && ! -d "$skills_target" ) ]]; then
+  printf 'Refusing to replace non-directory Pi skills target: %s\n' "$skills_target" >&2
+  exit 1
+fi
 
-mkdir --parents -- "$(dirname -- "$agents_target")" "$target_dir"
+mkdir --parents -- "$(dirname -- "$agents_target")" "$target_dir" "$(dirname -- "$skills_target")"
 cp --remove-destination --preserve=mode,timestamps -- "$agents_source" "$agents_target"
 
 # Replace only generated TypeScript files. Other files in the target are left
@@ -65,3 +89,6 @@ find "$target_dir" \
     \( -type f -o -type l \) -name '*.ts' \
     -exec cp --archive --parents --target-directory="$target_dir" -- {} +
 )
+
+rm --recursive --force -- "$skills_target"
+cp --archive -- "$skills_source" "$skills_target"
