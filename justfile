@@ -9,7 +9,11 @@ apply:
 update:
   chezmoi update --apply --init
 
+upgrade-biome:
+  sd 'schemas/[^/]+/schema\.json' "schemas/$(biome --version | cut --delimiter=' ' --fields=2)/schema.json" biome.json
+
 upgrade: && \
+    upgrade-biome \
     upgrade-externals \
     upgrade-neovim \
     upgrade-pi-extensions \
