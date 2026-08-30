@@ -66,7 +66,8 @@ n = no can't or won't use
 - [*] mini.ai            Extend and create a/i textobjects
 - [n] mini.align         Align text interactively
   - [*] => not useful enough to justify a mapping
-- [*] mini.comment       Comment lines
+- [n] mini.comment       Comment lines
+  - [*] => use native `gc`/`gcc`
 - [+] mini.completion    Completion and signature help
 - [*] mini.keymap        Special key mappings
 - [*] mini.move          Move any selection in any direction
@@ -125,6 +126,7 @@ n = no can't or won't use
 - [n] mini.starter       Start screen
   - [*] => start screens are awkward
 - [n] mini.statusline    Statusline
+- [y] mini.statuscolumn  Statuscolumn
   - [*] => use nvim-lualine/lualine.nvim
 - [n] mini.tabline       Tabline
   - [*] => use native
@@ -145,9 +147,8 @@ n = no can't or won't use
  │                      │ iN, aL, iL so Neovim 0.12+ an/in remain available. Disable g[/g] edge      │
  │                      │ mappings so built-in tag navigation is preserved.                          │
  ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
- │ mini.comment         │ Keep standard gc, gcc, and gc text object. Set comment_line and            │
- │                      │ comment_visual to \\, preserving nvimrc/plugin/mappings/commentary.vim     │
- │                      │ exactly.                                                                   │
+ │ Native commenting    │ Replaced mini.comment with Neovim’s built-in gc/gcc and preserved the      │
+ │                      │ legacy \\ line/visual mappings.                                            │
  ├──────────────────────┼────────────────────────────────────────────────────────────────────────────┤
  │ mini.completion      │ Keep <C-Space>, <C-f>, and <C-b>. Disable default <A-Space> because TODO   │
  │                      │ prohibits Alt mappings.                                                    │

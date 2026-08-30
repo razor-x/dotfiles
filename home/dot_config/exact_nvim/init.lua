@@ -32,7 +32,6 @@ require("lazy").setup({
           { path = "mini.bracketed", words = { "MiniBracketed" } },
           { path = "mini.bufremove", words = { "MiniBufremove" } },
           { path = "mini.cmdline", words = { "MiniCmdline" } },
-          { path = "mini.comment", words = { "MiniComment" } },
           { path = "mini.completion", words = { "MiniCompletion" } },
           { path = "mini.extra", words = { "MiniExtra" } },
           { path = "mini.icons", words = { "MiniIcons" } },

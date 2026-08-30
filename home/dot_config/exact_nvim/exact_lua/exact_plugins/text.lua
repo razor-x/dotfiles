@@ -1,6 +1,9 @@
 local M = {}
 local toggles = require("config.toggles")
 
+vim.keymap.set("n", [[\\]], "gcc", { desc = "Toggle comment on current line", remap = true })
+vim.keymap.set("x", [[\\]], "gc", { desc = "Toggle comment on selection", remap = true })
+
 ---@module "lazy.types"
 ---@type LazySpec
 M.spec = {
@@ -95,15 +98,6 @@ M.spec = {
         MiniBracketed.comment("last")
       end, { desc = "Comment last" })
       vim.keymap.set("o", "]|", "V<Cmd>lua MiniBracketed.comment('last')<CR>", { desc = "Comment last" })
-    end,
-  },
-  {
-    "nvim-mini/mini.comment",
-    opts = {},
-    config = function(_, opts)
-      require("mini.comment").setup(opts)
-      vim.keymap.set("n", [[\\]], "gcc", { desc = "Toggle comment on current line", remap = true })
-      vim.keymap.set("x", [[\\]], "gc", { desc = "Toggle comment on selection", remap = true })
     end,
   },
   {
