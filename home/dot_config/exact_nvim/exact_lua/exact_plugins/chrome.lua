@@ -26,6 +26,10 @@ M.spec = {
     end,
   },
   {
+    "nvim-mini/mini.statuscolumn",
+    opts = {},
+  },
+  {
     "catgoose/nvim-colorizer.lua",
     ---@module "colorizer.config"
     ---@type colorizer.SetupOptions
