@@ -157,8 +157,6 @@ M.spec = {
       vim.keymap.set("n", "<C-R>", "m", { desc = "Set mark" })
       vim.keymap.set("n", "<C-E>j", "`", { desc = "Jump to mark position" })
       vim.keymap.set("n", "<C-E>l", "'", { desc = "Jump to mark line" })
-      vim.keymap.set("n", "<C-E>n", "]`", { desc = "Next mark" })
-      vim.keymap.set("n", "<C-E>p", "[`", { desc = "Previous mark" })
       vim.keymap.set("n", "<C-E>d", ":delmarks ", { desc = "Delete marks" })
       vim.keymap.set("n", "<C-E>D", M.cmd("delmarks!"), { desc = "Delete all local marks" })
 

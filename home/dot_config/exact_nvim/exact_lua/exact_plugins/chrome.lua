@@ -37,6 +37,36 @@ M.spec = {
       global_mark = { highlight_group = "DiagnosticWarn" },
       excluded_filetypes = {},
     },
+    keys = {
+      {
+        "<C-e>n",
+        function()
+          require("guttermarks.actions").next_buf_mark()
+        end,
+        desc = "Next mark in current buffer",
+      },
+      {
+        "<C-e>p",
+        function()
+          require("guttermarks.actions").prev_buf_mark()
+        end,
+        desc = "Previous mark in current buffer",
+      },
+      {
+        "]m",
+        function()
+          require("guttermarks.actions").next_buf_mark()
+        end,
+        desc = "Next mark in current buffer",
+      },
+      {
+        "[m",
+        function()
+          require("guttermarks.actions").prev_buf_mark()
+        end,
+        desc = "Previous mark in current buffer",
+      },
+    },
   },
   {
     "catgoose/nvim-colorizer.lua",
