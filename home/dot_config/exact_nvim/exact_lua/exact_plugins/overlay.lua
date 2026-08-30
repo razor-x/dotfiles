@@ -76,6 +76,22 @@ M.spec = {
         desc = "Toggle global mark on current line",
       },
       {
+        "<C-e>q",
+        function()
+          require("guttermarks.actions").marks_to_quickfix()
+          vim.cmd.copen()
+        end,
+        desc = "Send marks to quickfix",
+      },
+      {
+        "<C-e>Q",
+        function()
+          require("guttermarks.actions").marks_to_quickfix({ special_mark = true })
+          vim.cmd.copen()
+        end,
+        desc = "Send marks to quickfix including special marks",
+      },
+      {
         "<C-e>n",
         function()
           require("guttermarks.actions").next_buf_mark()
