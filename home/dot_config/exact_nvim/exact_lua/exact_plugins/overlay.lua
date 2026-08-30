@@ -4,15 +4,9 @@ local M = {}
 ---@type LazySpec
 M.spec = {
   {
-    "dimtion/guttermarks.nvim",
-    event = { "BufReadPost", "BufNewFile", "BufWritePre", "FileType" },
+    "chrisgrieser/nvim-origami",
+    event = "VeryLazy",
     init = function()
-      vim.keymap.set("n", "<C-R>", "m", { desc = "Set mark" })
-      vim.keymap.set("n", "<C-E>j", "`", { desc = "Jump to mark position" })
-      vim.keymap.set("n", "<C-E>l", "'", { desc = "Jump to mark line" })
-      vim.keymap.set("n", "<C-E>d", ":delmarks ", { desc = "Delete marks" })
-      vim.keymap.set("n", "<C-E>D", "<Cmd>delmarks!<CR>", { desc = "Delete all local marks" })
-
       vim.keymap.set("n", "<C-G>", "za", { desc = "Toggle fold under cursor" })
       for suffix, desc in pairs({
         A = "Toggle all folds under cursor",
@@ -36,6 +30,24 @@ M.spec = {
         vim.keymap.set("n", "<C-F>" .. suffix, "z" .. suffix, { desc = desc })
       end
     end,
+    ---@module "origami"
+    ---@type Origami.config
+    opts = {
+      foldKeymaps = { setup = true },
+    },
+  },
+  {
+    "dimtion/guttermarks.nvim",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre", "FileType" },
+    init = function()
+      vim.keymap.set("n", "<C-R>", "m", { desc = "Set mark" })
+      vim.keymap.set("n", "<C-E>j", "`", { desc = "Jump to mark position" })
+      vim.keymap.set("n", "<C-E>l", "'", { desc = "Jump to mark line" })
+      vim.keymap.set("n", "<C-E>d", ":delmarks ", { desc = "Delete marks" })
+      vim.keymap.set("n", "<C-E>D", "<Cmd>delmarks!<CR>", { desc = "Delete all local marks" })
+    end,
+    ---@module "guttermarks"
+    ---@type guttermarks.Config
     opts = {
       local_mark = { highlight_group = "DiagnosticInfo" },
       global_mark = { highlight_group = "DiagnosticWarn" },
