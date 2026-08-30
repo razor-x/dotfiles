@@ -19,9 +19,11 @@ neovim keys to consider remapping
 
 `<C-e>` / `<C-y>` - precise viewport scrolling
 
-`<C-g>` - currently mapped to middle screen line
+> will not remap or did remap
 
-`<C-r>` - currently mapped to line undo
+`<C-g>` - fold toggle
+
+`<C-r>` - set mark
 
 Z - backspace in normal mode - almost always use something else to delete stuff in normal mode
 
@@ -33,8 +35,6 @@ C & D - change/delete to end of line are redundant with `c$`/`d$`, but convenien
 
 | - exact-column motion is mainly useful in macros and fixed-width text
 
-> will not remap or did remap
-
 : - will remap to register-replace
 ~ - single-character case toggle is less useful than the `g~` operator
 X - exchange operator; default delete backward is redundant with `dh`
@@ -44,7 +44,6 @@ m & M - will remap to "move"
 
 ctrl-space in insert mode
 
-- need to find an alt bind for setting marks (vim-signature replacement?)
 - Unicode name/glyph completion.
 - Rainbow/nested-delimiter coloring.
 - quicker.nvim maybe, really i just want the edit feature but the ui is not as nice as native
@@ -126,8 +125,7 @@ n = no can't or won't use
 - [n] mini.starter       Start screen
   - [*] => start screens are awkward
 - [n] mini.statusline    Statusline
-- [y] mini.statuscolumn  Statuscolumn
-  - [*] => use nvim-lualine/lualine.nvim
+- [*] mini.statuscolumn  Statuscolumn
 - [n] mini.tabline       Tabline
   - [*] => use native
 - [*] mini.trailspace    Trailspace (highlight and remove)
@@ -228,11 +226,7 @@ n = no can't or won't use
 
 ### Marks and symbols
 
-- [ ] Decide on a marks workflow.
-  - Keep Snacks as the marks picker.
-  - Determine whether sign-column mark visualization is still wanted.
-  - If needed, compare `marks.nvim` with retaining `vim-signature`.
-  - Provide a current-line mark toggle and mark deletion workflow.
+- [x] Use Snacks for the marks picker and `guttermarks.nvim` for sign-column visualization, navigation, current-line toggles, and deletion.
 
 - [ ] Decide whether a persistent symbol sidebar is needed.
   - First evaluate Snacks LSP symbols.
@@ -248,7 +242,7 @@ n = no can't or won't use
 
 - [ ] Validate the Tree-sitter folding workflow.
   - Test fold accuracy, performance, persistence, and fold text.
-  - Restore a convenient fold-toggle mapping.
+  - [x] Restore fold mappings and add `nvim-origami` for fold UX.
   - Keep native Tree-sitter folds unless a concrete gap justifies `nvim-ufo`.
 
 ### Language support
