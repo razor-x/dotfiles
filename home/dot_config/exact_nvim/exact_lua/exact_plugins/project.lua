@@ -124,7 +124,7 @@ M.spec = {
     },
     keys = {
       {
-        "<C-g>f",
+        "<C-f><C-g>",
         function()
           local buf = vim.api.nvim_get_current_buf()
           local row, col = unpack(vim.api.nvim_win_get_cursor(0))
