@@ -15,6 +15,14 @@ ctrl-enter -> open action menu, e.g., like ctrl-enter in opencode
 
 neovim keys to consider remapping
 
+`<C-b>` / `<C-f>` - page backward/forward; largely overlap `<C-u>` / `<C-d>`
+
+`<C-e>` / `<C-y>` - precise viewport scrolling
+
+`<C-g>` - currently mapped to middle screen line
+
+`<C-r>` - currently mapped to line undo
+
 s - Flash; default `s` is redundant with `cl`; restore default `S`
 
 Z - backspace in normal mode - almost always use something else to delete stuff in normal mode
