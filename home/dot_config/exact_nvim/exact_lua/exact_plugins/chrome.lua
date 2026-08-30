@@ -30,6 +30,15 @@ M.spec = {
     opts = {},
   },
   {
+    "dimtion/guttermarks.nvim",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre", "FileType" },
+    opts = {
+      local_mark = { highlight_group = "DiagnosticInfo" },
+      global_mark = { highlight_group = "DiagnosticWarn" },
+      excluded_filetypes = {},
+    },
+  },
+  {
     "catgoose/nvim-colorizer.lua",
     ---@module "colorizer.config"
     ---@type colorizer.SetupOptions

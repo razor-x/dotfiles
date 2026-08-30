@@ -7,6 +7,7 @@
   "flash.nvim": { "branch": "main", "commit": "5f0f270fdc7c5b0c21d903ee85b9cb06f2ac636a" },
   "friendly-snippets": { "branch": "main", "commit": "6cd7280adead7f586db6fccbd15d2cac7e2188b9" },
   "gitsigns.nvim": { "branch": "main", "commit": "5be654f2232c10ddcad19c1607a67b6b4b78fc29" },
+  "guttermarks.nvim": { "branch": "main", "commit": "50088f99c2e978afe7f8e339e98b397babc7cbd2" },
   "kitty-scrollback.nvim": { "branch": "main", "commit": "5a163bfeb789c1a2bfa143b0e78b02caa233bc43" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lazydev.nvim": { "branch": "main", "commit": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d" },
