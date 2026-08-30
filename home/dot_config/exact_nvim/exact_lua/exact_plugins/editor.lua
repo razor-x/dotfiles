@@ -152,7 +152,38 @@ M.spec = {
       vim.keymap.set("v", "<C-Q>", "@q", { desc = "Execute register q" })
 
       vim.keymap.set("n", "U", "<C-R>", { desc = "Redo" })
-      vim.keymap.set("n", "<C-R>", "U", { desc = "Undo all latest changes on one line" })
+
+      vim.keymap.set("n", "<C-B>", "<C-E>", { desc = "Scroll window down" })
+      vim.keymap.set("n", "<C-R>", "m", { desc = "Set mark" })
+      vim.keymap.set("n", "<C-E>j", "`", { desc = "Jump to mark position" })
+      vim.keymap.set("n", "<C-E>l", "'", { desc = "Jump to mark line" })
+      vim.keymap.set("n", "<C-E>n", "]`", { desc = "Next mark" })
+      vim.keymap.set("n", "<C-E>p", "[`", { desc = "Previous mark" })
+      vim.keymap.set("n", "<C-E>d", ":delmarks ", { desc = "Delete marks" })
+      vim.keymap.set("n", "<C-E>D", M.cmd("delmarks!"), { desc = "Delete all local marks" })
+
+      vim.keymap.set("n", "<C-G>", "za", { desc = "Toggle fold under cursor" })
+      for suffix, desc in pairs({
+        A = "Toggle all folds under cursor",
+        C = "Close all folds under cursor",
+        M = "Close all folds",
+        N = "Enable folding",
+        O = "Open all folds under cursor",
+        R = "Open all folds",
+        X = "Reset folds",
+        c = "Close fold under cursor",
+        i = "Toggle folding",
+        j = "Next fold",
+        k = "Previous fold",
+        m = "Fold more",
+        n = "Disable folding",
+        o = "Open fold under cursor",
+        r = "Fold less",
+        v = "Show cursor line",
+        x = "Update folds",
+      }) do
+        vim.keymap.set("n", "<C-F>" .. suffix, "z" .. suffix, { desc = desc })
+      end
 
       vim.keymap.set("n", "&", M.cmd("&&"), { desc = "Repeat last substitute with same flags", silent = true })
       vim.keymap.set("x", "&", M.cmd("&&"), { desc = "Repeat last substitute with same flags", silent = true })
@@ -180,9 +211,6 @@ M.spec = {
       vim.keymap.set("n", "<Leader>z", function()
         require("which-key").show({ keys = "z=" })
       end, { desc = "Suggest spelling corrections" })
-
-      -- TODO: This is only mapped since M is needed for a plugin.
-      vim.keymap.set("n", "<C-G>", "M", { desc = "To Middle line of window" })
 
       M.system_clipboard_mappings("+", true)
 

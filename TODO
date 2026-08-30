@@ -23,24 +23,23 @@ neovim keys to consider remapping
 
 `<C-r>` - currently mapped to line undo
 
-s - Flash; default `s` is redundant with `cl`; restore default `S`
-
 Z - backspace in normal mode - almost always use something else to delete stuff in normal mode
 
 H & L - top / bottom of screen - rarely useful, prime home row keys
-
-X - exchange operator; default delete backward is redundant with `dh`
 
 C & D - change/delete to end of line are redundant with `c$`/`d$`, but convenient
 
 `-` - previous line at first nonblank is rarely useful
 
-~ - single-character case toggle is less useful than the `g~` operator
-
 | - exact-column motion is mainly useful in macros and fixed-width text
 
-: - will remap to register-replace
+> will not remap or did remap
 
+: - will remap to register-replace
+~ - single-character case toggle is less useful than the `g~` operator
+X - exchange operator; default delete backward is redundant with `dh`
+
+s - Flash; default `s` is redundant with `cl`; restore default `S`
 m & M - will remap to "move"
 
 ctrl-space in insert mode
