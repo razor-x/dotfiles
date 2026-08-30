@@ -19,7 +19,7 @@ M.spec = {
           local auto_session = require("auto-session")
           auto_session.delete_session()
           auto_session.disable_auto_save()
-          vim.cmd("restart")
+          vim.cmd("restart!")
         end,
         desc = "Reset Session",
       },
