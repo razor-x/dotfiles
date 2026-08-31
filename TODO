@@ -103,7 +103,7 @@ n = no can't or won't use
 - [n] mini.sessions      Session management
   - [*] => use auto-session
 - [n] mini.visits        Track and reuse file system visits
-  - [*] => handled by snacks
+  - [*] => try along with harpoon2
 - [n] mini.animate       Animate common Neovim actions
   - [*] => use kitty or neovide
 - [n] mini.base16        Base16 colorscheme creation

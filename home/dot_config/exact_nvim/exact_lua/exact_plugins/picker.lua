@@ -547,6 +547,93 @@ M.spec = {
       },
     },
   },
+  {
+    "nvim-mini/mini.visits",
+    opts = {},
+    keys = {
+      {
+        "<leader>F",
+        function()
+          require("mini.visits").select_path()
+        end,
+        desc = "Select Visited File",
+      },
+    },
+  },
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("harpoon"):setup()
+    end,
+    keys = {
+      {
+        "<leader>rr",
+        function()
+          local harpoon = require("harpoon")
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        desc = "Harpoon List",
+      },
+      {
+        "<leader>rh",
+        function()
+          require("harpoon"):list():select(1)
+        end,
+        desc = "Harpoon File 1",
+      },
+      {
+        "<leader>rj",
+        function()
+          require("harpoon"):list():select(2)
+        end,
+        desc = "Harpoon File 2",
+      },
+      {
+        "<leader>rk",
+        function()
+          require("harpoon"):list():select(3)
+        end,
+        desc = "Harpoon File 3",
+      },
+      {
+        "<leader>rl",
+        function()
+          require("harpoon"):list():select(4)
+        end,
+        desc = "Harpoon File 4",
+      },
+      {
+        "<leader>Rh",
+        function()
+          require("harpoon"):list():replace_at(1)
+        end,
+        desc = "Set Harpoon File 1",
+      },
+      {
+        "<leader>Rj",
+        function()
+          require("harpoon"):list():replace_at(2)
+        end,
+        desc = "Set Harpoon File 2",
+      },
+      {
+        "<leader>Rk",
+        function()
+          require("harpoon"):list():replace_at(3)
+        end,
+        desc = "Set Harpoon File 3",
+      },
+      {
+        "<leader>Rl",
+        function()
+          require("harpoon"):list():replace_at(4)
+        end,
+        desc = "Set Harpoon File 4",
+      },
+    },
+  },
 }
 
 return M.spec

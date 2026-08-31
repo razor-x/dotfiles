@@ -178,6 +178,17 @@ U                       Redo. Equivalent to |CTRL-R|.
 <Leader>?               Toggle the search history window for `?`.
                         Opens with |q?|.
 
+                                                        *<Leader>rr*
+<Leader>rr              Toggle the Harpoon list.
+
+                                *<Leader>rh* *<Leader>rj*
+                                *<Leader>rk* *<Leader>rl*
+<Leader>r{hjkl}         Open Harpoon slots one through four.
+
+                                *<Leader>Rh* *<Leader>Rj*
+                                *<Leader>Rk* *<Leader>Rl*
+<Leader>R{hjkl}         Set Harpoon slots one through four to the current file.
+
                                                         *<Leader>xz*
 <Leader>xz              Close the preview window. Equivalent to |:pclose|.
 
