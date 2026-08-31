@@ -52,44 +52,54 @@ M.spec = {
     "amansingh-afk/milli.nvim",
     lazy = false,
     config = function()
+      local function hide_editor_chrome()
+        if vim.b.milli_chrome_hidden then
+          return
+        end
+        vim.b.milli_chrome_hidden = true
+        vim.b.minitrailspace_disable = true
+        require("mini.trailspace").unhighlight()
+
+        local window = vim.api.nvim_get_current_win()
+        local options = {
+          colorcolumn = "",
+          cursorline = false,
+          list = false,
+          number = false,
+          relativenumber = false,
+          signcolumn = "no",
+          spell = false,
+        }
+        local previous = {}
+        for option, value in pairs(options) do
+          previous[option] = vim.wo[option]
+          vim.wo[option] = value
+        end
+
+        vim.api.nvim_create_autocmd("BufLeave", {
+          buffer = 0,
+          once = true,
+          callback = function()
+            if vim.api.nvim_win_is_valid(window) then
+              for option, value in pairs(previous) do
+                vim.wo[window][option] = value
+              end
+            end
+          end,
+        })
+      end
+
       require("milli").vimenter({ splash = "fire", loop = true })
       vim.api.nvim_create_autocmd("VimEnter", {
         callback = function()
-          if vim.fn.argc() > 0 then
-            return
+          if vim.fn.argc() == 0 then
+            hide_editor_chrome()
           end
-
-          vim.b.minitrailspace_disable = true
-          require("mini.trailspace").unhighlight()
-
-          local window = vim.api.nvim_get_current_win()
-          local options = {
-            colorcolumn = "",
-            cursorline = false,
-            list = false,
-            number = false,
-            relativenumber = false,
-            signcolumn = "no",
-            spell = false,
-          }
-          local previous = {}
-          for option, value in pairs(options) do
-            previous[option] = vim.wo[option]
-            vim.wo[option] = value
-          end
-
-          vim.api.nvim_create_autocmd("BufLeave", {
-            buffer = 0,
-            once = true,
-            callback = function()
-              if vim.api.nvim_win_is_valid(window) then
-                for option, value in pairs(previous) do
-                  vim.wo[window][option] = value
-                end
-              end
-            end,
-          })
         end,
+      })
+      vim.api.nvim_create_autocmd("BufEnter", {
+        pattern = { "milli://*", "milli-shader://*" },
+        callback = hide_editor_chrome,
       })
     end,
   },
