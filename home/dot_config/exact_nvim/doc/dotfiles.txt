@@ -76,6 +76,11 @@ U                       Redo. Equivalent to |CTRL-R|.
                         {to} variants. Accepts any non-alphanumeric delimiter.
                         An empty {from} uses a search created by |star|.
 
+                                                        *:Gs* *:GS*
+:Gs/{from}/{to}/[gc]    Replace matches across project files found by
+                        ripgrep, including untracked but non-ignored files.
+:GS/{from}/{to}/[gc]    Do the same using case-preserving |:S| replacement.
+
                                         *<Leader>tt* *<Leader>tT*
 <Leader>tt              Open the Milli preview and shader picker.
 <Leader>tT              Open the colorscheme picker.

@@ -53,6 +53,39 @@ local function parse(arguments)
   return source, replacement, flags
 end
 
+local function variants(cases, source, replacement)
+  local result = { [source] = replacement }
+  for _, case in ipairs(cases) do
+    local convert = case.case or case
+    result[convert(source)] = convert(replacement)
+  end
+  return result
+end
+
+local function project_files(patterns, fixed_strings)
+  local command = { "rg", "--files-with-matches", "--hidden", "--glob", "!.git/**", "--null" }
+  if fixed_strings then
+    command[#command + 1] = "--fixed-strings"
+  end
+  for _, pattern in ipairs(patterns) do
+    vim.list_extend(command, { "-e", pattern })
+  end
+
+  local result = vim.system(command, { text = false }):wait()
+  if result.code > 1 then
+    error(vim.trim(result.stderr or "rg failed"))
+  end
+  return vim.split(result.stdout or "", "\0", { plain = true, trimempty = true })
+end
+
+local function project_substitute(arguments, files, command)
+  for _, file in ipairs(files) do
+    vim.cmd.edit(vim.fn.fnameescape(file))
+    vim.cmd("%" .. command .. arguments)
+    vim.cmd("silent update")
+  end
+end
+
 local function literal_pattern(value)
   return [[\V]] .. value:gsub("\\", "\\\\") .. [[\m]]
 end
@@ -61,14 +94,8 @@ end
 function M.setup(cases)
   vim.api.nvim_create_user_command("S", function(options)
     local source, replacement, flags = parse(options.args)
-    local variants = { [source] = replacement }
-
-    for _, case in ipairs(cases) do
-      local convert = case.case or case
-      variants[convert(source)] = convert(replacement)
-    end
-
-    local sources = vim.tbl_keys(variants)
+    local replacements_by_source = variants(cases, source, replacement)
+    local sources = vim.tbl_keys(replacements_by_source)
     table.sort(sources, function(left, right)
       return #left > #right
     end)
@@ -82,7 +109,7 @@ function M.setup(cases)
       flags
     )
 
-    replacements = variants
+    replacements = replacements_by_source
     local ok, err = pcall(vim.cmd, command)
     replacements = nil
     if not ok then
@@ -92,6 +119,24 @@ function M.setup(cases)
     desc = "Case-preserving literal substitution",
     nargs = 1,
     range = true,
+    force = true,
+  })
+
+  vim.api.nvim_create_user_command("Gs", function(options)
+    local source = parse(options.args)
+    project_substitute(options.args, project_files({ source }, false), "substitute")
+  end, {
+    desc = "Project-wide substitution",
+    nargs = 1,
+    force = true,
+  })
+
+  vim.api.nvim_create_user_command("GS", function(options)
+    local source, replacement = parse(options.args)
+    project_substitute(options.args, project_files(vim.tbl_keys(variants(cases, source, replacement)), true), "S")
+  end, {
+    desc = "Project-wide case-preserving substitution",
+    nargs = 1,
     force = true,
   })
 end
