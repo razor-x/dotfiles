@@ -15,13 +15,17 @@ ctrl-enter -> open action menu, e.g., like ctrl-enter in opencode
 
 neovim keys to consider remapping
 
-`<C-b>` / `<C-f>` - page backward/forward; largely overlap `<C-u>` / `<C-d>`
+`<C-b>` - page backward; largely overlaps `<C-u>`
 
-`<C-e>` / `<C-y>` - precise viewport scrolling
+`<C-y>` - precise upward viewport scrolling
 
 > will not remap or did remap
 
-`<C-g>` - fold toggle
+`<C-e>` - mark actions
+
+`<C-f>` - fold actions
+
+`<C-g>` - picker actions in Insert mode; toggle Flash search in Command-line mode
 
 `<C-r>` - set mark
 
