@@ -4,6 +4,10 @@ local M = {}
 ---@type LazySpec
 M.spec = {
   {
+    "HiPhish/rainbow-delimiters.nvim",
+    submodules = false,
+  },
+  {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
