@@ -71,7 +71,20 @@ M.spec = {
       {
         "<leader>gc",
         function()
-          require("neogit").action("commit", "commit")()
+          -- UPSTREAM: neogit.action("commit", "commit") loses its async context after refreshing.
+          local async = require("neogit.lib.async")
+          require("neogit.lib.git").repo:dispatch_refresh({
+            source = "commit_mapping",
+            callback = async.void(function()
+              require("neogit.popups.commit.actions").commit({
+                close = function() end,
+                state = { env = {} },
+                get_arguments = function()
+                  return {}
+                end,
+              })
+            end),
+          })
         end,
         desc = "Git Commit",
       },
