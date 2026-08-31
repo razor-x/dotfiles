@@ -15,32 +15,43 @@ ctrl-enter -> open action menu, e.g., like ctrl-enter in opencode
 
 # open leaders
 
-Currently open **lowercase top-level leader keys**:
+Current namespaces:
+
+- `<leader>c` - editor state and history
+- `<leader>d` - development
+- `<leader>f` - files and finding
+- `<leader>g` - Git and GitHub
+- `<leader>r` / `<leader>R` - Harpoon
+- `<leader>t` - reference and tooling
+
+Currently open lowercase top-level leader keys:
 
 - `<leader>m`
 - `<leader>v`
 
 Open uppercase slots:
 
-- `A B C G M O T V X Z`
+- `B C G M T V X`
 
 Digits `0–9` are also open.
 
-Your original `<C-b>` mapping is unchanged.
+`<leader>O` is a trial alias for `<leader>o`; keep both until the uppercase mapping proves comfortable.
 
 neovim keys to consider remapping
 
-`<C-b>` - page backward; largely overlaps `<C-u>`
+> will not remap
 
 `<C-y>` - precise upward viewport scrolling
 
-> will not remap or did remap
+> did remap
+
+`<C-b>` - precise downward viewport scrolling via `<C-e>`
 
 `<C-e>` - mark actions
 
 `<C-f>` - fold actions
 
-`<C-g>` - picker actions in Insert mode; toggle Flash search in Command-line mode
+`<C-g>` - toggle folds in Normal mode; picker actions in Insert mode; toggle Flash search in Command-line mode
 
 `<C-r>` - set mark
 
