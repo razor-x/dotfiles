@@ -369,7 +369,7 @@ M.spec = {
         desc = "Command History",
       },
       {
-        "<leader>cC",
+        "<leader>tc",
         function()
           Snacks.picker.commands()
         end,
@@ -390,21 +390,21 @@ M.spec = {
         desc = "Buffer Diagnostics",
       },
       {
-        "<leader>ch",
+        "<leader>th",
         function()
           Snacks.picker.help()
         end,
         desc = "Help Pages",
       },
       {
-        "<leader>cH",
+        "<leader>tH",
         function()
           Snacks.picker.highlights()
         end,
         desc = "Highlights",
       },
       {
-        "<leader>ci",
+        "<leader>ti",
         function()
           Snacks.picker.icons()
         end,
@@ -418,7 +418,7 @@ M.spec = {
         desc = "Jumps",
       },
       {
-        "<leader>ck",
+        "<leader>tk",
         function()
           Snacks.picker.keymaps()
         end,
@@ -439,7 +439,7 @@ M.spec = {
         desc = "Marks",
       },
       {
-        "<leader>cM",
+        "<leader>tm",
         function()
           Snacks.picker.man()
         end,
@@ -474,7 +474,7 @@ M.spec = {
         desc = "Undo History",
       },
       {
-        "<leader>cT",
+        "<leader>tT",
         function()
           Snacks.picker.colorschemes()
         end,

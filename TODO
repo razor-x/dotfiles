@@ -18,7 +18,6 @@ ctrl-enter -> open action menu, e.g., like ctrl-enter in opencode
 Currently open **lowercase top-level leader keys**:
 
 - `<leader>m`
-- `<leader>t`
 - `<leader>v`
 
 Open uppercase slots:
