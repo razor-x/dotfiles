@@ -158,6 +158,8 @@ M.spec = {
       vim.keymap.set("x", "&", M.cmd("&&"), { desc = "Repeat last substitute with same flags", silent = true })
 
       vim.keymap.set("n", "<Leader>o", M.cmd("nohlsearch"), { desc = "Stop search highlighting", silent = true })
+      -- TODO: Keep <Leader>o until <Leader>O proves comfortable.
+      vim.keymap.set("n", "<Leader>O", M.cmd("nohlsearch"), { desc = "Stop search highlighting", silent = true })
 
       vim.keymap.set(
         "n",

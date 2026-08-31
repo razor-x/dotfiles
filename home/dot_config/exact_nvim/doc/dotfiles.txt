@@ -210,8 +210,8 @@ gCr{cdknpsu/<Space>}{motion}
                                                         *<Leader>xz*
 <Leader>xz              Close the preview window. Equivalent to |:pclose|.
 
-                                                        *<Leader>o*
-<Leader>o               Clear search highlighting. Equivalent to
+                                             *<Leader>o* *<Leader>O*
+<Leader>o, <Leader>O    Clear search highlighting. Equivalent to
                         |:nohlsearch|.
 
                                                         *<Leader>n*
