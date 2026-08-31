@@ -61,14 +61,20 @@ M.spec = {
         require("mini.trailspace").unhighlight()
 
         local window = vim.api.nvim_get_current_win()
+        local guicursor = vim.o.guicursor
+        vim.o.guicursor = "a:hor1-MilliHiddenCursor"
+        vim.api.nvim_set_hl(0, "MilliHiddenCursor", { blend = 100, nocombine = true })
+
         local options = {
           colorcolumn = "",
           cursorline = false,
+          foldcolumn = "0",
           list = false,
           number = false,
           relativenumber = false,
           signcolumn = "no",
           spell = false,
+          statuscolumn = "",
         }
         local previous = {}
         for option, value in pairs(options) do
@@ -80,6 +86,8 @@ M.spec = {
           buffer = 0,
           once = true,
           callback = function()
+            vim.o.guicursor = guicursor
+            vim.api.nvim_set_hl(0, "MilliHiddenCursor", {})
             if vim.api.nvim_win_is_valid(window) then
               for option, value in pairs(previous) do
                 vim.wo[window][option] = value
