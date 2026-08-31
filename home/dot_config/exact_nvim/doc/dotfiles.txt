@@ -70,6 +70,10 @@ U                       Redo. Equivalent to |CTRL-R|.
 &                       Repeat the last substitution with its flags.
                         Equivalent to |:&&|.
 
+                                        *<Leader>tt* *<Leader>tT*
+<Leader>tt              Open the Milli preview and shader picker.
+<Leader>tT              Open the colorscheme picker.
+
                                                         *<F5>*
 <F5>                    Restart Neovim and reload the configuration.
                         See |:restart|.

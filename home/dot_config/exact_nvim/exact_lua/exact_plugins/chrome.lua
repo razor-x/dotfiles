@@ -97,14 +97,6 @@ M.spec = {
         })
       end
 
-      require("milli").vimenter({ splash = "fire", loop = true })
-      vim.api.nvim_create_autocmd("VimEnter", {
-        callback = function()
-          if vim.fn.argc() == 0 then
-            hide_editor_chrome()
-          end
-        end,
-      })
       vim.api.nvim_create_autocmd("BufEnter", {
         pattern = { "milli://*", "milli-shader://*" },
         callback = hide_editor_chrome,

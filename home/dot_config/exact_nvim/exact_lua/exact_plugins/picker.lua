@@ -475,6 +475,33 @@ M.spec = {
       {
         "<leader>tt",
         function()
+          local items = {}
+          for _, name in ipairs(require("milli").list()) do
+            items[#items + 1] = { command = "MilliPreview", name = name, text = "preview  " .. name }
+          end
+          for _, name in ipairs(require("milli.runtime").SHADERS) do
+            items[#items + 1] = { command = "MilliShader", name = name, text = "shader   " .. name }
+          end
+          Snacks.picker.pick({
+            items = items,
+            title = "Milli",
+            format = "text",
+            preview = "none",
+            confirm = function(picker, item)
+              picker:close()
+              if item then
+                vim.schedule(function()
+                  vim.api.nvim_cmd({ cmd = item.command, args = { item.name } }, {})
+                end)
+              end
+            end,
+          })
+        end,
+        desc = "Milli",
+      },
+      {
+        "<leader>tT",
+        function()
           Snacks.picker.colorschemes()
         end,
         desc = "Colorschemes",
