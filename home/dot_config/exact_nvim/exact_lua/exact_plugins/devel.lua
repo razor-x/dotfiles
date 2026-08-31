@@ -184,6 +184,15 @@ M.spec = {
     end,
   },
   {
+    "dpezto/chezmoi-template.nvim",
+    lazy = false,
+    ---@module "chezmoi-template"
+    ---@type chezmoi-template.Config
+    opts = {
+      apply = { on_save = false },
+    },
+  },
+  {
     "romus204/tree-sitter-manager.nvim",
     lazy = false,
     ---@module "tree-sitter-manager"
