@@ -297,7 +297,7 @@ M.spec = {
         desc = "Buffer Lines",
       },
       {
-        "<leader>cB",
+        "<leader>A",
         function()
           Snacks.picker.grep_buffers()
         end,
@@ -376,14 +376,14 @@ M.spec = {
         desc = "Help Pages",
       },
       {
-        "<leader>tH",
+        "<leader>ti",
         function()
           Snacks.picker.highlights()
         end,
         desc = "Highlights",
       },
       {
-        "<leader>ti",
+        "<leader>di",
         function()
           Snacks.picker.icons()
         end,
@@ -459,7 +459,7 @@ M.spec = {
         desc = "Undo History",
       },
       {
-        "<leader>tT",
+        "<leader>tt",
         function()
           Snacks.picker.colorschemes()
         end,
