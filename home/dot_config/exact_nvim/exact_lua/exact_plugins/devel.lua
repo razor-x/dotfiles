@@ -70,7 +70,9 @@ M.spec = {
     keys = {
       {
         "<leader>gc",
-        "<cmd>Neogit commit<cr>",
+        function()
+          require("neogit").action("commit", "commit")()
+        end,
         desc = "Git Commit",
       },
       {

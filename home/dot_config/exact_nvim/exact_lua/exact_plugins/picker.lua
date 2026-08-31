@@ -134,14 +134,7 @@ M.spec = {
         desc = "Grep",
       },
       {
-        "<leader>f:",
-        function()
-          Snacks.picker.command_history()
-        end,
-        desc = "Command History",
-      },
-      {
-        "<leader>fn",
+        "<leader>cn",
         function()
           Snacks.picker.notifications()
         end,
@@ -187,13 +180,6 @@ M.spec = {
           Snacks.picker.files()
         end,
         desc = "Find Files",
-      },
-      {
-        "<leader>f;",
-        function()
-          Snacks.picker.git_status()
-        end,
-        desc = "Find Git Status Files",
       },
       {
         "<leader>fs",
@@ -304,7 +290,7 @@ M.spec = {
       },
       -- Grep
       {
-        "<leader>cb",
+        "<leader>fl",
         function()
           Snacks.picker.lines()
         end,
@@ -348,18 +334,11 @@ M.spec = {
         desc = "Search History",
       },
       {
-        "<leader>ca",
+        "<leader>ta",
         function()
           Snacks.picker.autocmds()
         end,
         desc = "Autocmds",
-      },
-      {
-        "<leader>cb",
-        function()
-          Snacks.picker.lines()
-        end,
-        desc = "Buffer Lines",
       },
       {
         "<leader>cc",
@@ -376,14 +355,14 @@ M.spec = {
         desc = "Commands",
       },
       {
-        "<leader>cd",
+        "<leader>dc",
         function()
           Snacks.picker.diagnostics()
         end,
         desc = "Diagnostics",
       },
       {
-        "<leader>cD",
+        "<leader>dC",
         function()
           Snacks.picker.diagnostics_buffer()
         end,
@@ -446,9 +425,15 @@ M.spec = {
         desc = "Man Pages",
       },
       {
-        "<leader>cp",
+        "<leader>tp",
         function()
-          Snacks.picker.lazy()
+          local has_dotfiles, dotfiles = pcall(require, "dotfiles")
+          Snacks.picker.lazy({
+            transform = has_dotfiles and function(item)
+              item.file = vim.fs.joinpath(dotfiles.config_dir, "exact_lua", "exact_plugins", vim.fs.basename(item.file))
+              return item
+            end or nil,
+          })
         end,
         desc = "Search for Plugin Spec",
       },
@@ -532,14 +517,14 @@ M.spec = {
         desc = "C[a]lls Outgoing",
       },
       {
-        "<leader>cs",
+        "<leader>dl",
         function()
           Snacks.picker.lsp_symbols()
         end,
         desc = "LSP Symbols",
       },
       {
-        "<leader>cS",
+        "<leader>dL",
         function()
           Snacks.picker.lsp_workspace_symbols()
         end,
