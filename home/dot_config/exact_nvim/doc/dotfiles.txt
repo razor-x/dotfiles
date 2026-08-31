@@ -74,6 +74,20 @@ U                       Redo. Equivalent to |CTRL-R|.
 <Leader>tt              Open the Milli preview and shader picker.
 <Leader>tT              Open the colorscheme picker.
 
+        *gcrc* *gcrd* *gcrk* *gcrn* *gcrp* *gcrs* *gcru* *gcr/* *gcr<Space>*
+gcr{cdknpsu/<Space>}    Coerce the word under the cursor to camelCase,
+                        dot.case, kebab-case, numeronym, PascalCase,
+                        snake_case, UPPER_CASE, path/case, or space case.
+                        In visual mode, coerce the selection directly.
+
+        *gCrc* *gCrd* *gCrk* *gCrn* *gCrp* *gCrs* *gCru* *gCr/* *gCr<Space>*
+gCr{cdknpsu/<Space>}{motion}
+                        Coerce the text selected by {motion} to the chosen
+                        case.
+
+                                                        *<Leader>gc*
+<Leader>gc              Start a Neogit commit directly.
+
                                                         *<F5>*
 <F5>                    Restart Neovim and reload the configuration.
                         See |:restart|.

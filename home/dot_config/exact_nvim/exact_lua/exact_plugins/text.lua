@@ -230,6 +230,27 @@ M.spec = {
     },
   },
   {
+    "gregorias/coerce.nvim",
+    dependencies = { "gregorias/coop.nvim" },
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts)
+      local Coerce = require("coerce")
+      Coerce.setup(opts)
+
+      local expand = require("coerce.keymaps").which_key_expand
+      for _, mapping in ipairs({
+        { prefix = "gcr", mode = "n", cases = expand.normal_mode() },
+        { prefix = "gCr", mode = "n", cases = expand.motion_mode() },
+        { prefix = "gcr", mode = "x", cases = expand.visual_mode() },
+      }) do
+        for _, case in ipairs(mapping.cases) do
+          vim.keymap.set(mapping.mode, mapping.prefix .. case[1], case[2], { desc = case.desc })
+        end
+      end
+    end,
+  },
+  {
     "gbprod/substitute.nvim",
     dependencies = { "gbprod/yanky.nvim" },
     opts = {},

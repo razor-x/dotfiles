@@ -300,7 +300,8 @@ n = no can't or won't use
 - [ ] Consider Terraform tooling and completion.
 - [ ] Consider API Blueprint, GraphQL, and Riot-specific support when those filetypes are used again.
 - [ ] Decide whether to restore `vim-abolish` functionality.
-  - Word coercions such as camelCase/snake_case transformations are not replaced by `substitute.nvim`.
+  - Restore the old `cr…` case-coercion mappings if still wanted: `crc` camelCase, `crp`/`crm` PascalCase/MixedCase, `crs`/`cr_` snake_case, `cru`/`crU` SNAKE_UPPERCASE, `crk`/`cr-` kebab-case, and `cr.` dot.case.
+  - These plugin-provided mappings were not replaced by `substitute.nvim`.
   - Also check whether abbreviation and enhanced substitution commands were used.
 - [ ] Decide whether to restore searching for the current visual selection with `*`/`#`.
   - The old config provided this through `vim-visual-star-search`; Neovim does not provide equivalent visual mappings by default.
