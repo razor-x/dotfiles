@@ -445,7 +445,7 @@ M.spec = {
         desc = "Quickfix List",
       },
       {
-        "<leader>cR",
+        "<leader>cr",
         function()
           Snacks.picker.resume()
         end,
