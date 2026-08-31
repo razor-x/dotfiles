@@ -474,7 +474,7 @@ M.spec = {
         desc = "Undo History",
       },
       {
-        "<leader>uC",
+        "<leader>cT",
         function()
           Snacks.picker.colorschemes()
         end,
