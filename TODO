@@ -13,6 +13,22 @@ neovim bind ideas
 ctrl-enter -> open action menu, e.g., like ctrl-enter in opencode
 <Leader><Leader> as a "ctrl-shift" kind of overload for less common actions
 
+# open leaders
+
+Currently open **lowercase top-level leader keys**:
+
+- `<leader>m`
+- `<leader>t`
+- `<leader>v`
+
+Open uppercase slots:
+
+- `A B C G M O T V X Z`
+
+Digits `0–9` are also open.
+
+Your original `<C-b>` mapping is unchanged.
+
 neovim keys to consider remapping
 
 `<C-b>` - page backward; largely overlaps `<C-u>`
@@ -28,6 +44,8 @@ neovim keys to consider remapping
 `<C-g>` - picker actions in Insert mode; toggle Flash search in Command-line mode
 
 `<C-r>` - set mark
+
+> rest
 
 Z - backspace in normal mode - almost always use something else to delete stuff in normal mode
 
@@ -45,8 +63,6 @@ X - exchange operator; default delete backward is redundant with `dh`
 
 s - Flash; default `s` is redundant with `cl`; restore default `S`
 m & M - will remap to "move"
-
-ctrl-space in insert mode
 
 - Unicode name/glyph completion.
 - Rainbow/nested-delimiter coloring.
