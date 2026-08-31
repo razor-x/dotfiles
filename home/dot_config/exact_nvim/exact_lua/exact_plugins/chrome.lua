@@ -116,15 +116,6 @@ M.spec = {
       WhichKey = require("which-key")
       WhichKey.setup(opts)
     end,
-    keys = {
-      {
-        "<leader>?",
-        function()
-          WhichKey.show({ global = false })
-        end,
-        desc = "Buffer Local Keymaps (which-key)",
-      },
-    },
   },
 }
 
