@@ -209,6 +209,20 @@ M.spec = {
         end,
         desc = "Recent",
       },
+      {
+        "<leader>fz",
+        function()
+          Snacks.picker.zoxide()
+        end,
+        desc = "Zoxide Directories",
+      },
+      {
+        "<leader>Z",
+        function()
+          Snacks.picker.spelling()
+        end,
+        desc = "Spelling Suggestions",
+      },
       -- git
       {
         "<leader>gb",
