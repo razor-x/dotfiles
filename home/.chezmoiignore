@@ -27,6 +27,10 @@
 .config/environment.d/xsecurelock.conf
 {{ end -}}
 
+# Ignore Neovim tests.
+.config/nvim/tests
+.config/nvim/tests/**
+
 # Ignore TypeScript environment for pi extensions.
 .config/pi/npm/.gitignore
 .config/pi/npm/node_modules

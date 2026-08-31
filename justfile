@@ -55,6 +55,8 @@ check:
   mdformat --exclude '**/skills/**' --check $(git ls-files '*.md')
   ruff format --check $(git ls-files '*.py' '*.pyi' '*.ipynb')
   shfmt --diff $(git ls-files '*.sh')
+  fd --type f --extension lua . home/dot_config/exact_nvim/tests \
+    --exec nvim --clean --headless -l {}
   npm --prefix home/dot_config/pi/extensions/exact_local run check
 
 upgrade-pi-local: && format
