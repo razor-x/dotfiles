@@ -70,6 +70,12 @@ U                       Redo. Equivalent to |CTRL-R|.
 &                       Repeat the last substitution with its flags.
                         Equivalent to |:&&|.
 
+                                                        *:S*
+:[range]S/{from}/{to}/[gc]
+                        Replace literal {from} case variants with matching
+                        {to} variants. Accepts any non-alphanumeric delimiter.
+                        An empty {from} uses a search created by |star|.
+
                                         *<Leader>tt* *<Leader>tT*
 <Leader>tt              Open the Milli preview and shader picker.
 <Leader>tT              Open the colorscheme picker.

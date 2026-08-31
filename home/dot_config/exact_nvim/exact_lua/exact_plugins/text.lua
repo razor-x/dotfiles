@@ -237,6 +237,7 @@ M.spec = {
     config = function(_, opts)
       local Coerce = require("coerce")
       Coerce.setup(opts)
+      require("config.subs").setup(Coerce.default_cases)
 
       local expand = require("coerce.keymaps").which_key_expand
       for _, mapping in ipairs({
