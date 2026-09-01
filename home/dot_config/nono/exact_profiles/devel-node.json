@@ -5,12 +5,11 @@
     "description": "Node.js, npm, pnpm, and Yarn configuration and caches."
   },
   "filesystem": {
-    "read": [
-      "$XDG_CONFIG_HOME/npm",
+    "read": ["$XDG_CONFIG_HOME/npm", "$XDG_DATA_HOME/node"],
+    "allow": [
       "$XDG_CACHE_HOME/npm",
       "$XDG_CACHE_HOME/node-gyp",
       "$XDG_CACHE_HOME/pnpm",
-      "$XDG_DATA_HOME/node",
       "$XDG_DATA_HOME/pnpm",
       "$XDG_CACHE_HOME/yarn",
       "$XDG_DATA_HOME/yarn"
