@@ -31,6 +31,10 @@
 .config/nvim/tests
 .config/nvim/tests/**
 
+# Ignore locally installed Pi packages.
+.config/pi/packages
+.config/pi/packages/**
+
 # Ignore TypeScript environment for pi extensions.
 .config/pi/npm/.gitignore
 .config/pi/npm/node_modules

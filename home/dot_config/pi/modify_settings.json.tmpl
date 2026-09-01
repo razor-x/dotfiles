@@ -16,4 +16,15 @@ if not test -s $input
     printf '{}\n' >$input
 end
 
-jq --argjson packages $packages '.packages = $packages' $input
+jq --argjson packages $packages '
+  .packages = (
+    [ .packages[]?
+      | select(
+          if type == "string"
+          then startswith("npm:") | not
+          else (.source? // "" | startswith("npm:") | not)
+          end
+        )
+    ] + $packages
+  )
+' $input
