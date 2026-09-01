@@ -4,5 +4,5 @@
     "version": "1.0.0",
     "description": "Biome cache."
   },
-  "filesystem": { "read": ["$XDG_CACHE_HOME/biome"] }
+  "filesystem": { "allow": ["$XDG_CACHE_HOME/biome"] }
 }

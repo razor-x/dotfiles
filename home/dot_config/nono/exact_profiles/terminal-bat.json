@@ -7,8 +7,8 @@
   "filesystem": {
     "read": [
       "$XDG_CONFIG_HOME/bat",
-      "$XDG_CACHE_HOME/bat",
       "$XDG_DATA_HOME/theme/catppuccin/bat"
-    ]
+    ],
+    "allow": ["$XDG_CACHE_HOME/bat"]
   }
 }

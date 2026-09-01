@@ -4,5 +4,5 @@
     "version": "1.0.0",
     "description": "Deno cache."
   },
-  "filesystem": { "read": ["$XDG_CACHE_HOME/deno"] }
+  "filesystem": { "allow": ["$XDG_CACHE_HOME/deno"] }
 }

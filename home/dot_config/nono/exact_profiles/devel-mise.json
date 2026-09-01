@@ -5,10 +5,7 @@
     "description": "Mise configuration, cache, and data."
   },
   "filesystem": {
-    "read": [
-      "$XDG_CONFIG_HOME/mise",
-      "$XDG_CACHE_HOME/mise",
-      "$XDG_DATA_HOME/mise"
-    ]
+    "read": ["$XDG_CONFIG_HOME/mise"],
+    "allow": ["$XDG_CACHE_HOME/mise", "$XDG_DATA_HOME/mise"]
   }
 }

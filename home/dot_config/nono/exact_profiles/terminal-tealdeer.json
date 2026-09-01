@@ -5,6 +5,7 @@
     "description": "Tealdeer configuration and cache."
   },
   "filesystem": {
-    "read": ["$XDG_CONFIG_HOME/tealdeer", "$XDG_CACHE_HOME/tealdeer"]
+    "read": ["$XDG_CONFIG_HOME/tealdeer"],
+    "allow": ["$XDG_CACHE_HOME/tealdeer"]
   }
 }

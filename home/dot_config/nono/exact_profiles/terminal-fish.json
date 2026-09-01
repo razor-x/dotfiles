@@ -7,9 +7,9 @@
   "filesystem": {
     "read": [
       "$XDG_CONFIG_HOME/fish",
-      "$XDG_CACHE_HOME/fish",
       "$XDG_DATA_HOME/fish",
       "$XDG_DATA_HOME/plugin"
-    ]
+    ],
+    "allow": ["$XDG_CACHE_HOME/fish"]
   }
 }

@@ -4,5 +4,5 @@
     "version": "1.0.0",
     "description": "Bun cache."
   },
-  "filesystem": { "read": ["$XDG_CACHE_HOME/bun"] }
+  "filesystem": { "allow": ["$XDG_CACHE_HOME/bun"] }
 }

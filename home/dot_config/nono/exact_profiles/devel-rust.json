@@ -5,6 +5,6 @@
     "description": "Rust Cargo data."
   },
   "filesystem": {
-    "read": ["$XDG_DATA_HOME/cargo"]
+    "allow": ["$XDG_DATA_HOME/cargo"]
   }
 }
