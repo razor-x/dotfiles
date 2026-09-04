@@ -1,0 +1,12 @@
+#!/usr/bin/env -S fish --no-config
+
+{{- $repoPaths := dict }}
+{{- range .repos }}
+{{- $_ := set $repoPaths (trimSuffix ".git" (trimPrefix "git@github.com:" .url)) (joinPath $.chezmoi.homeDir $.repoRoot .path) }}
+{{- end }}
+{{- $base := joinPath .chezmoi.sourceDir "dot_config" "exact_gh-dash" "_config.yml" }}
+yq '
+  .repoPaths as $repoPaths |
+  load({{ $base | quote }}) |
+  .repoPaths = (($repoPaths // {}) * {{ $repoPaths | toRawJson }})
+' -

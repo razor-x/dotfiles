@@ -1,3 +1,6 @@
+# Ignore gh-dash config used as the base for its modify script.
+.config/gh-dash/_config.yml
+
 # Ignore generated kitty config backup file.
 .config/kitty/kitty.conf.bak
 
