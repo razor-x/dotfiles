@@ -55,6 +55,7 @@ if status is-interactive
     abbr gdpr 'git diff (git merge-base main HEAD)'
     abbr grm! git rm -rf
     abbr gstaa git stash apply
+    abbr gstas git stash show --patch
     abbr gstap git stash pop
     abbr gstad git stash drop
     abbr gstac! git stash clear
