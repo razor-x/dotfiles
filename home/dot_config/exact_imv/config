@@ -17,4 +17,4 @@ l = zoom 1
 u = zoom actual
 <semicolon> = scaling crop
 y = exec realpath "$imv_current_file" | xclip -selection clipboard
-<Shift+X> = exec magick "$imv_current_file" png:- | xclip -selection clipboard -target image/png
+<Ctrl+c> = exec magick "$imv_current_file" png:- | xclip -selection clipboard -target image/png
