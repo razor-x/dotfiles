@@ -1,6 +1,6 @@
 # Move between images.
-next_img j
-prev_img k
+next_img j Right
+prev_img k Left
 
 # Pan with shifted Vim keys.
 scroll_left H
@@ -8,8 +8,14 @@ scroll_down J
 scroll_up K
 scroll_right L
 
-# Zoom with horizontal Vim keys.
-zoom_out h
-zoom_in l
+# Zoom with horizontal Vim keys or arrows.
+zoom_out h Down
+zoom_in l Up
+
+# Unbind the default Alt+Arrow page scrolling.
+scroll_left_page
+scroll_down_page
+scroll_up_page
+scroll_right_page
 
 quit q Escape
