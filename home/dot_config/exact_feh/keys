@@ -12,6 +12,15 @@ scroll_right L
 zoom_out h Down
 zoom_in l Up
 
+# Transform images without Shift.
+orient_3 comma less
+orient_1 period greater
+flip v underscore
+mirror b bar
+zoom_default u asterisk KP_Multiply
+zoom_fill semicolon exclam
+toggle_auto_zoom t Z
+
 # Unbind the default Alt+Arrow page scrolling.
 scroll_left_page
 scroll_down_page
