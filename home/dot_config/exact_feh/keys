@@ -11,8 +11,5 @@ scroll_right L
 # Zoom with horizontal Vim keys.
 zoom_out h
 zoom_in l
-zoom_default d
-zoom_fit s
 
 quit q Escape
-toggle_fullscreen f
