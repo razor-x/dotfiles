@@ -1,0 +1,20 @@
+[options]
+fullscreen = true
+
+[binds]
+j = next 1
+k = prev 1
+h = zoom -1
+l = zoom 1
+<Shift+H> = pan 50 0
+<Shift+J> = pan 0 -50
+<Shift+K> = pan 0 50
+<Shift+L> = pan -50 0
+<Ctrl+h> = rotate by -90
+<Ctrl+j> = flip vertical
+<Ctrl+k> = flip horizontal
+<Ctrl+l> = rotate by 90
+u = zoom actual
+<semicolon> = scaling crop
+y = exec realpath "$imv_current_file" | xclip -selection clipboard
+<Shift+X> = exec magick "$imv_current_file" png:- | xclip -selection clipboard -target image/png
