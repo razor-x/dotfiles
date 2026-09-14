@@ -54,11 +54,13 @@ if status is-interactive
     abbr gg gitui
     abbr gdpr 'git diff (git merge-base main HEAD)'
     abbr grm! git rm -rf
-    abbr gstaa git stash apply
-    abbr gstas git stash show --patch
-    abbr gstap git stash pop
-    abbr gstad git stash drop
-    abbr gstac! git stash clear
+    abbr gk git stash
+    abbr gkk git stash show --patch
+    abbr gka git stash apply
+    abbr gkp git stash pop
+    abbr gkl git stash list
+    abbr gkd git stash drop
+    abbr gkc! git stash clear
     abbr --erase gsd
     alias gsd git_find_replace
     abbr gcd 'cd (git root)'

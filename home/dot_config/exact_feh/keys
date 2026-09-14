@@ -1,0 +1,18 @@
+# Move between images.
+next_img j
+prev_img k
+
+# Pan with shifted Vim keys.
+scroll_left H
+scroll_down J
+scroll_up K
+scroll_right L
+
+# Zoom with horizontal Vim keys.
+zoom_out h
+zoom_in l
+zoom_default d
+zoom_fit s
+
+quit q Escape
+toggle_fullscreen f

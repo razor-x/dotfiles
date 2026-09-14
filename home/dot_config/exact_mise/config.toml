@@ -5,7 +5,6 @@
 idiomatic_version_file_enable_tools = [
   'bun',
   'dotnet',
-  'go',
   'golangci-lint',
   'goreleaser',
   'java',

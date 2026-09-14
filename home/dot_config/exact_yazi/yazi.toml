@@ -1,3 +1,10 @@
+[opener]
+feh = [{ run = "feh --fullscreen --auto-zoom %s", desc = "Open in feh", orphan = true }]
+
+[[open.prepend_rules]]
+mime = "folder/*"
+use  = [ "feh", "edit", "open", "reveal" ]
+
 # Use ouch to preview archives.
 # https://github.com/ndtoan96/ouch.yazi#preview
 [[plugin.prepend_previewers]]
