@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "terminal-just",
+    "version": "1.0.0",
+    "description": "Just runtime files."
+  },
+  "filesystem": { "allow": ["$XDG_RUNTIME_DIR/just"] }
+}
