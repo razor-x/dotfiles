@@ -241,9 +241,9 @@ M.spec = {
 
       local expand = require("coerce.keymaps").which_key_expand
       for _, mapping in ipairs({
-        { prefix = "gcr", mode = "n", cases = expand.normal_mode() },
-        { prefix = "gCr", mode = "n", cases = expand.motion_mode() },
-        { prefix = "gcr", mode = "x", cases = expand.visual_mode() },
+        { prefix = "zc", mode = "n", cases = expand.normal_mode() },
+        { prefix = "zC", mode = "n", cases = expand.motion_mode() },
+        { prefix = "zc", mode = "x", cases = expand.visual_mode() },
       }) do
         for _, case in ipairs(mapping.cases) do
           vim.keymap.set(mapping.mode, mapping.prefix .. case[1], case[2], { desc = case.desc })
