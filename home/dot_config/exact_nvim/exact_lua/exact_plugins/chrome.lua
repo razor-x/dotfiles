@@ -114,6 +114,20 @@ M.spec = {
     ---@module "which-key"
     ---@type wk.Opts
     opts = {
+      filter = function(mapping)
+        return mapping.lhs ~= "z=z" or M.current_word_is_spelled_correctly()
+      end,
+      sort = {
+        "local",
+        function(item)
+          local lhs = item.mapping and item.mapping.lhs
+          return lhs == "z=z" and 0 or lhs and lhs:match("^z=[jkl]$") and 1 or 2
+        end,
+        "order",
+        "group",
+        "alphanum",
+        "mod",
+      },
       delay = function(ctx)
         if ctx.keys == "z=" then
           return 0
@@ -124,6 +138,34 @@ M.spec = {
         { "<c-e>", group = "mark" },
         { "<c-f>", group = "fold" },
         { "<c-g>", group = "picker", mode = "i" },
+        {
+          "z=z",
+          "<Nop>",
+          desc = function()
+            return vim.fn.expand("<cword>")
+          end,
+        },
+        {
+          "z=j",
+          "1z=",
+          desc = function()
+            return M.spelling_suggestion(1)
+          end,
+        },
+        {
+          "z=k",
+          "2z=",
+          desc = function()
+            return M.spelling_suggestion(2)
+          end,
+        },
+        {
+          "z=l",
+          "3z=",
+          desc = function()
+            return M.spelling_suggestion(3)
+          end,
+        },
         { "z<CR>", hidden = true },
         { "z<Left>", hidden = true },
         { "z<Right>", hidden = true },
@@ -177,5 +219,15 @@ M.spec = {
     end,
   },
 }
+
+function M.current_word_is_spelled_correctly()
+  local word = vim.fn.expand("<cword>")
+  local misspelling = vim.fn.spellbadword(word)
+  return word ~= "" and (misspelling[1] == "" or misspelling[2] == "caps")
+end
+
+function M.spelling_suggestion(index)
+  return vim.fn.spellsuggest(vim.fn.expand("<cword>"), 3)[index] or "unavailable"
+end
 
 return M.spec

@@ -55,6 +55,12 @@ yoi                     Toggle the indent scope indicator globally.
 \oi                     Toggle the indent scope indicator for the current
                         buffer.
 
+                                        *z=z* *z=j* *z=k* *z=l*
+z=z                     Keep the word under the cursor unchanged.
+z=j                     Use the first spelling suggestion.
+z=k                     Use the second spelling suggestion.
+z=l                     Use the third spelling suggestion.
+
                                                         *q*
 q                       Move backward to the end of the previous word
                         (recursive). Equivalent to |ge|.
