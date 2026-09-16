@@ -40,6 +40,9 @@ managed home directory.
 - Keep `exact_lua/exact_plugins/*.lua` organized by interface. Preserve the
   standalone path in `init.lua`, where the generated `dotfiles` module may be
   absent.
+- Define Lua module helpers as `M` methods after the module's primary
+  declarations and before its return; use deferred callbacks when a table
+  declared earlier needs to call them.
 - Update `doc/dotfiles.txt` with user-facing mapping changes. Treat
   `.lazy-lock.json` as pinned input and change it only for an explicit plugin
   upgrade.
