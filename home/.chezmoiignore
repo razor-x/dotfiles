@@ -48,3 +48,5 @@
 .config/pi/extensions/local/test/**
 .config/pi/extensions/local/node_modules
 .config/pi/extensions/local/node_modules/**
+
+.config/nvim/spell/*.spl

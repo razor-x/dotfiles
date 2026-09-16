@@ -240,10 +240,9 @@ n = no can't or won't use
   - Do not restore unconditional trim-on-save.
   - Keep `mini.trailspace` for visualization/manual trimming.
 
-- [ ] Restore project-local spellfiles.
-  - Detect `.spellfile.utf-8.add` beside the current file.
-  - Restore `:Mklocalspell`.
-  - Preserve the old `$VIM_LANG` override for `spelllang` if it is still used.
+- [x] Restore project-local spellfiles.
+  - Detect `.spellfile.utf-8.add` up to the Git root.
+  - Restore `:Mklocalspell` and explicit local/global dictionary actions.
   - Keep spell disabled in terminal buffers.
 
 - [ ] Verify Markdown frontmatter highlighting.

@@ -16,6 +16,7 @@ M.spec = {
 
       -- Highlight misspelled words using Neovim's built-in spell checker.
       vim.opt.spell = true
+      require("config.spelling").setup()
 
       -- Set nonzero scrolloff.
       vim.opt.scrolloff = 5

@@ -1,2 +1,5 @@
 .worktrees
 opencode.jsonc
+
+# Generated Neovim spell dictionaries
+*.add.spl

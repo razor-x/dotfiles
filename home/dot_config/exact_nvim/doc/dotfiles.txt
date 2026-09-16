@@ -61,6 +61,26 @@ z=j                     Use the first spelling suggestion.
 z=k                     Use the second spelling suggestion.
 z=l                     Use the third spelling suggestion.
 
+                                *zg* *zl* *zug* *zul* *:Mklocalspell*
+zg                      Add word to the global, repository-managed dictionary.
+zl                      Add word to the nearest project dictionary; prompt
+                        before creating one if missing.
+zug                     Remove word from the global dictionary.
+zul                     Remove word from the local dictionary; prompt to
+                        delete its .add and .spl files if now empty.
+:Mklocalspell           Create or recompile the nearest local dictionary,
+                        creating it at the Git root (file directory outside
+                        Git) if absent. Enable spelling in this window.
+
+Local .spellfile.utf-8.add discovery stops at the nearest Git root. Outside
+Git, only the file's directory is checked. Both local and global dictionaries
+are loaded; language selection remains native ('spelllang' is unchanged).
+Global words live in spell/words.utf-8.add under the dotfiles Neovim source
+(or stdpath('config') for standalone installs). Commit that text file manually;
+no automatic Git commit is made. Generated .add.spl files are ignored and
+rebuilt when missing/outdated on buffer entry, or after dictionary edits.
+Dictionary refresh respects spell toggles; terminal windows use nospell.
+
                                                         *q*
 q                       Move backward to the end of the previous word
                         (recursive). Equivalent to |ge|.
