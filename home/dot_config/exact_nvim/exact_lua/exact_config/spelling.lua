@@ -106,7 +106,8 @@ function M.change(action)
       error("Local spelling requires a named file buffer")
     end
   end
-  if vim.fn.expand("<cword>") == "" then
+  local word = vim.fn.expand("<cword>")
+  if word == "" then
     return
   end
   local remove = action.remove
@@ -144,7 +145,11 @@ function M.change(action)
   end
   M.refresh_all()
   vim.notify(
-    (remove and "Removed word from " or "Added word to ") .. (local_dictionary and "local" or "global") .. " dictionary"
+    (remove and "Removed " or "Added ")
+      .. word
+      .. (remove and " from " or " to ")
+      .. (local_dictionary and "local" or "global")
+      .. " dictionary"
   )
 end
 
