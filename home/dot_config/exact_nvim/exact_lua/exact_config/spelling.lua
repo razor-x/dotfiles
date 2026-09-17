@@ -66,13 +66,9 @@ function M.refresh()
   if vim.bo.buftype == "terminal" then
     vim.wo.spell = false
   end
-  local path = M.local_path()
-  if not path then
-    return
-  end
   local files = {}
-  for _, file in ipairs({ path, M.global_path() }) do
-    if vim.fn.filereadable(file) == 1 then
+  for _, file in ipairs({ M.global_path(), M.local_path() }) do
+    if file and vim.fn.filereadable(file) == 1 then
       M.compile(file)
       files[#files + 1] = file
     end
