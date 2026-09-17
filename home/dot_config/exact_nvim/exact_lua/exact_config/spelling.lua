@@ -18,14 +18,14 @@ function M.setup()
     M.create_local()
   end, {})
   for key, action in pairs({
-    zg = { false, false, "Add word to global dictionary" },
-    zl = { true, false, "Add word to local dictionary" },
-    zug = { false, true, "Remove word from global dictionary" },
-    zul = { true, true, "Remove word from local dictionary" },
+    zg = { local_dictionary = false, remove = false, description = "Add word to global dictionary" },
+    zl = { local_dictionary = true, remove = false, description = "Add word to local dictionary" },
+    zug = { local_dictionary = false, remove = true, description = "Remove word from global dictionary" },
+    zul = { local_dictionary = true, remove = true, description = "Remove word from local dictionary" },
   }) do
     vim.keymap.set("n", key, function()
-      M.change(action[1], action[2])
-    end, { desc = action[3] })
+      M.change(action)
+    end, { desc = action.description })
   end
   M.refresh()
 end
@@ -102,15 +102,19 @@ function M.create_local()
   vim.notify("Local spellfile: " .. path)
 end
 
-function M.change(local_dictionary, remove)
-  local local_path = M.local_path()
-  if not local_path then
-    error("Spelling requires a named file buffer")
+function M.change(action)
+  local path = M.global_path()
+  if action.local_dictionary then
+    path = M.local_path()
+    if not path then
+      error("Local spelling requires a named file buffer")
+    end
   end
   if vim.fn.expand("<cword>") == "" then
     return
   end
-  local path = local_dictionary and local_path or M.global_path()
+  local remove = action.remove
+  local local_dictionary = action.local_dictionary
   if vim.fn.filereadable(path) == 0 then
     if remove then
       vim.notify("No spellfile: " .. path)
