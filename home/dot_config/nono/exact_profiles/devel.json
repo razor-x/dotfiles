@@ -16,6 +16,7 @@
     "devel-python",
     "devel-ruby",
     "devel-seam",
+    "devel-tex",
     "devel-typescript"
   ],
   "meta": {

@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "name": "devel-tex",
+    "version": "1.0.0",
+    "description": "TeX configuration, cache, and user data."
+  },
+  "filesystem": {
+    "read": ["/etc/texmf"],
+    "allow": [
+      "$XDG_CONFIG_HOME/texlive",
+      "$XDG_CACHE_HOME/texlive",
+      "$XDG_DATA_HOME/texmf"
+    ]
+  }
+}
