@@ -32,7 +32,7 @@ end
 
 function M.global_path()
   local ok, dotfiles = pcall(require, "dotfiles")
-  return vim.fs.joinpath(ok and dotfiles.config_dir or vim.fn.stdpath("config"), "spell", "words.utf-8.add")
+  return vim.fs.joinpath(ok and dotfiles.config_dir or vim.fn.stdpath("config"), "spell", "spellfile.utf-8.add")
 end
 
 function M.local_path()

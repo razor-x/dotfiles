@@ -75,7 +75,7 @@ zul                     Remove word from the local dictionary; prompt to
 Local .spellfile.utf-8.add discovery stops at the nearest Git root. Outside
 Git, only the file's directory is checked. Both local and global dictionaries
 are loaded; language selection remains native ('spelllang' is unchanged).
-Global words live in spell/words.utf-8.add under the dotfiles Neovim source
+Global words live in spell/spellfile.utf-8.add under the dotfiles Neovim source
 (or stdpath('config') for standalone installs). Commit that text file manually;
 no automatic Git commit is made. Generated .add.spl files are ignored and
 rebuilt when missing/outdated on buffer entry, or after dictionary edits.
