@@ -1,6 +1,11 @@
 local M = {}
+local global_spellfile_path = vim.fs.joinpath(vim.fn.stdpath("config"), "spell", "spellfile.utf-8.add")
 
-function M.setup()
+function M.setup(options)
+  vim.opt.spell = true
+  if options and options.global_spellfile_path then
+    global_spellfile_path = options.global_spellfile_path
+  end
   local group = vim.api.nvim_create_augroup("DotfilesSpelling", { clear = true })
   vim.api.nvim_create_autocmd({ "BufEnter", "BufFilePost", "FileType" }, {
     group = group,
@@ -28,11 +33,6 @@ function M.setup()
     end, { desc = action.description })
   end
   M.refresh()
-end
-
-function M.global_path()
-  local ok, dotfiles = pcall(require, "dotfiles")
-  return vim.fs.joinpath(ok and dotfiles.config_dir or vim.fn.stdpath("config"), "spell", "spellfile.utf-8.add")
 end
 
 function M.local_path()
@@ -67,7 +67,7 @@ function M.refresh()
     vim.wo.spell = false
   end
   local files = {}
-  for _, file in ipairs({ M.global_path(), M.local_path() }) do
+  for _, file in ipairs({ global_spellfile_path, M.local_path() }) do
     if file and vim.fn.filereadable(file) == 1 then
       M.compile(file)
       files[#files + 1] = file
@@ -99,7 +99,7 @@ function M.create_local()
 end
 
 function M.change(action)
-  local path = M.global_path()
+  local path = global_spellfile_path
   if action.local_dictionary then
     path = M.local_path()
     if not path then
