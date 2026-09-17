@@ -9,6 +9,7 @@ bootstrap("https://github.com/folke/lazy.nvim.git", "11.17.5")
 
 if not has_dotfiles then
   require("lazy").setup({ { import = "plugins" } })
+  require("config.spelling").setup()
   return
 end
 
@@ -56,9 +57,10 @@ require("lazy").setup({
   },
 })
 
+require("config.spelling").setup({
+  global_spellfile_path = vim.fs.joinpath(dotfiles.config_dir, "spell", "spellfile.utf-8.add"),
+})
+
 vim.cmd.colorscheme(dotfiles.colorscheme)
 
 require("gui")
-
-if vim.g.neovide then
-end
