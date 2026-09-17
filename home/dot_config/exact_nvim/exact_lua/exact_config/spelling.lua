@@ -95,7 +95,7 @@ function M.create_local()
   M.compile(path, true)
   M.refresh_all()
   vim.wo.spell = true
-  vim.notify("Local spellfile: " .. path)
+  vim.notify("Local spellfile ready")
 end
 
 function M.change(action)
@@ -113,7 +113,7 @@ function M.change(action)
   local local_dictionary = action.local_dictionary
   if vim.fn.filereadable(path) == 0 then
     if remove then
-      vim.notify("No spellfile: " .. path)
+      vim.notify("No " .. (local_dictionary and "local" or "global") .. " spellfile")
       return
     end
     if local_dictionary and vim.fn.confirm("Create " .. path .. "?", "&Yes\n&No", 2) ~= 1 then
@@ -124,7 +124,11 @@ function M.change(action)
   end
   local previous = vim.bo.spellfile
   vim.opt_local.spellfile = { path }
-  local ok, err = pcall(vim.cmd.normal, { args = { remove and "1zug" or "1zg" }, bang = true })
+  local ok, err = pcall(vim.cmd.normal, {
+    args = { remove and "1zug" or "1zg" },
+    bang = true,
+    mods = { silent = true },
+  })
   vim.bo.spellfile = previous
   if not ok then
     error(err)
@@ -139,7 +143,9 @@ function M.change(action)
     end
   end
   M.refresh_all()
-  vim.notify((remove and "Removed word from " or "Added word to ") .. path)
+  vim.notify(
+    (remove and "Removed word from " or "Added word to ") .. (local_dictionary and "local" or "global") .. " dictionary"
+  )
 end
 
 function M.empty(path)
