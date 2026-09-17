@@ -64,6 +64,3 @@ require("config.spelling").setup({
 vim.cmd.colorscheme(dotfiles.colorscheme)
 
 require("gui")
-
-if vim.g.neovide then
-end
