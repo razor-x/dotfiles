@@ -7,6 +7,7 @@ import { default as kitty } from './src/kitty.ts'
 import { default as localEditor } from './src/local-editor.ts'
 import { default as nonoSandbox } from './src/nono-sandbox.ts'
 import { default as promptShortcutCommands } from './src/prompt-shortcuts.ts'
+import { default as reloadRuntime } from './src/reload-runtime.ts'
 
 const extensions: ExtensionFactory[] = [
   promptShortcutCommands,
@@ -14,6 +15,7 @@ const extensions: ExtensionFactory[] = [
   kitty,
   localEditor,
   nonoSandbox,
+  reloadRuntime,
 ]
 
 export default async function exactLocal(pi: ExtensionAPI): Promise<void> {

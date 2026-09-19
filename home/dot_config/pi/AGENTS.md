@@ -60,5 +60,5 @@ If the needed variable is unset, ask for its location. Create new local skills
 under `$PI_LOCAL_SKILLS_SOURCE`; `pi-sync-dotfiles` also syncs new skills.
 
 Their installed runtime copies are under `$XDG_CONFIG_HOME/pi`; do not edit
-them directly. After changing any source, run `pi-sync-dotfiles`, then ask the
-user to run `/reload`.
+them directly. After changing any source, call the `reload_runtime` tool to
+sync and reload it. Complete this yourself instead of delegating it to the user.
