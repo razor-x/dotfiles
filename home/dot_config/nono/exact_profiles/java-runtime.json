@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "java-runtime",
+    "version": "1.0.0",
+    "description": "Java runtime configuration access."
+  },
+  "filesystem": { "read": ["/etc/java*-openjdk"] }
+}

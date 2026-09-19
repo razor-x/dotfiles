@@ -1,5 +1,6 @@
 {
   "extends": [
+    "java-runtime",
     "terminal-bat",
     "terminal-fish",
     "terminal-git",
