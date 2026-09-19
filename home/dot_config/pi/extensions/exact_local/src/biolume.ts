@@ -3,31 +3,23 @@ import {
   type ExtensionContext,
   Theme,
 } from '@earendil-works/pi-coding-agent'
-import { Bloom, nodeGlyph, renderBloom } from './biolume-bloom.ts'
+import { truncateToWidth } from '@earendil-works/pi-tui'
+import { ListeningSigil, sigil } from './biolume-sigil.ts'
 
 export default function biolume(pi: ExtensionAPI): void {
-  const bloom = new Bloom()
+  const listener = new ListeningSigil()
   let previousTheme: Theme | undefined
   let enabled = false
   let still = false
   let afterReload = false
+  let working = false
+  let workingMessage = ''
   let timer: ReturnType<typeof setInterval> | undefined
   let requestRender: (() => void) | undefined
 
   const stop = () => {
     clearInterval(timer)
     timer = undefined
-  }
-  const update = () => {
-    if (enabled && bloom.active && !still && bloom.phase !== 'waiting') {
-      timer ??= setInterval(() => {
-        bloom.frame = (bloom.frame + 1) % 120
-        requestRender?.()
-      }, 240)
-    } else {
-      stop()
-    }
-    requestRender?.()
   }
   const applyTheme = (ctx: ExtensionContext) => {
     if (ctx.ui.theme.name !== 'biolume') {
@@ -46,9 +38,9 @@ export default function biolume(pi: ExtensionAPI): void {
     }
     enabled = false
     ctx.ui.setWidget('biolume', undefined)
-    ctx.ui.setWorkingVisible(true)
     ctx.ui.setWorkingIndicator()
     ctx.ui.setWorkingMessage()
+    ctx.ui.setHiddenThinkingLabel()
     if (ctx.ui.theme.name === 'biolume' && previousTheme) {
       ctx.ui.setTheme(previousTheme)
     }
@@ -59,7 +51,8 @@ export default function biolume(pi: ExtensionAPI): void {
     }
     applyTheme(ctx)
     const theme = ctx.ui.theme
-    ctx.ui.setWorkingMessage(theme.fg('toolTitle', 'Working'))
+    workingMessage = theme.fg('accent', listener.submitted)
+    ctx.ui.setWorkingMessage(workingMessage)
     ctx.ui.setWorkingIndicator({
       frames: still
         ? [theme.fg('accent', ' ·●· ')]
@@ -76,12 +69,33 @@ export default function biolume(pi: ExtensionAPI): void {
       intervalMs: 240,
     })
     ctx.ui.setWorkingVisible(true)
+    ctx.ui.setHiddenThinkingLabel('')
     if (!enabled) {
       enabled = true
-      ctx.ui.setWidget('biolume', (tui, theme) => {
+      ctx.ui.setWidget('biolume', (tui, liveTheme) => {
         requestRender = () => tui.requestRender()
         return {
-          render: (width) => renderBloom(bloom, width, theme),
+          render(width) {
+            const now = Date.now()
+            listener.observe(ctx.ui.getEditorText(), now)
+            if (!still && listener.isListening(now)) {
+              timer ??= setInterval(() => requestRender?.(), 90)
+            } else {
+              stop()
+            }
+            const glyph = liveTheme.fg(
+              'accent',
+              listener.display(now, still).glyph,
+            )
+            if (working) {
+              if (workingMessage !== glyph) {
+                workingMessage = glyph
+                ctx.ui.setWorkingMessage(glyph)
+              }
+              return []
+            }
+            return [truncateToWidth(`       ${glyph}`, width)]
+          },
           invalidate() {},
           dispose() {
             stop()
@@ -90,90 +104,70 @@ export default function biolume(pi: ExtensionAPI): void {
         }
       })
     }
-    update()
+    if (still) {
+      stop()
+    }
+    requestRender?.()
   }
 
+  // Display-only: session records and model context are unchanged.
+  pi.registerMarkdownTransformer((markdown, { messageType }) =>
+    enabled && messageType === 'user'
+      ? `\`${sigil(markdown)}\`\n\n${markdown}`
+      : markdown,
+  )
   pi.on('session_start', (event, ctx) => {
     if (ctx.mode !== 'tui') {
       return
     }
-    bloom.restore(ctx.sessionManager.getBranch())
+    const lastPrompt = ctx.sessionManager
+      .getBranch()
+      .slice()
+      .reverse()
+      .find(
+        (entry) => entry.type === 'message' && entry.message.role === 'user',
+      )
+    if (lastPrompt?.type === 'message' && lastPrompt.message.role === 'user') {
+      const content = lastPrompt.message.content
+      listener.submitted = sigil(
+        typeof content === 'string'
+          ? content
+          : content
+              .filter((part) => part.type === 'text')
+              .map((part) => part.text)
+              .join('\n'),
+      )
+    }
     afterReload = event.reason === 'reload'
     apply(ctx)
   })
-  pi.on('session_tree', (_event, ctx) => {
-    if (ctx.mode === 'tui') {
-      bloom.restore(ctx.sessionManager.getBranch())
-      update()
+  pi.on('input', (event, ctx) => {
+    if (ctx.mode === 'tui' && event.source === 'interactive') {
+      listener.submitted = sigil(event.text)
+      stop()
+      requestRender?.()
     }
   })
   pi.on('session_shutdown', (_event, ctx) => restore(ctx))
   pi.on('agent_start', (_event, ctx) => {
-    if (ctx.mode !== 'tui') {
-      return
-    }
+    working = true
+    requestRender?.()
     // Pi 0.85.1 reapplies saved colors after session_start on reload.
-    if (enabled && afterReload) {
+    if (ctx.mode === 'tui' && enabled && afterReload) {
       applyTheme(ctx)
       afterReload = false
     }
-    bloom.active = true
-    bloom.phase = 'forming'
-    update()
   })
-  pi.on('message_update', (event, ctx) => {
-    if (ctx.mode !== 'tui') {
-      return
-    }
-    const type = event.assistantMessageEvent.type
-    const phase =
-      type === 'thinking_delta'
-        ? 'thinking'
-        : type === 'text_delta'
-          ? 'replying'
-          : bloom.phase
-    if (phase !== bloom.phase) {
-      bloom.phase = phase
-      update()
-    }
-  })
-  pi.on('tool_execution_start', (event, ctx) => {
-    if (ctx.mode !== 'tui') {
-      return
-    }
-    bloom.start(event.toolCallId, event.toolName, event.args)
-    bloom.phase = 'working'
-    update()
-  })
-  pi.on('tool_execution_end', (event, ctx) => {
-    if (ctx.mode !== 'tui') {
-      return
-    }
-    bloom.finish(event.toolCallId, event.isError)
-    update()
-  })
-  pi.on('agent_settled', (_event, ctx) => {
-    if (ctx.mode === 'tui') {
-      bloom.settle()
-      update()
-    }
-  })
-  pi.on('ui_prompt_start', (_event, ctx) => {
-    if (ctx.mode === 'tui') {
-      bloom.phase = 'waiting'
-      update()
-    }
-  })
-  pi.on('ui_prompt_end', (_event, ctx) => {
-    if (ctx.mode === 'tui') {
-      bloom.phase = ctx.isIdle() ? 'resting' : 'forming'
-      update()
-    }
+
+  pi.on('agent_settled', () => {
+    working = false
+    stop()
+    requestRender?.()
   })
 
   pi.registerCommand('biolume', {
     description:
-      'Living activity trace: on, still (no motion), off; resets on reload',
+      'Listening glyph and spore pulse: on, still (no motion), off; resets on reload',
     handler: async (args, ctx) => {
       switch (args.trim()) {
         case '':
@@ -188,23 +182,6 @@ export default function biolume(pi: ExtensionAPI): void {
         default:
           ctx.ui.notify('Usage: /biolume [on|still|off]', 'warning')
       }
-    },
-  })
-  pi.registerCommand('bloom', {
-    description: 'Inspect the recent actions that formed the living trace',
-    handler: async (_args, ctx) => {
-      if (ctx.mode !== 'tui') {
-        return
-      }
-      await ctx.ui.select(
-        'Bloom · recent actions (view only; full results in transcript)',
-        bloom.nodes
-          .map(
-            (node, i) =>
-              `${i + 1} ${nodeGlyph(node)} ${node.tool} · ${node.state} · ${node.label}`,
-          )
-          .reverse(),
-      )
     },
   })
 }
