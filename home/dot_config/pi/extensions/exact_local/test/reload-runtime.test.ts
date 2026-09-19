@@ -32,7 +32,7 @@ describe('reload continuation', () => {
     expect(app.sendMessage).toHaveBeenCalledWith(
       expect.objectContaining({
         customType: 'runtime-reloaded',
-        content: expect.stringContaining('request-pi-ui'),
+        content: expect.stringContaining('capture_ui'),
       }),
       { triggerTurn: true, deliverAs: 'followUp' },
     )

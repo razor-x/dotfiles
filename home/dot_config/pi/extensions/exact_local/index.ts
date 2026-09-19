@@ -2,6 +2,7 @@ import type {
   ExtensionAPI,
   ExtensionFactory,
 } from '@earendil-works/pi-coding-agent'
+import { default as captureUi } from './src/capture-ui.ts'
 import { default as deleteCommand } from './src/delete.ts'
 import { default as kitty } from './src/kitty.ts'
 import { default as localEditor } from './src/local-editor.ts'
@@ -11,6 +12,7 @@ import { default as reloadRuntime } from './src/reload-runtime.ts'
 
 const extensions: ExtensionFactory[] = [
   promptShortcutCommands,
+  captureUi,
   deleteCommand,
   kitty,
   localEditor,

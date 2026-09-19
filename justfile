@@ -58,6 +58,7 @@ check:
   fd --type f --extension lua . home/dot_config/exact_nvim/tests \
     --exec nvim --clean --headless -l {}
   npm --prefix home/dot_config/pi/extensions/exact_local run check
+  python -m unittest discover --start-directory tools --verbose
 
 upgrade-pi-local: && format
   ./tools/upgrade_pi_local.fish
@@ -68,10 +69,7 @@ upgrade-pi-extensions:
   npm update
 
 capture-pi-ui window_id='':
-  ./tools/capture_pi_ui.fish {{window_id}}
-
-request-pi-ui:
-  ./tools/request_pi_ui.fish
+  ./tools/capture_pi_ui.py {{window_id}}
 
 watch:
   watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force --source {{ justfile_directory() }}

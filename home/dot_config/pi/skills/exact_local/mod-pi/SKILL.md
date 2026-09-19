@@ -27,9 +27,8 @@ Treat the user's arguments as the requested Pi change.
    `just check`.
 5. Call `reload_runtime` to sync and reload Pi. Complete this yourself instead
    of delegating it to the user.
-6. For a visual UI change, run `just request-pi-ui`, then inspect the PNG path
-   it prints with the image-capable `read` tool. If the command reports no active
-   helper or a pending request, tell the user: “The capture helper isn’t
+6. For a visual UI change, call `capture_ui` and inspect its returned image.
+   If the tool reports an unavailable helper, tell the user: “The capture helper isn’t
    responding. Please restart `just capture-pi-ui` outside the sandbox, select a
    dedicated Kitty window showing this session, and leave the helper running.”
    Compare the rendered UI with the request. Refine the authoritative source,

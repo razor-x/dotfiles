@@ -28,7 +28,7 @@ export default function reloadRuntime(pi: ExtensionAPI): void {
         {
           customType: 'runtime-reloaded',
           content:
-            'Runtime reloaded successfully. Continue the current task. For a UI change, run just request-pi-ui and inspect the returned PNG before reporting completion. Do not reload again unless another source change requires it.',
+            'Runtime reloaded successfully. Continue the current task. For a UI change, call capture_ui and inspect the returned PNG before reporting completion. Do not reload again unless another source change requires it.',
           display: false,
         },
         { triggerTurn: true, deliverAs: 'followUp' },
