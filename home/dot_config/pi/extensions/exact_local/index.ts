@@ -2,6 +2,7 @@ import type {
   ExtensionAPI,
   ExtensionFactory,
 } from '@earendil-works/pi-coding-agent'
+import { default as biolume } from './src/biolume.ts'
 import { default as captureUi } from './src/capture-ui.ts'
 import { default as deleteCommand } from './src/delete.ts'
 import { default as kitty } from './src/kitty.ts'
@@ -16,6 +17,7 @@ const extensions: ExtensionFactory[] = [
   deleteCommand,
   kitty,
   localEditor,
+  biolume,
   nonoSandbox,
   reloadRuntime,
 ]
