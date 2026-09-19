@@ -9,6 +9,23 @@ apply:
 update:
   chezmoi update --apply --init
 
+watch:
+  watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force --source {{ justfile_directory() }}
+
+generate:
+  chezmoi generate install.sh > bootstrap.sh
+  sd 'init --apply' 'init --force --keep-going --apply' bootstrap.sh
+  fish --command 'format bootstrap.sh'
+
+reset:
+  chezmoi state delete-bucket --bucket=scriptState;
+  chezmoi state delete-bucket --bucket=entryState;
+  rm --recursive --force ~/.config/fish
+  chezmoi apply --init
+
+capture-pi-ui window_id='':
+  ./tools/capture_pi_ui.py {{window_id}}
+
 upgrade-biome:
   sd 'schemas/[^/]+/schema\.json' \
     "schemas/$(biome --version | cut --delimiter=' ' --fields=2)/schema.json" \
@@ -31,11 +48,13 @@ upgrade-yazi:
 upgrade-externals:
   ./tools/upgrade_externals.fish
 
-reset:
-  chezmoi state delete-bucket --bucket=scriptState;
-  chezmoi state delete-bucket --bucket=entryState;
-  rm --recursive --force ~/.config/fish
-  chezmoi apply --init
+upgrade-pi-local: && format
+  ./tools/upgrade_pi_local.fish
+
+[working-directory: './home/dot_config/pi/exact_npm']
+upgrade-pi-extensions:
+  npx --yes --package npm-check-updates@23.1.0 -- ncu --minimal --upgrade
+  npm update
 
 format:
   cljfmt fix $(git ls-files '*.clj')
@@ -59,22 +78,3 @@ check:
     --exec nvim --clean --headless -l {}
   npm --prefix home/dot_config/pi/extensions/exact_local run check
   python -m unittest discover --start-directory tools --verbose
-
-upgrade-pi-local: && format
-  ./tools/upgrade_pi_local.fish
-
-[working-directory: './home/dot_config/pi/exact_npm']
-upgrade-pi-extensions:
-  npx --yes --package npm-check-updates@23.1.0 -- ncu --minimal --upgrade
-  npm update
-
-capture-pi-ui window_id='':
-  ./tools/capture_pi_ui.py {{window_id}}
-
-watch:
-  watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force --source {{ justfile_directory() }}
-
-generate:
-  chezmoi generate install.sh > bootstrap.sh
-  sd 'init --apply' 'init --force --keep-going --apply' bootstrap.sh
-  fish --command 'format bootstrap.sh'
