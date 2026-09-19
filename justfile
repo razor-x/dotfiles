@@ -48,13 +48,35 @@ upgrade-yazi:
 upgrade-externals:
   ./tools/upgrade_externals.fish
 
-upgrade-pi-local: && format
+upgrade-pi-local: && format-pi
   ./tools/upgrade_pi_local.fish
 
 [working-directory: './home/dot_config/pi/exact_npm']
 upgrade-pi-extensions:
   npx --yes --package npm-check-updates@23.1.0 -- ncu --minimal --upgrade
   npm update
+
+format-pi:
+  npm --prefix home/dot_config/pi/extensions/exact_local run format
+
+check-pi:
+  npm --prefix home/dot_config/pi/extensions/exact_local run check
+
+format-nvim:
+  stylua home/dot_config/exact_nvim
+
+check-nvim:
+  stylua --check home/dot_config/exact_nvim
+  fd --type f --extension lua . home/dot_config/exact_nvim/tests \
+    --exec nvim --clean --headless -l {}
+
+format-tools:
+  ruff format $(git ls-files 'tools/*.py' 'tools/*.pyi' 'tools/*.ipynb')
+  ruff check --fix $(git ls-files 'tools/*.py' 'tools/*.pyi' 'tools/*.ipynb')
+
+check-tools:
+  ruff format --check $(git ls-files 'tools/*.py' 'tools/*.pyi' 'tools/*.ipynb')
+  python -m unittest discover --start-directory tools --verbose
 
 format:
   cljfmt fix $(git ls-files '*.clj')
@@ -77,4 +99,5 @@ check:
   fd --type f --extension lua . home/dot_config/exact_nvim/tests \
     --exec nvim --clean --headless -l {}
   npm --prefix home/dot_config/pi/extensions/exact_local run check
-  python -m unittest discover --start-directory tools --verbose
+  fd --type f --glob 'test*.py' \
+    --exec python -m unittest discover --start-directory {//} --pattern {/} --verbose

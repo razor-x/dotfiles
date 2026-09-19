@@ -1,5 +1,11 @@
 # Neovim Config
 
+## Development
+
+From the dotfiles repository root, run `just format-nvim` and
+`just check-nvim`. Reserve the aggregate recipes for final or repo-wide
+validation.
+
 ## Standalone Install
 
 The included Neovim config may be installed independently

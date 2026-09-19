@@ -21,6 +21,9 @@ Use the local CLI tools when they are a good fit. Prefer:
 
 ## Repository and Git
 
+- In the dotfiles source repository, validate Pi changes with
+  `just format-pi` and `just check-pi`; reserve aggregate recipes for final or
+  repo-wide validation.
 - Use `just` recipes when a suitable repository task exists.
 - Use `git` for scripted or precise repository operations.
 - Use `gh` for GitHub issues, pull requests, and repository operations.

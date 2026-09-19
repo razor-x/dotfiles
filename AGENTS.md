@@ -23,9 +23,11 @@ managed home directory.
 ## Workflow
 
 1. Make the smallest source change that covers the request.
-1. Run `just format` after editing supported file types.
-1. Run `just check`; every reported failure is fixed or called out before
-   completion.
+1. While working in Pi, Neovim, or `tools`, use the matching focused recipes:
+   `just format-pi` / `check-pi`, `format-nvim` / `check-nvim`, or
+   `format-tools` / `check-tools`.
+1. Use `just format` and `just check` for repo-wide changes and final
+   validation; every reported failure is fixed or called out before completion.
 1. Assume the user will apply managed changes. When live synchronization would
    help, ask the user to run `just watch` in their own terminal. Pi
    self-modification follows its nested on-the-fly synchronization workflow.
@@ -54,8 +56,8 @@ managed home directory.
 - Put installed extension packages in `exact_npm`; put custom TypeScript in
   `extensions/exact_local` and custom skills in `skills/exact_local`. Keep
   package manifests and lockfiles together.
-- Validate custom extension changes with its existing npm scripts; the root
-  `just check` includes its full check.
+- Validate custom extension changes with `just format-pi` and `just check-pi`;
+  the aggregate recipes also include them.
 
 ### Kitty
 
