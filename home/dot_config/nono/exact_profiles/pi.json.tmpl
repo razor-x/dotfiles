@@ -1,4 +1,6 @@
 {{- $extensionSource := joinPath .chezmoi.sourceDir "dot_config" "pi" "extensions" "exact_local" -}}
+{{- $skillsSource := joinPath .chezmoi.sourceDir "dot_config" "pi" "skills" "exact_local" -}}
+{{- $profileSource := joinPath .chezmoi.sourceDir "dot_config" "nono" "exact_profiles" -}}
 {
   "extends": ["default", "nvim", "terminal", "devel"],
   "meta": {
@@ -18,11 +20,20 @@
     "signal_mode": "isolated",
     "capability_elevation": false
   },
+  "environment": {
+    "set_vars": {
+      "PI_NONO_PROFILE_SOURCE": {{ $profileSource | toJson }},
+      "PI_LOCAL_EXTENSION_SOURCE": {{ $extensionSource | toJson }},
+      "PI_LOCAL_SKILLS_SOURCE": {{ $skillsSource | toJson }}
+    }
+  },
   "filesystem": {
+    "read": [{{ $profileSource | toJson }}],
     "allow": [
       "$XDG_CONFIG_HOME/pi",
       "$XDG_CONFIG_HOME/mcp",
       {{ $extensionSource | toJson }},
+      {{ $skillsSource | toJson }},
       "/tmp"
     ]
   },

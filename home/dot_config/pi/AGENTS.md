@@ -51,8 +51,13 @@ Docs are installed at `/usr/share/doc/pi` on Arch Linux.
 
 When modifying Pi's global instructions, local extension, or skills, edit
 `$HOME/config/dotfiles/home/dot_config/pi/AGENTS.md`,
-`$HOME/config/dotfiles/home/dot_config/pi/extensions/exact_local`, or
-`$HOME/config/dotfiles/home/dot_config/pi/skills/exact_local`.
+the directory named by `$PI_LOCAL_EXTENSION_SOURCE`, or
+the directory named by `$PI_LOCAL_SKILLS_SOURCE`.
+
+Read `$PI_LOCAL_EXTENSION_SOURCE` and `$PI_LOCAL_SKILLS_SOURCE` to locate
+local extension and skill sources independently of the working directory.
+If the needed variable is unset, ask for its location. Create new local skills
+under `$PI_LOCAL_SKILLS_SOURCE`; `pi-sync-dotfiles` also syncs new skills.
 
 Their installed runtime copies are under `$XDG_CONFIG_HOME/pi`; do not edit
 them directly. After changing any source, run `pi-sync-dotfiles`, then ask the

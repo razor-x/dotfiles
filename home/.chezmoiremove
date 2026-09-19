@@ -9,4 +9,5 @@
 .yarn
 
 # Migrations
+.config/pi/extensions/nono-sandbox.ts
 .local/bin/pi-extension-sync

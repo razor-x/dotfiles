@@ -6,12 +6,14 @@ import { default as continueCommand } from './src/continue.ts'
 import { default as deleteCommand } from './src/delete.ts'
 import { default as kitty } from './src/kitty.ts'
 import { default as localEditor } from './src/local-editor.ts'
+import { default as nonoSandbox } from './src/nono-sandbox.ts'
 
 const extensions: ExtensionFactory[] = [
   continueCommand,
   deleteCommand,
   kitty,
   localEditor,
+  nonoSandbox,
 ]
 
 export default async function exactLocal(pi: ExtensionAPI): Promise<void> {
