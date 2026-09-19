@@ -8,8 +8,8 @@ disable-model-invocation: true
 
 Treat the user's arguments as the requested Pi change.
 
-1. Read Pi's documentation from `/usr/share/doc/pi` completely, including
-   linked references relevant to the change.
+1. Read Pi's documentation from `/usr/lib/pi` completely, including linked
+   references relevant to the change.
 2. Locate sources independently of the working directory:
    - Local extensions: `$PI_LOCAL_EXTENSION_SOURCE`
    - Local skills: `$PI_LOCAL_SKILLS_SOURCE`
@@ -27,3 +27,10 @@ Treat the user's arguments as the requested Pi change.
    `just check`.
 5. Call `reload_runtime` to sync and reload Pi. Complete this yourself instead
    of delegating it to the user.
+6. For a visual UI change, run `just request-pi-ui`, then inspect the PNG path
+   it prints with the image-capable `read` tool. If the command reports no active
+   helper or a pending request, tell the user: “The capture helper isn’t
+   responding. Please restart `just capture-pi-ui` outside the sandbox, select a
+   dedicated Kitty window showing this session, and leave the helper running.”
+   Compare the rendered UI with the request. Refine the authoritative source,
+   repeat checks and runtime reload, and capture again until the UI is done.

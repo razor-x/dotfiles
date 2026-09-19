@@ -67,6 +67,12 @@ upgrade-pi-extensions:
   npx --yes --package npm-check-updates@23.1.0 -- ncu --minimal --upgrade
   npm update
 
+capture-pi-ui window_id='':
+  ./tools/capture_pi_ui.fish {{window_id}}
+
+request-pi-ui:
+  ./tools/request_pi_ui.fish
+
 watch:
   watchexec --watch $(chezmoi source-path) -- chezmoi apply --init --force --source {{ justfile_directory() }}
 
