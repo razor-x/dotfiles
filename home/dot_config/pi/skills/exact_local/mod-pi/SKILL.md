@@ -29,7 +29,7 @@ Treat the user's arguments as the requested Pi change.
    of delegating it to the user.
 6. For a visual UI change, call `capture_ui` and inspect its returned image.
    If the tool reports an unavailable helper, tell the user: “The capture helper isn’t
-   responding. Please restart `just capture-pi-ui` outside the sandbox, select a
-   dedicated Kitty window showing this session, and leave the helper running.”
+   responding. Please restart `just capture-pi-ui` outside the sandbox from the
+   Kitty window showing this session, and leave the helper running.”
    Compare the rendered UI with the request. Refine the authoritative source,
    repeat checks and runtime reload, and capture again until the UI is done.

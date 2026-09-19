@@ -42,7 +42,7 @@ export default function captureUi(pi: ExtensionAPI): void {
     name: 'capture_ui',
     label: 'Capture UI',
     description:
-      'Capture the Kitty window selected by the human-launched just capture-pi-ui helper. Returns a fresh PNG (maximum 20 MiB).',
+      'Capture the Kitty window running the human-launched just capture-pi-ui helper. Returns a fresh PNG (maximum 20 MiB).',
     parameters: Type.Object({}),
     async execute(_id, _params, signal) {
       try {
@@ -62,7 +62,7 @@ export default function captureUi(pi: ExtensionAPI): void {
         }
       } catch (error) {
         throw new Error(
-          `Capture failed: ${error instanceof Error ? error.message : String(error)}. Run just capture-pi-ui outside the sandbox and select a dedicated Kitty window showing this session.`,
+          `Capture failed: ${error instanceof Error ? error.message : String(error)}. Run just capture-pi-ui outside the sandbox from the Kitty window showing this session.`,
         )
       }
     },

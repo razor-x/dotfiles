@@ -2,7 +2,6 @@
 
 """Human-launched X11 capture server. Only capture\n is accepted over the socket."""
 
-import argparse
 import fcntl
 import os
 import re
@@ -60,26 +59,17 @@ def handle(connection: socket.socket, window: str, identity: bytes) -> None:
         connection.sendall(image)
 
 
-def select_window(window: str | None) -> str:
+def current_window() -> str:
+    window = os.environ.get("WINDOWID")
     if window is None:
-        print(
-            "Click the dedicated Pi window (all its splits will be captured).",
-            flush=True,
-        )
-        window = subprocess.check_output(["xdotool", "selectwindow"], text=True).strip()
+        raise ValueError("WINDOWID is not set; run this command from the Kitty window")
     if not re.fullmatch(r"(?:0x[0-9a-fA-F]+|[0-9]+)", window):
         raise ValueError("Invalid X11 window ID")
     return window
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Serve captures of one Kitty X11 window."
-    )
-    parser.add_argument(
-        "window_id", nargs="?", help="Omit to select a window by clicking"
-    )
-    window = select_window(parser.parse_args().window_id)
+    window = current_window()
     identity = fingerprint(window)
     directory = Path(f"/tmp/pi-capture-ui-{os.getuid()}")
     directory.mkdir(mode=0o700, exist_ok=True)

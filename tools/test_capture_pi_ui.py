@@ -1,28 +1,28 @@
 """Capture helper tests; no X11 access needed."""
 
+import os
 import socket
 import unittest
 from unittest.mock import patch
 
-from capture_pi_ui import handle, select_window
+from capture_pi_ui import current_window, handle
 
 
 class CaptureUiTests(unittest.TestCase):
-    def test_explicit_window_skips_selection(self):
-        with patch("capture_pi_ui.subprocess.check_output") as select:
-            self.assertEqual(select_window("0x123"), "0x123")
-            select.assert_not_called()
+    def test_environment_window_is_used(self):
+        with patch.dict(os.environ, {"WINDOWID": "456"}):
+            self.assertEqual(current_window(), "456")
 
-    def test_click_selects_window(self):
-        with patch(
-            "capture_pi_ui.subprocess.check_output", return_value="123\n"
-        ) as select:
-            self.assertEqual(select_window(None), "123")
-            select.assert_called_once_with(["xdotool", "selectwindow"], text=True)
+    def test_missing_window_is_rejected(self):
+        with patch.dict(os.environ, {}, clear=True), self.assertRaises(ValueError):
+            current_window()
 
     def test_invalid_window_is_rejected(self):
-        with self.assertRaises(ValueError):
-            select_window("not-a-window")
+        with (
+            patch.dict(os.environ, {"WINDOWID": "not-a-window"}),
+            self.assertRaises(ValueError),
+        ):
+            current_window()
 
     def test_only_capture_requests_are_accepted(self):
         for request, expected_calls in [(b"capture\n", 1), (b"exec\n", 0)]:

@@ -23,8 +23,8 @@ reset:
   rm --recursive --force ~/.config/fish
   chezmoi apply --init
 
-capture-pi-ui window_id='':
-  ./tools/capture_pi_ui.py {{window_id}}
+capture-pi-ui:
+  ./tools/capture_pi_ui.py
 
 upgrade-biome:
   sd 'schemas/[^/]+/schema\.json' \
