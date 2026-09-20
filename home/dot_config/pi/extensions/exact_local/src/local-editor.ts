@@ -1,15 +1,23 @@
 import {
   CustomEditor,
   type ExtensionAPI,
+  type Theme,
 } from '@earendil-works/pi-coding-agent'
-import { Editor, matchesKey } from '@earendil-works/pi-tui'
+import {
+  Editor,
+  matchesKey,
+  type TuiMouseEvent,
+  type TuiMouseEventResult,
+} from '@earendil-works/pi-tui'
 import { copyPromptInputHandler } from './copy-prompt.ts'
 import { cursorDownOrNewLineInputHandler } from './cursor-down-or-newline.ts'
 import { thinkingInputHandler } from './cycle-thinking.ts'
+import { shellRow } from './shell-chrome.ts'
 
 export type EditorInputHandler = (editor: LocalEditor, data: string) => boolean
 
 type EditorInternals = {
+  renderedVisibleLineCount: number
   autocompleteList?: { getSelectedItem: () => { label: string } | undefined }
   isOnLastVisualLine: () => boolean
   moveCursor: (deltaLine: number, deltaCol: number) => void
@@ -23,16 +31,23 @@ export default function localEditor(pi: ExtensionAPI): void {
 
     ctx.ui.setEditorComponent(
       (tui, theme, keybindings) =>
-        new LocalEditor(tui, theme, keybindings, [
-          copyPromptInputHandler(keybindings, ctx.ui),
-          thinkingInputHandler(keybindings, pi, ctx),
-          cursorDownOrNewLineInputHandler(keybindings),
-        ]),
+        new LocalEditor(
+          tui,
+          theme,
+          keybindings,
+          [
+            copyPromptInputHandler(keybindings, ctx.ui),
+            thinkingInputHandler(keybindings, pi, ctx),
+            cursorDownOrNewLineInputHandler(keybindings),
+          ],
+          ctx.ui.theme,
+        ),
     )
   })
 }
 
 export class LocalEditor extends CustomEditor {
+  private readonly chromeTheme: Theme | undefined
   private readonly inputHandlers: EditorInputHandler[]
   private readonly localKeybindings: ConstructorParameters<
     typeof CustomEditor
@@ -43,10 +58,43 @@ export class LocalEditor extends CustomEditor {
     theme: ConstructorParameters<typeof CustomEditor>[1],
     keybindings: ConstructorParameters<typeof CustomEditor>[2],
     inputHandlers: EditorInputHandler[] = [],
+    chromeTheme?: Theme,
   ) {
     super(tui, theme, keybindings)
+    this.chromeTheme = chromeTheme
     this.localKeybindings = keybindings
     this.inputHandlers = inputHandlers
+  }
+
+  override render(width: number): string[] {
+    const theme = this.chromeTheme
+    if (!theme || width < 12) {
+      return super.render(width)
+    }
+    const lines = super.render(width - 4)
+    // The native row count excludes autocomplete, which stays inside the shell.
+    const divider =
+      (this as unknown as EditorInternals).renderedVisibleLineCount + 1
+    return lines.map((line, index) => {
+      if (index === 0) {
+        return this.borderColor('╱━') + line + this.borderColor('━╲')
+      }
+      if (index === divider) {
+        return this.borderColor('┣╸') + line + this.borderColor('╺┤')
+      }
+      return shellRow(line, width, theme)
+    })
+  }
+
+  override handleMouse(event: TuiMouseEvent): TuiMouseEventResult | undefined {
+    if (!this.chromeTheme || event.width < 12) {
+      return super.handleMouse(event)
+    }
+    return super.handleMouse({
+      ...event,
+      x: event.x - 2,
+      width: event.width - 4,
+    })
   }
 
   override handleInput(data: string): void {

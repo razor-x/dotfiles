@@ -10,6 +10,7 @@ import { default as localEditor } from './src/local-editor.ts'
 import { default as nonoSandbox } from './src/nono-sandbox.ts'
 import { default as promptShortcutCommands } from './src/prompt-shortcuts.ts'
 import { default as reloadRuntime } from './src/reload-runtime.ts'
+import { default as shellChrome } from './src/shell-chrome.ts'
 
 const extensions: ExtensionFactory[] = [
   promptShortcutCommands,
@@ -17,6 +18,7 @@ const extensions: ExtensionFactory[] = [
   deleteCommand,
   kitty,
   localEditor,
+  shellChrome,
   biolume,
   nonoSandbox,
   reloadRuntime,
