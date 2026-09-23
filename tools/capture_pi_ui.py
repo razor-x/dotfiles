@@ -14,60 +14,6 @@ import sys
 from pathlib import Path
 
 
-def fingerprint(window: str) -> bytes:
-    result = subprocess.check_output(
-        ["xprop", "-id", window, "WM_CLASS", "_NET_WM_PID"],
-        stderr=subprocess.DEVNULL,
-        timeout=3,
-    )
-    if b'"kitty"' not in result.lower() or not re.search(
-        rb"_NET_WM_PID\(CARDINAL\) = [0-9]+", result
-    ):
-        raise ValueError("Target must be a Kitty window with a PID")
-    return result
-
-
-def capture(window: str, identity: bytes) -> bytes:
-    if fingerprint(window) != identity:
-        raise ValueError("Target window identity changed")
-    image = subprocess.check_output(
-        ["import", "-silent", "-window", window, "png:-"],
-        stderr=subprocess.DEVNULL,
-        timeout=8,
-    )
-    if fingerprint(window) != identity:
-        raise ValueError("Target window identity changed during capture")
-    return image
-
-
-def handle(connection: socket.socket, window: str, identity: bytes) -> None:
-    connection.settimeout(3)
-    _, uid, _ = struct.unpack(
-        "3i", connection.getsockopt(socket.SOL_SOCKET, socket.SO_PEERCRED, 12)
-    )
-    if uid != os.getuid():
-        return
-    with connection.makefile("rb") as request:
-        if request.readline(9) != b"capture\n":
-            connection.sendall(b"ERROR: Only capture is supported\n")
-            return
-        try:
-            image = capture(window, identity)
-        except (ValueError, OSError, subprocess.SubprocessError) as error:
-            connection.sendall(f"ERROR: {error}\n".encode())
-            return
-        connection.sendall(image)
-
-
-def current_window() -> str:
-    window = os.environ.get("WINDOWID")
-    if window is None:
-        raise ValueError("WINDOWID is not set; run this command from the Kitty window")
-    if not re.fullmatch(r"(?:0x[0-9a-fA-F]+|[0-9]+)", window):
-        raise ValueError("Invalid X11 window ID")
-    return window
-
-
 def main() -> None:
     window = current_window()
     identity = fingerprint(window)
@@ -103,6 +49,60 @@ def main() -> None:
                 endpoint.unlink(missing_ok=True)
     finally:
         os.close(lock)
+
+
+def handle(connection: socket.socket, window: str, identity: bytes) -> None:
+    connection.settimeout(3)
+    _, uid, _ = struct.unpack(
+        "3i", connection.getsockopt(socket.SOL_SOCKET, socket.SO_PEERCRED, 12)
+    )
+    if uid != os.getuid():
+        return
+    with connection.makefile("rb") as request:
+        if request.readline(9) != b"capture\n":
+            connection.sendall(b"ERROR: Only capture is supported\n")
+            return
+        try:
+            image = capture(window, identity)
+        except (ValueError, OSError, subprocess.SubprocessError) as error:
+            connection.sendall(f"ERROR: {error}\n".encode())
+            return
+        connection.sendall(image)
+
+
+def capture(window: str, identity: bytes) -> bytes:
+    if fingerprint(window) != identity:
+        raise ValueError("Target window identity changed")
+    image = subprocess.check_output(
+        ["import", "-silent", "-window", window, "png:-"],
+        stderr=subprocess.DEVNULL,
+        timeout=8,
+    )
+    if fingerprint(window) != identity:
+        raise ValueError("Target window identity changed during capture")
+    return image
+
+
+def fingerprint(window: str) -> bytes:
+    result = subprocess.check_output(
+        ["xprop", "-id", window, "WM_CLASS", "_NET_WM_PID"],
+        stderr=subprocess.DEVNULL,
+        timeout=3,
+    )
+    if b'"kitty"' not in result.lower() or not re.search(
+        rb"_NET_WM_PID\(CARDINAL\) = [0-9]+", result
+    ):
+        raise ValueError("Target must be a Kitty window with a PID")
+    return result
+
+
+def current_window() -> str:
+    window = os.environ.get("WINDOWID")
+    if window is None:
+        raise ValueError("WINDOWID is not set; run this command from the Kitty window")
+    if not re.fullmatch(r"(?:0x[0-9a-fA-F]+|[0-9]+)", window):
+        raise ValueError("Invalid X11 window ID")
+    return window
 
 
 if __name__ == "__main__":
