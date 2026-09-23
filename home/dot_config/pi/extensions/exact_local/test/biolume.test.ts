@@ -18,6 +18,9 @@ afterEach(() => vi.useRealTimers())
 describe('living body', () => {
   it('blooms the original spore inside the strand, restoring each cell as it travels', () => {
     const body = new LivingBody()
+    for (const prompt of ['one', 'two', 'three', 'four']) {
+      body.grow(prompt)
+    }
     const fg = vi.fn((_color: string, text: string) => text)
     const theme = fromPartial<Theme>({ fg })
     const idle = body.render(80, theme, 0, false)
@@ -44,14 +47,14 @@ describe('living body', () => {
       const expected = cells.map((cell, index) =>
         index === head ? spores[step % 8] : cell,
       )
-      expect(body.render(80, theme, step * 240, false)).toEqual([
+      expect(body.render(80, theme, step * 160, false)).toEqual([
         ` ${expected.join('')}`,
       ])
       expect(fg.mock.calls[head]?.[0]).toBe(colors[step % 8])
     }
     body.observe('a pending draft', 0)
     fg.mockClear()
-    body.render(80, theme, (cells.length - 1) * 240, false)
+    body.render(80, theme, (cells.length - 1) * 160, false)
     expect(fg.mock.calls.at(-1)).toEqual([
       colors[(cells.length - 1) % 8],
       spores[(cells.length - 1) % 8],
@@ -71,6 +74,10 @@ describe('living body', () => {
     const app = setup()
     await app.emit({ type: 'session_start', reason: 'startup' })
     const widget = app.widget()
+    await app.emit({
+      type: 'message_end',
+      message: { role: 'user', content: 'first prompt', timestamp: 0 },
+    })
     const idle = widget.render(80)
     expect(vi.getTimerCount()).toBe(0)
     app.draft('Make it listen')
@@ -97,11 +104,62 @@ describe('living body', () => {
     expect(vi.getTimerCount()).toBe(0)
   })
 
+  it('appends connected prompt growth without changing older cells, and restores the active branch', async () => {
+    const app = setup()
+    await app.emit({ type: 'session_start', reason: 'startup' })
+    const widget = app.widget()
+    const text = () => widget.render(200).map(stripVTControlCharacters).join('')
+    const seed = text()
+    expect(app.ctx.ui.setWidget).toHaveBeenLastCalledWith(
+      'biolume',
+      expect.any(Function),
+      { placement: 'belowEditor' },
+    )
+    expect(seed.trim()).toBe('')
+    await app.emit({
+      type: 'message_end',
+      message: { role: 'user', content: 'first prompt', timestamp: 0 },
+    })
+    const first = text()
+    expect(first.startsWith(seed)).toBe(true)
+    expect(first.length).toBe(seed.length + 4)
+    await app.emit({
+      type: 'message_end',
+      message: { role: 'user', content: 'second prompt', timestamp: 1 },
+    })
+    const second = text()
+    expect(second.startsWith(first)).toBe(true)
+    expect(second.length).toBe(first.length + 4)
+    expect(
+      [...second.trim()].every(
+        (cell) => ((cell.charCodeAt(0) - 0x2800) & 0x12) === 0x12,
+      ),
+    ).toBe(true)
+    const restored = setup()
+    restored.branch.push(...app.branch)
+    await restored.emit({ type: 'session_start', reason: 'reload' })
+    const restoredText = () =>
+      restored.widget().render(200).map(stripVTControlCharacters).join('')
+    expect(restoredText()).toBe(second)
+    expect(restored.appendEntry).not.toHaveBeenCalled()
+    restored.branch.pop()
+    await restored.emit(fromPartial<ExtensionEvent>({ type: 'session_tree' }))
+    expect(restoredText()).toBe(first)
+    restored.branch.length = 0
+    await restored.emit({ type: 'session_start', reason: 'new' })
+    expect(restoredText()).toBe(seed)
+    expect(restored.appendEntry).toHaveBeenCalledOnce()
+  })
+
   it('stops motion in still/off/shutdown and restores native status', async () => {
     vi.useFakeTimers()
     const app = setup()
     await app.emit({ type: 'session_start', reason: 'startup' })
     const widget = app.widget()
+    await app.emit({
+      type: 'message_end',
+      message: { role: 'user', content: 'first prompt', timestamp: 0 },
+    })
     await app.emit({ type: 'agent_start' })
     widget.render(80)
     expect(vi.getTimerCount()).toBe(1)
@@ -143,8 +201,16 @@ function setup(mode: ExtensionContext['mode'] = 'tui') {
   const requestRender = vi.fn()
   const setWidget = vi.fn()
   const getEditorText = vi.fn(() => '')
+  type Entry = ReturnType<
+    ExtensionContext['sessionManager']['getBranch']
+  >[number]
+  const branch: Entry[] = []
+  const appendEntry = vi.fn((customType: string) => {
+    branch.push(fromPartial<Entry>({ type: 'custom', customType }))
+  })
   const ctx = fromPartial<ExtensionCommandContext>({
     mode,
+    sessionManager: { getBranch: () => branch },
     ui: {
       get theme() {
         return currentTheme
@@ -169,6 +235,7 @@ function setup(mode: ExtensionContext['mode'] = 'tui') {
   biolume(
     fromPartial<ExtensionAPI>({
       on,
+      appendEntry,
       registerCommand,
       registerMarkdownTransformer,
     }),
@@ -176,6 +243,8 @@ function setup(mode: ExtensionContext['mode'] = 'tui') {
   return {
     ctx,
     original,
+    branch,
+    appendEntry,
     registerMarkdownTransformer,
     draft: (text: string) => getEditorText.mockReturnValue(text),
     command: fromPartial<
@@ -186,6 +255,11 @@ function setup(mode: ExtensionContext['mode'] = 'tui') {
         on.mock.calls.find(([type]) => type === event.type)?.[1],
       )
       await handler(event, ctx)
+      if (event.type === 'message_end' && event.message.role === 'user') {
+        branch.push(
+          fromPartial<Entry>({ type: 'message', message: event.message }),
+        )
+      }
     },
     widget: () => {
       const factory = fromPartial<(tui: TUI, theme: Theme) => Component>(

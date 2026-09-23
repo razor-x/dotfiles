@@ -1,8 +1,7 @@
+import { createHash } from 'node:crypto'
 import type { Theme } from '@earendil-works/pi-coding-agent'
 
-// UI experiment: one fixed silhouette; growth and compaction come later.
-// Every cell shares its middle horizontal dots with its neighbours.
-const silhouette = '⠒⠒⠛⡾⢷⣓⡾⠶⠒⠒⠲⡗⢾⣓⡻⠾⠒⠒⠚⡟⣲⢷⠺⠒⠒⠖⠲⠒'
+// UI experiment: prompt growth; folding and compaction come later.
 const pulse = [
   'dim',
   'muted',
@@ -17,10 +16,25 @@ const radius = [0, 1, 2, 3, 3, 2, 1, 0]
 const spores = ['·', '•', '●', '◉', '◎', '○', '·', '·']
 
 export class LivingBody {
+  private structure = ''
   private draft = ''
   private typedAt = -Infinity
   private working = false
   private startedAt = 0
+
+  resetGrowth(): void {
+    this.structure = ''
+  }
+
+  grow(prompt: string): void {
+    const bytes = createHash('sha256')
+      .update(prompt.normalize('NFC').trim())
+      .digest()
+    // Shared horizontal dots keep every new cell connected to its neighbours.
+    this.structure += `${[...bytes.subarray(0, 3)]
+      .map((dots) => String.fromCodePoint(0x2800 + (dots | 0x12)))
+      .join('')}⠒`
+  }
 
   observe(draft: string, now: number): void {
     if (draft !== this.draft) {
@@ -41,8 +55,9 @@ export class LivingBody {
   }
 
   render(width: number, theme: Theme, now: number, still: boolean): string[] {
-    const cells = [...silhouette.slice(0, Math.max(0, width - 1))]
-    const step = still ? 2 : Math.floor((now - this.startedAt) / 240)
+    // ponytail: one-row prototype clips at terminal width; add connected folding next.
+    const cells = [...this.structure.slice(0, Math.max(0, width - 1))]
+    const step = still ? 2 : Math.floor((now - this.startedAt) / 160)
     const stage = step % pulse.length
     const end = cells.length - 1
     // Reflect at the tip rather than teleporting the light back to the root.

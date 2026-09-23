@@ -1,3 +1,4 @@
+import type { UserMessage } from '@earendil-works/pi-ai'
 import {
   type ExtensionAPI,
   type ExtensionContext,
@@ -17,6 +18,40 @@ export default function biolume(pi: ExtensionAPI): void {
   const stop = () => {
     clearInterval(timer)
     timer = undefined
+  }
+  const grow = (message: UserMessage) => {
+    const content = message.content
+    body.grow(
+      typeof content === 'string'
+        ? content
+        : content
+            .filter((part) => part.type === 'text')
+            .map((part) => part.text)
+            .join('\n'),
+    )
+  }
+  const restoreGrowth = (ctx: ExtensionContext) => {
+    if (ctx.mode !== 'tui') {
+      return
+    }
+    body.resetGrowth()
+    const branch = ctx.sessionManager.getBranch()
+    const start = branch.findIndex(
+      (entry) =>
+        entry.type === 'custom' && entry.customType === 'biolume-growth-start',
+    )
+    if (start < 0) {
+      // One session-only marker: keep the existing body and grow from this experiment onward.
+      // Reconstruct from committed prompts, never store or transmit unfinished drafts.
+      pi.appendEntry('biolume-growth-start', {})
+    } else {
+      for (const entry of branch.slice(start + 1)) {
+        if (entry.type === 'message' && entry.message.role === 'user') {
+          grow(entry.message)
+        }
+      }
+    }
+    requestRender?.()
   }
   const applyTheme = (ctx: ExtensionContext) => {
     if (ctx.ui.theme.name !== 'biolume') {
@@ -50,27 +85,31 @@ export default function biolume(pi: ExtensionAPI): void {
     ctx.ui.setHiddenThinkingLabel('')
     if (!enabled) {
       enabled = true
-      ctx.ui.setWidget('biolume', (tui, liveTheme) => {
-        requestRender = () => tui.requestRender()
-        return {
-          render(width) {
-            const now = Date.now()
-            // Drafts stay local; observing renders covers paste, undo, and history too.
-            body.observe(ctx.ui.getEditorText(), now)
-            if (!still && body.isActive(now)) {
-              timer ??= setInterval(() => requestRender?.(), 90)
-            } else {
+      ctx.ui.setWidget(
+        'biolume',
+        (tui, liveTheme) => {
+          requestRender = () => tui.requestRender()
+          return {
+            render(width) {
+              const now = Date.now()
+              // Drafts stay local; observing renders covers paste, undo, and history too.
+              body.observe(ctx.ui.getEditorText(), now)
+              if (!still && body.isActive(now)) {
+                timer ??= setInterval(() => requestRender?.(), 60)
+              } else {
+                stop()
+              }
+              return body.render(width, liveTheme, now, still)
+            },
+            invalidate() {},
+            dispose() {
               stop()
-            }
-            return body.render(width, liveTheme, now, still)
-          },
-          invalidate() {},
-          dispose() {
-            stop()
-            requestRender = undefined
-          },
-        }
-      })
+              requestRender = undefined
+            },
+          }
+        },
+        { placement: 'belowEditor' },
+      )
     }
     if (still) {
       stop()
@@ -83,7 +122,16 @@ export default function biolume(pi: ExtensionAPI): void {
       return
     }
     afterReload = event.reason === 'reload'
+    restoreGrowth(ctx)
     apply(ctx)
+  })
+  pi.on('session_tree', (_event, ctx) => restoreGrowth(ctx))
+  pi.on('message_end', (event, ctx) => {
+    if (ctx.mode === 'tui' && event.message.role === 'user') {
+      // Pi persists the user message after this event; grow once here, restore from history later.
+      grow(event.message)
+      requestRender?.()
+    }
   })
   pi.on('session_shutdown', (_event, ctx) => restore(ctx))
   pi.on('agent_start', (_event, ctx) => {
