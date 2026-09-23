@@ -93,13 +93,13 @@
 # https://github.com/mikesmithgh/kitty-scrollback.nvim/blob/36d19dc85c0a1d0193e7c52d41129c4aa28b72e8/lua/kitty-scrollback/kitty_commands.lua#L273
 .config/kitty/python:
   type: archive
-  url: https://github.com/mikesmithgh/kitty-scrollback.nvim/archive/refs/tags/v9.2.1.tar.gz
+  url: https://github.com/mikesmithgh/kitty-scrollback.nvim/archive/refs/tags/v9.3.0.tar.gz
   exact: true
   stripComponents: 2
   include:
     - '*/python/*.py'
   checksum:
-    sha256: "ac0e8e1ca9f39d5def4176e68a30c2900c8e4a2977ce1f1f20f1d155173d5029"
+    sha256: "0d7b73292b1f214d9a4953ae99557251481d45fe65710d4a73f3dbdc4e0c284c"
 
 # navi
 
