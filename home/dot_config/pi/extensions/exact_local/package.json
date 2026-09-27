@@ -28,5 +28,10 @@
     "@types/node": "22.19.19",
     "typescript": "5.9.3",
     "vitest": "^4.1.10"
+  },
+  "allowScripts": {
+    "@google/genai": false,
+    "esbuild": false,
+    "protobufjs": false
   }
 }
