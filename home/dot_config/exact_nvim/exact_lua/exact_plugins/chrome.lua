@@ -193,7 +193,6 @@ M.spec = {
         { "zi", hidden = true },
         { "zj", hidden = true },
         { "zk", hidden = true },
-        { "zl", hidden = true },
         { "zm", hidden = true },
         { "zn", hidden = true },
         { "zo", hidden = true },

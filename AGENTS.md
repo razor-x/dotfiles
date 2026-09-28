@@ -32,6 +32,11 @@ managed home directory.
    help, ask the user to run `just watch` in their own terminal. Pi
    self-modification follows its nested on-the-fly synchronization workflow.
 
+Use named options objects/tables when a function's generic name or arguments
+leave call-site meaning unclear, especially for setup/configuration functions
+and boolean parameters. Positional arguments are appropriate when the function
+name makes their role explicit, such as `get_foo_by_id(id)` or `is_cool(value)`.
+
 ## Major configurations
 
 ### Neovim

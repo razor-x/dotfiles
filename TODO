@@ -240,10 +240,9 @@ n = no can't or won't use
   - Do not restore unconditional trim-on-save.
   - Keep `mini.trailspace` for visualization/manual trimming.
 
-- [ ] Restore project-local spellfiles.
-  - Detect `.spellfile.utf-8.add` beside the current file.
-  - Restore `:Mklocalspell`.
-  - Preserve the old `$VIM_LANG` override for `spelllang` if it is still used.
+- [x] Restore project-local spellfiles.
+  - Detect `.spellfile.utf-8.add` up to the Git root.
+  - Restore `:Mklocalspell` and explicit local/global dictionary actions.
   - Keep spell disabled in terminal buffers.
 
 - [ ] Verify Markdown frontmatter highlighting.
@@ -302,7 +301,18 @@ n = no can't or won't use
 - [ ] Explore a picker-based replacement for Projectionist alternate-file navigation.
   - Prefer a Snacks/FZF picker source over restoring Projectionist.
 
-- [ ] Consider restoring thesaurus lookup.
+- [ ] Add word definition and thesaurus lookup.
+  - Full specification: `.agents/specs/neovim-word-tools.md` (also covers `zG`/`zL` spellfile management pickers).
+  - `zz`: smart entry point; misspelled word → spelling, otherwise → synonyms.
+  - Visual `zz`: synonyms for the selection; no word → no action.
+  - Explicit overrides: `z=` spelling, `zs` synonyms, `za` antonyms, `zk` definition.
+  - Leave `K` unchanged and preserve `zl` for local dictionary acceptance.
+  - Remove the `<Leader>z` spelling alias when `zz` lands; return `<Leader>z` to the available keymap pool, unassigned.
+  - Enter on a synonym/antonym result replaces the target in one undo step; Escape cancels. No second confirmation dialog.
+  - Show backend-provided senses/parts of speech as headings or result labels, with definitions/examples in the preview.
+  - Definition lookup is read-only. Preserve straightforward capitalization on replacement.
+  - Choose the dictionary backend before the plugin/UI; prefer local data and require explicit online lookups.
+  - Missing results/backend leave text unchanged; spelling failure must not silently switch to synonyms.
 - [ ] Consider Ruby `ri` documentation lookup.
 - [ ] Add Ruby Bundler integration only if needed.
 - [ ] Add JavaScript/CSS Emmet expansion and automatic tag closing only if needed.
