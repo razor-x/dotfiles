@@ -26,11 +26,19 @@ curl \
     --output tsconfig.base.json
 or exit
 
-set --local typescript_version (jq --raw-output '.[0].devDependencies.typescript' "$pi_info")
+set --local typescript_version (curl \
+    --fail \
+    --silent \
+    --show-error \
+    --location \
+    "https://raw.githubusercontent.com/earendil-works/pi/v$pi_version/package.json" \
+    | jq --raw-output '.devDependencies.typescript')
 or exit
 set --local node_types_version (jq --raw-output '.[0].devDependencies["@types/node"]' "$pi_info")
 or exit
 set --local typebox_version (jq --raw-output '.[0].dependencies["typebox"]' "$pi_info")
+or exit
+set --local agent_core_version (jq --raw-output '.[0].dependencies["@earendil-works/pi-agent-core"]' "$pi_info")
 or exit
 set --local ai_version (jq --raw-output '.[0].dependencies["@earendil-works/pi-ai"]' "$pi_info")
 or exit
@@ -41,6 +49,7 @@ or exit
 
 jq \
     --arg pi_version "$pi_version" \
+    --arg agent_core_version "$agent_core_version" \
     --arg ai_version "$ai_version" \
     --arg tui_version "$tui_version" \
     --arg typebox_version "$typebox_version" \
@@ -50,6 +59,7 @@ jq \
     '
       .name = "pi-local-extension"
       | .engines = $engines
+      | .devDependencies["@earendil-works/pi-agent-core"] = $agent_core_version
       | .devDependencies["@earendil-works/pi-ai"] = $ai_version
       | .devDependencies["@earendil-works/pi-coding-agent"] = $pi_version
       | .devDependencies["@earendil-works/pi-tui"] = $tui_version
