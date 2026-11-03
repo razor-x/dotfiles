@@ -81,25 +81,25 @@
 # https://github.com/mrjones2014/smart-splits.nvim/blob/e892a5da963813119d053af5b2260e3cd9d9f037/lua/smart-splits/mux/kitty.lua#L112
 .config/kitty:
   type: archive
-  url: https://github.com/mrjones2014/smart-splits.nvim/archive/refs/tags/v2.1.0.tar.gz
+  url: https://github.com/mrjones2014/smart-splits.nvim/archive/refs/tags/v3.0.0.tar.gz
   exact: true
   stripComponents: 2
   include:
     - '*/kitty/*.py'
   checksum:
-    sha256: "bdef19b109281f21ad61d62bd143f5c64e0b0ba135f4b5205b031a72aee741db"
+    sha256: "4a7d21207e2d02345783e4ec12d7386f1b78168adb17d6365fdf07271988d6c9"
 
 # UPSTREAM: The kitty-scrollback.nvim loading.py file must be placed in the python directory under the kitty config root.
 # https://github.com/mikesmithgh/kitty-scrollback.nvim/blob/36d19dc85c0a1d0193e7c52d41129c4aa28b72e8/lua/kitty-scrollback/kitty_commands.lua#L273
 .config/kitty/python:
   type: archive
-  url: https://github.com/mikesmithgh/kitty-scrollback.nvim/archive/refs/tags/v9.3.0.tar.gz
+  url: https://github.com/mikesmithgh/kitty-scrollback.nvim/archive/refs/tags/v9.3.1.tar.gz
   exact: true
   stripComponents: 2
   include:
     - '*/python/*.py'
   checksum:
-    sha256: "0d7b73292b1f214d9a4953ae99557251481d45fe65710d4a73f3dbdc4e0c284c"
+    sha256: "8055195471dc16d21bd7e3e4069c27bf7d5f85308274f98e3fd123adae4909a2"
 
 # navi
 
