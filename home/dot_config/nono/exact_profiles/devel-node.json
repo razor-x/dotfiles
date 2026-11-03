@@ -11,7 +11,7 @@
       "$XDG_CACHE_HOME/node-gyp",
       "$XDG_CONFIG_HOME/pnpm",
       "$XDG_CACHE_HOME/pnpm",
-      "$XDG_DATA_HOME/pnpm",
+      "$XDG_DATA_HOME/pnpm/store",
       "$XDG_CACHE_HOME/yarn",
       "$XDG_DATA_HOME/yarn"
     ]
