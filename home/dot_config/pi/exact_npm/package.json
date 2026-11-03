@@ -2,9 +2,9 @@
   "name": "pi-extensions",
   "private": true,
   "dependencies": {
-    "@dietrichgebert/ponytail": "4.10.0",
-    "@narumitw/pi-accounts": "0.52.2",
-    "@narumitw/pi-btw": "0.61.1",
-    "pi-nvim": "0.2.5"
+    "@dietrichgebert/ponytail": "5.3.3",
+    "@narumitw/pi-accounts": "0.54.0",
+    "@narumitw/pi-btw": "0.63.3",
+    "pi-nvim": "0.2.6"
   }
 }
