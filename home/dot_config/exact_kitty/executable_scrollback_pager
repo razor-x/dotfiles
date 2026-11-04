@@ -1,0 +1,6 @@
+#!/bin/sh
+
+kitten @ set-colors --match "id:$KITTY_WINDOW_ID" \
+  background=#1a1a2e >/dev/null 2>&1 || :
+
+exec less -r --chop-long-lines -+F "$@"

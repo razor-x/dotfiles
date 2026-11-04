@@ -133,6 +133,9 @@ M.spec = {
     ---@type KsbOpts
     opts = {
       {
+        highlight_overrides = {
+          KittyScrollbackNvimNormal = { bg = "#1a1a2e" },
+        },
         callbacks = {
           after_setup = function()
             M.disable_mini_basics_terminal_insert()

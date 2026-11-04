@@ -26,7 +26,7 @@ wayland_enable_ime no
 
 # Set the scrollback pager to use less -r to render Nerd Font symbols.
 # The -r option...cannot be set in a LESS environment variable.
-scrollback_pager less -r --chop-long-lines +INPUT_LINE_NUMBER
+scrollback_pager {{ joinPath .chezmoi.homeDir ".config" "kitty" "scrollback_pager" }} +INPUT_LINE_NUMBER
 
 # Set default layout and the enabled layouts.
 {{ if eq .chezmoi.hostname "Gungnir" -}}
