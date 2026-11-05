@@ -2,6 +2,8 @@
 
 {{ $pkg := include "dot_config/pi/exact_npm/package.json" | fromJson }}
 {{ $deps := keys $pkg.dependencies | sortAlpha }}
+set settings {{ .pi.settings | toJson | quote }}
+set theme {{ .theme | quote }}
 set packages '[{{ range $i, $name := $deps }}{{ if $i }},{{ end }}{{ printf "npm:%s@%s" $name (index $pkg.dependencies $name) | toJson }}{{ end }}]'
 
 set input (mktemp)
@@ -16,8 +18,9 @@ if not test -s $input
     printf '{}\n' >$input
 end
 
-jq --argjson packages $packages '
-  .packages = (
+jq --argjson settings $settings --arg theme $theme --argjson packages $packages '
+  . * $settings * { theme: $theme }
+  | .packages = (
     [ .packages[]?
       | select(
           if type == "string"
