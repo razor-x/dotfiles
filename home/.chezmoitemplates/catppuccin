@@ -32,6 +32,12 @@
   {{- else -}}
     catppuccin
   {{- end -}}
+{{- else if eq .app "pi" -}}
+  {{- if eq $flavor "latte" -}}
+    light
+  {{- else -}}
+    dark
+  {{- end -}}
 {{- else if eq .app "yazi" -}}
   {{- if eq .mode "light" -}}
     catppuccin-{{ $lightFlavor }}

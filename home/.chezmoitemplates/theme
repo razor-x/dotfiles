@@ -35,6 +35,8 @@
   {{ $name }}
 {{- else if eq .app "opencode" -}}
   {{ $name }}
+{{- else if eq .app "pi" -}}
+  {{ $name }}
 {{- else -}}
   {{- fail (printf "No catppuccin theme installed for %s." .app) -}}
 {{- end -}}
