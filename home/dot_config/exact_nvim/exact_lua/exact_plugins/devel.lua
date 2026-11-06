@@ -1,5 +1,8 @@
 local M = {}
 
+local pr_review_tabpage
+local review_history = setmetatable({}, { __mode = "k" })
+
 ---@module "lazy.types"
 ---@type LazySpec
 M.spec = {
@@ -43,7 +46,47 @@ M.spec = {
       "DiffviewDiffFiles",
       "DiffviewLog",
     },
-    opts = {},
+    ---@module "diffview"
+    ---@type DiffviewConfig.user
+    opts = {
+      persist_selections = { enabled = true },
+      keymaps = {
+        view = {
+          {
+            "n",
+            "<C-Tab>",
+            function()
+              M.review_current_file()
+            end,
+            { desc = "Mark reviewed and open next file" },
+          },
+          {
+            "n",
+            "<C-S-Tab>",
+            function()
+              M.undo_last_reviewed_file()
+            end,
+            { desc = "Undo last reviewed mark" },
+          },
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>gr",
+        function()
+          M.open_pr_review()
+        end,
+        desc = "Open Pull Request Review",
+      },
+      {
+        "<leader>gR",
+        function()
+          M.close_pr_review()
+        end,
+        desc = "Close Pull Request Review",
+      },
+    },
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -381,5 +424,75 @@ M.spec = {
     },
   },
 }
+
+function M.review_current_file()
+  local view = require("diffview.lib").get_current_view()
+  if not (view and view.cur_entry) then
+    return
+  end
+
+  local entry = view.cur_entry
+  local selections = require("diffview.api").selections
+  local opts = { kind = entry.kind, view = view }
+  if not selections.is_selected(entry.path, opts) then
+    selections.select({ entry.path }, opts)
+    review_history[view] = review_history[view] or {}
+    table.insert(review_history[view], { path = entry.path, kind = entry.kind })
+  end
+  require("diffview.actions").select_next_entry()
+end
+
+function M.undo_last_reviewed_file()
+  local view = require("diffview.lib").get_current_view()
+  local history = view and review_history[view]
+  local reviewed_file = history and table.remove(history)
+  if not reviewed_file then
+    return
+  end
+
+  require("diffview.api").selections.deselect({ reviewed_file.path }, { kind = reviewed_file.kind, view = view })
+end
+
+function M.open_pr_review()
+  if pr_review_tabpage and vim.api.nvim_tabpage_is_valid(pr_review_tabpage) then
+    vim.api.nvim_set_current_tabpage(pr_review_tabpage)
+    return
+  end
+
+  local pr = vim.system({ "gh", "pr", "view", "--json", "baseRefName", "--jq", ".baseRefName" }, { text = true }):wait()
+  if pr.code ~= 0 then
+    vim.notify(vim.trim(pr.stderr or ""), vim.log.levels.ERROR)
+    return
+  end
+
+  local base_ref = vim.trim(pr.stdout or "")
+  if base_ref == "" then
+    vim.notify("Pull request base branch not found", vim.log.levels.ERROR)
+    return
+  end
+
+  local fetch = vim.system({ "git", "fetch", "--quiet", "origin", base_ref }, { text = true }):wait()
+  if fetch.code ~= 0 then
+    vim.notify(vim.trim(fetch.stderr or ""), vim.log.levels.ERROR)
+    return
+  end
+
+  require("diffview").open({ "origin/" .. base_ref .. "...HEAD" })
+  local view = require("diffview.lib").get_current_view()
+  if view then
+    pr_review_tabpage = view.tabpage
+  end
+end
+
+function M.close_pr_review()
+  if not (pr_review_tabpage and vim.api.nvim_tabpage_is_valid(pr_review_tabpage)) then
+    pr_review_tabpage = nil
+    return
+  end
+
+  if require("diffview").close(pr_review_tabpage, { force = false }) then
+    pr_review_tabpage = nil
+  end
+end
 
 return M.spec

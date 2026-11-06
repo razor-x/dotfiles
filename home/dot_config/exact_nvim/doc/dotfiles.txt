@@ -105,6 +105,19 @@ zC{cdknpsu/<Space>}{motion}
                                                         *<Leader>gc*
 <Leader>gc              Start a Neogit commit directly.
 
+                                        *<Leader>gr* *<Leader>gR*
+<Leader>gr              Open or focus the current pull request review in a
+                        Diffview tab.
+<Leader>gR              Close the pull request review Diffview tab.
+
+                                        *<C-Tab>* *<C-S-Tab>*
+<C-Tab>                 In a Diffview file, mark the current file reviewed
+                        and open the next file. Reviewed-file state persists
+                        across Neovim restarts.
+<C-S-Tab>               Undo reviewed marks made with |<C-Tab>| in the
+                        current Diffview, newest first. Press repeatedly to
+                        undo multiple marks.
+
                                                         *<F5>*
 <F5>                    Restart Neovim and reload the configuration.
                         See |:restart|.
