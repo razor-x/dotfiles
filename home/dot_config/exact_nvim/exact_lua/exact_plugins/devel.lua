@@ -477,7 +477,7 @@ function M.open_pr_review()
     return
   end
 
-  require("diffview").open({ "origin/" .. base_ref .. "...HEAD" })
+  require("diffview").open({ "origin/" .. base_ref .. "...HEAD", "--imply-local" })
   local view = require("diffview.lib").get_current_view()
   if view then
     pr_review_tabpage = view.tabpage

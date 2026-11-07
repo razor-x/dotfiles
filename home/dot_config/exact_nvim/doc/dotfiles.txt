@@ -107,7 +107,8 @@ zC{cdknpsu/<Space>}{motion}
 
                                         *<Leader>gr* *<Leader>gR*
 <Leader>gr              Open or focus the current pull request review in a
-                        Diffview tab.
+                        Diffview tab with the editable working tree on the
+                        right side.
 <Leader>gR              Close the pull request review Diffview tab.
 
                                         *<C-Tab>* *<C-S-Tab>*
