@@ -39,4 +39,4 @@ exec nono run \
   --read "$root" \
   --allow "$home" \
   --allow "$projects" \
-  -- pi "$@"
+  -- pi --approve "$@"
