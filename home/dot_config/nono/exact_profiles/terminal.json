@@ -15,7 +15,8 @@
     "terminal-local-bin",
     "terminal-xh",
     "terminal-linear",
-    "terminal-just"
+    "terminal-just",
+    "terminal-zellij"
   ],
   "meta": {
     "name": "terminal",
