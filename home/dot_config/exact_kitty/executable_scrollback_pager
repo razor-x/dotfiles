@@ -1,6 +1,14 @@
 #!/bin/sh
 
-kitten @ set-colors --match "id:$KITTY_WINDOW_ID" \
-  background=#1a1a2e >/dev/null 2>&1 || :
+colors=$(kitten @ get-colors --match "id:$KITTY_WINDOW_ID" 2>/dev/null) || colors=
+background=$(printf '%s\n' "$colors" | awk '$1 == "inactive_tab_background" { print $2; exit }')
+foreground=$(printf '%s\n' "$colors" | awk '$1 == "inactive_tab_foreground" { print $2; exit }')
+
+case "$background:$foreground" in
+\#*:\#*)
+  kitten @ set-colors --match "id:$KITTY_WINDOW_ID" \
+    "background=$background" "foreground=$foreground" >/dev/null 2>&1 || :
+  ;;
+esac
 
 exec less -r --chop-long-lines -+F "$@"

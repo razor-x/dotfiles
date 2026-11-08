@@ -134,7 +134,7 @@ M.spec = {
     opts = {
       {
         highlight_overrides = {
-          KittyScrollbackNvimNormal = { bg = "#1a1a2e" },
+          KittyScrollbackNvimNormal = { link = "NormalFloat" },
         },
         callbacks = {
           after_setup = function()
