@@ -35,7 +35,7 @@ export TREEHOUSE_ROOT=${TREEHOUSE_ROOT:-"$projects/.treehouse"}
 exec nono run \
   --strict-broker-path \
   --profile firstmate \
-  --workdir "$home" \
+  --workdir "$root" \
   --read "$root" \
   --allow "$home" \
   --allow "$projects" \
