@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -eu
+
+xdg_data_home=${XDG_DATA_HOME:-"$HOME/.local/share"}
+root="$xdg_data_home/firstmate"
+tools="$root/.tools"
+home="$tools/home"
+projects=$PWD
+
+if [ ! -d "$root/.git" ]; then
+  printf 'FirstMate checkout not found: %s\n' "$root" >&2
+  exit 1
+fi
+
+mkdir -p "$home"
+cd "$root"
+
+export PATH="$tools/node_modules/.bin:$PATH"
+export FM_HOME="$home"
+export FM_BACKEND=${FM_BACKEND:-zellij}
+export FM_ZELLIJ_SESSION=${FM_ZELLIJ_SESSION:-firstmate-nono}
+export FM_PROJECTS_OVERRIDE="$projects"
+export TREEHOUSE_ROOT=${TREEHOUSE_ROOT:-"$projects/.treehouse"}
+
+exec nono run \
+  --strict-broker-path \
+  --profile pi \
+  --workdir "$home" \
+  --read "$root" \
+  --allow "$home" \
+  --allow "$projects" \
+  -- pi "$@"

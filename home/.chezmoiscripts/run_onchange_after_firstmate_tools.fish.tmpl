@@ -1,0 +1,16 @@
+#!/usr/bin/env fish
+
+# {{ $hash := include (joinPath .chezmoi.sourceDir ".chezmoitemplates" "firstmate-tools" "package-lock.json") | sha256sum -}}
+# hash: {{ $hash }}
+
+set --local source {{ joinPath .chezmoi.sourceDir ".chezmoitemplates" "firstmate-tools" | quote }}
+set --local tools "$XDG_DATA_HOME/firstmate/.tools"
+
+if not type --query npm
+    echo 'Cannot install FirstMate tools: npm not installed.'
+    return 1
+end
+
+mkdir --parents $tools
+cp "$source/package.json" "$source/package-lock.json" $tools
+npm --prefix $tools ci --ignore-scripts

@@ -67,6 +67,12 @@
   checksum:
     sha256: "90f1b33b86f3517500786f36523464eb6d6e2f57da34e65f378c0d4dcd6878de"
 
+# firstmate
+
+.local/share/firstmate:
+  type: git-repo
+  url: https://github.com/kunchenguid/firstmate.git
+
 # GitUI
 
 .config/gitui/key_bindings.ron:
