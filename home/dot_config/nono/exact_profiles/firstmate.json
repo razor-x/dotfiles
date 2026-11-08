@@ -1,0 +1,10 @@
+{
+  "extends": ["pi"],
+  "meta": {
+    "name": "firstmate",
+    "version": "1.0.0",
+    "description": "FirstMate with Linux PTY allocation for isolated Zellij workers.",
+    "author": "razor-x"
+  },
+  "filesystem": { "allow": ["/dev/ptmx"] }
+}
