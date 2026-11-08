@@ -17,6 +17,9 @@ mkdir -p "$home"
 cd "$root"
 
 export PATH="$tools/node_modules/.bin:$PATH"
+export NONO_NO_SAVE_PROMPT=1
+export PI_SKIP_VERSION_CHECK=1
+export PI_CLIPBOARD_OSC52=1
 export FM_HOME="$home"
 export LAVISH_AXI_STATE_DIR=${LAVISH_AXI_STATE_DIR:-"$home/lavish-axi"}
 export NM_HOME=${NM_HOME:-"$home/no-mistakes"}
