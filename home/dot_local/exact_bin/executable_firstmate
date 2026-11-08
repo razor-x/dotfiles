@@ -19,6 +19,8 @@ cd "$root"
 export PATH="$tools/node_modules/.bin:$PATH"
 export FM_HOME="$home"
 export LAVISH_AXI_STATE_DIR=${LAVISH_AXI_STATE_DIR:-"$home/lavish-axi"}
+export NM_HOME=${NM_HOME:-"$home/no-mistakes"}
+export NO_MISTAKES_NO_UPDATE_CHECK=1
 export FM_BACKEND=${FM_BACKEND:-zellij}
 export FM_ZELLIJ_SESSION=${FM_ZELLIJ_SESSION:-firstmate-nono}
 export FM_PROJECTS_OVERRIDE="$projects"
