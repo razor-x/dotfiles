@@ -6,6 +6,9 @@
     "description": "FirstMate with Linux PTY allocation for isolated Zellij workers.",
     "author": "razor-x"
   },
-  "filesystem": { "allow": ["/dev/ptmx"] },
+  "filesystem": {
+    "read": ["$XDG_CONFIG_HOME/zellij"],
+    "allow": ["/dev/ptmx"]
+  },
   "workdir": { "access": "read" }
 }

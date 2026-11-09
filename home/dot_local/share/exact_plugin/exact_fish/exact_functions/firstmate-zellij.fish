@@ -9,9 +9,6 @@ function firstmate-zellij \
 
     set --function firstmate_home "$XDG_STATE_HOME/firstmate"
 
-    if not set --query ZELLIJ_CONFIG_DIR
-        set --function --export ZELLIJ_CONFIG_DIR "$firstmate_home/zellij/config"
-    end
     if not set --query ZELLIJ_SOCKET_DIR
         set --function --export ZELLIJ_SOCKET_DIR "$firstmate_home/zellij/socket"
     end
