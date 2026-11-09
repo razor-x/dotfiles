@@ -1,5 +1,11 @@
 ---
 pi:
   settings:
+    autocompleteMaxVisible: 10
+    collapseChangelog: true
+    quietStartup: header
+    showCacheMissNotices: true
     showHardwareCursor: true
+    terminal:
+      showTerminalProgress: true
     tuiMode: regular
