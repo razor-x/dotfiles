@@ -27,9 +27,8 @@ capture-pi-ui:
   ./tools/capture_pi_ui.py
 
 upgrade-biome:
-  sd 'schemas/[^/]+/schema\.json' \
-    "schemas/$(biome --version | cut --delimiter=' ' --fields=2)/schema.json" \
-    biome.json
+  biome migrate --write
+  biome check --write --unsafe .
 
 upgrade: && \
     upgrade-biome \
