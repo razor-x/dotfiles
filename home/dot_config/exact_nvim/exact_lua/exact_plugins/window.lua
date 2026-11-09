@@ -5,9 +5,17 @@ local M = {}
 M.spec = {
   {
     "mrjones2014/smart-splits.nvim",
+    dependencies = {
+      {
+        "smart-splits-nvim/backend-kitty",
+        main = "smart-splits-backend-kitty",
+        opts = {},
+      },
+    },
     ---@module "smart-splits"
     ---@type SmartSplitsConfig
     opts = { ---@diagnostic disable-line:missing-fields
+      mux = { backend = "smart-splits-backend-kitty" },
     },
     init = function()
       vim.keymap.set("n", "<Leader>h", M.cmd("leftabove vsplit"), { desc = "Split current window left", silent = true })

@@ -77,17 +77,13 @@
 
 # Kitty
 
-# UPSTREAM: The smart-splits.nvim python kittens must be placed in the kitty config root.
-# https://github.com/mrjones2014/smart-splits.nvim/blob/e892a5da963813119d053af5b2260e3cd9d9f037/lua/smart-splits/mux/kitty.lua#L112
-.config/kitty:
-  type: archive
-  url: https://github.com/mrjones2014/smart-splits.nvim/archive/refs/tags/v3.0.0.tar.gz
-  exact: true
-  stripComponents: 2
-  include:
-    - '*/kitty/*.py'
+# UPSTREAM: backend-kitty's relative resize kitten must be placed in the kitty config root.
+# https://github.com/smart-splits-nvim/backend-kitty#kitty-configuration
+.config/kitty/relative_resize.py:
+  type: file
+  url: https://raw.githubusercontent.com/smart-splits-nvim/backend-kitty/70665a2228d52c255f3d116a146932f326df3914/kitten/relative_resize.py
   checksum:
-    sha256: "4a7d21207e2d02345783e4ec12d7386f1b78168adb17d6365fdf07271988d6c9"
+    sha256: "4042432d2fe247fbb79315e975f2f5df5be31e5499e9a810322cb918021ae997"
 
 # UPSTREAM: The kitty-scrollback.nvim loading.py file must be placed in the python directory under the kitty config root.
 # https://github.com/mikesmithgh/kitty-scrollback.nvim/blob/36d19dc85c0a1d0193e7c52d41129c4aa28b72e8/lua/kitty-scrollback/kitty_commands.lua#L273

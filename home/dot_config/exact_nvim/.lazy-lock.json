@@ -1,5 +1,6 @@
 {
   "auto-session": { "branch": "main", "commit": "02a5588f677970a9bc784115c62bef9e5855499b" },
+  "backend-kitty": { "branch": "main", "commit": "70665a2228d52c255f3d116a146932f326df3914" },
   "catppuccin": { "branch": "main", "commit": "edefef779ab08ce1a4a404713e3012b0d202bd35" },
   "chezmoi-template.nvim": { "branch": "main", "commit": "8e51127b4d67802cf0c7f00e8b6857200d338e86" },
   "coerce.nvim": { "branch": "main", "commit": "1d0b987b02280ec03dc82f7a94acad4361eb8163" },
