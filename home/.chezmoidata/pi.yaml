@@ -1,4 +1,5 @@
 ---
 pi:
   settings:
+    showHardwareCursor: true
     tuiMode: regular
