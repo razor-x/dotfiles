@@ -62,3 +62,6 @@ repos:
   - path: makenew/tsmodule
     groups: [makenew]
     url: git@github.com:makenew/tsmodule.git
+  - path: forks/firstmate
+    url: git@github.com:rxfork/firstmate.git
+    groups: [config]
