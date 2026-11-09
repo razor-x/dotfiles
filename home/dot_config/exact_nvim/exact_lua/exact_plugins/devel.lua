@@ -1,5 +1,6 @@
 local M = {}
 
+local main_review_tabpage
 local pr_review_tabpage
 local review_history = setmetatable({}, { __mode = "k" })
 
@@ -76,6 +77,20 @@ M.spec = {
         "<leader>gD",
         "<cmd>DiffviewOpen<cr>",
         desc = "Open Git Diff / Resolve Conflicts",
+      },
+      {
+        "<leader>gm",
+        function()
+          M.open_main_review()
+        end,
+        desc = "Open Main Branch Review",
+      },
+      {
+        "<leader>gM",
+        function()
+          M.close_main_review()
+        end,
+        desc = "Close Main Branch Review",
       },
       {
         "<leader>gr",
@@ -456,6 +471,36 @@ function M.undo_last_reviewed_file()
   end
 
   require("diffview.api").selections.deselect({ reviewed_file.path }, { kind = reviewed_file.kind, view = view })
+end
+
+function M.open_main_review()
+  if main_review_tabpage and vim.api.nvim_tabpage_is_valid(main_review_tabpage) then
+    vim.api.nvim_set_current_tabpage(main_review_tabpage)
+    return
+  end
+
+  local fetch = vim.system({ "git", "fetch", "--quiet", "origin", "main" }, { text = true }):wait()
+  if fetch.code ~= 0 then
+    vim.notify(vim.trim(fetch.stderr or ""), vim.log.levels.ERROR)
+    return
+  end
+
+  require("diffview").open({ "origin/main...HEAD", "--imply-local" })
+  local view = require("diffview.lib").get_current_view()
+  if view then
+    main_review_tabpage = view.tabpage
+  end
+end
+
+function M.close_main_review()
+  if not (main_review_tabpage and vim.api.nvim_tabpage_is_valid(main_review_tabpage)) then
+    main_review_tabpage = nil
+    return
+  end
+
+  if require("diffview").close(main_review_tabpage, { force = false }) then
+    main_review_tabpage = nil
+  end
 end
 
 function M.open_pr_review()

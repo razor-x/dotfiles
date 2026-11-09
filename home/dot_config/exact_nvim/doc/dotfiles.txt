@@ -109,6 +109,12 @@ zC{cdknpsu/<Space>}{motion}
 <Leader>gD              Open Diffview for working-tree changes. During a
                         merge or rebase, open the conflict-resolution view.
 
+                                        *<Leader>gm* *<Leader>gM*
+<Leader>gm              Open or focus a review of all current-branch changes
+                        since it diverged from origin/main, with the editable
+                        working tree on the right side.
+<Leader>gM              Close the main-branch review Diffview tab.
+
                                         *<Leader>gr* *<Leader>gR*
 <Leader>gr              Open or focus the current pull request review in a
                         Diffview tab with the editable working tree on the
