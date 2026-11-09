@@ -2,8 +2,12 @@
 
 set -eu
 
-xdg_data_home=${XDG_DATA_HOME:-"$HOME/.local/share"}
-root="$xdg_data_home/firstmate"
+if [ -z "${XDG_DATA_HOME:-}" ]; then
+  printf 'Cannot run FirstMate: XDG_DATA_HOME is not set.\n' >&2
+  exit 1
+fi
+
+root="$XDG_DATA_HOME/firstmate"
 tools="$root/.tools"
 home="$tools/home"
 zellij_home="$home/zellij"

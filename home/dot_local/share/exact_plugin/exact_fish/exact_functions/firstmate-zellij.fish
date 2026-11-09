@@ -2,11 +2,12 @@ function firstmate-zellij \
     --wraps zellij \
     --description 'Run Zellij in FirstMate isolated environment'
 
-    set --function data_home $XDG_DATA_HOME
-    if test -z "$data_home"
-        set data_home "$HOME/.local/share"
+    if not set --query XDG_DATA_HOME; or test -z "$XDG_DATA_HOME"
+        echo 'Cannot run FirstMate Zellij: XDG_DATA_HOME is not set.' >&2
+        return 1
     end
-    set --function firstmate_home "$data_home/firstmate/.tools/home"
+
+    set --function firstmate_home "$XDG_DATA_HOME/firstmate/.tools/home"
 
     if not set --query ZELLIJ_CONFIG_DIR
         set --function --export ZELLIJ_CONFIG_DIR "$firstmate_home/zellij/config"

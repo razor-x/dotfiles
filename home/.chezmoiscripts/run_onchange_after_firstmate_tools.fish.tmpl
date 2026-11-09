@@ -3,6 +3,11 @@
 # {{ $hash := include (joinPath .chezmoi.sourceDir ".chezmoitemplates" "firstmate-tools" "package-lock.json") | sha256sum -}}
 # hash: {{ $hash }}
 
+if not set --query XDG_DATA_HOME; or test -z "$XDG_DATA_HOME"
+    echo 'Cannot install FirstMate tools: XDG_DATA_HOME is not set.' >&2
+    return 1
+end
+
 set --local source {{ joinPath .chezmoi.sourceDir ".chezmoitemplates" "firstmate-tools" | quote }}
 set --local tools "$XDG_DATA_HOME/firstmate/.tools"
 
