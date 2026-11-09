@@ -34,6 +34,13 @@ export FM_BACKEND=${FM_BACKEND:-zellij}
 export FM_ZELLIJ_SESSION=${FM_ZELLIJ_SESSION:-firstmate-nono}
 export FM_PROJECTS_OVERRIDE="$projects"
 export TREEHOUSE_ROOT=${TREEHOUSE_ROOT:-"$projects/.treehouse"}
+export FM_WORKER_ENV_FORWARD='PATH
+TREEHOUSE_ROOT
+PI_SKIP_VERSION_CHECK
+PI_CLIPBOARD_OSC52
+LAVISH_AXI_STATE_DIR
+NM_HOME
+NO_MISTAKES_NO_UPDATE_CHECK'
 
 exec nono run \
   --strict-broker-path \
