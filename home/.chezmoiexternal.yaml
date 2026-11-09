@@ -71,7 +71,7 @@
 
 .local/share/firstmate:
   type: git-repo
-  url: https://github.com/kunchenguid/firstmate.git
+  url: https://github.com/rxfork/firstmate.git
 
 # GitUI
 
