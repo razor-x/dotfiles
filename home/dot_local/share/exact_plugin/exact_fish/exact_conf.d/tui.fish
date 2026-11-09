@@ -65,6 +65,7 @@ if status is-interactive
     alias gsd git_find_replace
     abbr gcd 'cd (git root)'
     abbr gs 'git switch-or-create'
+    abbr gsk 'git stack'
     abbr w wt
     abbr ws 'wt switch-or-create'
 
