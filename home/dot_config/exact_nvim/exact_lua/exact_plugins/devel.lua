@@ -51,6 +51,11 @@ M.spec = {
     ---@type DiffviewConfig.user
     opts = {
       persist_selections = { enabled = true },
+      view = {
+        cycle_layouts = {
+          default = { "diff2_horizontal", "diff2_vertical", "diff1_inline" },
+        },
+      },
       keymaps = {
         view = {
           {

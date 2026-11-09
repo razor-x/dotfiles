@@ -121,6 +121,10 @@ zC{cdknpsu/<Space>}{motion}
                         right side.
 <Leader>gR              Close the pull request review Diffview tab.
 
+                                                        *g_CTRL-X*
+g<C-X>                  In a Diffview file, cycle between horizontal,
+                        vertical, and unified inline diff layouts.
+
                                         *<C-Tab>* *<C-S-Tab>*
 <C-Tab>                 In a Diffview file, mark the current file reviewed
                         and open the next file. Reviewed-file state persists
