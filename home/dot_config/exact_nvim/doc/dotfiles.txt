@@ -105,6 +105,10 @@ zC{cdknpsu/<Space>}{motion}
                                                         *<Leader>gc*
 <Leader>gc              Start a Neogit commit directly.
 
+                                                        *<Leader>gD*
+<Leader>gD              Open Diffview for working-tree changes. During a
+                        merge or rebase, open the conflict-resolution view.
+
                                         *<Leader>gr* *<Leader>gR*
 <Leader>gr              Open or focus the current pull request review in a
                         Diffview tab with the editable working tree on the

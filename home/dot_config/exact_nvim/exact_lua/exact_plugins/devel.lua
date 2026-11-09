@@ -73,6 +73,11 @@ M.spec = {
     },
     keys = {
       {
+        "<leader>gD",
+        "<cmd>DiffviewOpen<cr>",
+        desc = "Open Git Diff / Resolve Conflicts",
+      },
+      {
         "<leader>gr",
         function()
           M.open_pr_review()
