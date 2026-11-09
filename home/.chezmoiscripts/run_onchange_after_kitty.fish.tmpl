@@ -1,7 +1,9 @@
 #!/usr/bin/env fish
 
+set --local XDG_CONFIG_HOME "$HOME/.config"
+
 if type --query kitten
-    set --local kitten_config_path "$XDG_CONFIG_HOME/.config/kitty"
+    set --local kitten_config_path "$XDG_CONFIG_HOME/kitty"
     mkdir --parents $kitten_config_path
     kitten themes --dump '{{ template "theme" (merge (dict "app" "kitty") .) }}' >$kitten_config_path/current-theme.conf
     kitten themes --reload-in=all '{{ template "theme" (merge (dict "app" "kitty") .) }}'

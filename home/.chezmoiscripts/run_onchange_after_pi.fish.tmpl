@@ -5,6 +5,8 @@
 #
 # hash: {{ sha256sum $hash }}
 
+set --local XDG_CONFIG_HOME "$HOME/.config"
+
 if type --query pi
     cd $XDG_CONFIG_HOME/pi/extensions/local
     npm ci

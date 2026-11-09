@@ -2,6 +2,9 @@
 
 # hash: {{ include (joinPath .chezmoi.homeDir ".config" "yazi" "package.toml") | sha256sum }}
 
+set --local XDG_CONFIG_HOME "$HOME/.config"
+set --local XDG_STATE_HOME "$HOME/.local/state"
+
 set --local config_path "$XDG_CONFIG_HOME/yazi"
 set --local state_path "$XDG_STATE_HOME/yazi"
 
