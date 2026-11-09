@@ -9,8 +9,13 @@ if not set --query XDG_DATA_HOME; or test -z "$XDG_DATA_HOME"
 end
 
 set --local source {{ joinPath .chezmoi.sourceDir ".chezmoitemplates" "firstmate-tools" | quote }}
-set --local tools "$XDG_DATA_HOME/firstmate/.tools"
+set --local root "$XDG_DATA_HOME/firstmate"
+set --local tools "$root/.tools"
 
+if not test -d "$root/.git"
+    echo "Cannot install FirstMate tools: checkout not found: $root" >&2
+    return 1
+end
 if not type --query npm
     echo 'Cannot install FirstMate tools: npm not installed.'
     return 1

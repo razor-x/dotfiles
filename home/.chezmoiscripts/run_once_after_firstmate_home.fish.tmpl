@@ -1,0 +1,24 @@
+#!/usr/bin/env fish
+
+if not set --query XDG_DATA_HOME; or test -z "$XDG_DATA_HOME"
+    echo 'Cannot migrate FirstMate home: XDG_DATA_HOME is not set.' >&2
+    exit 1
+end
+if not set --query XDG_STATE_HOME; or test -z "$XDG_STATE_HOME"
+    echo 'Cannot migrate FirstMate home: XDG_STATE_HOME is not set.' >&2
+    exit 1
+end
+
+set --local legacy_home "$XDG_DATA_HOME/firstmate/.tools/home"
+set --local home "$XDG_STATE_HOME/firstmate"
+
+if not test -d "$legacy_home"
+    exit 0
+end
+if test -e "$home"
+    echo "Cannot migrate FirstMate home: target already exists: $home" >&2
+    exit 1
+end
+
+mkdir --parents (dirname "$home")
+mv "$legacy_home" "$home"
