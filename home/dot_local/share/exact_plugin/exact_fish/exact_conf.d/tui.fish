@@ -135,6 +135,8 @@ if status is-interactive
 
     alias srv serve
 
+    abbr fm firstmate
+
     # Set fifc editor.
     if set --query VISUAL; and test -n "$VISUAL"
         set --export fifc_editor $VISUAL
