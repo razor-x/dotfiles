@@ -11,6 +11,9 @@ repos:
   - path: config/dotfiles
     groups: [config]
     url: git@github.com:razor-x/dotfiles.git
+  - path: config/firstmate
+    url: git@github.com:rxfork/firstmate.git
+    groups: [config]
   - path: dev/blobpack
     groups: [dev]
     url: git@github.com:razor-x/blobpack.git
@@ -62,6 +65,3 @@ repos:
   - path: makenew/tsmodule
     groups: [makenew]
     url: git@github.com:makenew/tsmodule.git
-  - path: forks/firstmate
-    url: git@github.com:rxfork/firstmate.git
-    groups: [config]
