@@ -137,5 +137,7 @@ if status is-interactive
     abbr o opencode
 
     # Set fifc editor.
-    set --export fifc_editor $VISUAL
+    if set --query VISUAL; and test -n "$VISUAL"
+        set --export fifc_editor $VISUAL
+    end
 end

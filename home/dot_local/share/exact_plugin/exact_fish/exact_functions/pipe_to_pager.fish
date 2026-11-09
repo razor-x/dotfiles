@@ -1,8 +1,11 @@
 function pipe_to_pager \
     --description 'Paginate the current command'
 
+    if not set --query PAGER; or test -z "$PAGER"
+        return 0
+    end
+
     set --function cmd $PAGER
-    or return 1
 
     # Use delta for ripgrep with --json.
     if string match --regex --quiet '^\s*rg\b' (commandline --current-job);
