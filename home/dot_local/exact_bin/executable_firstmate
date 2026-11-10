@@ -31,7 +31,6 @@ export NM_HOME=${NM_HOME:-"$home/no-mistakes"}
 export NO_MISTAKES_NO_UPDATE_CHECK=1
 export ZELLIJ_SOCKET_DIR=${ZELLIJ_SOCKET_DIR:-"$zellij_home/socket"}
 export FM_BACKEND=${FM_BACKEND:-zellij}
-export FM_ZELLIJ_SESSION=${FM_ZELLIJ_SESSION:-firstmate-nono}
 export FM_PROJECTS_OVERRIDE="$projects"
 export TREEHOUSE_ROOT=${TREEHOUSE_ROOT:-"$projects/.treehouse"}
 export FM_WORKER_ENV_FORWARD='PATH
