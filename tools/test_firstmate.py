@@ -57,6 +57,7 @@ class FirstmateWrapper(unittest.TestCase):
             if name.startswith("FM_") or name in (
                 "TREEHOUSE_ROOT",
                 "NM_HOME",
+                "NM_TEST_START_DAEMON",
                 "LAVISH_AXI_STATE_DIR",
                 "PI_CODING_AGENT_SESSION_DIR",
                 "ZELLIJ_SOCKET_DIR",
@@ -98,6 +99,13 @@ class FirstmateWrapper(unittest.TestCase):
             capture["env"]["PI_CODING_AGENT_SESSION_DIR"],
             str(self.anchor / ".firstmate/pi/sessions"),
         )
+        self.assertEqual(
+            capture["env"]["FM_TASK_TMP_ROOT"], str(self.anchor / ".firstmate/task-tmp")
+        )
+        self.assertEqual(capture["env"]["NM_TEST_START_DAEMON"], "1")
+        self.assertIn(
+            "NM_TEST_START_DAEMON", capture["env"]["FM_WORKER_ENV_FORWARD"].splitlines()
+        )
         self.assertEqual(list(self.anchor.iterdir()), [])
 
     def test_physical_anchor_and_conflicting_inherited_selectors(self):
@@ -120,6 +128,8 @@ class FirstmateWrapper(unittest.TestCase):
             "FM_WORKER_ENV_FORWARD": "",
             "FM_BACKEND": "caller-backend",
             "FM_ZELLIJ_SESSION": "caller-session",
+            "FM_TASK_TMP_ROOT": str(self.anchor / ".firstmate/custom-tmp"),
+            "NM_TEST_START_DAEMON": "0",
             "NM_HOME": str(self.anchor / ".firstmate/custom-nm"),
             "LAVISH_AXI_STATE_DIR": str(self.anchor / ".firstmate/custom-prompts"),
             "PI_CODING_AGENT_DIR": str(self.root / "host-pi-preferences"),

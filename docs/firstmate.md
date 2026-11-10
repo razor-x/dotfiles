@@ -33,11 +33,15 @@ The wrapper owns the Pi/Zellij/Nono invocation:
 - Leaves Pi preferences/authentication in the host's normal agent directory;
   `PI_CODING_AGENT_SESSION_DIR` directs conversations into `<ship>/pi/sessions`.
 - Uses ship-contained defaults for Treehouse worktrees, No-mistakes state,
-  Lavish state and Zellij sockets/data. Existing selectors are passed to core for
+  task/launch temporary directories (`FM_TASK_TMP_ROOT`), Lavish state and Zellij sockets/data. Existing selectors are passed to core for
   compatibility checks, not silently relocated.
 - Deliberately scopes `XDG_CACHE_HOME` to `<ship>/cache` because Zellij stores
   resurrection/session metadata there. Host configuration and authentication
   directories are not copied into the ship.
+- Defaults `NM_TEST_START_DAEMON=1` only when unset, keeping the private
+  No-mistakes daemon inside the leased process tree instead of systemd. Core
+  requires No-mistakes 1.111.0+ and rejects incompatible supplied settings rather
+  than replacing them.
 - Applies a default `FM_WORKER_ENV_FORWARD` only when unset. An explicit list or
   explicit empty value is preserved. Core supplies no forwarding defaults.
 - Uses Nono's existing `firstmate` profile, reads the shared code checkout and
