@@ -11,6 +11,15 @@ index a9024789..855fda6d 100644
    fm_backend_zellij_session_exists "$session" || { echo "error: zellij session '$session' does not exist; run container_ensure first" >&2; return 1; }
    title=$(fm_backend_zellij_scoped_title "$label")
    tabs=$(fm_backend_zellij_cli "$session" action list-tabs --json 2>/dev/null)
+@@ -341,7 +341,7 @@ fm_backend_zellij_create_task() {  # <session> <label> <cwd>
+     return 1
+   fi
+   prev_active=$(printf '%s' "$tabs" | jq -r '.[]? | select(.active == true) | .tab_id' 2>/dev/null | head -1)
+-  tab_id=$(fm_backend_zellij_cli "$session" action new-tab --cwd "$cwd" --name "$title" 2>/dev/null | tr -d '[:space:]')
++  tab_id=$(fm_backend_zellij_cli "$session" action new-tab --layout default --cwd "$cwd" --name "$title" 2>/dev/null | tr -d '[:space:]')
+   case "$tab_id" in
+     ''|*[!0-9]*)
+       echo "error: zellij new-tab did not return a numeric tab id for '$title' (got '$tab_id'; session '$session' may not exist)" >&2
 @@ -350,7 +350,21 @@ fm_backend_zellij_create_task() {  # <session> <label> <cwd>
    esac
    pane_id=$(fm_backend_zellij_pane_for_tab "$session" "$tab_id")
