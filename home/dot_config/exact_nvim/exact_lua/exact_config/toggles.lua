@@ -15,7 +15,7 @@ function M.map_toggle(key, toggle)
   })
 
   if toggle.local_toggle then
-    vim.keymap.set("n", [[\o]] .. key, toggle.local_toggle, {
+    vim.keymap.set("n", "<LocalLeader>o" .. key, toggle.local_toggle, {
       desc = "Toggle " .. toggle.desc .. " for current " .. toggle.local_scope,
       silent = true,
     })

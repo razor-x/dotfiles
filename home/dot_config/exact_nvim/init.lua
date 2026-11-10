@@ -3,7 +3,7 @@ local bootstrap = require("bootstrap")
 local has_dotfiles, dotfiles = pcall(require, "dotfiles")
 
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = "'"
 
 bootstrap("https://github.com/folke/lazy.nvim.git", "11.17.5")
 

@@ -1,6 +1,7 @@
 local M = {}
 local toggles = require("config.toggles")
 
+vim.keymap.set({ "n", "x", "o" }, [[\]], "'", { desc = "Jump to mark line" })
 vim.keymap.set("n", [[\\]], "gcc", { desc = "Toggle comment on current line", remap = true })
 vim.keymap.set("x", [[\\]], "gc", { desc = "Toggle comment on selection", remap = true })
 

@@ -8,51 +8,52 @@ Shifted `<Leader>` mappings also have an unshifted alias using
 `<Leader><Leader>` plus the unshifted key when possible.
 
 Toggle mappings use `yo{key}` for global state. If a toggle supports
-buffer- or window-local state, replace `y` with `\`: `\o{key}`.
+buffer- or window-local state, replace `y` with `<LocalLeader>`:
+`<LocalLeader>o{key}`. `<LocalLeader>` is `'`.
 
                                         *yob* *yoh* *yoI*
 yob                     Toggle the background globally.
 yoh                     Toggle search highlighting globally.
 yoI                     Toggle case-insensitive searching globally.
 
-                                        *yoc* *\oc* *yoC* *\oC*
+                                        *yoc* *'oc* *yoC* *'oC*
 yoc                     Toggle `cursorline` globally.
-\oc                     Toggle `cursorline` for the current window.
+'oc                     Toggle `cursorline` for the current window.
 yoC                     Toggle `cursorcolumn` globally.
-\oC                     Toggle `cursorcolumn` for the current window.
+'oC                     Toggle `cursorcolumn` for the current window.
 
-                                                        *yod* *\od*
+                                                        *yod* *'od*
 yod                     Toggle diagnostics globally.
-\od                     Toggle diagnostics for the current buffer.
+'od                     Toggle diagnostics for the current buffer.
 
-                                        *yol* *\ol* *yon* *\on*
+                                        *yol* *'ol* *yon* *'on*
 yol                     Toggle `list` globally.
-\ol                     Toggle `list` for the current window.
+'ol                     Toggle `list` for the current window.
 yon                     Toggle `number` globally.
-\on                     Toggle `number` for the current window.
+'on                     Toggle `number` for the current window.
 
-                                        *yor* *\or* *yos* *\os*
+                                        *yor* *'or* *yos* *'os*
 yor                     Toggle `relativenumber` globally.
-\or                     Toggle `relativenumber` for the current window.
+'or                     Toggle `relativenumber` for the current window.
 yos                     Toggle `spell` globally.
-\os                     Toggle `spell` for the current window.
+'os                     Toggle `spell` for the current window.
 
-                                                        *yow* *\ow*
+                                                        *yow* *'ow*
 yow                     Toggle `wrap` globally.
-\ow                     Toggle `wrap` for the current window.
+'ow                     Toggle `wrap` for the current window.
 
                                                         *yoP*
 yoP                     Toggle system clipboard mappings between the `+`
                         and `*` registers. See |quote| and |clipboard|.
 
-                                                        *yom* *\om*
+                                                        *yom* *'om*
 yom                     Toggle `colorcolumn` globally between `81` and
                         disabled. See |'colorcolumn'|.
-\om                     Toggle `colorcolumn` for the current window.
+'om                     Toggle `colorcolumn` for the current window.
 
-                                                        *yoi* *\oi*
+                                                        *yoi* *'oi*
 yoi                     Toggle the indent scope indicator globally.
-\oi                     Toggle the indent scope indicator for the current
+'oi                     Toggle the indent scope indicator for the current
                         buffer.
 
                                         *z=z* *z=j* *z=k* *z=l*
@@ -71,6 +72,14 @@ Q                       Move backward to the end of the previous WORD
 
                                                         *U*
 U                       Redo. Equivalent to |CTRL-R|.
+
+                                              *dotfiles-backslash-mark*
+\{mark}                 Jump to the line containing {mark}. Equivalent to
+                        |'|.
+
+                                           *dotfiles-double-backslash*
+\\                      Toggle the current line's comment in Normal mode or
+                        the selection's comments in Visual mode (recursive).
 
                                                         *&*
 &                       Repeat the last substitution with its flags.
