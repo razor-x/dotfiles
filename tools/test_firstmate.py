@@ -1,4 +1,4 @@
-"""Contract for the minimal public firstmate wrapper; no real capsule or server."""
+"""Caller-owned Firstmate ship integration; private fixtures, never real sessions."""
 
 import json
 import os
@@ -8,10 +8,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-WRAPPER = (
-    Path(__file__).resolve().parents[1]
-    / "home/dot_local/exact_bin/executable_firstmate"
-)
+BIN = Path(__file__).resolve().parents[1] / "home/dot_local/exact_bin"
+WRAPPER = BIN / "executable_firstmate"
 
 
 class FirstmateWrapper(unittest.TestCase):
@@ -21,28 +19,49 @@ class FirstmateWrapper(unittest.TestCase):
         self.root = Path(self.tmp.name)
         self.anchor = self.root / "anchor with spaces"
         self.anchor.mkdir()
-        self.entry = self.root / "data/firstmate/bin/fm-firstmate.sh"
+        self.entry = self.root / "data/firstmate/bin/fm-board.sh"
         self.entry.parent.mkdir(parents=True)
         self.capture = self.root / "capture.json"
         self.entry.write_text(
             "#!/usr/bin/env python3\n"
             "import json, os, signal, sys\n"
             "with open(os.environ['FIRSTMATE_CAPTURE'], 'w') as f:\n"
-            "    json.dump({'env': dict(os.environ), 'args': sys.argv[1:], 'pid': os.getpid()}, f)\n"
-            "if os.environ.get('TEST_SIGNAL'): os.kill(os.getpid(), signal.SIGTERM)\n"
-            "sys.exit(int(os.environ.get('TEST_EXIT', '0')))\n"
+            "    json.dump({'env':dict(os.environ),'args':sys.argv[1:],'pid':os.getpid()},f)\n"
+            "if os.environ.get('TEST_SIGNAL'): os.kill(os.getpid(),signal.SIGTERM)\n"
+            "sys.exit(int(os.environ.get('TEST_EXIT','0')))\n"
         )
         self.entry.chmod(0o755)
+        fakebin = self.root / "bin"
+        fakebin.mkdir()
+        for name, version in (
+            ("pi", "1.5.0"),
+            ("zellij", "zellij 0.45.1"),
+            ("nono", "nono 0.81.0"),
+        ):
+            file = fakebin / name
+            file.write_text(
+                '#!/bin/sh\n[ "$1" = --version ] || exit 99\nprintf "%s\\n" "'
+                + version
+                + '"\n'
+            )
+            file.chmod(0o755)
         self.env = dict(
             os.environ,
             XDG_DATA_HOME=str(self.root / "data"),
             FIRSTMATE_CAPTURE=str(self.capture),
+            PATH=f"{fakebin}:{os.environ['PATH']}",
         )
         for name in list(self.env):
-            if name.startswith("FM_"):
+            if name.startswith("FM_") or name in (
+                "TREEHOUSE_ROOT",
+                "NM_HOME",
+                "LAVISH_AXI_STATE_DIR",
+                "PI_CODING_AGENT_SESSION_DIR",
+                "ZELLIJ_SOCKET_DIR",
+            ):
                 del self.env[name]
 
-    def launch(self, *args, env=None):
+    def launch(self, *args, env=None, input=None):
         return subprocess.run(
             ["sh", str(WRAPPER), *map(str, args)],
             check=False,
@@ -50,63 +69,107 @@ class FirstmateWrapper(unittest.TestCase):
             env=dict(self.env, **(env or {})),
             capture_output=True,
             text=True,
+            input=input,
         )
 
     def captured(self):
         return json.loads(self.capture.read_text())
 
-    def test_relative_anchor_and_forwarded_arguments(self):
+    def test_relative_anchor_and_literal_runtime_arguments(self):
         result = self.launch(
             "anchor with spaces", "--model", "a model", "", "--", "a;echo not-a-command"
         )
         self.assertEqual(result.returncode, 0, result.stderr)
+        capture = self.captured()
         self.assertEqual(
-            self.captured()["args"],
-            ["--model", "a model", "", "--", "a;echo not-a-command"],
+            capture["args"][:4], ["--anchor", str(self.anchor), "--", "nono"]
         )
-        self.assertEqual(self.captured()["env"]["FM_ANCHOR"], str(self.anchor))
+        layout = capture["args"][capture["args"].index("--layout-string") + 1]
+        self.assertIn(
+            'args "--approve" "--model" "a model" "" "--" "a;echo not-a-command"',
+            layout,
+        )
         self.assertEqual(
-            self.captured()["env"]["FM_HOME"], str(self.anchor / ".firstmate/home")
+            capture["env"]["FM_HOME"], str(self.anchor / ".firstmate/home")
+        )
+        self.assertEqual(
+            capture["env"]["PI_CODING_AGENT_SESSION_DIR"],
+            str(self.anchor / ".firstmate/pi/sessions"),
         )
         self.assertEqual(list(self.anchor.iterdir()), [])
 
-    def test_physical_anchor_overrides_inherited_paths(self):
+    def test_physical_anchor_and_conflicting_inherited_selectors(self):
         link = self.root / "linked anchor"
         link.symlink_to(self.anchor)
-        self.assertEqual(
-            self.launch(
-                link, env={"FM_ANCHOR": "/wrong-anchor", "FM_HOME": "/wrong-home"}
-            ).returncode,
-            0,
+        result = self.launch(
+            link, env={"FM_ANCHOR": str(link), "FM_HOME": str(link / ".firstmate/home")}
         )
+        self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(self.captured()["env"]["FM_ANCHOR"], str(self.anchor))
-        self.assertEqual(
-            self.captured()["env"]["FM_HOME"], str(self.anchor / ".firstmate/home")
-        )
+        self.capture.unlink()
+        for key in ("FM_ANCHOR", "FM_HOME"):
+            with self.subTest(selector=key):
+                result = self.launch(link, env={key: str(self.root / "wrong")})
+                self.assertNotEqual(result.returncode, 0)
+                self.assertFalse(self.capture.exists())
 
-    def test_only_two_path_variables_are_added(self):
-        self.assertEqual(self.launch(self.anchor).returncode, 0)
-        env = self.captured()["env"]
-        # Shell-maintained '_' and PWD are not wrapper path configuration.
-        added = set(env) - set(self.env) - {"_", "PWD"}
-        self.assertEqual(added, {"FM_ANCHOR", "FM_HOME"})
-        for key in set(self.env) - {"_", "PWD"}:
-            self.assertEqual(env[key], self.env[key], key)
+    def test_caller_preferences_and_explicit_empty_forwarding_are_preserved(self):
+        supplied = {
+            "FM_WORKER_ENV_FORWARD": "",
+            "FM_BACKEND": "caller-backend",
+            "FM_ZELLIJ_SESSION": "caller-session",
+            "NM_HOME": str(self.anchor / ".firstmate/custom-nm"),
+            "LAVISH_AXI_STATE_DIR": str(self.anchor / ".firstmate/custom-prompts"),
+            "PI_CODING_AGENT_DIR": str(self.root / "host-pi-preferences"),
+            "PI_SKIP_VERSION_CHECK": "0",
+            "PI_CLIPBOARD_OSC52": "caller-setting",
+            "NO_MISTAKES_NO_UPDATE_CHECK": "0",
+        }
+        result = self.launch(self.anchor, env=supplied)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        for key, value in supplied.items():
+            self.assertEqual(self.captured()["env"][key], value, key)
+        self.assertEqual(
+            self.captured()["env"]["XDG_CACHE_HOME"],
+            str(self.anchor / ".firstmate/cache"),
+        )
+        self.assertFalse((self.root / "host-pi-preferences").exists())
+
+    def test_session_paths_cannot_escape_and_ids_are_not_guessed(self):
+        for args in (
+            ("--session", str(self.root / "outside.jsonl")),
+            ("--session-dir=" + str(self.root / "outside"),),
+            ("--session", "unscoped-session-id"),
+        ):
+            with self.subTest(args=args):
+                self.assertNotEqual(self.launch(self.anchor, *args).returncode, 0)
+                self.assertFalse(self.capture.exists())
+        inside = self.anchor / ".firstmate/pi/sessions/inside.jsonl"
+        result = self.launch(self.anchor, "--session", inside)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        layout = self.captured()["args"][-1]
+        self.assertIn(str(inside), layout)
+
+    def test_feature_versions_fail_without_falling_back(self):
+        pi = self.root / "bin/pi"
+        pi.write_text("#!/bin/sh\nprintf '1.2.0\\n'\n")
+        pi.chmod(0o755)
+        result = self.launch(self.anchor)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Pi 1.5.0+", result.stderr)
+        self.assertFalse(self.capture.exists())
 
     def test_missing_and_nondirectory_anchors(self):
         self.assertNotEqual(self.launch().returncode, 0)
-        self.assertNotEqual(self.launch(self.root / "absent").returncode, 0)
+        self.assertNotEqual(self.launch(self.root / "missing").returncode, 0)
         file = self.root / "file"
         file.touch()
         self.assertNotEqual(self.launch(file).returncode, 0)
         self.assertFalse(self.capture.exists())
 
-    def test_exit_status(self):
-        self.assertEqual(
-            self.launch(self.anchor, env={"TEST_EXIT": "37"}).returncode, 37
-        )
-
-    def test_exec_and_signal_behavior(self):
+    def test_exit_status_and_exec_signal_behavior(self):
+        result = self.launch(self.anchor, env={"TEST_EXIT": "37"})
+        self.assertEqual(result.returncode, 37)
         process = subprocess.Popen(
             ["sh", str(WRAPPER), str(self.anchor)],
             cwd=self.root,
@@ -117,6 +180,30 @@ class FirstmateWrapper(unittest.TestCase):
         process.communicate(timeout=5)
         self.assertEqual(self.captured()["pid"], process.pid)
         self.assertEqual(process.returncode, -signal.SIGTERM)
+
+    def test_external_transport_delegators_preserve_arguments_and_status(self):
+        for command in ("fm-dock", "fm-undock"):
+            entry = self.entry.with_name(command + ".sh")
+            entry.write_text(self.entry.read_text())
+            entry.chmod(0o755)
+            result = subprocess.run(
+                [
+                    "sh",
+                    str(BIN / ("executable_" + command)),
+                    "--anchor",
+                    str(self.anchor),
+                    "--literal",
+                ],
+                cwd=self.root,
+                check=False,
+                env=dict(self.env, TEST_EXIT="37"),
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 37, result.stderr)
+            self.assertEqual(
+                self.captured()["args"], ["--anchor", str(self.anchor), "--literal"]
+            )
 
 
 if __name__ == "__main__":

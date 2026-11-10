@@ -1,0 +1,4 @@
+#!/bin/sh
+# External ship release; core owns ownership and lock checks.
+set -eu
+exec "${XDG_DATA_HOME:-"$HOME/.local/share"}/firstmate/bin/fm-undock.sh" "$@"

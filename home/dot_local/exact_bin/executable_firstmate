@@ -1,22 +1,100 @@
 #!/bin/sh
-
+# Caller-owned Linux ship integration. Core owns validation, docking and the lease.
 set -eu
 
 if [ "$#" -eq 0 ]; then
-  printf 'Usage: firstmate <anchor> [arguments...]\n' >&2
-  exit 2
+    printf 'Usage: firstmate <anchor> [Pi arguments...]\n' >&2
+    exit 2
+fi
+if [ "$(uname -s)" != Linux ]; then
+    printf 'Cannot run Firstmate: ship boarding requires Linux.\n' >&2
+    exit 1
 fi
 requested=$1
 shift
-if [ ! -d "$requested" ]; then
-  printf 'Cannot run Firstmate: anchor is not a directory: %s\n' "$requested" >&2
-  exit 1
+if ! anchor=$(CDPATH='' cd -P -- "$requested" 2>/dev/null && pwd -P); then
+    printf 'Cannot run Firstmate: anchor is not a directory: %s\n' "$requested" >&2
+    exit 1
 fi
-if ! FM_ANCHOR=$(CDPATH='' cd -P -- "$requested" 2>/dev/null && pwd -P); then
-  printf 'Cannot run Firstmate: anchor cannot be resolved: %s\n' "$requested" >&2
-  exit 1
+ship="$anchor/.firstmate"
+for selector in FM_ANCHOR FM_HOME; do
+    case "$selector" in
+        FM_ANCHOR) supplied=${FM_ANCHOR:-}; expected=$anchor ;;
+        FM_HOME) supplied=${FM_HOME:-}; expected="$ship/home" ;;
+    esac
+    if [ -n "$supplied" ] && [ "$(realpath -m -- "$supplied")" != "$expected" ]; then
+        printf 'Cannot run Firstmate: inherited %s conflicts with the requested anchor.\n' "$selector" >&2
+        exit 1
+    fi
+done
+root="${XDG_DATA_HOME:-"$HOME/.local/share"}/firstmate"
+if [ ! -x "$root/bin/fm-board.sh" ]; then
+    printf 'Cannot run Firstmate: install the ship-boarding core first: %s\n' "$root" >&2
+    exit 1
 fi
-FM_HOME="$FM_ANCHOR/.firstmate/home"
-export FM_ANCHOR FM_HOME
+if [ -d "$root/.tools/node_modules/.bin" ]; then
+    PATH="$root/.tools/node_modules/.bin:$PATH"
+fi
+export PATH
+pi=$(command -v pi)
+FM_ANCHOR=$anchor
+FM_HOME="$ship/home"
+FM_BACKEND=${FM_BACKEND:-zellij}
+FM_ZELLIJ_SESSION=${FM_ZELLIJ_SESSION:-"fm-$(python3 -c 'import uuid; print(uuid.uuid4().hex[:12])')"}
+TREEHOUSE_ROOT=${TREEHOUSE_ROOT:-"$ship/worktrees"}
+NM_HOME=${NM_HOME:-"$ship/no-mistakes"}
+LAVISH_AXI_STATE_DIR=${LAVISH_AXI_STATE_DIR:-"$ship/lavish-axi"}
+PI_CODING_AGENT_SESSION_DIR=${PI_CODING_AGENT_SESSION_DIR:-"$ship/pi/sessions"}
+ZELLIJ_SOCKET_DIR=${ZELLIJ_SOCKET_DIR:-"$ship/zellij/socket"}
+# Zellij's Linux resurrection cache follows XDG_CACHE_HOME, not its socket dir.
+XDG_CACHE_HOME="$ship/cache"
+NONO_NO_SAVE_PROMPT=${NONO_NO_SAVE_PROMPT-1}
+PI_SKIP_VERSION_CHECK=${PI_SKIP_VERSION_CHECK-1}
+PI_CLIPBOARD_OSC52=${PI_CLIPBOARD_OSC52-1}
+NO_MISTAKES_NO_UPDATE_CHECK=${NO_MISTAKES_NO_UPDATE_CHECK-1}
+if [ "${FM_WORKER_ENV_FORWARD+x}" != x ]; then
+    FM_WORKER_ENV_FORWARD='PATH
+TREEHOUSE_ROOT
+PI_CODING_AGENT_SESSION_DIR
+PI_SKIP_VERSION_CHECK
+PI_CLIPBOARD_OSC52
+LAVISH_AXI_STATE_DIR
+NM_HOME
+NO_MISTAKES_NO_UPDATE_CHECK'
+fi
+export FM_ANCHOR FM_HOME FM_BACKEND FM_ZELLIJ_SESSION TREEHOUSE_ROOT NM_HOME LAVISH_AXI_STATE_DIR
+export PI_CODING_AGENT_SESSION_DIR ZELLIJ_SOCKET_DIR XDG_CACHE_HOME FM_WORKER_ENV_FORWARD
+export NONO_NO_SAVE_PROMPT PI_SKIP_VERSION_CHECK PI_CLIPBOARD_OSC52 NO_MISTAKES_NO_UPDATE_CHECK
+# Never attach a ship runtime to an ambient host session.
+unset ZELLIJ ZELLIJ_SESSION_NAME ZELLIJ_PANE_ID
 
-exec "${XDG_DATA_HOME:-"$HOME/.local/share"}/firstmate/bin/fm-firstmate.sh" "$@"
+layout=$(python3 - "$root" "$pi" "$ship" "$("$pi" --version)" "$(zellij --version)" "$(nono --version)" "$@" <<'PY'
+import json
+from pathlib import Path
+import re
+import sys
+
+root, executable, ship, pi_version, zellij_version, nono_version = sys.argv[1:7]
+for name, raw, minimum in (("Pi", pi_version, (1, 5, 0)), ("Zellij", zellij_version, (0, 45, 1)), ("Nono", nono_version, (0, 81, 0))):
+    match = re.search(r"\b(\d+)\.(\d+)\.(\d+)\b", raw)
+    if not match or tuple(map(int, match.groups())) < minimum:
+        sys.exit(f"Cannot run Firstmate: {name} {'.'.join(map(str, minimum))}+ is required; got {raw!r}.")
+args = sys.argv[7:]
+for i, arg in enumerate(args):
+    flag, equals, value = arg.partition("=")
+    if flag not in ("--session", "--session-dir"):
+        continue
+    if not equals:
+        if i + 1 == len(args):
+            sys.exit(f"Cannot run Firstmate: {flag} needs a ship-contained absolute path.")
+        value = args[i + 1]
+    path = Path(value).expanduser()
+    if not path.is_absolute() or (path.resolve() != Path(ship) and Path(ship) not in path.resolve().parents):
+        sys.exit(f"Cannot run Firstmate: {flag} must stay inside the ship; session IDs are unsupported.")
+quote = lambda value: json.dumps(value, ensure_ascii=False)
+print(f"layout {{ pane command={quote(executable)} cwd={quote(root)} {{ args {' '.join(map(quote, ['--approve', *args]))}; close_on_exit true; }} }}")
+PY
+)
+exec "$root/bin/fm-board.sh" --anchor "$anchor" -- \
+    nono run --strict-broker-path --profile firstmate --workdir "$root" --read "$root" --allow "$ship" -- \
+    zellij --data-dir "$ship/zellij/data" --session "$FM_ZELLIJ_SESSION" --layout-string "$layout"
