@@ -1,0 +1,4 @@
+#!/bin/sh
+# Firstmate owns all docking behavior and explicit --anchor path derivation.
+set -eu
+exec "${XDG_DATA_HOME:-"$HOME/.local/share"}/firstmate/bin/fm-dock.sh" "$@"
