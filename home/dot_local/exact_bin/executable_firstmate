@@ -69,7 +69,6 @@ export NONO_NO_SAVE_PROMPT PI_SKIP_VERSION_CHECK PI_CLIPBOARD_OSC52 NO_MISTAKES_
 unset ZELLIJ ZELLIJ_SESSION_NAME ZELLIJ_PANE_ID
 
 layout=$(python3 - "$root" "$pi" "$ship" "$("$pi" --version)" "$(zellij --version)" "$(nono --version)" "$@" <<'PY'
-import json
 from pathlib import Path
 import re
 import sys
@@ -91,8 +90,13 @@ for i, arg in enumerate(args):
     path = Path(value).expanduser()
     if not path.is_absolute() or (path.resolve() != Path(ship) and Path(ship) not in path.resolve().parents):
         sys.exit(f"Cannot run Firstmate: {flag} must stay inside the ship; session IDs are unsupported.")
-quote = lambda value: json.dumps(value, ensure_ascii=False)
-print(f"layout {{ pane command={quote(executable)} cwd={quote(root)} {{ args {' '.join(map(quote, ['--approve', *args]))}; close_on_exit true; }} }}")
+def quote(value):
+    # KDL uses braced Unicode escapes, not JSON's fixed-width escapes.
+    return '"' + "".join(
+        "\\" + c if c in ("\\", '"') else f"\\u{{{ord(c):x}}}" if not c.isprintable() else c
+        for c in value
+    ) + '"'
+print(f"layout {{\n  pane command={quote(executable)} cwd={quote(root)} {{\n    args {' '.join(map(quote, ['--approve', *args]))}\n    close_on_exit true\n  }}\n}}")
 PY
 )
 exec "$root/bin/fm-board.sh" --anchor "$anchor" -- \

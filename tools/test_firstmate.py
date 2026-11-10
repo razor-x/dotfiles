@@ -2,6 +2,7 @@
 
 import json
 import os
+import shutil
 import signal
 import subprocess
 import tempfile
@@ -10,6 +11,7 @@ from pathlib import Path
 
 BIN = Path(__file__).resolve().parents[1] / "home/dot_local/exact_bin"
 WRAPPER = BIN / "executable_firstmate"
+NATIVE_ZELLIJ = shutil.which("zellij")
 
 
 class FirstmateWrapper(unittest.TestCase):
@@ -204,6 +206,56 @@ class FirstmateWrapper(unittest.TestCase):
             self.assertEqual(
                 self.captured()["args"], ["--anchor", str(self.anchor), "--literal"]
             )
+
+    @unittest.skipUnless(
+        NATIVE_ZELLIJ, "zellij absent; native layout parser unavailable"
+    )
+    def test_generated_layout_is_accepted_by_real_zellij(self):
+        private = self.root / "native-zellij"
+        private.mkdir()
+        config = private / "config.kdl"
+        config.write_text("")
+        env = dict(
+            self.env,
+            XDG_CONFIG_HOME=str(private / "config"),
+            XDG_CACHE_HOME=str(private / "cache"),
+            XDG_DATA_HOME=str(private / "data"),
+            XDG_STATE_HOME=str(private / "state"),
+            ZELLIJ_CONFIG_DIR=str(private / "config/zellij"),
+            ZELLIJ_SOCKET_DIR=str(private / "socket"),
+            ZELLIJ_LAYOUT_DIR=str(private / "layouts"),
+        )
+        env.pop("ZELLIJ_CONFIG_FILE", None)
+        for value in (
+            "a model",
+            "control" + "".join(map(chr, range(1, 32))),
+            r"literal\u001b",
+            "unicode\u2028value",
+        ):
+            with self.subTest(value=value):
+                result = self.launch(self.anchor, "--model", value)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                layout = self.captured()["args"][-1]
+                checked = subprocess.run(
+                    [
+                        NATIVE_ZELLIJ,
+                        "--config",
+                        str(config),
+                        "--data-dir",
+                        str(private / "data"),
+                        "--layout-string",
+                        layout,
+                        "setup",
+                        "--check",
+                    ],
+                    env=env,
+                    cwd=private,
+                    check=False,
+                    capture_output=True,
+                    text=True,
+                    timeout=10,
+                )
+                self.assertEqual(checked.returncode, 0, checked.stdout + checked.stderr)
 
 
 if __name__ == "__main__":

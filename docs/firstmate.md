@@ -75,4 +75,7 @@ or free lock is not same-boot recovery authority.
 storage, version refusal, physical/conflicting anchors, exec/signals/status and
 external transport delegation with temporary fake entrypoints.
 `just check-tools` includes the same tests in the tools collection.
+When Zellij is installed, they also send the generated layout to its real
+`setup --check` parser in private configuration/cache/data/socket directories,
+including control-character and Unicode arguments.
 These tests never launch a real user session or apply sandbox policy.
