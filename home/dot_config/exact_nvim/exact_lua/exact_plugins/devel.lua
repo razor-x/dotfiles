@@ -40,6 +40,9 @@ M.spec = {
   },
   {
     "dlyongemallo/diffview-plus.nvim",
+    init = function()
+      vim.opt.diffopt:append("iwhiteall")
+    end,
     cmd = {
       "DiffviewOpen",
       "DiffviewToggle",
