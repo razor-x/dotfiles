@@ -73,6 +73,9 @@ format-tools:
   ruff format $(git ls-files 'tools/*.py' 'tools/*.pyi' 'tools/*.ipynb')
   ruff check --fix $(git ls-files 'tools/*.py' 'tools/*.pyi' 'tools/*.ipynb')
 
+check-firstmate:
+  python -m unittest discover --start-directory tools --pattern test_firstmate.py --verbose
+
 check-tools:
   ruff format --check $(git ls-files 'tools/*.py' 'tools/*.pyi' 'tools/*.ipynb')
   python -m unittest discover --start-directory tools --verbose

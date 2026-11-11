@@ -1,58 +1,75 @@
 #!/bin/sh
-
+# Personal Pi/tmux/Nono policy; shared core owns local anchoring and its gate.
 set -eu
-
-if [ -z "${XDG_DATA_HOME:-}" ] || [ -z "${XDG_STATE_HOME:-}" ]; then
-  printf 'Cannot run FirstMate: XDG_DATA_HOME and XDG_STATE_HOME must be set.\n' >&2
-  exit 1
+fail() { printf 'firstmate: %s\n' "$*" >&2; exit 1; }
+[ "$#" -ge 1 ] || fail 'usage: firstmate ANCHOR [Pi arguments...]'
+[ "$(uname -s)" = Linux ] || fail 'local vessels currently require Linux'
+anchor=$(CDPATH='' cd -P -- "$1" && pwd -P) || fail 'anchor must be an existing directory'
+shift
+vessel="$anchor/.firstmate"
+root="${XDG_DATA_HOME:-"$HOME/.local/share"}/firstmate"
+[ -x "$root/bin/fm-anchor.sh" ] || fail 'install the local-anchoring core first'
+for name in FM_ANCHOR FM_HOME; do
+  case "$name" in FM_ANCHOR) supplied=${FM_ANCHOR:-}; expected=$anchor ;; FM_HOME) supplied=${FM_HOME:-}; expected=$vessel ;; esac
+  [ -z "$supplied" ] || [ "$(realpath -m -- "$supplied")" = "$expected" ] || fail "inherited $name conflicts with this anchor"
+done
+[ "${FM_BACKEND:-tmux}" = tmux ] || fail 'this integration uses tmux, without backend fallback'
+[ ! -d "$root/.tools/node_modules/.bin" ] || PATH="$root/.tools/node_modules/.bin:$PATH"
+export PATH
+for tool in pi tmux nono jq; do command -v "$tool" >/dev/null || fail "required tool is missing: $tool"; done
+pi=$(command -v pi)
+export FM_ANCHOR="$anchor" FM_HOME="$vessel" FM_BACKEND=tmux
+export FM_CONFIG_OVERRIDE="${FM_CONFIG_OVERRIDE:-"$vessel/config"}"
+export FM_DATA_OVERRIDE="${FM_DATA_OVERRIDE:-"$vessel/data"}"
+export FM_STATE_OVERRIDE="${FM_STATE_OVERRIDE:-"$vessel/state"}"
+export FM_PROJECTS_OVERRIDE="${FM_PROJECTS_OVERRIDE:-"$vessel/projects"}"
+export TREEHOUSE_ROOT="${TREEHOUSE_ROOT:-"$vessel/worktrees"}"
+export NM_HOME="${NM_HOME:-"$vessel/no-mistakes"}"
+export LAVISH_AXI_STATE_DIR="${LAVISH_AXI_STATE_DIR:-"$vessel/lavish-axi"}"
+export PI_CODING_AGENT_SESSION_DIR="${PI_CODING_AGENT_SESSION_DIR:-"$vessel/pi/sessions"}"
+export TMUX_TMPDIR="$vessel/tmux" XDG_CACHE_HOME="$vessel/cache"
+export NONO_NO_SAVE_PROMPT="${NONO_NO_SAVE_PROMPT-1}" PI_SKIP_VERSION_CHECK="${PI_SKIP_VERSION_CHECK-1}"
+export PI_CLIPBOARD_OSC52="${PI_CLIPBOARD_OSC52-1}" NO_MISTAKES_NO_UPDATE_CHECK="${NO_MISTAKES_NO_UPDATE_CHECK-1}"
+export NM_TEST_START_DAEMON="${NM_TEST_START_DAEMON-1}"
+if [ "${FM_WORKER_ENV_FORWARD+x}" != x ]; then
+  FM_WORKER_ENV_FORWARD='PATH TREEHOUSE_ROOT NM_HOME LAVISH_AXI_STATE_DIR PI_CODING_AGENT_SESSION_DIR TMUX_TMPDIR XDG_CACHE_HOME PI_SKIP_VERSION_CHECK PI_CLIPBOARD_OSC52 NO_MISTAKES_NO_UPDATE_CHECK NM_TEST_START_DAEMON'
 fi
-
-root="$XDG_DATA_HOME/firstmate"
-tools="$root/.tools"
-requested_root=${1:-$PWD}
-if [ "$#" -gt 0 ]; then
+export FM_WORKER_ENV_FORWARD
+if [ -z "${FM_TMUX_SESSION:-}" ]; then
+  read -r FM_TMUX_SESSION < /proc/sys/kernel/random/uuid
+  FM_TMUX_SESSION="fm-$FM_TMUX_SESSION"
+fi
+case "$FM_TMUX_SESSION" in *[!A-Za-z0-9_-]*) fail 'invalid private tmux session name' ;; esac
+export FM_TMUX_SESSION
+unset TMUX TMUX_PANE ZELLIJ ZELLIJ_SESSION_NAME ZELLIJ_PANE_ID
+session_path() {
+  case "$1" in /*) ;; *) fail 'Pi sessions require a vessel-contained absolute path, not an unscoped ID' ;; esac
+  resolved=$(realpath -m -- "$1")
+  case "$resolved" in "$vessel"|"$vessel"/*) ;; *) fail 'Pi session path is outside the vessel' ;; esac
+}
+need_path=''
+for argument do
+  if [ -n "$need_path" ]; then session_path "$argument"; need_path=''; continue; fi
+  case "$argument" in
+    --) break ;;
+    --session|--session-dir) need_path=$argument ;;
+    --session=*|--session-dir=*) session_path "${argument#*=}" ;;
+  esac
+done
+[ -z "$need_path" ] || fail "$need_path requires a path"
+if [ ! -e "$anchor/.firstmate.json" ] && [ ! -L "$anchor/.firstmate.json" ]; then
+  printf 'Anchor a new vessel here? [y/N] ' >&2
+  IFS= read -r answer || exit 1
+  case "$answer" in y|Y|yes|YES) "$root/bin/fm-anchor.sh" init --anchor "$anchor" >/dev/null ;; *) exit 1 ;; esac
+  # This is caller-owned policy for a new home, never an existing preference rewrite.
+  if [ ! -e "$NM_HOME/config.yaml" ]; then printf 'agent: pi\n' > "$NM_HOME/config.yaml"; fi
+fi
+# tmux parses terminal semicolons even after --; escape its separator once.
+for argument do
+  case "$argument" in *';') argument=${argument%;}'\;' ;; esac
+  set -- "$@" "$argument"
   shift
-fi
-if ! projects=$(cd "$requested_root" 2>/dev/null && pwd -P); then
-  printf 'Cannot run FirstMate: root directory not found: %s\n' "$requested_root" >&2
-  exit 1
-fi
-home="$projects/.firstmate"
-zellij_home="$home/zellij"
-
-if [ ! -d "$root/.git" ]; then
-  printf 'FirstMate checkout not found: %s\n' "$root" >&2
-  exit 1
-fi
-
-mkdir -p "$home" "$zellij_home/socket"
-cd "$root"
-
-export PATH="$tools/node_modules/.bin:$PATH"
-export NONO_NO_SAVE_PROMPT=1
-export PI_SKIP_VERSION_CHECK=1
-export PI_CLIPBOARD_OSC52=1
-export FM_HOME="$home"
-export LAVISH_AXI_STATE_DIR="${LAVISH_AXI_STATE_DIR:-"$home/lavish-axi"}"
-export NM_HOME="${NM_HOME:-"$home/no-mistakes"}"
-export NO_MISTAKES_NO_UPDATE_CHECK=1
-export ZELLIJ_SOCKET_DIR="${ZELLIJ_SOCKET_DIR:-"$zellij_home/socket"}"
-export FM_BACKEND="${FM_BACKEND:-zellij}"
-export FM_PROJECTS_OVERRIDE="$projects"
-export TREEHOUSE_ROOT="$projects"
-export FM_WORKER_ENV_FORWARD='PATH
-TREEHOUSE_ROOT
-PI_SKIP_VERSION_CHECK
-PI_CLIPBOARD_OSC52
-LAVISH_AXI_STATE_DIR
-NM_HOME
-NO_MISTAKES_NO_UPDATE_CHECK'
-
-exec nono run \
-  --strict-broker-path \
-  --profile firstmate \
-  --workdir "$root" \
-  --read "$root" \
-  --allow "$home" \
-  --allow "$projects" \
-  -- pi --approve "$@"
+done
+exec "$root/bin/fm-anchor.sh" run --anchor "$anchor" -- \
+  nono run --strict-broker-path --profile firstmate --workdir "$root" --read "$root" --allow "$vessel" -- \
+  tmux new-session -s "$FM_TMUX_SESSION" -c "$root" -- "$pi" --approve "$@"
