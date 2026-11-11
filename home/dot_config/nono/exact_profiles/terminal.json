@@ -3,6 +3,7 @@
     "java-runtime",
     "terminal-bat",
     "terminal-fish",
+    "terminal-tmux",
     "terminal-git",
     "terminal-eza",
     "terminal-fd",
