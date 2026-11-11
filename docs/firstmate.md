@@ -16,17 +16,16 @@ The core vessel guide owns the local metadata and gate contract.
 
 ## Caller policy
 
-`FM_HOME` is the vessel itself, with `config/`, `data/`, `state/` and `projects/` below it.
-Treehouse worktrees, Pi conversations, No-mistakes/Lavish state, tmux sockets and cache also use vessel-contained defaults.
-Conflicting inherited home/anchor settings and paths outside the vessel refuse rather than being silently relocated.
+Core owns the vessel layout, portable runtime environment and path validation; the wrapper does not set the shared directory variables.
 Pi preferences, authentication and installed tools stay on the host.
 Pi session options require an absolute vessel-contained path, not an unscoped session ID.
 
 This wrapper starts Pi directly with the personal `--approve` flag and leaves its arguments unchanged.
-It clears ambient multiplexer routing; Firstmate's ordinary tmux backend creates its detached worker session when needed, using the vessel's private `TMUX_TMPDIR`.
-The worker forwarding default applies only when unset; explicit lists and explicit empty values are preserved.
-New No-mistakes homes default to `agent: pi`; existing preferences are not rewritten.
-`NM_TEST_START_DAEMON=1` is the caller's default for the verified No-mistakes 1.111+ descendant daemon mode, avoiding external systemd startup.
+Core clears ambient routing; Firstmate's ordinary tmux backend creates its detached worker session when needed.
+The wrapper adds its personal preference names through `FM_WORKER_ENV_FORWARD_DEFAULTS`; core combines those with its portable forwarding defaults.
+An explicit `FM_WORKER_ENV_FORWARD`, including empty, overrides both layers.
+New No-mistakes homes default to `agent: pi`; the wrapper gets the selected settings location from core's initialization result rather than duplicating its layout.
+Existing preferences are not rewritten.
 Background work can still outlive the visible interface; stopping it is manual in this stage.
 
 The wrapper uses the Nono `firstmate` profile; sandbox policy is managed separately.
@@ -35,6 +34,5 @@ No transfer, automatic stopping, migration of old homes or backend fallback is i
 
 ## Verification
 
-Run `just check-firstmate` or `just check-tools`.
-For real core integration, set `FIRSTMATE_TEST_CORE=/path/to/firstmate/bin/fm-anchor.sh` when running the tests.
-The primary-launch regression checks a direct Pi command and exact arguments, without starting a real user session.
+Environment and forwarding coverage lives in core's `tests/fm-anchor.test.sh`.
+This minimal launcher has no separate test suite; interactive Pi/Nono and worker behavior are checked during local use.

@@ -73,9 +73,6 @@ format-tools:
   ruff format $(git ls-files 'tools/*.py' 'tools/*.pyi' 'tools/*.ipynb')
   ruff check --fix $(git ls-files 'tools/*.py' 'tools/*.pyi' 'tools/*.ipynb')
 
-check-firstmate:
-  python -m unittest discover --start-directory tools --pattern test_firstmate.py --verbose
-
 check-tools:
   ruff format --check $(git ls-files 'tools/*.py' 'tools/*.pyi' 'tools/*.ipynb')
   python -m unittest discover --start-directory tools --verbose
@@ -88,7 +85,7 @@ format:
   mdformat --exclude '**/skills/**' $(git ls-files '*.md')
   ruff format $(git ls-files '*.py' '*.pyi' '*.ipynb')
   ruff check --fix $(git ls-files '*.py' '*.pyi' '*.ipynb')
-  shfmt --write $(git ls-files '*.sh')
+  shfmt --write $(git ls-files '*.sh') home/dot_local/exact_bin
 
 check:
   cljfmt check $(git ls-files '*.clj')
@@ -97,7 +94,8 @@ check:
   stylua --check $(git ls-files '*.lua')
   mdformat --exclude '**/skills/**' --check $(git ls-files '*.md')
   ruff format --check $(git ls-files '*.py' '*.pyi' '*.ipynb')
-  shfmt --diff $(git ls-files '*.sh')
+  shfmt --diff $(git ls-files '*.sh') home/dot_local/exact_bin
+  shellcheck $(shfmt --find home/dot_local/exact_bin)
   fd --type f --extension lua . home/dot_config/exact_nvim/tests \
     --exec nvim --clean --headless -l {}
   npm --prefix home/dot_config/pi/extensions/exact_local run check
