@@ -1,14 +1,10 @@
 {
-  "extends": ["pi"],
+  "extends": ["pi", "tmux"],
   "meta": {
     "name": "firstmate",
     "version": "1.0.0",
-    "description": "FirstMate with Linux PTY allocation for isolated Zellij workers.",
+    "description": "Firstmate with Linux PTY allocation for local tmux vessels.",
     "author": "razor-x"
-  },
-  "filesystem": {
-    "read": ["$XDG_CONFIG_HOME/zellij"],
-    "allow": ["/dev/ptmx"]
   },
   "workdir": { "access": "read" }
 }

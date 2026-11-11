@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "terminal-tmux",
+    "name": "tmux",
     "version": "1.0.0",
     "description": "Tmux configuration and PTY allocation."
   },
