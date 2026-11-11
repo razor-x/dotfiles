@@ -14,6 +14,9 @@ repos:
   - path: config/firstmate
     url: git@github.com:rxfork/firstmate.git
     groups: [config]
+    remotes:
+      - name: upstream
+        url: git@github.com:kunchenguid/firstmate.git
   - path: dev/blobpack
     groups: [dev]
     url: git@github.com:razor-x/blobpack.git
