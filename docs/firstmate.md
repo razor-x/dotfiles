@@ -23,7 +23,7 @@ Session arguments are defaults, not a path-validation gate; explicitly supplied 
 
 This wrapper starts Pi directly with the personal `--approve` flag and leaves its arguments unchanged.
 Core clears ambient routing; Firstmate's ordinary tmux backend creates its detached worker session when needed.
-`environment.d/50-firstmate.conf` appends personal preference names to `FM_WORKER_ENV_FORWARD`.
+`environment.d/50-firstmate.conf` defines the personal preference names in `FM_WORKER_ENV_FORWARD`.
 Core appends its required portable names to that same list; empty or unset no longer disables core forwarding.
 The wrapper chooses `--agent pi` when asking core to initialize a vessel.
 Core records the No-mistakes choice and owns the configuration write; the launcher neither reads the initialization JSON nor writes tool configuration.
