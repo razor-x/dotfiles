@@ -1,22 +1,17 @@
-# Firstmate ship integration
+# Firstmate vessel integration
 
 ```sh
 firstmate ~/root [Pi arguments...]
 ```
 
-Linux-only. The argument is an existing anchor directory, not a collection of
-repositories to scan. The portable ship is `<anchor>/.firstmate`; its control
-record and advisory lock remain outside it. Absolute physical anchor paths must
-match between harbors.
-Zellij remains the default. To initialize and board an explicitly selected tmux
-ship, use:
+Linux-only, using tmux. The argument is an existing physical anchor directory.
+The vessel is `<anchor>/.firstmate`, distinct from a **ship task** (an implementation
+worker task). Its control record and advisory lock remain outside the vessel.
+Absolute physical anchor paths must match between harbors.
 
-```sh
-FM_BACKEND=tmux firstmate ~/tmux-root [Pi arguments...]
-```
-
-Use the same explicit selection on later boardings. An existing Zellij ship is
-not converted; its backend is immutable. No Zellij patches are removed.
+Zellij boarding is unsupported. Existing Zellij patches and dormant launch code
+remain for a separate cleanup; they are not an alternative runtime or fallback.
+An existing Zellij vessel is refused, never automatically converted.
 
 ## Responsibilities
 
@@ -25,76 +20,66 @@ core's `bin/fm-board.sh`. Core owns compatibility/containment checks, explicit
 initialization, discovery/docking questions and the full-environment lease.
 Core never chooses this wrapper's personal runtime flags or forwarding list.
 
-The wrapper owns the Pi/Nono invocation with the selected multiplexer:
+The wrapper owns the Pi/tmux/Nono invocation:
 
-- Requires Pi 1.5.0+, Nono 0.81.0+ and either Zellij 0.45.1+ or tmux 3.2+;
-  incompatible tools fail rather than selecting another stack.
-- Supplies `FM_HOME=<ship>/home` and defaults `FM_BACKEND` to `zellij`, without
-  changing an explicitly supplied backend.
-- Chooses a fresh private session unless the caller supplies `FM_ZELLIJ_SESSION`
-  or `FM_TMUX_SESSION`. Core rejects old endpoint aliases and unleased live servers.
-- For Zellij, builds a literal in-memory Pi layout with KDL strings. For tmux,
-  supplies direct Pi argv to `new-session`, without shell-command encoding.
+- Requires Pi 1.5.0+, tmux 3.2+ and Nono 0.81.0+; incompatible tools fail without
+  selecting another runtime. The caller defaults `FM_BACKEND` to `tmux` and
+  rejects other selections.
+- Supplies `FM_HOME=<vessel>/home` and chooses a fresh private `FM_TMUX_SESSION`
+  unless supplied. Core refuses old endpoint aliases and unleased live servers.
+- Uses vessel-contained `TMUX_TMPDIR` and clears ambient host multiplexer routing.
+  No host server is adopted.
+- Supplies direct Pi argv to `new-session`, without shell-command encoding.
   Terminal semicolons are escaped for tmux's command parser so Pi receives the
   original argument, including an existing backslash before the semicolon.
-  It writes no ship files before core has resolved ownership or confirmed initialization.
-- Uses `ZELLIJ_SOCKET_DIR` for Zellij or `TMUX_TMPDIR` for tmux, both beneath the
-  ship. Ambient host multiplexer routing is cleared; no host server is adopted.
-- Keeps the existing personal Pi defaults (`--approve`, optional version-check
-  suppression and OSC52) here, with supplied environment settings preserved.
-- Leaves Pi preferences/authentication in the host's normal agent directory;
-  `PI_CODING_AGENT_SESSION_DIR` directs conversations into `<ship>/pi/sessions`.
-- Uses ship-contained defaults for Treehouse worktrees, No-mistakes state,
-  task/launch temporary directories (`FM_TASK_TMP_ROOT`), Lavish state and selected
-  multiplexer sockets/data. Existing selectors are passed to core for
-  compatibility checks, not silently relocated.
-- Deliberately scopes `XDG_CACHE_HOME` to `<ship>/cache` because Zellij stores
-  resurrection/session metadata there. Host configuration and authentication
-  directories are not copied into the ship.
-- Defaults `NM_TEST_START_DAEMON=1` only when unset, keeping the private
-  No-mistakes daemon inside the leased process tree instead of systemd. Core
-  requires No-mistakes 1.111.0+ and rejects incompatible supplied settings rather
-  than replacing them.
-- Applies a default `FM_WORKER_ENV_FORWARD` only when unset. An explicit list or
-  explicit empty value is preserved. Core supplies no forwarding defaults.
-- Uses Nono's existing `firstmate` profile, reads the shared code checkout and
-  grants the same ship directory the original integration used. The old broad
-  anchor grant is not retained. No profile source is changed or deployed.
+- Writes no vessel files before core resolves ownership or confirms initialization.
+- Keeps personal Pi defaults (`--approve`, optional version-check suppression and
+  OSC52) here, preserving supplied environment settings.
+- Leaves Pi preferences/authentication in the host agent directory;
+  `PI_CODING_AGENT_SESSION_DIR` directs conversations into `<vessel>/pi/sessions`.
+- Uses contained defaults for Treehouse worktrees, No-mistakes state,
+  task/launch temporary directories (`FM_TASK_TMP_ROOT`), Lavish state and cache.
+  Existing selectors go to core for compatibility checks, not silent relocation.
+- Defaults `NM_TEST_START_DAEMON=1` only when unset, keeping the private No-mistakes
+  daemon inside the leased process tree instead of systemd. Core requires
+  No-mistakes 1.111.0+ and refuses incompatible supplied settings.
+- Applies default `FM_WORKER_ENV_FORWARD` only when unset. Explicit lists and
+  explicit empty values are preserved. Core supplies no forwarding defaults.
+- Uses Nono's existing `firstmate` profile, reads shared code and grants the
+  vessel directory. The old broad anchor grant is not retained. No profile is
+  changed or deployed.
 
 Inherited `FM_ANCHOR` or `FM_HOME` conflicting with the requested anchor is an
-error. Explicit `--session`/`--session-dir` arguments must use absolute paths
-inside the ship; unscoped session IDs are unsupported rather than searched in
-host state. Ordinary Pi usage and ordinary Firstmate home selection are unchanged.
+error. Explicit `--session`/`--session-dir` arguments must be absolute paths inside
+the vessel; unscoped session IDs are unsupported, not searched in host state.
+Ordinary Pi usage and ordinary Firstmate home selection are unchanged.
 
-`fm-dock` and `fm-undock` are external core delegators, including the noninteractive
-SSH peer entrypoint. They contain no second transport protocol or personal
-runtime policy. All three commands resolve core from `XDG_DATA_HOME/firstmate`,
-falling back to `~/.local/share/firstmate`.
+`fm-dock` and `fm-undock` externally delegate to core, including its noninteractive
+SSH peer entrypoint. They contain no second transport protocol or personal policy.
+All three commands resolve core from `XDG_DATA_HOME/firstmate`, falling back to
+`~/.local/share/firstmate`.
 
 ## Deployment order
 
-1. Land and install the companion Firstmate core interfaces first.
-1. Review the existing sandbox configuration outside the agent session.
+1. Land and install the companion core interfaces first.
+1. Review existing sandbox configuration outside the agent session.
 1. Land and apply this caller integration.
 
-Do not apply this wrapper to an older core. Neither wrapper nor core automatically
-converts existing ordinary homes, rewrites application metadata, migrates tasks
-or deletes unlanded repositories. Keep existing copies for deliberate manual
-reconciliation.
+Do not apply this wrapper to an older core. Neither wrapper nor core converts
+ordinary homes or existing vessels, rewrites application metadata, migrates tasks
+or deletes unlanded repositories. Keep copies for deliberate manual reconciliation.
 
-A crashed lifetime guard leaves a durable fence. Core can recover it only after
-a different kernel boot identity proves old writers cannot survive; a missing PID
-or free lock is not same-boot recovery authority.
+A crashed guard leaves a durable fence. Core recovers it only after a changed
+kernel boot identity proves old writers cannot survive; a missing PID or free
+lock is not same-boot recovery authority.
 
 ## Verification
 
-`just check-firstmate` checks caller policy, literal arguments, private session
-storage, explicit tmux/direct-argv selection, version refusal, physical/conflicting anchors, exec/signals/status and
-external transport delegation with temporary fake entrypoints.
-`just check-tools` includes the same tests in the tools collection.
-When Zellij is installed, they also send the generated layout to its real
-`setup --check` parser in private configuration/cache/data/socket directories,
-including control-character and Unicode arguments.
+`just check-firstmate` exercises caller policy, literal arguments, private session
+storage, tmux-only selection, version refusal, physical/conflicting anchors,
+exec/signals/status and transport delegation with temporary fake entrypoints.
+`just check-tools` includes the same cases.
 When tmux is installed, a private pane-free daemon checks terminal-semicolon
 arguments through its real command parser, without allocating a PTY or running Pi.
+Dormant Zellij parser coverage is skipped, not maintained as supported behavior.
 These tests never launch a real user session or apply sandbox policy.

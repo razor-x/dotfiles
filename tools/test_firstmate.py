@@ -90,11 +90,20 @@ class FirstmateWrapper(unittest.TestCase):
         self.assertEqual(
             capture["args"][:4], ["--anchor", str(self.anchor), "--", "nono"]
         )
-        layout = capture["args"][capture["args"].index("--layout-string") + 1]
-        self.assertIn(
-            'args "--approve" "--model" "a model" "" "--" "a;echo not-a-command"',
-            layout,
+        self.assertEqual(capture["env"]["FM_BACKEND"], "tmux")
+        self.assertEqual(
+            capture["args"][-7:],
+            [
+                str(self.root / "bin/pi"),
+                "--approve",
+                "--model",
+                "a model",
+                "",
+                "--",
+                "a;echo not-a-command",
+            ],
         )
+        self.assertNotIn("--layout-string", capture["args"])
         self.assertEqual(
             capture["env"]["FM_HOME"], str(self.anchor / ".firstmate/home")
         )
@@ -222,9 +231,10 @@ class FirstmateWrapper(unittest.TestCase):
             )
 
     def test_tmux_versions_and_unknown_backends_never_fall_back(self):
-        result = self.launch(self.anchor, env={"FM_BACKEND": "unsupported"})
-        self.assertNotEqual(result.returncode, 0)
-        self.assertFalse(self.capture.exists())
+        for backend in ("unsupported", "zellij"):
+            result = self.launch(self.anchor, env={"FM_BACKEND": backend})
+            self.assertNotEqual(result.returncode, 0)
+            self.assertFalse(self.capture.exists())
         tmux = self.root / "bin/tmux"
         tmux.write_text("#!/bin/sh\nprintf 'tmux 3.1\\n'\n")
         result = self.launch(self.anchor, env={"FM_BACKEND": "tmux"})
@@ -324,8 +334,8 @@ class FirstmateWrapper(unittest.TestCase):
                 timeout=10,
             )
 
-    @unittest.skipUnless(
-        NATIVE_ZELLIJ, "zellij absent; native layout parser unavailable"
+    @unittest.skip(
+        "Zellij boarding is unsupported; legacy parser coverage retained for later cleanup"
     )
     def test_generated_layout_is_accepted_by_real_zellij(self):
         private = self.root / "native-zellij"

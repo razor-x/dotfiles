@@ -39,7 +39,12 @@ export PATH
 pi=$(command -v pi)
 FM_ANCHOR=$anchor
 FM_HOME="$ship/home"
-FM_BACKEND=${FM_BACKEND:-zellij}
+FM_BACKEND=${FM_BACKEND:-tmux}
+# Only tmux is supported; legacy Zellij launch code awaits separate cleanup.
+if [ "$FM_BACKEND" != tmux ]; then
+    printf 'Cannot run Firstmate: vessel boarding supports only tmux.\n' >&2
+    exit 1
+fi
 case "$FM_BACKEND" in
     zellij)
         FM_ZELLIJ_SESSION=${FM_ZELLIJ_SESSION:-"fm-$(python3 -c 'import uuid; print(uuid.uuid4().hex[:12])')"}
