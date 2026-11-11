@@ -35,12 +35,6 @@ if [ "${FM_WORKER_ENV_FORWARD+x}" != x ]; then
   FM_WORKER_ENV_FORWARD='PATH TREEHOUSE_ROOT NM_HOME LAVISH_AXI_STATE_DIR PI_CODING_AGENT_SESSION_DIR TMUX_TMPDIR XDG_CACHE_HOME PI_SKIP_VERSION_CHECK PI_CLIPBOARD_OSC52 NO_MISTAKES_NO_UPDATE_CHECK NM_TEST_START_DAEMON'
 fi
 export FM_WORKER_ENV_FORWARD
-if [ -z "${FM_TMUX_SESSION:-}" ]; then
-  read -r FM_TMUX_SESSION < /proc/sys/kernel/random/uuid
-  FM_TMUX_SESSION="fm-$FM_TMUX_SESSION"
-fi
-case "$FM_TMUX_SESSION" in *[!A-Za-z0-9_-]*) fail 'invalid private tmux session name' ;; esac
-export FM_TMUX_SESSION
 unset TMUX TMUX_PANE ZELLIJ ZELLIJ_SESSION_NAME ZELLIJ_PANE_ID
 session_path() {
   case "$1" in /*) ;; *) fail 'Pi sessions require a vessel-contained absolute path, not an unscoped ID' ;; esac
@@ -64,12 +58,6 @@ if [ ! -e "$anchor/.firstmate.json" ] && [ ! -L "$anchor/.firstmate.json" ]; the
   # This is caller-owned policy for a new home, never an existing preference rewrite.
   if [ ! -e "$NM_HOME/config.yaml" ]; then printf 'agent: pi\n' > "$NM_HOME/config.yaml"; fi
 fi
-# tmux parses terminal semicolons even after --; escape its separator once.
-for argument do
-  case "$argument" in *';') argument=${argument%;}'\;' ;; esac
-  set -- "$@" "$argument"
-  shift
-done
 exec "$root/bin/fm-anchor.sh" run --anchor "$anchor" -- \
   nono run --strict-broker-path --profile firstmate --workdir "$root" --read "$root" --allow "$vessel" -- \
-  tmux new-session -s "$FM_TMUX_SESSION" -c "$root" -- "$pi" --approve "$@"
+  "$pi" --approve "$@"

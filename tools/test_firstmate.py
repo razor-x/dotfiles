@@ -1,8 +1,7 @@
-"""Local vessel caller policy and native tmux argument parsing; no user sessions."""
+"""Local vessel policy: primary Pi stays in the terminal; tmux is for workers."""
 
 import json
 import os
-import shutil
 import signal
 import subprocess
 import tempfile
@@ -13,7 +12,6 @@ WRAPPER = (
     Path(__file__).resolve().parents[1]
     / "home/dot_local/exact_bin/executable_firstmate"
 )
-TMUX = shutil.which("tmux")
 CORE = os.environ.get("FIRSTMATE_TEST_CORE")
 
 
@@ -164,55 +162,15 @@ class LocalVessel(unittest.TestCase):
         self.assertEqual(process.returncode, -signal.SIGTERM)
         self.assertEqual(self.captured()["pid"], process.pid)
 
-    @unittest.skipUnless(TMUX, "native tmux is unavailable")
-    def test_native_tmux_parser_preserves_terminal_semicolons(self):
+    def test_primary_runs_directly_in_terminal_with_literal_arguments(self):
         values = ("explain this;", ";", r"\;", "double;;", "", "literal ; argument")
         result = self.launch(self.anchor, *values)
         self.assertEqual(result.returncode, 0, result.stderr)
-        arguments = self.captured()["args"][-len(values) :]
-        private = self.root / "tmux"
-        private.mkdir()
-        config = private / "tmux.conf"
-        config.write_text("set -s exit-empty off\n")
-        env = dict(
-            self.env,
-            HOME=str(private),
-            TMUX_TMPDIR=str(private),
-            XDG_CONFIG_HOME=str(private / "config"),
-            XDG_CACHE_HOME=str(private / "cache"),
-            XDG_DATA_HOME=str(private / "data"),
-            XDG_STATE_HOME=str(private / "state"),
-        )
-        env.pop("TMUX", None)
-        env.pop("TMUX_PANE", None)
-        command = [TMUX, "-L", "private-parser", "-f", str(config)]
-        try:
-            subprocess.run(
-                [*command, "start-server"],
-                env=env,
-                check=True,
-                capture_output=True,
-                timeout=10,
-            )
-            for value, argument in zip(values, arguments, strict=True):
-                decoded = subprocess.run(
-                    [*command, "display-message", "-p", "--", argument],
-                    env=env,
-                    check=False,
-                    capture_output=True,
-                    text=True,
-                    timeout=10,
-                )
-                self.assertEqual(decoded.returncode, 0, decoded.stderr)
-                self.assertEqual(decoded.stdout, value + "\n")
-        finally:
-            subprocess.run(
-                [*command, "kill-server"],
-                env=env,
-                check=False,
-                capture_output=True,
-                timeout=10,
-            )
+        arguments = self.captured()["args"]
+        nono = arguments.index("nono")
+        command = arguments[arguments.index("--", nono) + 1 :]
+        self.assertEqual(command, [str(self.root / "bin/pi"), "--approve", *values])
+        self.assertNotIn("FM_TMUX_SESSION", self.captured()["env"])
 
     @unittest.skipUnless(
         CORE, "set FIRSTMATE_TEST_CORE for real caller/core integration"
