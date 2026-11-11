@@ -35,6 +35,8 @@ The wrapper owns the Pi/Nono invocation with the selected multiplexer:
   or `FM_TMUX_SESSION`. Core rejects old endpoint aliases and unleased live servers.
 - For Zellij, builds a literal in-memory Pi layout with KDL strings. For tmux,
   supplies direct Pi argv to `new-session`, without shell-command encoding.
+  Terminal semicolons are escaped for tmux's command parser so Pi receives the
+  original argument, including an existing backslash before the semicolon.
   It writes no ship files before core has resolved ownership or confirmed initialization.
 - Uses `ZELLIJ_SOCKET_DIR` for Zellij or `TMUX_TMPDIR` for tmux, both beneath the
   ship. Ambient host multiplexer routing is cleared; no host server is adopted.
@@ -93,4 +95,6 @@ external transport delegation with temporary fake entrypoints.
 When Zellij is installed, they also send the generated layout to its real
 `setup --check` parser in private configuration/cache/data/socket directories,
 including control-character and Unicode arguments.
+When tmux is installed, a private pane-free daemon checks terminal-semicolon
+arguments through its real command parser, without allocating a PTY or running Pi.
 These tests never launch a real user session or apply sandbox policy.

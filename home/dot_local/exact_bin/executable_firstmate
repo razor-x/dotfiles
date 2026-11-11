@@ -127,6 +127,12 @@ print(f"layout {{\n  pane command={quote(executable)} cwd={quote(root)} {{\n    
 PY
 )
 if [ "$FM_BACKEND" = tmux ]; then
+    # tmux parses terminal semicolons even after --; escape its separator once.
+    for argument do
+        case "$argument" in *';') argument=${argument%;}'\;' ;; esac
+        set -- "$@" "$argument"
+        shift
+    done
     set -- tmux new-session -s "$FM_TMUX_SESSION" -c "$root" -- "$pi" --approve "$@"
 else
     set -- zellij --data-dir "$ship/zellij/data" --session "$FM_ZELLIJ_SESSION" --layout-string "$layout"

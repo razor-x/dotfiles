@@ -12,6 +12,7 @@ from pathlib import Path
 BIN = Path(__file__).resolve().parents[1] / "home/dot_local/exact_bin"
 WRAPPER = BIN / "executable_firstmate"
 NATIVE_ZELLIJ = shutil.which("zellij")
+NATIVE_TMUX = shutil.which("tmux")
 
 
 class FirstmateWrapper(unittest.TestCase):
@@ -271,6 +272,57 @@ class FirstmateWrapper(unittest.TestCase):
             "TMUX_TMPDIR", capture["env"]["FM_WORKER_ENV_FORWARD"].splitlines()
         )
         self.assertEqual(list(self.anchor.iterdir()), [])
+
+    @unittest.skipUnless(NATIVE_TMUX, "tmux absent; native argument parser unavailable")
+    def test_tmux_receives_literal_terminal_semicolons(self):
+        values = ("explain this;", ";", r"\;", "double;;", "", "literal ; argument")
+        result = self.launch(self.anchor, *values, env={"FM_BACKEND": "tmux"})
+        self.assertEqual(result.returncode, 0, result.stderr)
+        arguments = self.captured()["args"][-len(values) :]
+        private = self.root / "native-tmux"
+        private.mkdir()
+        config = private / "tmux.conf"
+        config.write_text("set -s exit-empty off\n")
+        env = dict(
+            self.env,
+            HOME=str(private),
+            TMUX_TMPDIR=str(private),
+            XDG_CONFIG_HOME=str(private / "config"),
+            XDG_CACHE_HOME=str(private / "cache"),
+            XDG_DATA_HOME=str(private / "data"),
+            XDG_STATE_HOME=str(private / "state"),
+        )
+        env.pop("TMUX", None)
+        env.pop("TMUX_PANE", None)
+        command = [NATIVE_TMUX, "-L", "private-parser", "-f", str(config)]
+        try:
+            subprocess.run(
+                [*command, "start-server"],
+                env=env,
+                check=True,
+                capture_output=True,
+                timeout=10,
+            )
+            for value, argument in zip(values, arguments, strict=True):
+                with self.subTest(value=value):
+                    decoded = subprocess.run(
+                        [*command, "display-message", "-p", "--", argument],
+                        env=env,
+                        check=False,
+                        capture_output=True,
+                        text=True,
+                        timeout=10,
+                    )
+                    self.assertEqual(decoded.returncode, 0, decoded.stderr)
+                    self.assertEqual(decoded.stdout, value + "\n")
+        finally:
+            subprocess.run(
+                [*command, "kill-server"],
+                env=env,
+                check=False,
+                capture_output=True,
+                timeout=10,
+            )
 
     @unittest.skipUnless(
         NATIVE_ZELLIJ, "zellij absent; native layout parser unavailable"
