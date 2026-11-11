@@ -18,13 +18,15 @@ The core vessel guide owns the local metadata and gate contract.
 
 Core owns the vessel layout, portable runtime environment and path validation; the wrapper does not set the shared directory variables.
 Pi preferences, authentication and installed tools stay on the host.
-Pi session options require an absolute vessel-contained path, not an unscoped session ID.
+The launcher selects `$vessel/pi/primary` with `--session-dir` and `--continue`, so normal launches continue the latest primary conversation separately from worker history.
+Session arguments are defaults, not a path-validation gate; explicitly supplied Pi options can override them.
 
 This wrapper starts Pi directly with the personal `--approve` flag and leaves its arguments unchanged.
 Core clears ambient routing; Firstmate's ordinary tmux backend creates its detached worker session when needed.
-The wrapper adds its personal preference names through `FM_WORKER_ENV_FORWARD_DEFAULTS`; core combines those with its portable forwarding defaults.
-An explicit `FM_WORKER_ENV_FORWARD`, including empty, overrides both layers.
-New No-mistakes homes default to `agent: pi`; the wrapper gets the selected settings location from core's initialization result rather than duplicating its layout.
+`environment.d/50-firstmate.conf` appends personal preference names to `FM_WORKER_ENV_FORWARD`.
+Core appends its required portable names to that same list; empty or unset no longer disables core forwarding.
+The wrapper chooses `--agent pi` when asking core to initialize a vessel.
+Core records the No-mistakes choice and owns the configuration write; the launcher neither reads the initialization JSON nor writes tool configuration.
 Existing preferences are not rewritten.
 Background work can still outlive the visible interface; stopping it is manual in this stage.
 
