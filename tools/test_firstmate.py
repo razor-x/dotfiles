@@ -38,11 +38,12 @@ class FirstmateWrapper(unittest.TestCase):
         for name, version in (
             ("pi", "1.5.0"),
             ("zellij", "zellij 0.45.1"),
+            ("tmux", "tmux 3.8"),
             ("nono", "nono 0.81.0"),
         ):
             file = fakebin / name
             file.write_text(
-                '#!/bin/sh\n[ "$1" = --version ] || exit 99\nprintf "%s\\n" "'
+                '#!/bin/sh\ncase "$1" in --version|-V) ;; *) exit 99 ;; esac\nprintf "%s\\n" "'
                 + version
                 + '"\n'
             )
@@ -61,6 +62,7 @@ class FirstmateWrapper(unittest.TestCase):
                 "LAVISH_AXI_STATE_DIR",
                 "PI_CODING_AGENT_SESSION_DIR",
                 "ZELLIJ_SOCKET_DIR",
+                "TMUX_TMPDIR",
             ):
                 del self.env[name]
 
@@ -126,8 +128,9 @@ class FirstmateWrapper(unittest.TestCase):
     def test_caller_preferences_and_explicit_empty_forwarding_are_preserved(self):
         supplied = {
             "FM_WORKER_ENV_FORWARD": "",
-            "FM_BACKEND": "caller-backend",
+            "FM_BACKEND": "tmux",
             "FM_ZELLIJ_SESSION": "caller-session",
+            "FM_TMUX_SESSION": "caller-tmux",
             "FM_TASK_TMP_ROOT": str(self.anchor / ".firstmate/custom-tmp"),
             "NM_TEST_START_DAEMON": "0",
             "NM_HOME": str(self.anchor / ".firstmate/custom-nm"),
@@ -216,6 +219,58 @@ class FirstmateWrapper(unittest.TestCase):
             self.assertEqual(
                 self.captured()["args"], ["--anchor", str(self.anchor), "--literal"]
             )
+
+    def test_tmux_versions_and_unknown_backends_never_fall_back(self):
+        result = self.launch(self.anchor, env={"FM_BACKEND": "unsupported"})
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse(self.capture.exists())
+        tmux = self.root / "bin/tmux"
+        tmux.write_text("#!/bin/sh\nprintf 'tmux 3.1\\n'\n")
+        result = self.launch(self.anchor, env={"FM_BACKEND": "tmux"})
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("tmux 3.2.0+", result.stderr)
+        self.assertFalse(self.capture.exists())
+        tmux.write_text("#!/bin/sh\nprintf 'tmux 3.3a\\n'\n")
+        result = self.launch(self.anchor, env={"FM_BACKEND": "tmux"})
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.captured()["env"]["FM_BACKEND"], "tmux")
+
+    def test_explicit_tmux_uses_private_socket_and_direct_pi_arguments(self):
+        args = ("--model", "a model", "", "--", "literal ; argument")
+        result = self.launch(
+            self.anchor,
+            *args,
+            env={"FM_BACKEND": "tmux", "TMUX": "/host/socket,1,0", "TMUX_PANE": "%1"},
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        capture = self.captured()
+        self.assertEqual(capture["env"]["FM_BACKEND"], "tmux")
+        self.assertEqual(
+            capture["env"]["TMUX_TMPDIR"], str(self.anchor / ".firstmate/tmux")
+        )
+        self.assertNotIn("TMUX", capture["env"])
+        self.assertNotIn("TMUX_PANE", capture["env"])
+        self.assertNotIn("--layout-string", capture["args"])
+        start = capture["args"].index("tmux")
+        self.assertEqual(
+            capture["args"][start:],
+            [
+                "tmux",
+                "new-session",
+                "-s",
+                capture["env"]["FM_TMUX_SESSION"],
+                "-c",
+                str(self.root / "data/firstmate"),
+                "--",
+                str(self.root / "bin/pi"),
+                "--approve",
+                *args,
+            ],
+        )
+        self.assertIn(
+            "TMUX_TMPDIR", capture["env"]["FM_WORKER_ENV_FORWARD"].splitlines()
+        )
+        self.assertEqual(list(self.anchor.iterdir()), [])
 
     @unittest.skipUnless(
         NATIVE_ZELLIJ, "zellij absent; native layout parser unavailable"

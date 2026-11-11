@@ -8,6 +8,15 @@ Linux-only. The argument is an existing anchor directory, not a collection of
 repositories to scan. The portable ship is `<anchor>/.firstmate`; its control
 record and advisory lock remain outside it. Absolute physical anchor paths must
 match between harbors.
+Zellij remains the default. To initialize and board an explicitly selected tmux
+ship, use:
+
+```sh
+FM_BACKEND=tmux firstmate ~/tmux-root [Pi arguments...]
+```
+
+Use the same explicit selection on later boardings. An existing Zellij ship is
+not converted; its backend is immutable. No Zellij patches are removed.
 
 ## Responsibilities
 
@@ -16,24 +25,26 @@ core's `bin/fm-board.sh`. Core owns compatibility/containment checks, explicit
 initialization, discovery/docking questions and the full-environment lease.
 Core never chooses this wrapper's personal runtime flags or forwarding list.
 
-The wrapper owns the Pi/Zellij/Nono invocation:
+The wrapper owns the Pi/Nono invocation with the selected multiplexer:
 
-- Requires Pi 1.5.0+, Zellij 0.45.1+ and Nono 0.81.0+; incompatible tools fail
-  rather than selecting another stack.
+- Requires Pi 1.5.0+, Nono 0.81.0+ and either Zellij 0.45.1+ or tmux 3.2+;
+  incompatible tools fail rather than selecting another stack.
 - Supplies `FM_HOME=<ship>/home` and defaults `FM_BACKEND` to `zellij`, without
   changing an explicitly supplied backend.
-- Chooses a fresh private Zellij session unless the caller supplies one. Core
-  rejects a session name that would alias existing task endpoints or an unleased
-  live server.
-- Builds a literal in-memory Zellij layout for Pi. It writes no ship files before
-  core has resolved ownership or confirmed initialization. Arguments are encoded
-  as KDL strings, not shell commands.
+- Chooses a fresh private session unless the caller supplies `FM_ZELLIJ_SESSION`
+  or `FM_TMUX_SESSION`. Core rejects old endpoint aliases and unleased live servers.
+- For Zellij, builds a literal in-memory Pi layout with KDL strings. For tmux,
+  supplies direct Pi argv to `new-session`, without shell-command encoding.
+  It writes no ship files before core has resolved ownership or confirmed initialization.
+- Uses `ZELLIJ_SOCKET_DIR` for Zellij or `TMUX_TMPDIR` for tmux, both beneath the
+  ship. Ambient host multiplexer routing is cleared; no host server is adopted.
 - Keeps the existing personal Pi defaults (`--approve`, optional version-check
   suppression and OSC52) here, with supplied environment settings preserved.
 - Leaves Pi preferences/authentication in the host's normal agent directory;
   `PI_CODING_AGENT_SESSION_DIR` directs conversations into `<ship>/pi/sessions`.
 - Uses ship-contained defaults for Treehouse worktrees, No-mistakes state,
-  task/launch temporary directories (`FM_TASK_TMP_ROOT`), Lavish state and Zellij sockets/data. Existing selectors are passed to core for
+  task/launch temporary directories (`FM_TASK_TMP_ROOT`), Lavish state and selected
+  multiplexer sockets/data. Existing selectors are passed to core for
   compatibility checks, not silently relocated.
 - Deliberately scopes `XDG_CACHE_HOME` to `<ship>/cache` because Zellij stores
   resurrection/session metadata there. Host configuration and authentication
@@ -76,7 +87,7 @@ or free lock is not same-boot recovery authority.
 ## Verification
 
 `just check-firstmate` checks caller policy, literal arguments, private session
-storage, version refusal, physical/conflicting anchors, exec/signals/status and
+storage, explicit tmux/direct-argv selection, version refusal, physical/conflicting anchors, exec/signals/status and
 external transport delegation with temporary fake entrypoints.
 `just check-tools` includes the same tests in the tools collection.
 When Zellij is installed, they also send the generated layout to its real

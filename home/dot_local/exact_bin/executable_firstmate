@@ -40,14 +40,29 @@ pi=$(command -v pi)
 FM_ANCHOR=$anchor
 FM_HOME="$ship/home"
 FM_BACKEND=${FM_BACKEND:-zellij}
-FM_ZELLIJ_SESSION=${FM_ZELLIJ_SESSION:-"fm-$(python3 -c 'import uuid; print(uuid.uuid4().hex[:12])')"}
+case "$FM_BACKEND" in
+    zellij)
+        FM_ZELLIJ_SESSION=${FM_ZELLIJ_SESSION:-"fm-$(python3 -c 'import uuid; print(uuid.uuid4().hex[:12])')"}
+        ZELLIJ_SOCKET_DIR=${ZELLIJ_SOCKET_DIR:-"$ship/zellij/socket"}
+        socket_variable=ZELLIJ_SOCKET_DIR
+        version_option=--version
+        export FM_ZELLIJ_SESSION ZELLIJ_SOCKET_DIR
+        ;;
+    tmux)
+        FM_TMUX_SESSION=${FM_TMUX_SESSION:-"fm-$(python3 -c 'import uuid; print(uuid.uuid4().hex[:12])')"}
+        TMUX_TMPDIR=${TMUX_TMPDIR:-"$ship/tmux"}
+        socket_variable=TMUX_TMPDIR
+        version_option=-V
+        export FM_TMUX_SESSION TMUX_TMPDIR
+        ;;
+    *) printf 'Cannot run Firstmate: unsupported caller backend: %s\n' "$FM_BACKEND" >&2; exit 1 ;;
+esac
 TREEHOUSE_ROOT=${TREEHOUSE_ROOT:-"$ship/worktrees"}
 NM_HOME=${NM_HOME:-"$ship/no-mistakes"}
 NM_TEST_START_DAEMON=${NM_TEST_START_DAEMON-1}
 FM_TASK_TMP_ROOT=${FM_TASK_TMP_ROOT:-"$ship/task-tmp"}
 LAVISH_AXI_STATE_DIR=${LAVISH_AXI_STATE_DIR:-"$ship/lavish-axi"}
 PI_CODING_AGENT_SESSION_DIR=${PI_CODING_AGENT_SESSION_DIR:-"$ship/pi/sessions"}
-ZELLIJ_SOCKET_DIR=${ZELLIJ_SOCKET_DIR:-"$ship/zellij/socket"}
 # Zellij's Linux resurrection cache follows XDG_CACHE_HOME, not its socket dir.
 XDG_CACHE_HOME="$ship/cache"
 NONO_NO_SAVE_PROMPT=${NONO_NO_SAVE_PROMPT-1}
@@ -65,25 +80,29 @@ NM_HOME
 NM_TEST_START_DAEMON
 FM_TASK_TMP_ROOT
 NO_MISTAKES_NO_UPDATE_CHECK'
+    FM_WORKER_ENV_FORWARD="$FM_WORKER_ENV_FORWARD
+$socket_variable"
 fi
-export FM_ANCHOR FM_HOME FM_BACKEND FM_ZELLIJ_SESSION TREEHOUSE_ROOT NM_HOME LAVISH_AXI_STATE_DIR
+export FM_ANCHOR FM_HOME FM_BACKEND TREEHOUSE_ROOT NM_HOME LAVISH_AXI_STATE_DIR
 export FM_TASK_TMP_ROOT NM_TEST_START_DAEMON
-export PI_CODING_AGENT_SESSION_DIR ZELLIJ_SOCKET_DIR XDG_CACHE_HOME FM_WORKER_ENV_FORWARD
+export PI_CODING_AGENT_SESSION_DIR XDG_CACHE_HOME FM_WORKER_ENV_FORWARD
 export NONO_NO_SAVE_PROMPT PI_SKIP_VERSION_CHECK PI_CLIPBOARD_OSC52 NO_MISTAKES_NO_UPDATE_CHECK
 # Never attach a ship runtime to an ambient host session.
-unset ZELLIJ ZELLIJ_SESSION_NAME ZELLIJ_PANE_ID
+unset ZELLIJ ZELLIJ_SESSION_NAME ZELLIJ_PANE_ID TMUX TMUX_PANE
 
-layout=$(python3 - "$root" "$pi" "$ship" "$("$pi" --version)" "$(zellij --version)" "$(nono --version)" "$@" <<'PY'
+layout=$(python3 - "$root" "$pi" "$ship" "$FM_BACKEND" "$("$pi" --version)" "$("$FM_BACKEND" "$version_option")" "$(nono --version)" "$@" <<'PY'
 from pathlib import Path
 import re
 import sys
 
-root, executable, ship, pi_version, zellij_version, nono_version = sys.argv[1:7]
-for name, raw, minimum in (("Pi", pi_version, (1, 5, 0)), ("Zellij", zellij_version, (0, 45, 1)), ("Nono", nono_version, (0, 81, 0))):
-    match = re.search(r"\b(\d+)\.(\d+)\.(\d+)\b", raw)
-    if not match or tuple(map(int, match.groups())) < minimum:
+root, executable, ship, backend, pi_version, mux_version, nono_version = sys.argv[1:8]
+mux_minimum = (0, 45, 1) if backend == "zellij" else (3, 2, 0)
+for name, raw, minimum in (("Pi", pi_version, (1, 5, 0)), (backend, mux_version, mux_minimum), ("Nono", nono_version, (0, 81, 0))):
+    pattern = r"\b(\d+)\.(\d+)(?:\.(\d+))?[a-z]?\b" if name == "tmux" else r"\b(\d+)\.(\d+)\.(\d+)\b"
+    match = re.search(pattern, raw)
+    if not match or tuple(int(value or 0) for value in match.groups()) < minimum:
         sys.exit(f"Cannot run Firstmate: {name} {'.'.join(map(str, minimum))}+ is required; got {raw!r}.")
-args = sys.argv[7:]
+args = sys.argv[8:]
 for i, arg in enumerate(args):
     flag, equals, value = arg.partition("=")
     if flag not in ("--session", "--session-dir"):
@@ -95,6 +114,9 @@ for i, arg in enumerate(args):
     path = Path(value).expanduser()
     if not path.is_absolute() or (path.resolve() != Path(ship) and Path(ship) not in path.resolve().parents):
         sys.exit(f"Cannot run Firstmate: {flag} must stay inside the ship; session IDs are unsupported.")
+if backend == "tmux":
+    sys.exit(0)
+
 def quote(value):
     # KDL uses braced Unicode escapes, not JSON's fixed-width escapes.
     return '"' + "".join(
@@ -104,6 +126,10 @@ def quote(value):
 print(f"layout {{\n  pane command={quote(executable)} cwd={quote(root)} {{\n    args {' '.join(map(quote, ['--approve', *args]))}\n    close_on_exit true\n  }}\n}}")
 PY
 )
+if [ "$FM_BACKEND" = tmux ]; then
+    set -- tmux new-session -s "$FM_TMUX_SESSION" -c "$root" -- "$pi" --approve "$@"
+else
+    set -- zellij --data-dir "$ship/zellij/data" --session "$FM_ZELLIJ_SESSION" --layout-string "$layout"
+fi
 exec "$root/bin/fm-board.sh" --anchor "$anchor" -- \
-    nono run --strict-broker-path --profile firstmate --workdir "$root" --read "$root" --allow "$ship" -- \
-    zellij --data-dir "$ship/zellij/data" --session "$FM_ZELLIJ_SESSION" --layout-string "$layout"
+    nono run --strict-broker-path --profile firstmate --workdir "$root" --read "$root" --allow "$ship" -- "$@"
