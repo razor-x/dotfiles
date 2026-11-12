@@ -1,11 +1,14 @@
 function firstmate --description 'Launch, sail or scuttle a named Firstmate vessel'
-    if not set --query argv[1]
-        printf 'Usage: firstmate ANCHOR [--vessel NAME] [--sail-to HARBOR | --scuttle | Pi arguments...]\n' >&2
-        return 2
-    end
-    if contains -- "$argv[1]" -h --help
-        printf 'Usage: firstmate ANCHOR [--vessel NAME] [--sail-to HARBOR | --scuttle | Pi arguments...]\nDefault vessel: flagship. Use -- before literal Pi options that overlap launcher options.\n'
+    set --local usage 'Usage: firstmate ANCHOR [--vessel NAME] [--sail-to HARBOR | --scuttle | Pi arguments...]'
+    argparse --ignore-unknown --strict-longopts --exclusive sail-to,scuttle h/help 'vessel=' 'sail-to=' scuttle -- $argv
+    or return $status
+    if set --query --function _flag_help
+        printf '%s\n%s\n' "$usage" 'Default vessel: flagship. Use -- before literal Pi options that overlap launcher options.'
         return 0
+    end
+    if not set --query argv[1]
+        printf '%s\n' "$usage" >&2
+        return 2
     end
     if test (uname) != Linux
         printf 'firstmate: local vessels currently require Linux\n' >&2
@@ -17,21 +20,19 @@ function firstmate --description 'Launch, sail or scuttle a named Firstmate vess
         return 1
     end
     set --erase argv[1]
-    argparse --ignore-unknown --exclusive sail-to,scuttle 'vessel=' 'sail-to=' scuttle -- $argv
-    or return $status
-    if set --query _flag_vessel[2]; or set --query _flag_sail_to[2]; or set --query _flag_scuttle[2]
+    if set --query --function _flag_vessel[2]; or set --query --function _flag_sail_to[2]; or set --query --function _flag_scuttle[2]
         printf 'firstmate: launcher options must not be repeated\n' >&2
         return 2
     end
     set --local vessel_name flagship
-    if set --query _flag_vessel
+    if set --query --function _flag_vessel
         set vessel_name "$_flag_vessel"
     end
     if not string match --quiet --regex '\\A[a-z0-9][a-z0-9_-]{0,63}\\z' -- "$vessel_name"
         printf 'firstmate: invalid vessel name\n' >&2
         return 2
     end
-    if set --query _flag_sail_to; or set --query _flag_scuttle
+    if set --query --function _flag_sail_to; or set --query --function _flag_scuttle
         if set --query argv[1]
             printf 'firstmate: sailing or scuttling cannot be combined with Pi arguments\n' >&2
             return 2
@@ -49,7 +50,7 @@ function firstmate --description 'Launch, sail or scuttle a named Firstmate vess
         set --prepend PATH "$core/.tools/node_modules/.bin"
     end
 
-    if set --query _flag_sail_to
+    if set --query --function _flag_sail_to
         if test -z "$_flag_sail_to"
             printf 'firstmate: a destination harbor is required\n' >&2
             return 2
@@ -59,9 +60,9 @@ function firstmate --description 'Launch, sail or scuttle a named Firstmate vess
         printf 'Vessel %s sailed to %s.\n' "$vessel_name" "$_flag_sail_to"
         return 0
     end
-    if set --query _flag_scuttle
-        printf 'Permanently delete %s, its metadata, ALL vessel repositories, uncommitted work and session history?\nType SCUTTLE to confirm: ' "$vessel" >&2
-        read --local answer; or return 1
+    if set --query --function _flag_scuttle
+        printf 'Permanently delete %s, its metadata, ALL vessel repositories, uncommitted work and session history?\n' "$vessel" >&2
+        read --local --prompt-str 'Type SCUTTLE to confirm: ' answer; or return 1
         if test "$answer" != SCUTTLE
             printf 'Scuttle cancelled.\n' >&2
             return 1
@@ -80,12 +81,10 @@ function firstmate --description 'Launch, sail or scuttle a named Firstmate vess
 
     set --local metadata "$anchor/.firstmate/$vessel_name.json"
     if not test -e "$metadata"; and not test -L "$metadata"
-        printf 'Sail vessel %s here from another harbor? [y/N] ' "$vessel_name" >&2
-        read --local answer; or return 1
+        read --local --prompt-str "Sail vessel $vessel_name here from another harbor? [y/N] " answer; or return 1
         switch "$answer"
             case y Y yes YES
-                printf 'Source harbor: ' >&2
-                read --local source_harbor; or return 1
+                read --local --prompt-str 'Source harbor: ' source_harbor; or return 1
                 if test -z "$source_harbor"
                     printf 'firstmate: a source harbor is required\n' >&2
                     return 1
@@ -93,8 +92,7 @@ function firstmate --description 'Launch, sail or scuttle a named Firstmate vess
                 command "$core/bin/fm-anchor.sh" sail $target --from "$source_harbor" >/dev/null
                 or return $status
             case '*'
-                printf 'Anchor a new vessel named %s here? [y/N] ' "$vessel_name" >&2
-                read --local answer; or return 1
+                read --local --prompt-str "Anchor a new vessel named $vessel_name here? [y/N] " answer; or return 1
                 switch "$answer"
                     case y Y yes YES
                         command "$core/bin/fm-anchor.sh" init $target --agent pi >/dev/null
