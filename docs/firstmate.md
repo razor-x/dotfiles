@@ -7,7 +7,8 @@ firstmate ~/seam --vessel red --sail-to desktop
 firstmate ~/seam --vessel red --scuttle
 ```
 
-`firstmate` is an autoloaded Fish function from the local Fish plugin, with a matching completion file; it replaces the executable launcher.
+`firstmate` is an autoloaded Fish function from the dedicated local `~/.local/share/plugin/firstmate` plugin, with a matching completion file; it replaces the executable launcher.
+The plugin follows Delve's `functions/` and `completions/` layout, is registered in `fish_plugins`, and participates in the Fish plugin update hash.
 The default vessel is `flagship`.
 Each vessel lives at `<anchor>/.firstmate/NAME/`, with its `NAME.json` record and `NAME.lock` alongside it inside `.firstmate/`.
 Vessels have separate working repositories, conversations, tool state and active harbors; operating on one does not operate on another.
