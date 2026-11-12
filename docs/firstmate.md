@@ -3,6 +3,7 @@
 ```sh
 firstmate /path/to/anchor [Pi arguments...]
 firstmate ~/seam --sail-to desktop
+firstmate ~/seam --scuttle
 ```
 
 Use an existing directory at the same physical path on every harbor.
@@ -21,6 +22,11 @@ To send a vessel before this machine goes offline, run `--sail-to HARBOR` as the
 This delegates to core's `sail --to`, waits for acknowledgement and exits without starting Pi or offering initialization.
 A failed push returns the core error and does not print a success message.
 The source must stay online until success; the destination then starts locally without pulling from it.
+
+`--scuttle` requires typing `SCUTTLE` to permanently discard the local vessel, repositories, uncommitted work and session history.
+Run it from a separate terminal; it stops local work first and exits without launching Pi or offering initialization.
+Cancelling or reaching end-of-input performs no core action.
+Outside repositories and other harbors are not removed; directory permissions are repaired without chmodding shared hardlinked files.
 
 ## Caller policy
 
