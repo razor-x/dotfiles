@@ -1,5 +1,5 @@
 #!/bin/sh
-# Personal Pi/tmux/Nono policy; shared core owns local anchoring and its gate.
+# Personal Pi/tmux/Nono policy; core owns anchoring, discovery and sailing.
 set -eu
 
 fail() {
@@ -25,12 +25,26 @@ fi
 export PATH
 
 if [ ! -e "$anchor/.firstmate.json" ] && [ ! -L "$anchor/.firstmate.json" ]; then
-  printf 'Anchor a new vessel here? [y/N] ' >&2
+  printf 'Sail a vessel here from another harbor? [y/N] ' >&2
   IFS= read -r answer || exit 1
   case "$answer" in
-  y | Y | yes | YES) "$firstmate/bin/fm-anchor.sh" init --anchor "$anchor" --agent pi >/dev/null ;;
-  *) exit 1 ;;
+  y | Y | yes | YES)
+    printf 'Source harbor (source work must already be stopped): ' >&2
+    IFS= read -r source_harbor || exit 1
+    [ -n "$source_harbor" ] || fail 'a source harbor is required'
+    "$firstmate/bin/fm-anchor.sh" sail --anchor "$anchor" --from "$source_harbor" >/dev/null
+    ;;
+  *)
+    printf 'Anchor a new vessel here? [y/N] ' >&2
+    IFS= read -r answer || exit 1
+    case "$answer" in
+    y | Y | yes | YES) "$firstmate/bin/fm-anchor.sh" init --anchor "$anchor" --agent pi >/dev/null ;;
+    *) exit 1 ;;
+    esac
+    ;;
   esac
+else
+  "$firstmate/bin/fm-anchor.sh" sail --anchor "$anchor" >/dev/null
 fi
 
 exec "$firstmate/bin/fm-anchor.sh" run --anchor "$anchor" -- \
