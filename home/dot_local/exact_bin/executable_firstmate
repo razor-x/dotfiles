@@ -47,8 +47,10 @@ else
   "$firstmate/bin/fm-anchor.sh" sail --anchor "$anchor" >/dev/null
 fi
 
+# Pi's TUI contains historical errors; do not classify its screen after exit.
 exec "$firstmate/bin/fm-anchor.sh" run --anchor "$anchor" -- \
   nono run \
+  --no-diagnostics \
   --strict-broker-path \
   --profile firstmate \
   --workdir "$firstmate" \
@@ -58,4 +60,5 @@ exec "$firstmate/bin/fm-anchor.sh" run --anchor "$anchor" -- \
   --approve \
   --session-dir "$vessel/pi/primary" \
   --continue \
+  --name captain \
   "$@"

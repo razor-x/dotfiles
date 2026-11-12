@@ -20,7 +20,8 @@ The core vessel guide owns the records, discovery, transfer prerequisites and la
 
 Core owns the vessel layout, portable runtime environment, discovery, SSH/rsync transfer and path validation; the wrapper does not set the shared directory variables.
 Pi preferences, authentication and installed tools stay on the host.
-The launcher selects `$vessel/pi/primary` with `--session-dir` and `--continue`, so normal launches continue the latest primary conversation separately from worker history.
+The launcher names the main conversation `captain` with `--name captain` and continues it with `--continue`, separately from worker history.
+Its existing `$vessel/pi/primary` storage path is retained so prior history is not moved or abandoned.
 Session arguments are defaults, not a path-validation gate; explicitly supplied Pi options can override them.
 
 This wrapper starts Pi directly with the personal `--approve` flag and leaves its arguments unchanged.
@@ -33,6 +34,8 @@ Existing preferences are not rewritten.
 Background work can still outlive the visible interface; stop all source work manually before sailing.
 
 The wrapper uses the Nono `firstmate` profile; sandbox policy is managed separately.
+It passes `--no-diagnostics` because Nono's post-exit TUI-text analysis can mistake quoted historical errors for a failed Pi run, even after exit code 0.
+This suppresses post-exit diagnostic footers and save-profile prompts, not sandbox enforcement, child output or the real exit status.
 No sandbox policy or installed home files are deployed by these changes.
 No automatic stopping, migration of unrelated old homes or backend fallback is implemented.
 
