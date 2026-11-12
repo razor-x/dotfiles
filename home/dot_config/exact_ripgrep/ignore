@@ -1,4 +1,5 @@
 *.svg
+*.add.spl
 .git
 .next
 package-lock.json
