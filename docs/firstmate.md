@@ -31,11 +31,12 @@ Core appends its required portable names to that same list; empty or unset no lo
 The wrapper chooses `--agent pi` when asking core to initialize a vessel.
 Core records the No-mistakes choice and owns the configuration write; the launcher neither reads the initialization JSON nor writes tool configuration.
 Existing preferences are not rewritten.
-Background work can still outlive the visible interface; stop all source work manually before sailing.
+Background work can outlive the visible interface.
+Core stops known source work before sailing and asks the existing source Pi agent to resolve unfamiliar processes; an unconfirmed stop prevents copying.
 
 The wrapper uses the Nono `firstmate` profile; sandbox policy is managed separately.
 No sandbox policy or installed home files are deployed by these changes.
-No automatic stopping, migration of unrelated old homes or backend fallback is implemented.
+No migration of unrelated old homes or backend fallback is implemented.
 
 ## Verification
 
