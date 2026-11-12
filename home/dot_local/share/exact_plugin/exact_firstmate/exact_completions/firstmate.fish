@@ -1,6 +1,31 @@
-complete -c firstmate -f
-complete -c firstmate -n __fish_use_subcommand -a '(__fish_complete_directories)' -d Anchor
-complete -c firstmate -l vessel -x -a '(__firstmate_vessels)' -d 'Select vessel (default: flagship)'
-complete -c firstmate -l sail-to -x -d 'Send the selected vessel to a harbor, then exit'
-complete -c firstmate -l scuttle -d 'Confirm permanent deletion of the selected local vessel'
-complete -c firstmate -s h -l help -d 'Show launcher usage'
+complete --command firstmate --no-files
+
+complete \
+    --command firstmate \
+    --condition __fish_use_subcommand \
+    --arguments '(__fish_complete_directories)' \
+    --description Anchor
+
+complete \
+    --command firstmate \
+    --long-option vessel \
+    --exclusive \
+    --arguments '(__firstmate_vessels)' \
+    --description 'Select vessel (default: flagship)'
+
+complete \
+    --command firstmate \
+    --long-option sail-to \
+    --exclusive \
+    --description 'Send the selected vessel to a harbor, then exit'
+
+complete \
+    --command firstmate \
+    --long-option scuttle \
+    --description 'Confirm permanent deletion of the selected local vessel'
+
+complete \
+    --command firstmate \
+    --short-option h \
+    --long-option help \
+    --description 'Show launcher usage'
