@@ -20,6 +20,9 @@ M.spec = {
       -- Set nonzero scrolloff.
       vim.opt.scrolloff = 5
 
+      -- Treat hyphenated words as whole words for completion and motions.
+      vim.opt.iskeyword:append("-")
+
       -- Set indentation preferences.
       vim.opt.tabstop = 2
       vim.opt.softtabstop = 2
