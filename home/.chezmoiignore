@@ -4,6 +4,9 @@
 # Ignore generated kitty config backup file.
 .config/kitty/kitty.conf.bak
 
+# Ignore pi settings used as the base for its modify script.
+.config/pi/_settings.json
+
 # Ignore generated kitty theme files.
 {{ range (list "current-theme" "dark-theme.auto" "light-theme.auto" "no-preference-theme.auto") -}}
 .config/kitty/{{ . }}.conf
