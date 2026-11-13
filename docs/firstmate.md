@@ -22,7 +22,6 @@ A vessel is the working environment, not a ship task.
 Zellij-specific Firstmate launch integration is removed; unrelated desktop Zellij preferences are unchanged.
 
 Install the matching named-vessel core `bin/fm-anchor.sh` before applying the Fish integration.
-The new layout is fresh-state only: old unnamed records and locks are refused without adopting, moving or deleting their data.
 Core is resolved from `${XDG_DATA_HOME:-$HOME/.local/share}/firstmate`, the installed core rather than the development working copy.
 The core vessel guide owns the records, discovery, transfer prerequisites and launch contract.
 
@@ -41,7 +40,7 @@ Other named vessels, outside repositories and other harbors are not removed; dir
 Core owns the vessel layout, portable runtime environment, discovery, SSH/rsync transfer and path validation; the wrapper does not set the shared directory variables.
 Pi preferences, authentication and installed tools stay on the host.
 The launcher names the main conversation `captain` with `--name captain` and continues it with `--continue`, separately from worker history.
-Each named vessel keeps its own history at `$vessel/pi/primary`; old unnamed history is not moved automatically.
+Each named vessel keeps its own history at `$vessel/pi/primary`.
 Session arguments are defaults, not a path-validation gate; explicitly supplied Pi options can override them.
 
 In normal launch mode the function starts Pi directly with the personal `--approve` flag and leaves its arguments unchanged after removing launcher options.
@@ -60,7 +59,6 @@ The function uses the Nono `firstmate` profile and grants only the selected payl
 It does not grant access to the whole `.firstmate/` container or other vessels.
 Sandbox profiles are managed separately.
 No sandbox policy or installed home files are deployed by these changes.
-No migration of unrelated old homes or backend fallback is implemented.
 
 ## Verification
 
