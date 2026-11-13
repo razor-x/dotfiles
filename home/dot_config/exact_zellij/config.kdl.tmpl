@@ -6,8 +6,8 @@ default_shell "fish"
 pane_frames false
 theme "{{ template "theme" (merge (dict "app" "zellij") .) }}"
 
-// Enable startup tips.
-show_startup_tips true
+// Disable startup tips.
+show_startup_tips false
 
 // Treat git commit as nvim so Ctrl keybinds are passed to nvim.
 post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | grep --quiet --extended-regexp '(git commit|fzf)' && echo nvim || echo \"$RESURRECT_COMMAND\""
