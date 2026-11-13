@@ -21,7 +21,6 @@ if status is-interactive
     if set --query SSH_CONNECTION;
         and not set --query TMUX;
         and not set --query ZELLIJ;
-        and set --query TERM; and test "$TERM" != xterm-kitty;
         and type --query zellij
 
         zellij attach --create ssh
