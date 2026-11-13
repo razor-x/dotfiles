@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "name": "tmux",
+    "version": "1.0.0",
+    "description": "Tmux configuration and PTY allocation."
+  },
+  "filesystem": {
+    "read": ["$XDG_CONFIG_HOME/tmux"],
+    "allow": ["/dev/ptmx"]
+  }
+}
