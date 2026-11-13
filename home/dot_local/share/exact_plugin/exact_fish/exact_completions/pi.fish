@@ -1,3 +1,5 @@
+# UPSTREAM: Pi will not maintain shell completion.
+# https://github.com/earendil-works/pi/issues/4776#issuecomment-4493229307
 set -l commands install remove uninstall update list config auth mcp
 set -l main "not __fish_seen_subcommand_from $commands"
 
