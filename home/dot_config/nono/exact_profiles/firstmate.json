@@ -1,0 +1,10 @@
+{
+  "extends": ["pi", "tmux"],
+  "meta": {
+    "name": "firstmate",
+    "version": "1.0.0",
+    "description": "Firstmate with Linux PTY allocation for local tmux vessels.",
+    "author": "razor-x"
+  },
+  "workdir": { "access": "read" }
+}

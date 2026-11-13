@@ -61,11 +61,22 @@
     sha256: "d3135e42b800ff2e7aac44d4dfe500f0f4e2c7eb00a1c2191b0dc8b28431f155"
 
 # delta
+
 .config/git/delta_themes:
   type: file
   url: https://raw.githubusercontent.com/dandavison/delta/refs/tags/0.20.1/themes.gitconfig
   checksum:
     sha256: "90f1b33b86f3517500786f36523464eb6d6e2f57da34e65f378c0d4dcd6878de"
+
+# firstmate
+
+.local/share/firstmate:
+  type: archive
+  url: https://github.com/rxfork/firstmate/archive/refs/tags/2026-11-12.1.tar.gz
+  exact: true
+  stripComponents: 1
+  checksum:
+    sha256: "4b41e409472153fabb07943594cb24c130c8d2efcafec50ee97fde513b6758bd"
 
 # GitUI
 
@@ -104,6 +115,7 @@
   url: https://github.com/denisidoro/cheats.git
 
 # pi
+
 .config/pi/skills/mattpocock:
   type: archive
   url: https://github.com/mattpocock/skills/archive/refs/tags/v1.3.2.tar.gz
