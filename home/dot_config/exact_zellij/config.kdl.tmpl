@@ -1,6 +1,9 @@
 // Set defaults.
 default_mode "locked"
 
+// Keep live sessions attachable without saving commands for resurrection.
+session_serialization false
+
 // Set theme and style.
 pane_frames false
 theme "{{ template "theme" (merge (dict "app" "zellij") .) }}"
