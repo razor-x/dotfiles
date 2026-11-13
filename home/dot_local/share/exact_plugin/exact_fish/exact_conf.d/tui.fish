@@ -100,7 +100,6 @@ if status is-interactive
     end
 
     abbr pi pi-nono
-    complete --command pi-nono --wraps pi
 
     abbr dotfiles cd "(chezmoi source-path)"
     alias dotupg 'chezmoi update --apply --init'
