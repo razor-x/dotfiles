@@ -5,6 +5,7 @@
 # Do not delete items from this list: move them to units_to_disable instead.
 set --local units_to_enable \
     atuin \
+    podman.socket \
     ssh-agent
 
 set --local units_to_disable
