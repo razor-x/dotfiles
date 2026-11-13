@@ -23,7 +23,7 @@ if status is-interactive
         and not set --query ZELLIJ;
         and type --query zellij
 
-        zellij attach --create ssh
+        zellij attach --create ssh options --default-shell (status fish-path)
         exit
     end
 end
