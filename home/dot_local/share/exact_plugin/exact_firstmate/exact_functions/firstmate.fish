@@ -92,9 +92,9 @@ function firstmate --description 'Launch, sail or scuttle a named Firstmate vess
                 command "$core/bin/fm-anchor.sh" sail $target --from "$source_harbor" >/dev/null
                 or return $status
             case '*'
-                read --local --prompt-str "Anchor a new vessel named $vessel_name here? [y/N] " answer; or return 1
+                read --local --prompt-str "Anchor a new vessel named $vessel_name here? [Y/n] " answer; or return 1
                 switch "$answer"
-                    case y Y yes YES
+                    case '' y Y yes YES
                         command "$core/bin/fm-anchor.sh" init $target --agent pi >/dev/null
                         or return $status
                     case '*'
