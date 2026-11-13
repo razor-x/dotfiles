@@ -20,7 +20,6 @@ themes:
     kitty: Ayu
     mise: charm
     neovim: default
-    opencode: system
     pi: system
     yazi: catppuccin
     zellij: vesper
@@ -34,7 +33,6 @@ themes:
     kitty: catppuccin
     mise: catppuccin
     neovim: catppuccin
-    opencode: catppuccin
     pi: catppuccin
     yazi: catppuccin
     zellij: catppuccin

@@ -10,7 +10,7 @@ ensure all shadows neovim binds get alt bind, e.g., i_CTRL-K
 
 neovim bind ideas
 
-ctrl-enter -> open action menu, e.g., like ctrl-enter in opencode
+ctrl-enter -> open action menu
 <Leader><Leader> as a "ctrl-shift" kind of overload for less common actions
 
 # open leaders

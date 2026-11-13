@@ -33,8 +33,6 @@
   {{- end -}}
 {{- else if eq .app "zellij" -}}
   {{ $name }}
-{{- else if eq .app "opencode" -}}
-  {{ $name }}
 {{- else if eq .app "pi" -}}
   {{ $name }}
 {{- else -}}
