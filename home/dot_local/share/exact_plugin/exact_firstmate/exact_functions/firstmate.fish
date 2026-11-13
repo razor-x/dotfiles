@@ -1,6 +1,6 @@
-function firstmate --description 'Launch, sail or scuttle a named Firstmate vessel'
+function firstmate --description 'Launch, sail, cancel sailing or scuttle a named Firstmate vessel'
     set --local usage \
-        'Usage: firstmate ANCHOR [--vessel NAME] [--sail-to HARBOR | --scuttle | Pi arguments...]'
+        'Usage: firstmate ANCHOR [--vessel NAME] [sail [--to HARBOR | --from HARBOR | --cancel] | --sail-to HARBOR | --scuttle | Pi arguments...]'
 
     argparse \
         --ignore-unknown \
@@ -56,6 +56,12 @@ function firstmate --description 'Launch, sail or scuttle a named Firstmate vess
         or return $status
         printf 'Vessel sailed to %s.\n' "$_flag_sail_to"
         return 0
+    end
+
+    if set --query argv[1]; and test "$argv[1]" = sail
+        set --erase argv[1]
+        command "$core/bin/fm-anchor.sh" sail $target $argv >/dev/null
+        return $status
     end
 
     if set --query --function _flag_scuttle

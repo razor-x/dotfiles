@@ -21,6 +21,18 @@ complete \
 
 complete \
     --command firstmate \
+    --condition 'test (count (commandline -opc)) -eq 2' \
+    --arguments sail \
+    --description 'Sail the selected vessel'
+
+complete \
+    --command firstmate \
+    --condition 'contains -- sail (commandline -opc)' \
+    --long-option cancel \
+    --description 'Cancel an unfinished sail and keep the vessel at its source'
+
+complete \
+    --command firstmate \
     --long-option scuttle \
     --description 'Confirm permanent deletion of the selected local vessel'
 
