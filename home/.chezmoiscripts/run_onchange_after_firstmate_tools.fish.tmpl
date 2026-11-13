@@ -12,7 +12,7 @@ set --local source {{ joinPath .chezmoi.sourceDir ".chezmoitemplates" "firstmate
 set --local root "$XDG_DATA_HOME/firstmate"
 set --local tools "$root/.tools"
 
-if not test -d "$root/.git"
+if not test -d $root
     echo "Cannot install FirstMate tools: checkout not found: $root" >&2
     return 1
 end
