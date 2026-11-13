@@ -24,7 +24,6 @@ if status is-interactive
         and type --query zellij
 
         zellij attach --create ssh
-        zellij delete-session ssh
-        kill $fish_pid
+        exit
     end
 end
