@@ -2,5 +2,14 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "minimal",
-  "hideThinkingBlock": true
+  "hideThinkingBlock": true,
+  "autocompleteMaxVisible": 10,
+  "collapseChangelog": true,
+  "quietStartup": "header",
+  "showCacheMissNotices": true,
+  "showHardwareCursor": true,
+  "terminal": {
+    "showTerminalProgress": true
+  },
+  "tuiMode": "regular"
 }
