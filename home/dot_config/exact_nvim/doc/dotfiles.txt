@@ -218,11 +218,12 @@ g<C-X>                  In a Diffview file, cycle between horizontal,
                         backend detects a running session; otherwise use Kitty.
                         Inside Zellij, <C-S-h/j/k/l> invokes its navigator,
                         which forwards <C-h/j/k/l> when Neovim is focused.
-                        Kitty must be in multiplexer passthrough mode for
-                        those shifted bindings to reach Zellij.
+                        Fish marks local SSH and Zellij commands so Kitty
+                        forwards those shifted bindings automatically.
 <A-h/j/k/l>             In normal mode, resize through the selected backend.
                         Zellij's navigator forwards these keys to Neovim.
-                        Kitty handles them outside multiplexer passthrough.
+                        Kitty forwards them during SSH and Zellij commands;
+                        other Alt shortcuts retain their normal Kitty actions.
 
                                         *<Leader>h* *<Leader>j*
                                         *<Leader>k* *<Leader>l*
