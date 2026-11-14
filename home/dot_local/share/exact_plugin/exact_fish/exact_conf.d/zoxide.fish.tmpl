@@ -1,4 +1,9 @@
 # Use zoxide.
 if status is-interactive
     {{ output "zoxide" "init" "--cmd" "z" "fish" }}
+
+    function z --wraps __zoxide_z
+        set --global __dotfiles_last_z_args $argv
+        __zoxide_z $argv
+    end
 end
