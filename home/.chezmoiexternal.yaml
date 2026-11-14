@@ -72,11 +72,11 @@
 
 .local/share/firstmate:
   type: archive
-  url: https://github.com/rxfork/firstmate/archive/refs/tags/2026-11-13.3.tar.gz
+  url: https://github.com/rxfork/firstmate/archive/refs/tags/2026-11-14.1.tar.gz
   exact: true
   stripComponents: 1
   checksum:
-    sha256: "32b9767b210e119ffa3550e2cf3992e179d5adf06d226c95483100efa85f6930"
+    sha256: "d24f2e8f742d55562bb69d3c1d5685bdc7c8075c5ca5769505cfe43d0dd910db"
 
 # GitUI
 
@@ -92,7 +92,7 @@
 # https://github.com/smart-splits-nvim/backend-kitty#kitty-configuration
 .config/kitty/relative_resize.py:
   type: file
-  url: https://raw.githubusercontent.com/smart-splits-nvim/backend-kitty/70665a2228d52c255f3d116a146932f326df3914/kitten/relative_resize.py
+  url: https://raw.githubusercontent.com/smart-splits-nvim/backend-kitty/3d2a42abbe7545b406757f8a303813e49dc0449a/kitten/relative_resize.py
   checksum:
     sha256: "4042432d2fe247fbb79315e975f2f5df5be31e5499e9a810322cb918021ae997"
 
