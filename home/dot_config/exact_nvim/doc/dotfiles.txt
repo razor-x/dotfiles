@@ -212,6 +212,18 @@ g<C-X>                  In a Diffview file, cycle between horizontal,
 <Tab><Tab>              Start recording a macro into register `q`.
                         Uses |recording|.
 
+                                        *dotfiles-split-navigation*
+<C-h/j/k/l>             In normal mode, navigate Neovim splits and cross pane
+                        boundaries through smart-splits. Use Zellij when its
+                        backend detects a running session; otherwise use Kitty.
+                        Inside Zellij, <C-S-h/j/k/l> invokes its navigator,
+                        which forwards <C-h/j/k/l> when Neovim is focused.
+                        Kitty must be in multiplexer passthrough mode for
+                        those shifted bindings to reach Zellij.
+<A-h/j/k/l>             In normal mode, resize through the selected backend.
+                        Zellij's navigator forwards these keys to Neovim.
+                        Kitty handles them outside multiplexer passthrough.
+
                                         *<Leader>h* *<Leader>j*
                                         *<Leader>k* *<Leader>l*
 <Leader>{hjkl}          Split the current window in the given direction.

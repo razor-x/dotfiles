@@ -32,6 +32,8 @@ keybinds clear-defaults=true {
     }
     normal {
         bind "h" { NextSwapLayout; SwitchToMode "locked"; }
+        bind "[" { PreviousSwapLayout; SwitchToMode "locked"; }
+        bind "]" { NextSwapLayout; SwitchToMode "locked"; }
         bind "j" { NewPane "Down"; SwitchToMode "locked"; }
         bind "k" { ToggleFloatingPanes; SwitchToMode "locked"; }
         bind "l" { NewPane "Right"; SwitchToMode "locked"; }
@@ -67,6 +69,8 @@ keybinds clear-defaults=true {
         bind "l" { MoveFocus "right"; }
         bind "n" { NewPane; SwitchToMode "locked"; }
         // -- begin customization --
+        bind "p" { TogglePaneInGroup; }
+        bind "P" { ToggleGroupMarking; }
         bind "s" { SwitchToMode "normal"; }
         // -- end customization --
         bind "r" { NewPane "right"; SwitchToMode "locked"; }
@@ -100,6 +104,8 @@ keybinds clear-defaults=true {
         bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
         // -- begin customization --
         bind "a" { SwitchToMode "normal"; }
+        bind "," { MoveTab "left"; }
+        bind "." { MoveTab "right"; }
         // -- end customization --
         bind "x" { CloseTab; SwitchToMode "locked"; }
         bind "tab" { ToggleTab; }
@@ -137,17 +143,23 @@ keybinds clear-defaults=true {
         bind "tab" { MovePane; }
     }
     scroll {
-        bind "Alt left" { MoveFocusOrTab "left"; SwitchToMode "locked"; }
-        bind "Alt down" { MoveFocus "down"; SwitchToMode "locked"; }
-        bind "Alt up" { MoveFocus "up"; SwitchToMode "locked"; }
-        bind "Alt right" { MoveFocusOrTab "right"; SwitchToMode "locked"; }
+        // -- begin customization --
+        // bind "Alt left" { MoveFocusOrTab "left"; SwitchToMode "locked"; }
+        // bind "Alt down" { MoveFocus "down"; SwitchToMode "locked"; }
+        // bind "Alt up" { MoveFocus "up"; SwitchToMode "locked"; }
+        // bind "Alt right" { MoveFocusOrTab "right"; SwitchToMode "locked"; }
+        // -- end customization --
         bind "e" { EditScrollback; SwitchToMode "locked"; }
         bind "f" { SwitchToMode "entersearch"; SearchInput 0; }
-        bind "Alt h" { MoveFocusOrTab "left"; SwitchToMode "locked"; }
-        bind "Alt j" { MoveFocus "down"; SwitchToMode "locked"; }
-        bind "Alt k" { MoveFocus "up"; SwitchToMode "locked"; }
-        bind "Alt l" { MoveFocusOrTab "right"; SwitchToMode "locked"; }
         // -- begin customization --
+        // bind "Alt h" { MoveFocusOrTab "left"; SwitchToMode "locked"; }
+        // bind "Alt j" { MoveFocus "down"; SwitchToMode "locked"; }
+        // bind "Alt k" { MoveFocus "up"; SwitchToMode "locked"; }
+        // bind "Alt l" { MoveFocusOrTab "right"; SwitchToMode "locked"; }
+        bind "Ctrl Shift h" { MoveFocus "left"; SwitchToMode "locked"; }
+        bind "Ctrl Shift j" { MoveFocus "down"; SwitchToMode "locked"; }
+        bind "Ctrl Shift k" { MoveFocus "up"; SwitchToMode "locked"; }
+        bind "Ctrl Shift l" { MoveFocus "right"; SwitchToMode "locked"; }
         bind "space" { SwitchToMode "locked"; }
         bind "w" {
             DumpScreen "/tmp/zellij_scrollback.dump.txt";
@@ -200,26 +212,24 @@ keybinds clear-defaults=true {
         }
     }
     shared_among "normal" "locked" {
-        bind "Alt left" { MoveFocusOrTab "left"; }
-        bind "Alt down" { MoveFocus "down"; }
-        bind "Alt up" { MoveFocus "up"; }
-        bind "Alt right" { MoveFocusOrTab "right"; }
-        bind "Alt +" { Resize "Increase"; }
-        bind "Alt -" { Resize "Decrease"; }
-        bind "Alt =" { Resize "Increase"; }
-        bind "Alt [" { PreviousSwapLayout; }
-        bind "Alt ]" { NextSwapLayout; }
-        bind "Alt f" { ToggleFloatingPanes; }
         // -- begin customization --
+        // bind "Alt left" { MoveFocusOrTab "left"; }
+        // bind "Alt down" { MoveFocus "down"; }
+        // bind "Alt up" { MoveFocus "up"; }
+        // bind "Alt right" { MoveFocusOrTab "right"; }
+        // bind "Alt +" { Resize "Increase"; }
+        // bind "Alt -" { Resize "Decrease"; }
+        // bind "Alt =" { Resize "Increase"; }
+        // bind "Alt [" { PreviousSwapLayout; }
+        // bind "Alt ]" { NextSwapLayout; }
+        // bind "Alt f" { ToggleFloatingPanes; }
         bind "Alt h" {
             MessagePlugin "vim-zellij-navigator" {
                 name "resize";
                 payload "left";
             };
         }
-        // -- end customization --
-        bind "Alt i" { MoveTab "left"; }
-        // -- begin customization --
+        // bind "Alt i" { MoveTab "left"; }
         bind "Alt j" {
             MessagePlugin "vim-zellij-navigator" {
                 name "resize";
@@ -238,19 +248,17 @@ keybinds clear-defaults=true {
                 payload "right";
             };
         }
-        // -- end customization --
-        bind "Alt n" { NewPane; }
-        bind "Alt o" { MoveTab "right"; }
-        bind "Alt p" { TogglePaneInGroup; }
-        bind "Alt Shift p" { ToggleGroupMarking; }
-        // -- begin customization --
-        bind "Alt q" { Detach; }
-        bind "Alt e" { EditScrollback; SwitchToMode "locked"; }
-        bind "Alt ." { GoToPreviousTab; } // Looks like shift-less "Alt <"
-        bind "Alt ," { GoToNextTab; } // Looks like shift-less "Alt >"
-        bind "Alt Shift tab" { CloseTab; }
-        bind "Alt tab" { NewTab; }
-        bind "Alt w" { CloseFocus; }
+        // bind "Alt n" { NewPane; }
+        // bind "Alt o" { MoveTab "right"; }
+        // bind "Alt p" { TogglePaneInGroup; }
+        // bind "Alt Shift p" { ToggleGroupMarking; }
+        // bind "Alt q" { Detach; }
+        // bind "Alt e" { EditScrollback; SwitchToMode "locked"; }
+        // bind "Alt ." { GoToPreviousTab; } // Looks like shift-less "Alt <"
+        // bind "Alt ," { GoToNextTab; } // Looks like shift-less "Alt >"
+        // bind "Alt Shift tab" { CloseTab; }
+        // bind "Alt tab" { NewTab; }
+        // bind "Alt w" { CloseFocus; }
         bind "Ctrl Shift h" {
             MessagePlugin "vim-zellij-navigator" {
                 name "move_focus";
