@@ -99,6 +99,8 @@ if status is-interactive
         abbr archrc cd "$ACONFMGR_CONFIG/.."
     end
 
+    abbr jq jaq
+
     abbr pi pi-nono
 
     abbr dotfiles cd "(chezmoi source-path)"
