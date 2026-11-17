@@ -1,7 +1,10 @@
 function copy_file_to_clipboard \
     --description 'Copy a file, or fuzzy-select one below the path at the cursor'
 
-    set --function target (commandline --current-token | string unescape)
+    set --function target $argv[1]
+    if not set --query argv[1]
+        set target (commandline --current-token | string unescape)
+    end
     set target (string replace --regex '^~(?=/|$)' $HOME -- $target)
     if test -z "$target"
         set target .
@@ -22,5 +25,7 @@ function copy_file_to_clipboard \
         | string collect \
         | fish_clipboard_copy
     and history append (string join ' ' 'cat --' (string escape -- $files) '|' fish_clipboard_copy)
-    and commandline --replace ''
+    and if not set --query argv[1]
+        commandline --replace ''
+    end
 end
