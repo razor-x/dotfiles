@@ -1,4 +1,5 @@
 {
+  "extends": ["devel-native"],
   "meta": {
     "name": "devel-rust",
     "version": "1.0.0",

@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "devel-native",
+    "version": "1.0.0",
+    "description": "Read-only system headers for native compilation."
+  },
+  "filesystem": { "read": ["/usr/include"] }
+}

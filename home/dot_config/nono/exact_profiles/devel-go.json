@@ -1,4 +1,5 @@
 {
+  "extends": ["devel-native"],
   "meta": {
     "name": "devel-go",
     "version": "1.0.0",
