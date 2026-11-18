@@ -24,6 +24,25 @@ Current namespaces:
 - `<leader>r` / `<leader>R` - Harpoon
 - `<leader>t` - reference and tooling
 
+Open punctuation slots on the main keyboard (including shifted punctuation,
+not shifted digits such as `@`):
+
+- `<leader>;`
+- `<leader>'` / `<leader>"`
+- <code><leader>`</code> / `<leader>~`
+- `<leader>-` / `<leader>_`
+- `<leader>+` (`<leader>=` is already used for the expression register)
+- `<leader>[` / `<leader>{`
+- `<leader>]` / `<leader>}`
+- `<leader>\` / `<leader>|`
+- `<leader>,` / `<leader><lt>` (literal `<`)
+- `<leader>.` / `<leader>>`
+
+Already occupied: `<leader>:` (command-line history), `<leader>/` and
+`<leader>?` (forward/backward search history), and `<leader>=`.
+`<leader><leader>;` is an alias for `<leader>:`, but `<leader>;` itself is open.
+The local leader is `'`; that does not occupy `<leader>'`.
+
 Currently open lowercase top-level leader keys:
 
 - `<leader>m`
