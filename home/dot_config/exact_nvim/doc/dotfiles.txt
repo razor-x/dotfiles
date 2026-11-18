@@ -7,6 +7,13 @@ Mappings are nonrecursive unless otherwise noted.
 Shifted `<Leader>` mappings also have an unshifted alias using
 `<Leader><Leader>` plus the unshifted key when possible.
 
+                                        *<F2>* *<F3>* *<F7>* *<F8>*
+<F2>, <F7>              Recursive aliases for the `[` prefix.
+<F3>, <F8>              Recursive aliases for the `]` prefix.
+                        Available in Normal, Visual, and Operator-pending
+                        modes; keep the same suffixes (e.g. <F2>d for [d).
+                        The original bracket mappings remain available.
+
 Toggle mappings use `yo{key}` for global state. If a toggle supports
 buffer- or window-local state, replace `y` with `<LocalLeader>`:
 `<LocalLeader>o{key}`. `<LocalLeader>` is `'`.

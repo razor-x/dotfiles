@@ -101,6 +101,8 @@ M.spec = {
         silent = true,
       })
 
+      vim.keymap.set({ "n", "x", "o" }, "<F2>", "[", { desc = "Bracket previous prefix", remap = true })
+      vim.keymap.set({ "n", "x", "o" }, "<F3>", "]", { desc = "Bracket next prefix", remap = true })
       vim.keymap.set({ "n", "x", "o" }, "<F7>", "[", { desc = "Bracket previous prefix", remap = true })
       vim.keymap.set({ "n", "x", "o" }, "<F8>", "]", { desc = "Bracket next prefix", remap = true })
 
