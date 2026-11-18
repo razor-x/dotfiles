@@ -15,7 +15,7 @@
   "tui.editor.deleteToLineEnd": ["shift+delete"],
   "tui.editor.yank": [],
   "tui.editor.yankPop": [],
-  "tui.editor.undo": ["ctrl+z"],
+  "tui.editor.undo": ["ctrl+z", "ctrl+-"],
   "tui.input.newLine": ["shift+enter"],
   "tui.input.tab": ["tab"],
   "local.editor.cursorDownOrNewLine": ["ctrl+j"],
