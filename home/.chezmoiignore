@@ -37,6 +37,10 @@
 .config/nvim/tests
 .config/nvim/tests/**
 
+# Ignore locally installed FirstMate tools.
+.local/share/firstmate/.tools
+.local/share/firstmate/.tools/**
+
 # Ignore locally installed Pi packages.
 .config/pi/packages
 .config/pi/packages/**
