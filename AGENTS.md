@@ -23,6 +23,12 @@ managed home directory.
 ## Workflow
 
 1. Make the smallest source change that covers the request.
+1. Keep ad hoc verification scripts and tests in a temporary directory outside
+   the repository. Add persistent tests only when explicitly requested or when
+   the affected component already has an established convention of testing that
+   kind of change; follow that convention and location. `tools/` is not a
+   catch-all test directory, and existing ad hoc tests do not establish a
+   convention for unrelated components.
 1. While working in Pi, Neovim, or `tools`, use the matching focused recipes:
    `just format-pi` / `check-pi`, `format-nvim` / `check-nvim`, or
    `format-tools` / `check-tools`.
