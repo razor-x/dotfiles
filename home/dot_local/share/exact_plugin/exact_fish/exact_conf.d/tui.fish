@@ -137,6 +137,7 @@ if status is-interactive
     alias srv serve
 
     abbr fm firstmate
+    abbr fms firstmate station
 
     # Set fifc editor.
     if set --query VISUAL; and test -n "$VISUAL"

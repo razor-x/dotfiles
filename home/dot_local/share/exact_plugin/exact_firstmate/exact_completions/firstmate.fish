@@ -3,6 +3,12 @@ complete --command firstmate --no-files
 complete \
     --command firstmate \
     --condition __fish_use_subcommand \
+    --arguments station \
+    --description 'Jump to a local work station'
+
+complete \
+    --command firstmate \
+    --condition __fish_use_subcommand \
     --arguments '(__fish_complete_directories)' \
     --description Anchor
 

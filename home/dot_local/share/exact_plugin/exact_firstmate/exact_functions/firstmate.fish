@@ -1,6 +1,13 @@
 function firstmate --description 'Launch, sail, cancel sailing or scuttle a named Firstmate vessel'
+    if set --query argv[1]; and test "$argv[1]" = station
+        __firstmate_station $argv[2..]
+        return $status
+    end
+
     set --local usage \
         'Usage: firstmate ANCHOR [--vessel NAME] [sail [--to HARBOR | --from HARBOR | --cancel] | --sail-to HARBOR | --scuttle | Pi arguments...]'
+
+    set --append usage '       firstmate station [DIRECTORY] [QUERY ...]'
 
     argparse \
         --ignore-unknown \
