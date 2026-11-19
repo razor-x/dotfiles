@@ -1,12 +1,8 @@
 complete --command firstmate --no-files
 
-complete --command firstmate --condition __fish_use_subcommand --arguments launch --description 'Start or resume the captain (default)'
-complete --command firstmate --condition __fish_use_subcommand --arguments station --description 'Jump to a local work station'
-complete --command firstmate --condition __fish_use_subcommand --arguments sail --description 'Sail the selected vessel'
-complete --command firstmate --condition __fish_use_subcommand --arguments scuttle --description 'Confirm permanent deletion of the selected local vessel'
-
 complete \
     --command firstmate \
+    --keep-order \
     --condition '__fish_use_subcommand; or __fish_seen_subcommand_from launch station sail scuttle' \
     --arguments '(__fish_complete_directories)' \
     --description Directory
@@ -44,3 +40,9 @@ complete \
     --short-option h \
     --long-option help \
     --description 'Show usage'
+
+# Fish displays later keep-order groups first, ahead of directory candidates.
+complete --command firstmate --keep-order --condition __fish_use_subcommand --arguments scuttle --description 'Confirm permanent deletion of the selected local vessel'
+complete --command firstmate --keep-order --condition __fish_use_subcommand --arguments sail --description 'Sail the selected vessel'
+complete --command firstmate --keep-order --condition __fish_use_subcommand --arguments station --description 'Jump to a local work station'
+complete --command firstmate --keep-order --condition __fish_use_subcommand --arguments launch --description 'Start or resume the captain (default)'

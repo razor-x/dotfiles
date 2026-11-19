@@ -32,12 +32,13 @@ function firstmate --description 'Launch, visit a station, sail or scuttle a Fir
     or return $status
 
     if set --query --function _flag_help
-        printf '%s\n%s\n' "$usage" 'Default vessel: flagship. Use -- before literal Pi options that overlap launcher options.'
+        printf '%s\n' $usage
+        printf '\n%s\n' 'Default vessel: flagship. Use -- before literal Pi options that overlap launcher options.'
         return 0
     end
 
     if not set --query argv[1]
-        printf '%s\n' "$usage" >&2
+        printf '%s\n' $usage >&2
         return 2
     end
 
