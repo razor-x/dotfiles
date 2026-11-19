@@ -1,22 +1,33 @@
-function firstmate --description 'Launch, sail, cancel sailing or scuttle a named Firstmate vessel'
-    if set --query argv[1]; and test "$argv[1]" = station
-        __firstmate_station $argv[2..]
+function firstmate --description 'Launch, visit a station, sail or scuttle a Firstmate vessel'
+    set --local subcommand launch
+    if set --query argv[1]
+        switch "$argv[1]"
+            case launch station sail scuttle
+                set subcommand "$argv[1]"
+                set --erase argv[1]
+        end
+    end
+
+    if test "$subcommand" = station
+        if contains -- --help $argv; or contains -- -h $argv
+            printf 'Usage: firstmate station [DIRECTORY] [QUERY ...]\n'
+            return 0
+        end
+        __firstmate_station $argv
         return $status
     end
 
     set --local usage \
-        'Usage: firstmate ANCHOR [--vessel NAME] [sail [--to HARBOR | --from HARBOR | --cancel] | --sail-to HARBOR | --scuttle | Pi arguments...]'
-
-    set --append usage '       firstmate station [DIRECTORY] [QUERY ...]'
+        'Usage: firstmate [launch] ANCHOR [--vessel NAME] [--] [Pi arguments...]' \
+        '       firstmate station [DIRECTORY] [QUERY ...]' \
+        '       firstmate sail ANCHOR [--vessel NAME] [--to HARBOR | --from HARBOR | --cancel]' \
+        '       firstmate scuttle ANCHOR [--vessel NAME]'
 
     argparse \
         --ignore-unknown \
         --strict-longopts \
-        --exclusive sail-to,scuttle \
         h/help \
-        'vessel=' \
-        'sail-to=' \
-        scuttle \
+        'vessel=+' \
         -- $argv
     or return $status
 
@@ -30,16 +41,14 @@ function firstmate --description 'Launch, sail, cancel sailing or scuttle a name
         return 2
     end
 
-    if set --query --function _flag_vessel[2]; or set --query --function _flag_sail_to[2]; or set --query --function _flag_scuttle[2]
+    if set --query --function _flag_vessel[2]
         printf 'firstmate: launcher options must not be repeated\n' >&2
         return 2
     end
 
-    if set --query --function _flag_sail_to; or set --query --function _flag_scuttle
-        if set --query argv[2]
-            printf 'firstmate: sailing or scuttling cannot be combined with Pi arguments\n' >&2
-            return 2
-        end
+    if test "$subcommand" = scuttle; and set --query argv[2]
+        printf 'firstmate: scuttling does not accept extra arguments\n' >&2
+        return 2
     end
     set --local target --anchor "$argv[1]"
     set --erase argv[1]
@@ -58,20 +67,12 @@ function firstmate --description 'Launch, sail, cancel sailing or scuttle a name
         set --prepend PATH "$core/.tools/node_modules/.bin"
     end
 
-    if set --query --function _flag_sail_to
-        command "$core/bin/fm-anchor.sh" sail $target --to "$_flag_sail_to" $argv >/dev/null
-        or return $status
-        printf 'Vessel sailed to %s.\n' "$_flag_sail_to"
-        return 0
-    end
-
-    if set --query argv[1]; and test "$argv[1]" = sail
-        set --erase argv[1]
+    if test "$subcommand" = sail
         command "$core/bin/fm-anchor.sh" sail $target $argv >/dev/null
         return $status
     end
 
-    if set --query --function _flag_scuttle
+    if test "$subcommand" = scuttle
         command "$core/bin/fm-anchor.sh" scuttle $target --interactive $argv >/dev/null
         or return $status
         printf 'Local vessel scuttled; other vessels, outside repositories and other harbors were not removed.\n'

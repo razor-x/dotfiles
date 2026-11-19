@@ -1,19 +1,19 @@
 complete --command firstmate --no-files
 
-complete \
-    --command firstmate \
-    --condition __fish_use_subcommand \
-    --arguments station \
-    --description 'Jump to a local work station'
+complete --command firstmate --condition __fish_use_subcommand --arguments launch --description 'Start or resume the captain (default)'
+complete --command firstmate --condition __fish_use_subcommand --arguments station --description 'Jump to a local work station'
+complete --command firstmate --condition __fish_use_subcommand --arguments sail --description 'Sail the selected vessel'
+complete --command firstmate --condition __fish_use_subcommand --arguments scuttle --description 'Confirm permanent deletion of the selected local vessel'
 
 complete \
     --command firstmate \
-    --condition __fish_use_subcommand \
+    --condition '__fish_use_subcommand; or __fish_seen_subcommand_from launch station sail scuttle' \
     --arguments '(__fish_complete_directories)' \
-    --description Anchor
+    --description Directory
 
 complete \
     --command firstmate \
+    --condition 'not __fish_seen_subcommand_from station' \
     --long-option vessel \
     --exclusive \
     --arguments '(__firstmate_vessels)' \
@@ -21,29 +21,26 @@ complete \
 
 complete \
     --command firstmate \
-    --long-option sail-to \
-    --exclusive \
-    --description 'Send the selected vessel to a harbor, then exit'
+    --condition '__fish_seen_subcommand_from sail' \
+    --long-option to \
+    --require-parameter \
+    --description 'Destination harbor'
 
 complete \
     --command firstmate \
-    --condition 'test (count (commandline -opc)) -eq 2' \
-    --arguments sail \
-    --description 'Sail the selected vessel'
+    --condition '__fish_seen_subcommand_from sail' \
+    --long-option from \
+    --require-parameter \
+    --description 'Source harbor'
 
 complete \
     --command firstmate \
-    --condition 'contains -- sail (commandline -opc)' \
+    --condition '__fish_seen_subcommand_from sail' \
     --long-option cancel \
     --description 'Cancel an unfinished sail and keep the vessel at its source'
 
 complete \
     --command firstmate \
-    --long-option scuttle \
-    --description 'Confirm permanent deletion of the selected local vessel'
-
-complete \
-    --command firstmate \
     --short-option h \
     --long-option help \
-    --description 'Show launcher usage'
+    --description 'Show usage'
