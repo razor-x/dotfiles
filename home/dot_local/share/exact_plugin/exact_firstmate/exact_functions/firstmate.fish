@@ -1,8 +1,8 @@
-function firstmate --description 'Launch, visit a station, fullstop, sail or scuttle a Firstmate vessel'
+function firstmate --description 'Launch, visit a station, aheadfull, fullstop, sail or scuttle a Firstmate vessel'
     set --local subcommand launch
     if set --query argv[1]
         switch "$argv[1]"
-            case launch station fullstop sail scuttle
+            case launch station aheadfull fullstop sail scuttle
                 set subcommand "$argv[1]"
                 set --erase argv[1]
         end
@@ -21,6 +21,7 @@ function firstmate --description 'Launch, visit a station, fullstop, sail or scu
         'Usage: firstmate [launch] [ANCHOR] [--vessel NAME] [--] [Pi arguments...]' \
         '       firstmate station [DIRECTORY] [QUERY ...]' \
         '       firstmate sail ANCHOR [--vessel NAME] [--to HARBOR | --from HARBOR | --cancel]' \
+        '       firstmate aheadfull [ANCHOR] [--vessel NAME]' \
         '       firstmate fullstop ANCHOR [--vessel NAME]' \
         '       firstmate scuttle ANCHOR [--vessel NAME]'
 
@@ -41,7 +42,7 @@ function firstmate --description 'Launch, visit a station, fullstop, sail or scu
     end
 
     if not set --query argv[1]
-        if test "$subcommand" = launch
+        if contains -- "$subcommand" launch aheadfull
             set argv "$PWD"
         else
             printf '%s\n' $usage >&2
@@ -54,7 +55,7 @@ function firstmate --description 'Launch, visit a station, fullstop, sail or scu
         return 2
     end
 
-    if contains -- "$subcommand" fullstop scuttle; and set --query argv[2]
+    if contains -- "$subcommand" aheadfull fullstop scuttle; and set --query argv[2]
         printf 'firstmate: %s does not accept extra arguments\n' "$subcommand" >&2
         return 2
     end
@@ -92,6 +93,10 @@ function firstmate --description 'Launch, visit a station, fullstop, sail or scu
             'Local vessel scuttled; other vessels, outside repositories ' \
             'and other harbors were not removed.'
         return 0
+    end
+
+    if test "$subcommand" = aheadfull
+        set --append argv 'We performed a fullstop and are now resuming this session. Bring everything back up: review the session context, restart the services and processes needed for our work, verify they are healthy, and resume where we left off.'
     end
 
     for tool in pi tmux nono
