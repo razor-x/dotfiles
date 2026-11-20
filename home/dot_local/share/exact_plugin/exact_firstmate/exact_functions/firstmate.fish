@@ -110,6 +110,8 @@ function firstmate --description 'Launch, visit a station, sail or scuttle a Fir
         --read "$core" \
         --allow "$vessel" \
         --allow-file "$anchor/.firstmate/$vessel_name.lock" \
-        --read-file "$anchor/.firstmate/$vessel_name.json" -- \
+        --read-file "$anchor/.firstmate/$vessel_name.json" \
+        --read "$anchor/.firstmate/.agents" \
+        -- \
         pi --approve --session-dir "$vessel/pi/primary" --continue --name captain $argv
 end
