@@ -1,8 +1,8 @@
-function firstmate --description 'Launch, visit a station, sail or scuttle a Firstmate vessel'
+function firstmate --description 'Launch, visit a station, fullstop, sail or scuttle a Firstmate vessel'
     set --local subcommand launch
     if set --query argv[1]
         switch "$argv[1]"
-            case launch station sail scuttle
+            case launch station fullstop sail scuttle
                 set subcommand "$argv[1]"
                 set --erase argv[1]
         end
@@ -21,6 +21,7 @@ function firstmate --description 'Launch, visit a station, sail or scuttle a Fir
         'Usage: firstmate [launch] [ANCHOR] [--vessel NAME] [--] [Pi arguments...]' \
         '       firstmate station [DIRECTORY] [QUERY ...]' \
         '       firstmate sail ANCHOR [--vessel NAME] [--to HARBOR | --from HARBOR | --cancel]' \
+        '       firstmate fullstop ANCHOR [--vessel NAME]' \
         '       firstmate scuttle ANCHOR [--vessel NAME]'
 
     argparse \
@@ -53,8 +54,8 @@ function firstmate --description 'Launch, visit a station, sail or scuttle a Fir
         return 2
     end
 
-    if test "$subcommand" = scuttle; and set --query argv[2]
-        printf 'firstmate: scuttling does not accept extra arguments\n' >&2
+    if contains -- "$subcommand" fullstop scuttle; and set --query argv[2]
+        printf 'firstmate: %s does not accept extra arguments\n' "$subcommand" >&2
         return 2
     end
     set --local target --anchor "$argv[1]"
@@ -74,8 +75,13 @@ function firstmate --description 'Launch, visit a station, sail or scuttle a Fir
         set --prepend PATH "$core/.tools/node_modules/.bin"
     end
 
+    if test "$subcommand" = fullstop
+        command "$core/bin/fm-anchor.sh" fullstop $target >/dev/null
+        return $status
+    end
+
     if test "$subcommand" = sail
-        command "$core/bin/fm-anchor.sh" sail $target $argv >/dev/null
+        command "$core/bin/fm-anchor.sh" "$subcommand" $target $argv >/dev/null
         return $status
     end
 

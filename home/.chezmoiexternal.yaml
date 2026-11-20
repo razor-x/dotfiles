@@ -72,11 +72,11 @@
 
 .local/share/firstmate:
   type: archive
-  url: https://github.com/rxfork/firstmate/archive/refs/tags/2026-11-20.2.tar.gz
+  url: https://github.com/rxfork/firstmate/archive/refs/tags/2026-11-20.3.tar.gz
   exact: true
   stripComponents: 1
   checksum:
-    sha256: "352b4e04e003bab35453a336938f5b528bfba42b6a902036814d67f926c98a43"
+    sha256: "20ac6d7d39b01f0089270437eb2e0f79ab5533b266689dcc57c66ecf67974ba9"
 
 # GitUI
 
