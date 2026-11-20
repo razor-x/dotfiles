@@ -1,5 +1,5 @@
 {
-  "extends": ["devel-native"],
+  "extends": ["lib-native"],
   "meta": {
     "name": "devel-haskell",
     "version": "1.0.0",

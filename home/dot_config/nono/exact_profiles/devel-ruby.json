@@ -1,5 +1,5 @@
 {
-  "extends": ["devel-native"],
+  "extends": ["lib-native"],
   "meta": {
     "name": "devel-ruby",
     "version": "1.0.0",

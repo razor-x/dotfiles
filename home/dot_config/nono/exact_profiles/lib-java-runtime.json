@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "java-runtime",
+    "name": "lib-java-runtime",
     "version": "1.0.0",
     "description": "Java runtime configuration access."
   },

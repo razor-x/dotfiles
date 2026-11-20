@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "devel-native",
+    "name": "lib-native",
     "version": "1.0.0",
     "description": "Read-only system headers for native compilation."
   },
