@@ -33,7 +33,9 @@ function firstmate --description 'Launch, visit a station, sail or scuttle a Fir
 
     if set --query --function _flag_help
         printf '%s\n' $usage
-        printf '\n%s\n' 'Default vessel: flagship. Use -- before literal Pi options that overlap launcher options.'
+        printf '\n%s%s\n' \
+            'Default vessel: flagship. ' \
+            'Use -- before literal Pi options that overlap launcher options.'
         return 0
     end
 
@@ -76,7 +78,9 @@ function firstmate --description 'Launch, visit a station, sail or scuttle a Fir
     if test "$subcommand" = scuttle
         command "$core/bin/fm-anchor.sh" scuttle $target --interactive $argv >/dev/null
         or return $status
-        printf 'Local vessel scuttled; other vessels, outside repositories and other harbors were not removed.\n'
+        printf '%s%s\n' \
+            'Local vessel scuttled; other vessels, outside repositories ' \
+            'and other harbors were not removed.'
         return 0
     end
 

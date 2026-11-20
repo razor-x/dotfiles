@@ -1,4 +1,5 @@
-function __firstmate_vessels --description 'Complete locally registered vessels at the selected anchor'
+function __firstmate_vessels \
+    --description 'Complete locally registered vessels at the selected anchor'
     set --local tokens (commandline --tokens-expanded --current-process --cut-at-cursor)
     set --query tokens[2]; or return
     test -d "$tokens[2]"; or return

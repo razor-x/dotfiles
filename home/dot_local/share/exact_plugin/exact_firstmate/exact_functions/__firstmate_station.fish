@@ -6,7 +6,9 @@ function __firstmate_station --description 'Pick a Firstmate worktree at the cur
     end
     while not test -d "$anchor/.firstmate"
         if test "$anchor" = /
-            printf 'Usage: firstmate station [DIRECTORY] [QUERY ...] (no ancestor contains .firstmate)\n' >&2
+            printf '%s%s\n' \
+                'Usage: firstmate station [DIRECTORY] [QUERY ...] ' \
+                '(no ancestor contains .firstmate)' >&2
             return 1
         end
         set anchor (path dirname -- "$anchor")
@@ -33,7 +35,8 @@ function __firstmate_station --description 'Pick a Firstmate worktree at the cur
         command git -C "$worktree" rev-parse --is-inside-work-tree >/dev/null 2>&1; or continue
         set --local vessel (path basename -- (path dirname -- (path dirname -- "$meta")))
         set --local task (path change-extension '' -- (path basename -- "$meta"))
-        set --local git_common_dir (command git -C "$worktree" rev-parse --path-format=absolute --git-common-dir)
+        set --local git_common_dir (command git -C "$worktree" rev-parse \
+            --path-format=absolute --git-common-dir)
         or continue
         set --local repo (path basename -- (path dirname -- "$git_common_dir"))
         set repo_width (math "max($repo_width, "(string length -- "$repo")")")
