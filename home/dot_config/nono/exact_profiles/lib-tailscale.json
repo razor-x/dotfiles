@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "name": "lib-tailscale",
+    "version": "1.0.0",
+    "description": "Tailscale configuration and state."
+  },
+  "filesystem": {
+    "allow": ["$XDG_CONFIG_HOME/tailscale"]
+  }
+}
