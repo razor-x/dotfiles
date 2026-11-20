@@ -39,6 +39,7 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
         printf '\n%s%s\n' \
             'Defaults: launch anchor is the current directory; vessel is flagship. ' \
             'Use -- before literal Pi options that overlap launcher options.'
+        printf '%s\n' 'aheadfull recovers workers without opening Pi; launch recovers a stopped vessel before opening Pi.'
         return 0
     end
 
@@ -101,11 +102,11 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
         return 0
     end
 
-    if test "$subcommand" = aheadfull
-        set --append argv 'We performed a fullstop and are now resuming this session. Bring everything back up: review the session context, restart the services and processes needed for our work, verify they are healthy, and resume where we left off.'
+    set --local tools tmux nono
+    if test "$subcommand" = launch
+        set --append tools pi
     end
-
-    for tool in pi tmux nono
+    for tool in $tools
         if not command --query "$tool"
             printf 'firstmate: required tool is missing: %s\n' "$tool" >&2
             return 1
@@ -118,9 +119,7 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
         set vessel_name "$_flag_vessel"
     end
     set --local vessel "$anchor/.firstmate/$vessel_name"
-
-    command "$core/bin/fm-anchor.sh" open $target --agent pi -- \
-        nono run \
+    set --local sandbox nono run \
         --strict-broker-path \
         --profile firstmate \
         --workdir "$core" \
@@ -129,6 +128,14 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
         --allow-file "$anchor/.firstmate/$vessel_name.lock" \
         --read-file "$anchor/.firstmate/$vessel_name.json" \
         --read "$anchor/.firstmate/.agents" \
-        -- \
+        --
+
+    if test "$subcommand" = aheadfull
+        command $sandbox "$core/bin/fm-anchor.sh" resume $target
+        return $status
+    end
+
+    command "$core/bin/fm-anchor.sh" open $target --agent pi -- \
+        $sandbox "$core/bin/fm-anchor.sh" resume $target --if-pending -- \
         pi --approve --session-dir "$vessel/pi/primary" --continue --name captain $argv
 end
