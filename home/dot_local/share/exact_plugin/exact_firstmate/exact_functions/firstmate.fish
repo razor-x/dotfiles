@@ -2,7 +2,7 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
     set --local subcommand launch
     if set --query argv[1]
         switch "$argv[1]"
-            case launch station spy aheadfull fullstop sail scuttle
+            case launch station spyglass aheadfull fullstop sail scuttle
                 set subcommand "$argv[1]"
                 set --erase argv[1]
         end
@@ -20,7 +20,7 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
     set --local usage \
         'Usage: firstmate [launch] [ANCHOR] [--vessel NAME] [--] [Pi arguments...]' \
         '       firstmate station [DIRECTORY] [QUERY ...]' \
-        '       firstmate spy [ANCHOR] [--vessel NAME]' \
+        '       firstmate spyglass [ANCHOR] [--vessel NAME]' \
         '       firstmate sail ANCHOR [--vessel NAME] [--to HARBOR | --from HARBOR | --cancel]' \
         '       firstmate aheadfull [ANCHOR] [--vessel NAME]' \
         '       firstmate fullstop ANCHOR [--vessel NAME]' \
@@ -43,7 +43,7 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
     end
 
     if not set --query argv[1]
-        if contains -- "$subcommand" launch aheadfull spy
+        if contains -- "$subcommand" launch aheadfull spyglass
             set argv "$PWD"
         else
             printf '%s\n' $usage >&2
@@ -56,7 +56,7 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
         return 2
     end
 
-    if contains -- "$subcommand" aheadfull fullstop scuttle spy; and set --query argv[2]
+    if contains -- "$subcommand" aheadfull fullstop scuttle spyglass; and set --query argv[2]
         printf 'firstmate: %s does not accept extra arguments\n' "$subcommand" >&2
         return 2
     end
@@ -66,8 +66,8 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
         set --append target --vessel "$_flag_vessel"
     end
 
-    if test "$subcommand" = spy
-        __firstmate_spy "$target[2]" "$_flag_vessel"
+    if test "$subcommand" = spyglass
+        __firstmate_spyglass "$target[2]" "$_flag_vessel"
         return $status
     end
 

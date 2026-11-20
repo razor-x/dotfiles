@@ -4,7 +4,7 @@ complete \
     --command firstmate \
     --keep-order \
     --condition '__fish_use_subcommand
-        or __fish_seen_subcommand_from launch station spy aheadfull fullstop sail scuttle' \
+        or __fish_seen_subcommand_from launch station spyglass aheadfull fullstop sail scuttle' \
     --arguments '(__fish_complete_directories)' \
     --description Directory
 
@@ -46,7 +46,7 @@ complete \
     --command firstmate \
     --keep-order \
     --condition __fish_use_subcommand \
-    --arguments spy \
+    --arguments spyglass \
     --description 'Attach to the vessel tmux server read-only'
 
 # Fish displays later keep-order groups first, ahead of directory candidates.

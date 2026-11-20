@@ -14,7 +14,10 @@ if status is-interactive;
             set --erase tokens[1]
         end
 
-        if contains -- (path basename -- "$tokens[1]") $mux_commands
+        set --local program (path basename -- "$tokens[1]")
+        if contains -- "$program" $mux_commands
+            printf '\e]1337;SetUserVar=IS_MUX=MQ==\a'
+        else if test "$program" = firstmate; and test "$tokens[2]" = spyglass
             printf '\e]1337;SetUserVar=IS_MUX=MQ==\a'
         end
     end
