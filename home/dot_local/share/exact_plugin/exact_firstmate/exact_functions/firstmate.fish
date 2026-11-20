@@ -18,7 +18,7 @@ function firstmate --description 'Launch, visit a station, sail or scuttle a Fir
     end
 
     set --local usage \
-        'Usage: firstmate [launch] ANCHOR [--vessel NAME] [--] [Pi arguments...]' \
+        'Usage: firstmate [launch] [ANCHOR] [--vessel NAME] [--] [Pi arguments...]' \
         '       firstmate station [DIRECTORY] [QUERY ...]' \
         '       firstmate sail ANCHOR [--vessel NAME] [--to HARBOR | --from HARBOR | --cancel]' \
         '       firstmate scuttle ANCHOR [--vessel NAME]'
@@ -34,14 +34,18 @@ function firstmate --description 'Launch, visit a station, sail or scuttle a Fir
     if set --query --function _flag_help
         printf '%s\n' $usage
         printf '\n%s%s\n' \
-            'Default vessel: flagship. ' \
+            'Defaults: launch anchor is the current directory; vessel is flagship. ' \
             'Use -- before literal Pi options that overlap launcher options.'
         return 0
     end
 
     if not set --query argv[1]
-        printf '%s\n' $usage >&2
-        return 2
+        if test "$subcommand" = launch
+            set argv "$PWD"
+        else
+            printf '%s\n' $usage >&2
+            return 2
+        end
     end
 
     if set --query --function _flag_vessel[2]
