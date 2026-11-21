@@ -5,6 +5,6 @@
     "@dietrichgebert/ponytail": "5.3.3",
     "@narumitw/pi-accounts": "0.54.3",
     "@narumitw/pi-btw": "0.63.8",
-    "pi-nvim": "0.2.6"
+    "pi-nvim": "0.2.7"
   }
 }
