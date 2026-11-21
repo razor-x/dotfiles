@@ -21,6 +21,20 @@ pass the desired `NVIM_APPNAME` as the first argument
 curl -fsSL https://raw.githubusercontent.com/razor-x/dotfiles/main/nvimrc.sh | sh -s -- razor-x
 ```
 
+## Atlas repository inventory
+
+On first use, Atlas reads `*.json` in `$XDG_CONFIG_HOME/repository.d`
+(default: `~/.config/repository.d`). Chezmoi exports the `repoRoot` and `repos`
+fields from `.chezmoidata/repository.yaml` to `10-dotfiles.json`. To add private
+repositories, copy `dot_config/repository.d/10-dotfiles.json.tmpl` into the
+private chezmoi project as `dot_config/repository.d/50-private.json.tmpl` and
+provide that project’s own `repoRoot` and `repos` data.
+
+Atlas uses each primary GitHub `url` to map `owner/repo` to its local `path`.
+Paths are relative to `repoRoot`, which can be absolute or relative to home
+(`.` means home). Later filenames override earlier paths; explicit Atlas
+`pulls.repo_config` options still win. No Lua fragments are executed.
+
 ## Architecture
 
 1. Every `plugins/*.lua` file must export a `LazySpec`.

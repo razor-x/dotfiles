@@ -436,6 +436,25 @@ M.spec = {
     },
   },
   {
+    "emrearmagan/atlas.nvim",
+    cmd = "Atlas",
+    ---@module "atlas"
+    ---@type AtlasConfig
+    opts = {
+      providers = { github = {} },
+      ui = { statusline = { enable = false } },
+    },
+    config = function(_, opts)
+      opts.pulls = opts.pulls or {}
+      opts.pulls.repo_config = vim.tbl_deep_extend(
+        "force",
+        { paths = require("config.repository").github_paths() },
+        opts.pulls.repo_config or {}
+      )
+      require("atlas").setup(opts)
+    end,
+  },
+  {
     "pwntester/octo.nvim",
     cmd = "Octo",
     ---@module "octo"

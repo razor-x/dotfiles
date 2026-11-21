@@ -1,4 +1,5 @@
 {
+  "atlas.nvim": { "branch": "main", "commit": "e3035add15df67bb3e70f53ced4b63b94a76d916" },
   "auto-session": { "branch": "main", "commit": "02a5588f677970a9bc784115c62bef9e5855499b" },
   "backend-kitty": { "branch": "main", "commit": "70665a2228d52c255f3d116a146932f326df3914" },
   "backend-zellij-lua": { "branch": "master", "commit": "4e3e588795efb95548dd2ebeaf385a7823821ceb" },
