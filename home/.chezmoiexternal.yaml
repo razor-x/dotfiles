@@ -64,7 +64,7 @@
 
 .config/git/delta_themes:
   type: file
-  url: https://raw.githubusercontent.com/dandavison/delta/refs/tags/0.21.2/themes.gitconfig
+  url: https://raw.githubusercontent.com/dandavison/delta/refs/tags/0.22.0/themes.gitconfig
   checksum:
     sha256: "d200d8d6e0345a95b4dad199a99164fd69ddd5a8e9bb756b34465b9f0926fd86"
 
@@ -72,11 +72,11 @@
 
 .local/share/firstmate:
   type: archive
-  url: https://github.com/rxfork/firstmate/archive/refs/tags/2026-11-21.4.tar.gz
+  url: https://github.com/rxfork/firstmate/archive/refs/tags/2026-11-23.1.tar.gz
   exact: true
   stripComponents: 1
   checksum:
-    sha256: "97aa5ea79e068aa5efebc8cf59dbedf93e65f667a2f3e84bdd4d9b79e1790b34"
+    sha256: "fa4b80f4b365ed86ab9f54b1c93e237de4c8c0487219c50b602114990ba51774"
 
 # GitUI
 

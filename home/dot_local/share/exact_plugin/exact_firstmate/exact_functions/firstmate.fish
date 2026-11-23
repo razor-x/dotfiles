@@ -128,7 +128,7 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
         --allow-file "$anchor/.firstmate/$vessel_name.lock" \
         --read-file "$anchor/.firstmate/$vessel_name.json" \
         --read "$anchor/.firstmate/.agents" \
-        --read "$anchor/.firstmate/.sprites" \
+        --read "$anchor/.sprites" \
         --
 
     if test "$subcommand" = aheadfull
