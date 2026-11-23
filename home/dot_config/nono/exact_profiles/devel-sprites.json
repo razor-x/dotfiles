@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "devel-sprites",
+    "version": "1.0.0",
+    "description": "Sprites CLI user state."
+  },
+  "filesystem": { "allow": ["$HOME/.sprites"] }
+}
