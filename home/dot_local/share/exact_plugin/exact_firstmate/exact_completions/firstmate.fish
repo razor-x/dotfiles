@@ -4,7 +4,7 @@ complete \
     --command firstmate \
     --keep-order \
     --condition '__fish_use_subcommand
-        or __fish_seen_subcommand_from launch station spyglass aheadfull fullstop sail scuttle' \
+        or __fish_seen_subcommand_from launch station spyglass aheadfull allstop sail scuttle' \
     --arguments '(__fish_complete_directories)' \
     --description Directory
 
@@ -55,13 +55,13 @@ complete \
     --keep-order \
     --condition __fish_use_subcommand \
     --arguments aheadfull \
-    --description 'Resume after fullstop and ask the captain to bring everything back up'
+    --description 'Resume after allstop and ask the captain to bring everything back up'
 
 complete \
     --command firstmate \
     --keep-order \
     --condition __fish_use_subcommand \
-    --arguments fullstop \
+    --arguments allstop \
     --description 'Stop local vessel processes without sailing or deleting work'
 
 complete \

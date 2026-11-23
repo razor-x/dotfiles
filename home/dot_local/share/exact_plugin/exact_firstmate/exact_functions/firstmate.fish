@@ -1,8 +1,8 @@
-function firstmate --description 'Launch, visit a station, aheadfull, fullstop, sail or scuttle a Firstmate vessel'
+function firstmate --description 'Launch, visit a station, aheadfull, allstop, sail or scuttle a Firstmate vessel'
     set --local subcommand launch
     if set --query argv[1]
         switch "$argv[1]"
-            case launch station spyglass aheadfull fullstop sail scuttle
+            case launch station spyglass aheadfull allstop sail scuttle
                 set subcommand "$argv[1]"
                 set --erase argv[1]
         end
@@ -23,7 +23,7 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
         '       firstmate spyglass [ANCHOR] [--vessel NAME]' \
         '       firstmate sail ANCHOR [--vessel NAME] [--to HARBOR | --from HARBOR | --cancel]' \
         '       firstmate aheadfull [ANCHOR] [--vessel NAME]' \
-        '       firstmate fullstop ANCHOR [--vessel NAME]' \
+        '       firstmate allstop ANCHOR [--vessel NAME]' \
         '       firstmate scuttle ANCHOR [--vessel NAME]'
 
     argparse \
@@ -57,7 +57,7 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
         return 2
     end
 
-    if contains -- "$subcommand" aheadfull fullstop scuttle spyglass; and set --query argv[2]
+    if contains -- "$subcommand" aheadfull allstop scuttle spyglass; and set --query argv[2]
         printf 'firstmate: %s does not accept extra arguments\n' "$subcommand" >&2
         return 2
     end
@@ -83,8 +83,8 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
         set --prepend PATH "$core/.tools/node_modules/.bin"
     end
 
-    if test "$subcommand" = fullstop
-        command "$core/bin/fm-anchor.sh" fullstop $target >/dev/null
+    if test "$subcommand" = allstop
+        command "$core/bin/fm-anchor.sh" allstop $target >/dev/null
         return $status
     end
 
@@ -132,11 +132,11 @@ function firstmate --description 'Launch, visit a station, aheadfull, fullstop, 
         --
 
     if test "$subcommand" = aheadfull
-        command $sandbox "$core/bin/fm-anchor.sh" resume $target
+        command $sandbox "$core/bin/fm-anchor.sh" aheadfull $target
         return $status
     end
 
     command "$core/bin/fm-anchor.sh" open $target --agent pi -- \
-        $sandbox "$core/bin/fm-anchor.sh" resume $target --if-pending -- \
+        $sandbox "$core/bin/fm-anchor.sh" aheadfull $target --if-pending -- \
         pi --approve --session-dir "$vessel/pi/primary" --continue --name captain $argv
 end
