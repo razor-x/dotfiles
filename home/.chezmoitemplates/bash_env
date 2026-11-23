@@ -2,19 +2,19 @@
 if [[ ${USER_ENV_HASH:-} != '{{ template "user_env_hash" . }}' ]] \
   && [[ -d "$HOME/.config/environment.d" ]]; then
   for f in $HOME/.config/environment.d/*.conf; do
-    set -a
+    set -o allexport
     if [[ -f "$f" ]]; then
       source "$f"
     fi
-    set +a
+    set +o allexport
   done
 fi
 
 # Always reload private environment variables.
 for f in "$HOME"/.config/environment.d/*-private.conf; do
-  set -a
+  set -o allexport
   if [[ -f "$f" ]]; then
     source "$f"
   fi
-  set +a
+  set +o allexport
 done

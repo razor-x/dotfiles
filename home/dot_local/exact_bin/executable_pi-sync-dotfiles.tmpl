@@ -6,7 +6,7 @@
 {{ $skillsSource := joinPath .chezmoi.sourceDir "dot_config" "pi" "skills" "exact_local" }}
 {{ $skillsTarget := joinPath .chezmoi.homeDir ".config" "pi" "skills" "local" }}
 
-set -euo pipefail
+set -o errexit -o nounset -o pipefail
 
 agents_source={{ $agentsSource | toJson }}
 agents_target={{ $agentsTarget | toJson }}

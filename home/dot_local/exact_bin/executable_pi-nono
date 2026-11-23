@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eu
+set -o errexit -o nounset
 
 if git_common_dir=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null); then
   exec nono run --strict-broker-path --allow-cwd --allow "$git_common_dir" --profile pi -- pi "$@"
