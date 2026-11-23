@@ -1,5 +1,5 @@
 {
-  "atlas.nvim": { "branch": "main", "commit": "e3035add15df67bb3e70f53ced4b63b94a76d916" },
+  "atlas.nvim": { "branch": "main", "commit": "4678b0223e187a6eb125a53b75db61ca41e0e83f" },
   "auto-session": { "branch": "main", "commit": "02a5588f677970a9bc784115c62bef9e5855499b" },
   "backend-kitty": { "branch": "main", "commit": "07b528c5c52054cc995d013abae18ef77d3f6217" },
   "backend-zellij-lua": { "branch": "master", "commit": "4e3e588795efb95548dd2ebeaf385a7823821ceb" },
@@ -39,7 +39,7 @@
   "mini.visits": { "branch": "main", "commit": "e6d8f658523db39d06c04dc07e0bc4c872d29dee" },
   "neogit": { "branch": "master", "commit": "17929b7b0b9c05fe3dfc788fbba9881eb9c1cbec" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "72a05f62c52241bc7441c820eb53946f92b2e6a4" },
-  "nvim-lspconfig": { "branch": "master", "commit": "4648fd8ba5c678d7e2db75ae44ffac269bb589d8" },
+  "nvim-lspconfig": { "branch": "master", "commit": "7d22e678970d95d8d18494ec389c52b07111c53a" },
   "nvim-origami": { "branch": "main", "commit": "a137d35eaabb7cd7be89228229c1aa5b057f5ed7" },
   "nvim-treesitter-textobjects": { "branch": "main", "commit": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187" },
   "octo.nvim": { "branch": "master", "commit": "0ddca04c02aab8ba18d2072f9b855f3806adad54" },

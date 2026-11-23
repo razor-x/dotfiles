@@ -1,5 +1,11 @@
 {
-  "extends": ["service-gh", "service-doppler", "service-linear", "service-seam", "service-sprites"],
+  "extends": [
+    "service-gh",
+    "service-doppler",
+    "service-linear",
+    "service-seam",
+    "service-sprites"
+  ],
   "meta": {
     "name": "service",
     "version": "1.0.0",
