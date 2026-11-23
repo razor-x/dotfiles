@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "devel-seam",
+    "name": "service-seam",
     "version": "1.0.0",
     "description": "Seam configuration and cache."
   },

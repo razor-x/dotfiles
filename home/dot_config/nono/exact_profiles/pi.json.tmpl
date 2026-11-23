@@ -2,7 +2,7 @@
 {{- $skillsSource := joinPath .chezmoi.sourceDir "dot_config" "pi" "skills" "exact_local" -}}
 {{- $profileSource := joinPath .chezmoi.sourceDir "dot_config" "nono" "exact_profiles" -}}
 {
-  "extends": ["default", "nvim", "terminal", "devel", "lib-tailscale"],
+  "extends": ["default", "nvim", "terminal", "devel", "service", "lib-tailscale"],
   "meta": {
     "name": "pi",
     "version": "1.0.0",

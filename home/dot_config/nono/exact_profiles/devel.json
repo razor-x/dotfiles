@@ -1,23 +1,18 @@
 {
   "extends": [
-    "devel-gh",
     "devel-bun",
     "devel-rust",
     "devel-biome",
     "devel-clojure",
     "devel-deno",
-    "devel-doppler",
     "devel-go",
     "devel-haskell",
     "devel-java",
-    "devel-linear",
     "devel-mise",
     "devel-node",
     "devel-php",
     "devel-python",
     "devel-ruby",
-    "devel-seam",
-    "devel-sprites",
     "devel-tex",
     "devel-typescript"
   ],

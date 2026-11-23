@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "devel-doppler",
+    "name": "service-doppler",
     "version": "1.0.0",
     "description": "Doppler configuration."
   },

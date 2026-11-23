@@ -1,0 +1,8 @@
+{
+  "extends": ["service-gh", "service-doppler", "service-linear", "service-seam", "service-sprites"],
+  "meta": {
+    "name": "service",
+    "version": "1.0.0",
+    "description": "Meta profile combining third-party service access."
+  }
+}

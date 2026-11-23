@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "devel-gh",
+    "name": "service-gh",
     "version": "1.0.0",
     "description": "GitHub CLI configuration and data."
   },
