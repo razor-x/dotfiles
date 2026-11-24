@@ -21,3 +21,8 @@ idiomatic_version_file_enable_tools = [
 ]
 
 ruby.compile=false
+
+# Exact versions and artifact checksums are in mise.lock.
+[tools.doppler]
+version = "latest"
+postinstall = { run = 'sh "${MISE_CONFIG_FILE%/*}/fish-completion.sh" doppler --no-check-version --no-read-env completion fish', when = "always" }
