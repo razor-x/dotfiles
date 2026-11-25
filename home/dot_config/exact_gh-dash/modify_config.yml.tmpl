@@ -5,8 +5,10 @@
 {{- $_ := set $repoPaths (trimSuffix ".git" (trimPrefix "git@github.com:" .url)) (joinPath $.chezmoi.homeDir $.repoRoot .path) }}
 {{- end }}
 {{- $base := joinPath .chezmoi.sourceDir "dot_config" "exact_gh-dash" "_config.yml" }}
-yq '
-  .repoPaths as $repoPaths |
-  load({{ $base | quote }}) |
-  .repoPaths = (($repoPaths // {}) * {{ $repoPaths | toRawJson }})
-' -
+GH_DASH_BASE='{{ $base | includeTemplate "fish-quote" }}' \
+GH_DASH_REPO_PATHS='{{ $repoPaths | toRawJson | includeTemplate "fish-quote" }}' \
+    yq '
+      .repoPaths as $repoPaths |
+      load(strenv(GH_DASH_BASE)) |
+      .repoPaths = (($repoPaths // {}) * env(GH_DASH_REPO_PATHS))
+    ' -

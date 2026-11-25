@@ -30,7 +30,7 @@ else
 end
 
 if type --query fish_config
-    fish_config theme choose '{{ template "theme" (merge (dict "app" "fish") .) }}'
+    fish_config theme choose '{{ includeTemplate "theme" (merge (dict "app" "fish") .) | includeTemplate "fish-quote" }}'
     or return 1
 else
     echo 'Cannot update fish theme: fish_config not found.'

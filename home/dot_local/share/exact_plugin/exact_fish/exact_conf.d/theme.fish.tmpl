@@ -1,3 +1,3 @@
 if status is-interactive
-    fish_config theme choose "{{ template "theme" (merge (dict "app" "fish") .) }}"
+    fish_config theme choose '{{ includeTemplate "theme" (merge (dict "app" "fish") .) | includeTemplate "fish-quote" }}'
 end

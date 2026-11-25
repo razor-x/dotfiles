@@ -4,7 +4,7 @@
 {{- $name := index $theme .app | default (index $default .app) -}}
 
 {{- if eq $name "catppuccin" -}}
-  {{ template "catppuccin" . }}
+  {{ includeTemplate "catppuccin" . }}
 {{- else if eq .app "atuin" -}}
   themes/{{ $name }}
 {{- else if eq .app "bat" -}}

@@ -2,7 +2,7 @@
 
 # hash: {{ template "mise-hash" . }}
 
-set --local mise_config_path {{ joinPath .chezmoi.homeDir ".config" "mise" | quote }}
+set --local mise_config_path '{{ joinPath .chezmoi.homeDir ".config" "mise" | includeTemplate "fish-quote" }}'
 
 set --local plugin "$HOME/.local/share/plugin/mise"
 set --local completions "$plugin/completions"

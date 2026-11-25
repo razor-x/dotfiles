@@ -1,5 +1,9 @@
+{{- $sourceDir := .chezmoi.sourceDir | replace "\\" "\\\\" | replace "\"" "\\\"" | replace "\r" "\\r" | replace "\n" "\\n" -}}
+{{- $colorscheme := includeTemplate "theme" (merge (dict "app" "neovim") .) | replace "\\" "\\\\" | replace "\"" "\\\"" | replace "\r" "\\r" | replace "\n" "\\n" -}}
+local source_dir = "{{ $sourceDir }}"
+
 return {
-  root_dir = vim.fs.dirname("{{ .chezmoi.sourceDir }}"),
-  config_dir = vim.fs.joinpath("{{ .chezmoi.sourceDir }}", "dot_config", "exact_nvim"),
-  colorscheme = "{{ template "theme" (merge (dict "app" "neovim") .) }}"
+  root_dir = vim.fs.dirname(source_dir),
+  config_dir = vim.fs.joinpath(source_dir, "dot_config", "exact_nvim"),
+  colorscheme = "{{ $colorscheme }}",
 }

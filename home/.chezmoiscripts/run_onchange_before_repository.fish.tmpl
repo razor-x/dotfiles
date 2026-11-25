@@ -1,16 +1,16 @@
 #!/usr/bin/env fish
 
 # {{ range .repos }}
-set --local repo {{ joinPath $.chezmoi.homeDir $.repoRoot .path | quote }}
+set --local repo '{{ joinPath $.chezmoi.homeDir $.repoRoot .path | includeTemplate "fish-quote" }}'
 set --local repo_name (path basename "$repo")
 
 mkdir --parents (path dirname "$repo")
 or exit
 
-git -C "$repo" rev-parse --git-dir >/dev/null 2>&1; or git clone {{ .url | quote }} "$repo"
+git -C "$repo" rev-parse --git-dir >/dev/null 2>&1; or git clone '{{ .url | includeTemplate "fish-quote" }}' "$repo"
 or exit
 
-git -C "$repo" config --local --replace-all remote.origin.url {{ .url | quote }}
+git -C "$repo" config --local --replace-all remote.origin.url '{{ .url | includeTemplate "fish-quote" }}'
 or exit
 
 git -C "$repo" config --local --replace-all remote.origin.fetch \
@@ -19,11 +19,11 @@ or exit
 
 # {{ if hasKey . "remotes" }}
 # {{ range .remotes }}
-git -C "$repo" config --local --replace-all remote.{{ .name }}.url {{ .url | quote }}
+git -C "$repo" config --local --replace-all 'remote.{{ .name | includeTemplate "fish-quote" }}.url' '{{ .url | includeTemplate "fish-quote" }}'
 or exit
 
-git -C "$repo" config --local --replace-all remote.{{ .name }}.fetch \
-    {{ printf "+refs/heads/*:refs/remotes/%s/*" .name | quote }}
+git -C "$repo" config --local --replace-all 'remote.{{ .name | includeTemplate "fish-quote" }}.fetch' \
+    '+refs/heads/*:refs/remotes/{{ .name | includeTemplate "fish-quote" }}/*'
 or exit
 # {{ end }}
 # {{ end }}
@@ -32,15 +32,15 @@ git -C "$repo" config --local --unset-all remote.origin.gh-resolved >/dev/null 2
 
 # {{ if hasKey . "remotes" }}
 # {{ range .remotes }}
-git -C "$repo" config --local --unset-all remote.{{ .name }}.gh-resolved >/dev/null 2>&1
+git -C "$repo" config --local --unset-all 'remote.{{ .name | includeTemplate "fish-quote" }}.gh-resolved' >/dev/null 2>&1
 # {{ end }}
 # {{ end }}
 
 # {{ if hasKey . "base" }}
 # {{ if contains "/" .base }}
-git -C "$repo" config --local --replace-all remote.origin.gh-resolved {{ .base | quote }}
+git -C "$repo" config --local --replace-all remote.origin.gh-resolved '{{ .base | includeTemplate "fish-quote" }}'
 # {{ else }}
-git -C "$repo" config --local --replace-all remote.{{ .base }}.gh-resolved base
+git -C "$repo" config --local --replace-all 'remote.{{ .base | includeTemplate "fish-quote" }}.gh-resolved' base
 # {{ end }}
 # {{ else }}
 git -C "$repo" config --local --replace-all remote.origin.gh-resolved base
@@ -54,7 +54,7 @@ if type --query gita
     set --local gita_repos
 
     for group in (gita group ls | string split ' ')
-        for prefix in{{ range $.repoGroupPrefixes }} {{ . | quote }}{{ end }}
+        for prefix in{{ range $.repoGroupPrefixes }} '{{ . | includeTemplate "fish-quote" }}'{{ end }}
             if string match --quiet -- "$prefix*" "$group"
                 set --append gita_groups "$group"
                 for line in (gita group ll "$group" | string match -- '- *')
@@ -77,20 +77,21 @@ if type --query gita
         or exit
     end
 
-    gita add{{ range $.repos }} {{ joinPath $.chezmoi.homeDir $.repoRoot .path | quote }}{{ end }}
+    gita add{{ range $.repos }} '{{ joinPath $.chezmoi.homeDir $.repoRoot .path | includeTemplate "fish-quote" }}'{{ end }}
     or exit
 
 # {{ range $.repos }}
-    set --local repo {{ joinPath $.chezmoi.homeDir $.repoRoot .path | quote }}
+    set --local repo '{{ joinPath $.chezmoi.homeDir $.repoRoot .path | includeTemplate "fish-quote" }}'
     set --local repo_name (path basename "$repo")
 # {{ if hasKey . "groups" }}
 # {{ range .groups }}
-    if not contains -- {{ . | quote }} $gita_groups
-        set --append gita_groups {{ . | quote }}
+    set --local group '{{ . | includeTemplate "fish-quote" }}'
+    if not contains -- "$group" $gita_groups
+        set --append gita_groups "$group"
         set --append gita_group_paths (path dirname "$repo")
     end
-    set --local group_index (contains --index -- {{ . | quote }} $gita_groups)
-    gita group add --name {{ . | quote }} --path "$gita_group_paths[$group_index]" "$repo_name"
+    set --local group_index (contains --index -- "$group" $gita_groups)
+    gita group add --name "$group" --path "$gita_group_paths[$group_index]" "$repo_name"
     or exit
 # {{ end }}
 # {{ end }}

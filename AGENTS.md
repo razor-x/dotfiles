@@ -87,6 +87,12 @@ managed home directory.
   autoloadable function per matching filename in `exact_functions/`.
 - Guard interactive integrations with `status is-interactive`. Use `.tmpl`
   only when chezmoi must render data or command output.
+- Quote runtime scalars as `"$var"` to pass one argument even when unset.
+  Leave lists such as `$argv` unquoted when each element is a separate argument.
+- For chezmoi values in Fish strings, put single quotes at the call site:
+  `'{{ $value | includeTemplate "fish-quote" }}'`. The helper escapes
+  backslashes and apostrophes inside the string.
+  Pass values to embedded languages (such as `yq`) as data, not source code.
 - Keep third-party and local plugin declarations in
   `home/dot_config/fish/fish_plugins`; local Fish code belongs to the `fish`
   plugin tree above.

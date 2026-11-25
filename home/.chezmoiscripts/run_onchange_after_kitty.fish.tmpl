@@ -5,8 +5,9 @@ set --local XDG_CONFIG_HOME "$HOME/.config"
 if type --query kitten
     set --local kitten_config_path "$XDG_CONFIG_HOME/kitty"
     mkdir --parents $kitten_config_path
-    kitten themes --dump '{{ template "theme" (merge (dict "app" "kitty") .) }}' >$kitten_config_path/current-theme.conf
-    kitten themes --reload-in=all '{{ template "theme" (merge (dict "app" "kitty") .) }}'
+    set --local theme '{{ includeTemplate "theme" (merge (dict "app" "kitty") .) | includeTemplate "fish-quote" }}'
+    kitten themes --dump "$theme" >$kitten_config_path/current-theme.conf
+    kitten themes --reload-in=all "$theme"
 else
     echo 'Cannot update kitty theme: kitty or kitten not installed.'
     # TODO: Uncomment below when GUI stuff is ready.

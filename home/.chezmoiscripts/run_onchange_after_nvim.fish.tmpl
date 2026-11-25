@@ -16,12 +16,14 @@ if type --query nvim
     # https://github.com/folke/lazy.nvim/pull/2127
     # https://github.com/folke/lazy.nvim/issues/1279
     set --function tmp (mktemp --suffix '.json' 'lazy-lock.XXXXXX')
-    cp '{{ $lockfile }}' $tmp
+    set --local lockfile '{{ $lockfile | includeTemplate "fish-quote" }}'
+    cp "$lockfile" $tmp
     nvim --headless '+Lazy! sync' +qall
-    mv $tmp '{{ $lockfile }}'
+    mv $tmp "$lockfile"
 
     nvim --headless '+Lazy! restore' +qall
-    nvim --headless '+helptags {{ $dir }}' +qall
+    DOTFILES_NVIM_DOC_DIR='{{ $dir | includeTemplate "fish-quote" }}' \
+        nvim --headless '+lua assert(vim.uv.chdir(vim.env.DOTFILES_NVIM_DOC_DIR)); vim.cmd.helptags(".")' +qall
 else
     echo 'Cannot generate Neovim helptags or install plugins: nvim not found.'
     return 1
