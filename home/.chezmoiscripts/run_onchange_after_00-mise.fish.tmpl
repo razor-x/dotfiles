@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
 
-# mise config: {{ template "mise-hash" . }}
+# hash: {{ template "mise-hash" . }}
 
-mise --cd {{ joinPath .chezmoi.homeDir ".config" "mise" | quote }} install --locked
+set --local mise_config_path {{ joinPath .chezmoi.homeDir ".config" "mise" | quote }}
+
+mise --cd $mise_config_path install --locked
