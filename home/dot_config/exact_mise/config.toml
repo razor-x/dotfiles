@@ -21,3 +21,10 @@ idiomatic_version_file_enable_tools = [
 ]
 
 ruby.compile=false
+
+[tools."npm:@metabase/cli"]
+version = "0"
+
+[tools.doppler]
+version = "3"
+postinstall = { run = 'sh "${MISE_CONFIG_FILE%/*}/fish-completion.sh" doppler --no-check-version --no-read-env completion fish', when = "always" }

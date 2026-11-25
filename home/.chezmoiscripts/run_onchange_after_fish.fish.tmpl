@@ -13,6 +13,7 @@
 # {{- end -}}
 #
 # hash: {{ sha256sum $hash }}
+# mise hash: {{ template "mise-hash" . }}
 
 # Clear Fish greeting.
 set --universal fish_greeting

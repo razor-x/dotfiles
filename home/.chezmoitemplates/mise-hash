@@ -1,0 +1,6 @@
+{{- $dir := joinPath .chezmoi.homeDir ".config" "mise" -}}
+{{- $hash := "" -}}
+{{- range (list "config.toml" "mise.lock" "fish-completion.sh") -}}
+  {{- $hash = printf "%s%s" $hash (include (joinPath $dir .) | sha256sum) -}}
+{{- end -}}
+{{- sha256sum $hash -}}

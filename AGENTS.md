@@ -23,6 +23,7 @@ managed home directory.
 ## Workflow
 
 1. Make the smallest source change that covers the request.
+1. Use full `--long` CLI flags whenever the command supports them.
 1. Keep ad hoc verification scripts and tests in a temporary directory outside
    the repository. Add persistent tests only when explicitly requested or when
    the affected component already has an established convention of testing that

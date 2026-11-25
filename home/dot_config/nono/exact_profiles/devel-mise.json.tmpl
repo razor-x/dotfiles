@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "name": "devel-mise",
+    "version": "1.0.0",
+    "description": "Mise configuration, cache, and data."
+  },
+  "filesystem": {
+    "read": [
+      "$XDG_CONFIG_HOME/mise",
+      "$XDG_DATA_HOME/mise",
+      {{ joinPath .chezmoi.sourceDir "dot_config" "exact_mise" ".mise" "locks" | toJson }}
+    ],
+    "read_file": [{{ joinPath .chezmoi.sourceDir "dot_config" "exact_mise" ".mise.lock" | toJson }}],
+    "allow": ["$XDG_CACHE_HOME/mise"]
+  }
+}

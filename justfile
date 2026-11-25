@@ -38,6 +38,9 @@ upgrade: && \
     upgrade-pi-local \
     upgrade-yazi
 
+upgrade-mise:
+  mise lock --global --bump --platform linux-x64
+
 upgrade-neovim:
   nvim --headless '+Lazy! update' +qall
 
