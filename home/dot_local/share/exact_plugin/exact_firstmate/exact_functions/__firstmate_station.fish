@@ -1,17 +1,13 @@
 function __firstmate_station --description 'Pick a Firstmate worktree at the current anchor'
     set --local anchor "$PWD"
     if set --query argv[1]; and test -d "$argv[1]"
-        set anchor (path resolve -- "$argv[1]")
+        set anchor "$argv[1]"
         set --erase argv[1]
     end
-    while not test -d "$anchor/.firstmate"
-        if test "$anchor" = /
-            printf '%s%s\n' \
-                'Usage: firstmate station [DIRECTORY] [QUERY ...] ' \
-                '(no ancestor contains .firstmate)' >&2
-            return 1
-        end
-        set anchor (path dirname -- "$anchor")
+    set anchor (__firstmate_find_anchor "$anchor")
+    or begin
+        printf 'firstmate station: no ancestor contains .firstmate\n' >&2
+        return 1
     end
     set --local candidates
     set --local repo_width 0

@@ -21,10 +21,19 @@ function firstmate --description 'Launch, visit a station, aheadfull, allstop, s
         'Usage: firstmate [launch] [ANCHOR] [--vessel NAME] [--] [Pi arguments...]' \
         '       firstmate station [DIRECTORY] [QUERY ...]' \
         '       firstmate spyglass [ANCHOR] [--vessel NAME]' \
-        '       firstmate sail ANCHOR [--vessel NAME] [--to HARBOR | --from HARBOR | --cancel]' \
+        '       firstmate sail [ANCHOR] [--vessel NAME] [--to HARBOR | --from HARBOR | --cancel]' \
         '       firstmate aheadfull [ANCHOR] [--vessel NAME]' \
-        '       firstmate allstop ANCHOR [--vessel NAME]' \
-        '       firstmate scuttle ANCHOR [--vessel NAME]'
+        '       firstmate allstop [ANCHOR] [--vessel NAME]' \
+        '       firstmate scuttle [ANCHOR] [--vessel NAME]'
+
+    set --local pi_arguments
+    if test "$subcommand" = launch
+        set --local separator (contains --index -- -- $argv)
+        if set --query separator[1]
+            set pi_arguments $argv[(math $separator + 1)..-1]
+            set --erase argv[$separator..-1]
+        end
+    end
 
     argparse \
         --ignore-unknown \
@@ -36,20 +45,12 @@ function firstmate --description 'Launch, visit a station, aheadfull, allstop, s
 
     if set --query --function _flag_help
         printf '%s\n' $usage
-        printf '\n%s%s\n' \
-            'Defaults: launch anchor is the current directory; vessel is flagship. ' \
-            'Use -- before literal Pi options that overlap launcher options.'
-        printf '%s\n' 'aheadfull recovers workers without opening Pi; launch recovers a stopped vessel before opening Pi.'
+        printf '\n%s\n' \
+            'Without an anchor, Firstmate uses the nearest directory containing .firstmate.' \
+            'If none is found, launch uses the current directory; other commands require a .firstmate directory or an explicit anchor.' \
+            'The default vessel is flagship. Use -- to pass arguments directly to Pi.' \
+            'aheadfull recovers workers without opening Pi; launch recovers a stopped vessel before opening Pi.'
         return 0
-    end
-
-    if not set --query argv[1]
-        if contains -- "$subcommand" launch aheadfull spyglass
-            set argv "$PWD"
-        else
-            printf '%s\n' $usage >&2
-            return 2
-        end
     end
 
     if set --query --function _flag_vessel[2]
@@ -57,12 +58,28 @@ function firstmate --description 'Launch, visit a station, aheadfull, allstop, s
         return 2
     end
 
-    if contains -- "$subcommand" aheadfull allstop scuttle spyglass; and set --query argv[2]
+    set --local selected_anchor
+    if set --query argv[1]; and not string match --quiet -- '-*' "$argv[1]"
+        set selected_anchor "$argv[1]"
+        set --erase argv[1]
+    else if test "$subcommand" = spyglass
+        set selected_anchor "$PWD"
+    else
+        set selected_anchor (__firstmate_find_anchor "$PWD")
+        if not set --query selected_anchor[1]
+            if test "$subcommand" != launch
+                printf 'firstmate %s: no ancestor contains .firstmate; pass an explicit anchor\n' "$subcommand" >&2
+                return 1
+            end
+            set selected_anchor "$PWD"
+        end
+    end
+
+    if contains -- "$subcommand" aheadfull allstop scuttle spyglass; and set --query argv[1]
         printf 'firstmate: %s does not accept extra arguments\n' "$subcommand" >&2
         return 2
     end
-    set --local target --anchor "$argv[1]"
-    set --erase argv[1]
+    set --local target --anchor "$selected_anchor"
     if set --query --function _flag_vessel
         set --append target --vessel "$_flag_vessel"
     end
@@ -138,5 +155,5 @@ function firstmate --description 'Launch, visit a station, aheadfull, allstop, s
 
     command "$core/bin/fm-anchor.sh" open $target --agent pi -- \
         $sandbox "$core/bin/fm-anchor.sh" aheadfull $target --if-pending -- \
-        pi --approve --session-dir "$vessel/pi/primary" --continue --name captain $argv
+        pi --approve --session-dir "$vessel/pi/primary" --continue --name captain $argv $pi_arguments
 end

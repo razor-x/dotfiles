@@ -4,14 +4,10 @@ function __firstmate_spyglass --argument-names anchor vessel --description 'Atta
         printf 'firstmate spyglass: invalid vessel name\n' >&2
         return 2
     end
-    set anchor (path resolve -- "$anchor")
-    test -d "$anchor"; or return 1
-    while not test -d "$anchor/.firstmate"
-        if test "$anchor" = /
-            printf 'firstmate spyglass: no ancestor contains .firstmate\n' >&2
-            return 1
-        end
-        set anchor (path dirname -- "$anchor")
+    set anchor (__firstmate_find_anchor "$anchor")
+    or begin
+        printf 'firstmate spyglass: directory or ancestor .firstmate not found\n' >&2
+        return 1
     end
     set --local socket "$anchor/.firstmate/$vessel/tmux/tmux-"(id -u)"/default"
     set --local candidates (command tmux -S "$socket" list-panes -a \
