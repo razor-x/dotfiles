@@ -4,4 +4,21 @@
 
 set --local mise_config_path {{ joinPath .chezmoi.homeDir ".config" "mise" | quote }}
 
-mise --cd $mise_config_path install --locked
+set --local plugin "$HOME/.local/share/plugin/mise"
+set --local completions "$plugin/completions"
+mkdir --parents -- "$plugin"
+or exit 1
+set --local staging (mktemp --directory "$plugin/.completions.XXXXXX")
+or exit 1
+
+# Publish the new set only after all install hooks succeed.
+MISE_FISH_COMPLETIONS_DIR=$staging mise --cd $mise_config_path install --locked
+set --local result $status
+if test $result -eq 0
+    rm --recursive --force -- "$completions"
+    and mv --no-target-directory -- "$staging" "$completions"
+    set result $status
+end
+
+rm --recursive --force -- "$staging"
+exit $result

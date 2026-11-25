@@ -2,9 +2,9 @@
 set -eu
 
 name=$1
-dir="$HOME/.local/share/plugin/mise/completions"
-mkdir -p "$dir"
-tmp=$(mktemp "$dir/.$name.XXXXXX")
-trap 'rm -f "$tmp"' EXIT
+dir="${MISE_FISH_COMPLETIONS_DIR:-$HOME/.local/share/plugin/mise/completions}"
+mkdir --parents -- "$dir"
+tmp=$(mktemp -- "$dir/.$name.XXXXXX")
+trap 'rm --force -- "$tmp"' EXIT
 "$@" >"$tmp"
 mv "$tmp" "$dir/$name.fish"

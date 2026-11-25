@@ -5,7 +5,7 @@ lockfile_version = 4
 [[tools.doppler]]
 version = "3.77.1"
 backend = "github:DopplerHQ/cli"
-specifiers = ["latest"]
+specifiers = ["3"]
 
 [tools.doppler."platforms.linux-x64"]
 checksum = "sha256:001f89a42629f9cb827cd86683c4c2dbf87c6299a8d6130643b98044bf5ed80a"
