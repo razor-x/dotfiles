@@ -127,7 +127,7 @@ function firstmate --description 'Launch, visit a station, aheadfull, allstop, s
         --allow "$vessel" \
         --allow-file "$anchor/.firstmate/$vessel_name.lock" \
         --read-file "$anchor/.firstmate/$vessel_name.json" \
-        --read "$anchor/.firstmate/AGENTS.md" \
+        --read-file "$anchor/.firstmate/AGENTS.md" \
         --read "$anchor/.firstmate/.agents" \
         --
 
