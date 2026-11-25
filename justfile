@@ -39,8 +39,7 @@ upgrade: && \
     upgrade-yazi
 
 upgrade-mise:
-  MISE_GLOBAL_CONFIG_FILE="$PWD/home/dot_config/exact_mise/config.toml" mise --cd / lock --global --bump --platform linux-x64
-  just apply
+  mise lock --global --bump --platform linux-x64
 
 upgrade-neovim:
   nvim --headless '+Lazy! update' +qall
