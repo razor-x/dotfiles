@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "service-metabase",
+    "version": "1.0.0",
+    "description": "Metabase CLI configuration."
+  },
+  "filesystem": { "read": ["$XDG_CONFIG_HOME/metabase-cli"] }
+}

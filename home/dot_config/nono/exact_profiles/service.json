@@ -3,6 +3,7 @@
     "service-gh",
     "service-doppler",
     "service-linear",
+    "service-metabase",
     "service-seam",
     "service-sprites"
   ],
