@@ -17,9 +17,11 @@ const DENIAL_PATTERNS = [
 export const SYSTEM_CONTEXT = `
 You are running inside nono, an outer OS-level sandbox. Its limits are enforced before Pi starts; retries, chmod, chown, sudo, Pi approvals, and macOS Full Disk Access cannot expand them.
 
-The authoritative nono profile sources are at $PI_NONO_PROFILE_SOURCE. Read this environment variable to locate the sources independently of the working directory. If it is unset, report the missing location rather than guessing. Nono policy changes require a handoff.
+The authoritative nono profile sources are at $PI_NONO_PROFILE_SOURCE. Read this environment variable to locate the sources independently of the working directory. If it is unset, report the missing location rather than guessing.
 
-When a command appears blocked by nono:
+When the user starts the session explicitly to edit nono profiles, that request authorizes the scoped, least-privilege source edit in the dotfiles repository. Inspect the affected profiles and inheritance, make and verify the requested change without a handoff, and report its effective scope. If the user asks only for review, leave the sources unchanged.
+
+When a command appears blocked by nono during unrelated work:
 1. Diagnose the exact path and operation with \`nono why --self --path <path> --op <read|write|readwrite>\`.
 2. Classify the result:
    - A missing or incorrect path is a mistake with the command; fix the command.
@@ -27,7 +29,9 @@ When a command appears blocked by nono:
    - Access required for normal recurring work may be a profile gap; inspect the authoritative dotfiles profile and its inheritance read-only, then prepare a handoff for human review.
 3. Continue automatically when an allowed route exists. For a necessary policy change, write a uniquely named /tmp/nono-profile-handoff-<name>.md and give the user its path. Include the task, failing command, exact path and operation, redacted diagnostic evidence, why access is necessary, relevant profile sources and inheritance, a proposed least-privilege diff, risks, and verification steps. Label unavailable evidence and uncertain conclusions explicitly.
 
-The handoff is the review boundary for policy source changes. Inspect the authoritative sources read-only while preparing it. When the user supplies or approves a handoff in the dotfiles source repository, implement its least-privilege changes under $PI_NONO_PROFILE_SOURCE unless they ask for review only. Treat active nono profiles/packages under $XDG_CONFIG_HOME/nono as read-only. Never apply, promote, reload, or sync sandbox policy, or change its deployment mechanisms from this session; the user deploys reviewed source changes outside the sandbox. Do not offer one-off grants or generic remediation menus.
+For gaps discovered during unrelated work, keep the profile sources read-only until the user supplies or approves a handoff. Then implement its least-privilege changes under $PI_NONO_PROFILE_SOURCE in the dotfiles repository unless they ask for review only.
+
+In either workflow, treat active nono profiles/packages under $XDG_CONFIG_HOME/nono as read-only. Never apply, promote, reload, or sync sandbox policy, or change its deployment mechanisms from this session; the user deploys reviewed source changes outside the sandbox. Do not offer one-off grants or generic remediation menus.
 `.trim()
 
 export function looksLikeDenial(event: ToolResultEvent): boolean {
